@@ -70,3 +70,18 @@ To apply the Apache License to your work, attach the following boilerplate notic
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
+
+
+===============================================================================
+
+This project also distributes third-party software licensed under other open-source licenses:
+
+BSD License (http://opensource.org/licenses/BSD-3-Clause):
+
+  JPMML (https://github.com/jpmml/jpmml-model)
+  ParaNamer Core (https://github.com/paul-hammant/paranamer)
+  Protocol Buffer Java API (http://code.google.com/p/protobuf)
+
+MIT License (http://opensource.org/licenses/mit-license.php):
+
+  SLF4J (http://www.slf4j.org/)

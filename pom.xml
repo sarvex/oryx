@@ -18,7 +18,7 @@
 
   <groupId>com.cloudera.oryx</groupId>
   <artifactId>oryx</artifactId>
-  <version>0.5.2-SNAPSHOT</version>
+  <version>0.6.0</version>
   <packaging>pom</packaging>
 
   <dependencyManagement>
@@ -415,7 +415,7 @@
               <id>enforce</id>
               <configuration>
                 <rules>
-                  <dependencyConvergence/>
+                  <dependencyConvergence />
                   <requireMavenVersion>
                     <version>3.0.4</version>
                   </requireMavenVersion>
@@ -874,7 +874,7 @@
     <connection>scm:git:https://github.com/cloudera/oryx.git</connection>
     <url>scm:git:https://github.com/cloudera/oryx.git</url>
     <developerConnection>scm:git:https://github.com/cloudera/oryx.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>oryx-0.6.0</tag>
   </scm>
   
   <prerequisites>

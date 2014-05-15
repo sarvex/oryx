@@ -34,7 +34,7 @@
 <a class="jxr_linenumber" name="L26" href="#L26">26</a>  <strong class="jxr_keyword">import</strong> com.cloudera.oryx.rdf.serving.generation.Generation;
 <a class="jxr_linenumber" name="L27" href="#L27">27</a>  
 <a class="jxr_linenumber" name="L28" href="#L28">28</a>  <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L29" href="#L29">29</a>  <em class="jxr_javadoccomment"> * &lt;p&gt;Responsds to a GET request to {@code /feature/importance} or {@code /feature/importance/[feature number]}.</em>
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>  <em class="jxr_javadoccomment"> * &lt;p&gt;Responds to a GET request to {@code /feature/importance} or {@code /feature/importance/[feature number]}.</em>
 <a class="jxr_linenumber" name="L30" href="#L30">30</a>  <em class="jxr_javadoccomment"> * In the first case, the results are feature importance values for all features in order as specified in</em>
 <a class="jxr_linenumber" name="L31" href="#L31">31</a>  <em class="jxr_javadoccomment"> * the configuration. In the second case, specified by number, the result is a single feature importance.&lt;/p&gt;</em>
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>  <em class="jxr_javadoccomment"> *</em>
@@ -82,7 +82,7 @@
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>          <strong class="jxr_keyword">return</strong>;
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>        }
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>  
-<a class="jxr_linenumber" name="L77" href="#L77">77</a>        output(request, response, importances[featureNumber]);
+<a class="jxr_linenumber" name="L77" href="#L77">77</a>        output(request, response, <strong class="jxr_keyword">new</strong> <strong class="jxr_keyword">double</strong>[] { importances[featureNumber] });
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>      }
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>    }
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>  

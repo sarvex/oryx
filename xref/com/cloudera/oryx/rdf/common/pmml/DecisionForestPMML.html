@@ -412,7 +412,7 @@
 <a class="jxr_linenumber" name="L404" href="#L404">404</a>       decision = <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/rule/NumericDecision.html">NumericDecision</a>(featureNumber, threshold, defaultDecision);
 <a class="jxr_linenumber" name="L405" href="#L405">405</a> 
 <a class="jxr_linenumber" name="L406" href="#L406">406</a>     } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L407" href="#L407">407</a>       <em class="jxr_comment">// Cateogrical decision</em>
+<a class="jxr_linenumber" name="L407" href="#L407">407</a>       <em class="jxr_comment">// Categorical decision</em>
 <a class="jxr_linenumber" name="L408" href="#L408">408</a>       Preconditions.checkArgument(predicate instanceof SimpleSetPredicate);
 <a class="jxr_linenumber" name="L409" href="#L409">409</a>       SimpleSetPredicate simpleSetPredicate = (SimpleSetPredicate) predicate;
 <a class="jxr_linenumber" name="L410" href="#L410">410</a>       Preconditions.checkArgument(simpleSetPredicate.getBooleanOperator() == SimpleSetPredicate.BooleanOperator.IS_IN);

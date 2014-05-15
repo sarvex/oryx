@@ -361,52 +361,65 @@
 <a class="jxr_linenumber" name="L353" href="#L353">353</a>   }
 <a class="jxr_linenumber" name="L354" href="#L354">354</a> 
 <a class="jxr_linenumber" name="L355" href="#L355">355</a>   @Test
-<a class="jxr_linenumber" name="L356" href="#L356">356</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testSet() <strong class="jxr_keyword">throws</strong> Exception {
+<a class="jxr_linenumber" name="L356" href="#L356">356</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testPopularRepresentative() <strong class="jxr_keyword">throws</strong> Exception {
 <a class="jxr_linenumber" name="L357" href="#L357">357</a>     ServerRecommender client = getRecommender();
-<a class="jxr_linenumber" name="L358" href="#L358">358</a> 
-<a class="jxr_linenumber" name="L359" href="#L359">359</a>     client.setPreference(<span class="jxr_string">"0"</span>, <span class="jxr_string">"1"</span>);
-<a class="jxr_linenumber" name="L360" href="#L360">360</a>     List&lt;IDValue&gt; recs = client.recommend(<span class="jxr_string">"0"</span>, 1);
-<a class="jxr_linenumber" name="L361" href="#L361">361</a>     assertEquals(<span class="jxr_string">"50"</span>, recs.get(0).getID());
-<a class="jxr_linenumber" name="L362" href="#L362">362</a> 
-<a class="jxr_linenumber" name="L363" href="#L363">363</a>     client.setPreference(<span class="jxr_string">"0"</span>, <span class="jxr_string">"2"</span>, 3.0f);
-<a class="jxr_linenumber" name="L364" href="#L364">364</a>     recs = client.recommend(<span class="jxr_string">"0"</span>, 1);
-<a class="jxr_linenumber" name="L365" href="#L365">365</a>     assertEquals(<span class="jxr_string">"117"</span>, recs.get(0).getID());
-<a class="jxr_linenumber" name="L366" href="#L366">366</a> 
-<a class="jxr_linenumber" name="L367" href="#L367">367</a>     client.setPreference(<span class="jxr_string">"0"</span>, <span class="jxr_string">"2"</span>, -3.0f);
-<a class="jxr_linenumber" name="L368" href="#L368">368</a>     recs = client.recommend(<span class="jxr_string">"0"</span>, 1);
-<a class="jxr_linenumber" name="L369" href="#L369">369</a>     assertEquals(<span class="jxr_string">"117"</span>, recs.get(0).getID());
-<a class="jxr_linenumber" name="L370" href="#L370">370</a> 
-<a class="jxr_linenumber" name="L371" href="#L371">371</a>     client.setPreference(<span class="jxr_string">"0"</span>, <span class="jxr_string">"1"</span>, -1.0f);
-<a class="jxr_linenumber" name="L372" href="#L372">372</a>     <em class="jxr_comment">// Don't really know/care what will be recommend at this point; the feature vec is nearly 0</em>
-<a class="jxr_linenumber" name="L373" href="#L373">373</a>     assertEquals(1, client.recommend(<span class="jxr_string">"0"</span>, 1).size());
-<a class="jxr_linenumber" name="L374" href="#L374">374</a>   }
+<a class="jxr_linenumber" name="L358" href="#L358">358</a>     List&lt;String&gt; representative = client.popularRepresentativeItems();
+<a class="jxr_linenumber" name="L359" href="#L359">359</a>     log.info(<span class="jxr_string">"{}"</span>, representative);
+<a class="jxr_linenumber" name="L360" href="#L360">360</a>     assertNotNull(representative);
+<a class="jxr_linenumber" name="L361" href="#L361">361</a>     assertEquals(30, representative.size());
+<a class="jxr_linenumber" name="L362" href="#L362">362</a>     List&lt;String&gt; expected = Arrays.asList(
+<a class="jxr_linenumber" name="L363" href="#L363">363</a>         <span class="jxr_string">"648"</span>, <span class="jxr_string">"276"</span>, <span class="jxr_string">"1171"</span>, <span class="jxr_string">"408"</span>, <span class="jxr_string">"629"</span>, <span class="jxr_string">"250"</span>, <span class="jxr_string">"211"</span>, <span class="jxr_string">"403"</span>, <span class="jxr_string">"923"</span>, <span class="jxr_string">"763"</span>, <span class="jxr_string">"477"</span>, <span class="jxr_string">"171"</span>, <span class="jxr_string">"213"</span>, <span class="jxr_string">"421"</span>, <span class="jxr_string">"637"</span>,
+<a class="jxr_linenumber" name="L364" href="#L364">364</a>         <span class="jxr_string">"325"</span>,  <span class="jxr_string">"46"</span>,  <span class="jxr_string">"214"</span>, <span class="jxr_string">"313"</span>, <span class="jxr_string">"503"</span>, <span class="jxr_string">"167"</span>, <span class="jxr_string">"515"</span>, <span class="jxr_string">"326"</span>, <span class="jxr_string">"606"</span>, <span class="jxr_string">"166"</span>, <span class="jxr_string">"347"</span>, <span class="jxr_string">"258"</span>, <span class="jxr_string">"713"</span>, <span class="jxr_string">"924"</span>, <span class="jxr_string">"863"</span>);
+<a class="jxr_linenumber" name="L365" href="#L365">365</a>     assertEquals(expected, representative);
+<a class="jxr_linenumber" name="L366" href="#L366">366</a>   }
+<a class="jxr_linenumber" name="L367" href="#L367">367</a> 
+<a class="jxr_linenumber" name="L368" href="#L368">368</a>   @Test
+<a class="jxr_linenumber" name="L369" href="#L369">369</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testSet() <strong class="jxr_keyword">throws</strong> Exception {
+<a class="jxr_linenumber" name="L370" href="#L370">370</a>     ServerRecommender client = getRecommender();
+<a class="jxr_linenumber" name="L371" href="#L371">371</a> 
+<a class="jxr_linenumber" name="L372" href="#L372">372</a>     client.setPreference(<span class="jxr_string">"0"</span>, <span class="jxr_string">"1"</span>);
+<a class="jxr_linenumber" name="L373" href="#L373">373</a>     List&lt;IDValue&gt; recs = client.recommend(<span class="jxr_string">"0"</span>, 1);
+<a class="jxr_linenumber" name="L374" href="#L374">374</a>     assertEquals(<span class="jxr_string">"50"</span>, recs.get(0).getID());
 <a class="jxr_linenumber" name="L375" href="#L375">375</a> 
-<a class="jxr_linenumber" name="L376" href="#L376">376</a>   @Test
-<a class="jxr_linenumber" name="L377" href="#L377">377</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testSetRemove() <strong class="jxr_keyword">throws</strong> Exception {
-<a class="jxr_linenumber" name="L378" href="#L378">378</a>     ServerRecommender client = getRecommender();
+<a class="jxr_linenumber" name="L376" href="#L376">376</a>     client.setPreference(<span class="jxr_string">"0"</span>, <span class="jxr_string">"2"</span>, 3.0f);
+<a class="jxr_linenumber" name="L377" href="#L377">377</a>     recs = client.recommend(<span class="jxr_string">"0"</span>, 1);
+<a class="jxr_linenumber" name="L378" href="#L378">378</a>     assertEquals(<span class="jxr_string">"117"</span>, recs.get(0).getID());
 <a class="jxr_linenumber" name="L379" href="#L379">379</a> 
-<a class="jxr_linenumber" name="L380" href="#L380">380</a>     client.setPreference(<span class="jxr_string">"0"</span>, <span class="jxr_string">"1"</span>);
-<a class="jxr_linenumber" name="L381" href="#L381">381</a>     List&lt;IDValue&gt; recs = client.recommend(<span class="jxr_string">"0"</span>, 1);
-<a class="jxr_linenumber" name="L382" href="#L382">382</a>     assertEquals(<span class="jxr_string">"50"</span>, recs.get(0).getID());
+<a class="jxr_linenumber" name="L380" href="#L380">380</a>     client.setPreference(<span class="jxr_string">"0"</span>, <span class="jxr_string">"2"</span>, -3.0f);
+<a class="jxr_linenumber" name="L381" href="#L381">381</a>     recs = client.recommend(<span class="jxr_string">"0"</span>, 1);
+<a class="jxr_linenumber" name="L382" href="#L382">382</a>     assertEquals(<span class="jxr_string">"117"</span>, recs.get(0).getID());
 <a class="jxr_linenumber" name="L383" href="#L383">383</a> 
-<a class="jxr_linenumber" name="L384" href="#L384">384</a>     client.setPreference(<span class="jxr_string">"0"</span>, <span class="jxr_string">"2"</span>, 1.0f);
-<a class="jxr_linenumber" name="L385" href="#L385">385</a>     recs = client.recommend(<span class="jxr_string">"0"</span>, 1);
-<a class="jxr_linenumber" name="L386" href="#L386">386</a>     assertEquals(<span class="jxr_string">"50"</span>, recs.get(0).getID());
-<a class="jxr_linenumber" name="L387" href="#L387">387</a> 
-<a class="jxr_linenumber" name="L388" href="#L388">388</a>     client.removePreference(<span class="jxr_string">"0"</span>, <span class="jxr_string">"2"</span>);
-<a class="jxr_linenumber" name="L389" href="#L389">389</a>     recs = client.recommend(<span class="jxr_string">"0"</span>, 1);
-<a class="jxr_linenumber" name="L390" href="#L390">390</a>     assertEquals(<span class="jxr_string">"50"</span>, recs.get(0).getID());
-<a class="jxr_linenumber" name="L391" href="#L391">391</a> 
-<a class="jxr_linenumber" name="L392" href="#L392">392</a>     client.removePreference(<span class="jxr_string">"0"</span>, <span class="jxr_string">"1"</span>);
-<a class="jxr_linenumber" name="L393" href="#L393">393</a>     <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L394" href="#L394">394</a>       client.recommend(<span class="jxr_string">"0"</span>, 1);
-<a class="jxr_linenumber" name="L395" href="#L395">395</a>       fail();
-<a class="jxr_linenumber" name="L396" href="#L396">396</a>     } <strong class="jxr_keyword">catch</strong> (NoSuchUserException nsue) {
-<a class="jxr_linenumber" name="L397" href="#L397">397</a>       <em class="jxr_comment">// good</em>
-<a class="jxr_linenumber" name="L398" href="#L398">398</a>     }
-<a class="jxr_linenumber" name="L399" href="#L399">399</a>   }
+<a class="jxr_linenumber" name="L384" href="#L384">384</a>     client.setPreference(<span class="jxr_string">"0"</span>, <span class="jxr_string">"1"</span>, -1.0f);
+<a class="jxr_linenumber" name="L385" href="#L385">385</a>     <em class="jxr_comment">// Don't really know/care what will be recommend at this point; the feature vec is nearly 0</em>
+<a class="jxr_linenumber" name="L386" href="#L386">386</a>     assertEquals(1, client.recommend(<span class="jxr_string">"0"</span>, 1).size());
+<a class="jxr_linenumber" name="L387" href="#L387">387</a>   }
+<a class="jxr_linenumber" name="L388" href="#L388">388</a> 
+<a class="jxr_linenumber" name="L389" href="#L389">389</a>   @Test
+<a class="jxr_linenumber" name="L390" href="#L390">390</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testSetRemove() <strong class="jxr_keyword">throws</strong> Exception {
+<a class="jxr_linenumber" name="L391" href="#L391">391</a>     ServerRecommender client = getRecommender();
+<a class="jxr_linenumber" name="L392" href="#L392">392</a> 
+<a class="jxr_linenumber" name="L393" href="#L393">393</a>     client.setPreference(<span class="jxr_string">"0"</span>, <span class="jxr_string">"1"</span>);
+<a class="jxr_linenumber" name="L394" href="#L394">394</a>     List&lt;IDValue&gt; recs = client.recommend(<span class="jxr_string">"0"</span>, 1);
+<a class="jxr_linenumber" name="L395" href="#L395">395</a>     assertEquals(<span class="jxr_string">"50"</span>, recs.get(0).getID());
+<a class="jxr_linenumber" name="L396" href="#L396">396</a> 
+<a class="jxr_linenumber" name="L397" href="#L397">397</a>     client.setPreference(<span class="jxr_string">"0"</span>, <span class="jxr_string">"2"</span>, 1.0f);
+<a class="jxr_linenumber" name="L398" href="#L398">398</a>     recs = client.recommend(<span class="jxr_string">"0"</span>, 1);
+<a class="jxr_linenumber" name="L399" href="#L399">399</a>     assertEquals(<span class="jxr_string">"50"</span>, recs.get(0).getID());
 <a class="jxr_linenumber" name="L400" href="#L400">400</a> 
-<a class="jxr_linenumber" name="L401" href="#L401">401</a> }
+<a class="jxr_linenumber" name="L401" href="#L401">401</a>     client.removePreference(<span class="jxr_string">"0"</span>, <span class="jxr_string">"2"</span>);
+<a class="jxr_linenumber" name="L402" href="#L402">402</a>     recs = client.recommend(<span class="jxr_string">"0"</span>, 1);
+<a class="jxr_linenumber" name="L403" href="#L403">403</a>     assertEquals(<span class="jxr_string">"50"</span>, recs.get(0).getID());
+<a class="jxr_linenumber" name="L404" href="#L404">404</a> 
+<a class="jxr_linenumber" name="L405" href="#L405">405</a>     client.removePreference(<span class="jxr_string">"0"</span>, <span class="jxr_string">"1"</span>);
+<a class="jxr_linenumber" name="L406" href="#L406">406</a>     <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="L407" href="#L407">407</a>       client.recommend(<span class="jxr_string">"0"</span>, 1);
+<a class="jxr_linenumber" name="L408" href="#L408">408</a>       fail();
+<a class="jxr_linenumber" name="L409" href="#L409">409</a>     } <strong class="jxr_keyword">catch</strong> (NoSuchUserException nsue) {
+<a class="jxr_linenumber" name="L410" href="#L410">410</a>       <em class="jxr_comment">// good</em>
+<a class="jxr_linenumber" name="L411" href="#L411">411</a>     }
+<a class="jxr_linenumber" name="L412" href="#L412">412</a>   }
+<a class="jxr_linenumber" name="L413" href="#L413">413</a> 
+<a class="jxr_linenumber" name="L414" href="#L414">414</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2013&#x2013;2014. All rights reserved.</div>

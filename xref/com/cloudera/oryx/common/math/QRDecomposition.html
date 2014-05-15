@@ -74,9 +74,9 @@
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>  <em class="jxr_javadoccomment">   * matrix R, and the rows ABOVE the diagonal are the Householder reflector vectors</em>
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>  <em class="jxr_javadoccomment">   * from which an explicit form of Q can be recomputed if desired.&lt;/p&gt;</em>
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>  <em class="jxr_javadoccomment">   */</em>
-<a class="jxr_linenumber" name="L69" href="#L69">69</a>    <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">double</strong>[][] qrt;
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>    <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">double</strong>[][] qrt;
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>    <em class="jxr_javadoccomment">/** The diagonal elements of R. */</em>
-<a class="jxr_linenumber" name="L71" href="#L71">71</a>    <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">double</strong>[] rDiag;
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>    <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">double</strong>[] rDiag;
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>    <em class="jxr_javadoccomment">/** Cached value of Q. */</em>
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>    <strong class="jxr_keyword">private</strong> RealMatrix cachedQ;
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>    <em class="jxr_javadoccomment">/** Cached value of QT. */</em>
@@ -345,7 +345,7 @@
 <a class="jxr_linenumber" name="L337" href="#L337">337</a>       <strong class="jxr_keyword">this</strong>.threshold = threshold;
 <a class="jxr_linenumber" name="L338" href="#L338">338</a>     }
 <a class="jxr_linenumber" name="L339" href="#L339">339</a> 
-<a class="jxr_linenumber" name="L340" href="#L340">340</a>     <em class="jxr_javadoccomment">/** {@inheritDoc} */</em>
+<a class="jxr_linenumber" name="L340" href="#L340">340</a>     @Override
 <a class="jxr_linenumber" name="L341" href="#L341">341</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">boolean</strong> isNonSingular() {
 <a class="jxr_linenumber" name="L342" href="#L342">342</a>       <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">double</strong> diag : rDiag) {
 <a class="jxr_linenumber" name="L343" href="#L343">343</a>         <strong class="jxr_keyword">if</strong> (FastMath.abs(diag) &lt;= threshold) {
@@ -355,7 +355,7 @@
 <a class="jxr_linenumber" name="L347" href="#L347">347</a>       <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">true</strong>;
 <a class="jxr_linenumber" name="L348" href="#L348">348</a>     }
 <a class="jxr_linenumber" name="L349" href="#L349">349</a> 
-<a class="jxr_linenumber" name="L350" href="#L350">350</a>     <em class="jxr_javadoccomment">/** {@inheritDoc} */</em>
+<a class="jxr_linenumber" name="L350" href="#L350">350</a>     @Override
 <a class="jxr_linenumber" name="L351" href="#L351">351</a>     <strong class="jxr_keyword">public</strong> RealVector solve(RealVector b) {
 <a class="jxr_linenumber" name="L352" href="#L352">352</a>       <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> n = qrt.length;
 <a class="jxr_linenumber" name="L353" href="#L353">353</a>       <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> m = qrt[0].length;
@@ -398,7 +398,7 @@
 <a class="jxr_linenumber" name="L390" href="#L390">390</a>       <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> ArrayRealVector(x, false);
 <a class="jxr_linenumber" name="L391" href="#L391">391</a>     }
 <a class="jxr_linenumber" name="L392" href="#L392">392</a> 
-<a class="jxr_linenumber" name="L393" href="#L393">393</a>     <em class="jxr_javadoccomment">/** {@inheritDoc} */</em>
+<a class="jxr_linenumber" name="L393" href="#L393">393</a>     @Override
 <a class="jxr_linenumber" name="L394" href="#L394">394</a>     <strong class="jxr_keyword">public</strong> RealMatrix solve(RealMatrix b) {
 <a class="jxr_linenumber" name="L395" href="#L395">395</a>       <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> n = qrt.length;
 <a class="jxr_linenumber" name="L396" href="#L396">396</a>       <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> m = qrt[0].length;
@@ -478,9 +478,9 @@
 <a class="jxr_linenumber" name="L470" href="#L470">470</a>     }
 <a class="jxr_linenumber" name="L471" href="#L471">471</a> 
 <a class="jxr_linenumber" name="L472" href="#L472">472</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L473" href="#L473">473</a> <em class="jxr_javadoccomment">     * {@inheritDoc}</em>
-<a class="jxr_linenumber" name="L474" href="#L474">474</a> <em class="jxr_javadoccomment">     * @throws SingularMatrixException if the decomposed matrix is singular.</em>
-<a class="jxr_linenumber" name="L475" href="#L475">475</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L473" href="#L473">473</a> <em class="jxr_javadoccomment">     * @throws SingularMatrixException if the decomposed matrix is singular.</em>
+<a class="jxr_linenumber" name="L474" href="#L474">474</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L475" href="#L475">475</a>     @Override
 <a class="jxr_linenumber" name="L476" href="#L476">476</a>     <strong class="jxr_keyword">public</strong> RealMatrix getInverse() {
 <a class="jxr_linenumber" name="L477" href="#L477">477</a>       <strong class="jxr_keyword">return</strong> solve(MatrixUtils.createRealIdentityMatrix(qrt[0].length));
 <a class="jxr_linenumber" name="L478" href="#L478">478</a>     }

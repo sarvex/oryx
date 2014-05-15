@@ -28,36 +28,52 @@
 <a class="jxr_linenumber" name="L20" href="#L20">20</a>  <strong class="jxr_keyword">import</strong> com.cloudera.oryx.common.iterator.LongPrimitiveIterator;
 <a class="jxr_linenumber" name="L21" href="#L21">21</a>  <strong class="jxr_keyword">import</strong> com.cloudera.oryx.computation.common.fn.OryxMapFn;
 <a class="jxr_linenumber" name="L22" href="#L22">22</a>  <strong class="jxr_keyword">import</strong> com.google.common.base.Preconditions;
-<a class="jxr_linenumber" name="L23" href="#L23">23</a>  <strong class="jxr_keyword">import</strong> org.apache.crunch.Pair;
-<a class="jxr_linenumber" name="L24" href="#L24">24</a>  <strong class="jxr_keyword">import</strong> org.apache.hadoop.mapreduce.Partitioner;
-<a class="jxr_linenumber" name="L25" href="#L25">25</a>  <strong class="jxr_keyword">import</strong> org.apache.hadoop.mapreduce.lib.partition.HashPartitioner;
-<a class="jxr_linenumber" name="L26" href="#L26">26</a>  
-<a class="jxr_linenumber" name="L27" href="#L27">27</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../com/cloudera/oryx/als/computation/popular/PopularMapFn.html">PopularMapFn</a> <strong class="jxr_keyword">extends</strong> OryxMapFn&lt;Pair&lt;Long, LongFloatMap&gt;, Pair&lt;Integer, LongSet&gt;&gt; {
-<a class="jxr_linenumber" name="L28" href="#L28">28</a>  
-<a class="jxr_linenumber" name="L29" href="#L29">29</a>    <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Partitioner&lt;Long,?&gt; HASHER = <strong class="jxr_keyword">new</strong> HashPartitioner&lt;Long, Object&gt;();
-<a class="jxr_linenumber" name="L30" href="#L30">30</a>  
-<a class="jxr_linenumber" name="L31" href="#L31">31</a>    <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> numReducers;
+<a class="jxr_linenumber" name="L23" href="#L23">23</a>  <strong class="jxr_keyword">import</strong> org.apache.crunch.Emitter;
+<a class="jxr_linenumber" name="L24" href="#L24">24</a>  <strong class="jxr_keyword">import</strong> org.apache.crunch.Pair;
+<a class="jxr_linenumber" name="L25" href="#L25">25</a>  <strong class="jxr_keyword">import</strong> org.apache.hadoop.mapreduce.Partitioner;
+<a class="jxr_linenumber" name="L26" href="#L26">26</a>  <strong class="jxr_keyword">import</strong> org.apache.hadoop.mapreduce.lib.partition.HashPartitioner;
+<a class="jxr_linenumber" name="L27" href="#L27">27</a>  
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../com/cloudera/oryx/als/computation/popular/PopularMapFn.html">PopularMapFn</a> <strong class="jxr_keyword">extends</strong> OryxMapFn&lt;Pair&lt;Long, LongFloatMap&gt;, Pair&lt;Integer, LongSet&gt;&gt; {
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>  
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>    <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Partitioner&lt;Long,?&gt; HASHER = <strong class="jxr_keyword">new</strong> HashPartitioner&lt;Long, Object&gt;();
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>    <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> CHUNK_SIZE = 4096;
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>  
-<a class="jxr_linenumber" name="L33" href="#L33">33</a>    @Override
-<a class="jxr_linenumber" name="L34" href="#L34">34</a>    <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> initialize() {
-<a class="jxr_linenumber" name="L35" href="#L35">35</a>      <strong class="jxr_keyword">super</strong>.initialize();
-<a class="jxr_linenumber" name="L36" href="#L36">36</a>      <strong class="jxr_keyword">this</strong>.numReducers = getContext().getNumReduceTasks();
-<a class="jxr_linenumber" name="L37" href="#L37">37</a>    }
-<a class="jxr_linenumber" name="L38" href="#L38">38</a>  
-<a class="jxr_linenumber" name="L39" href="#L39">39</a>    @Override
-<a class="jxr_linenumber" name="L40" href="#L40">40</a>    <strong class="jxr_keyword">public</strong> Pair&lt;Integer, LongSet&gt; map(Pair&lt;Long, LongFloatMap&gt; input) {
-<a class="jxr_linenumber" name="L41" href="#L41">41</a>      <a href="../../../../../../com/cloudera/oryx/common/collection/LongFloatMap.html">LongFloatMap</a> vector = input.second();
-<a class="jxr_linenumber" name="L42" href="#L42">42</a>      Preconditions.checkState(!vector.isEmpty());
-<a class="jxr_linenumber" name="L43" href="#L43">43</a>      <a href="../../../../../../com/cloudera/oryx/common/collection/LongSet.html">LongSet</a> targetIDs = <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/common/collection/LongSet.html">LongSet</a>(vector.size());
-<a class="jxr_linenumber" name="L44" href="#L44">44</a>      <a href="../../../../../../com/cloudera/oryx/common/iterator/LongPrimitiveIterator.html">LongPrimitiveIterator</a> it = vector.keySetIterator();
-<a class="jxr_linenumber" name="L45" href="#L45">45</a>      <strong class="jxr_keyword">while</strong> (it.hasNext()) {
-<a class="jxr_linenumber" name="L46" href="#L46">46</a>        targetIDs.add(it.nextLong());
-<a class="jxr_linenumber" name="L47" href="#L47">47</a>      }
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>    <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> numReducers;
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>  
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>    @Override
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>    <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> initialize() {
+<a class="jxr_linenumber" name="L37" href="#L37">37</a>      <strong class="jxr_keyword">super</strong>.initialize();
+<a class="jxr_linenumber" name="L38" href="#L38">38</a>      <strong class="jxr_keyword">this</strong>.numReducers = getContext().getNumReduceTasks();
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>    }
+<a class="jxr_linenumber" name="L40" href="#L40">40</a>  
+<a class="jxr_linenumber" name="L41" href="#L41">41</a>    @Override
+<a class="jxr_linenumber" name="L42" href="#L42">42</a>    <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> process(Pair&lt;Long, LongFloatMap&gt; input, Emitter&lt;Pair&lt;Integer, LongSet&gt;&gt; emitter) {
+<a class="jxr_linenumber" name="L43" href="#L43">43</a>      <a href="../../../../../../com/cloudera/oryx/common/collection/LongFloatMap.html">LongFloatMap</a> vector = input.second();
+<a class="jxr_linenumber" name="L44" href="#L44">44</a>      Preconditions.checkState(!vector.isEmpty());
+<a class="jxr_linenumber" name="L45" href="#L45">45</a>      <em class="jxr_comment">// vector is already large to have in memory, and a copy of its key set, copied several times through</em>
+<a class="jxr_linenumber" name="L46" href="#L46">46</a>      <em class="jxr_comment">// Crunch / Avro, can exhaust memory. Output in chunks.</em>
+<a class="jxr_linenumber" name="L47" href="#L47">47</a>      <a href="../../../../../../com/cloudera/oryx/common/collection/LongSet.html">LongSet</a> targetIDs = <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/common/collection/LongSet.html">LongSet</a>();
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>      <em class="jxr_comment">// Make sure we use exactly the same hash:</em>
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>      <strong class="jxr_keyword">int</strong> partition = HASHER.getPartition(input.first(), <strong class="jxr_keyword">null</strong>, numReducers);
-<a class="jxr_linenumber" name="L50" href="#L50">50</a>      <strong class="jxr_keyword">return</strong> Pair.of(partition, targetIDs);
-<a class="jxr_linenumber" name="L51" href="#L51">51</a>    }
-<a class="jxr_linenumber" name="L52" href="#L52">52</a>  }
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>      <a href="../../../../../../com/cloudera/oryx/common/iterator/LongPrimitiveIterator.html">LongPrimitiveIterator</a> it = vector.keySetIterator();
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>      <strong class="jxr_keyword">while</strong> (it.hasNext()) {
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>        targetIDs.add(it.nextLong());
+<a class="jxr_linenumber" name="L53" href="#L53">53</a>        <strong class="jxr_keyword">if</strong> (targetIDs.size() &gt;= CHUNK_SIZE) {
+<a class="jxr_linenumber" name="L54" href="#L54">54</a>          emitter.emit(Pair.of(partition, targetIDs));
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>          targetIDs = <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/common/collection/LongSet.html">LongSet</a>();
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>        }
+<a class="jxr_linenumber" name="L57" href="#L57">57</a>      }
+<a class="jxr_linenumber" name="L58" href="#L58">58</a>      <strong class="jxr_keyword">if</strong> (!targetIDs.isEmpty()) {
+<a class="jxr_linenumber" name="L59" href="#L59">59</a>        emitter.emit(Pair.of(partition, targetIDs));
+<a class="jxr_linenumber" name="L60" href="#L60">60</a>      }
+<a class="jxr_linenumber" name="L61" href="#L61">61</a>    }
+<a class="jxr_linenumber" name="L62" href="#L62">62</a>  
+<a class="jxr_linenumber" name="L63" href="#L63">63</a>    @Override
+<a class="jxr_linenumber" name="L64" href="#L64">64</a>    <strong class="jxr_keyword">public</strong> Pair&lt;Integer, LongSet&gt; map(Pair&lt;Long, LongFloatMap&gt; input) {
+<a class="jxr_linenumber" name="L65" href="#L65">65</a>      <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> UnsupportedOperationException(<span class="jxr_string">"process() should have been called!"</span>);
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>    }
+<a class="jxr_linenumber" name="L67" href="#L67">67</a>  
+<a class="jxr_linenumber" name="L68" href="#L68">68</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2013&#x2013;2014. All rights reserved.</div>

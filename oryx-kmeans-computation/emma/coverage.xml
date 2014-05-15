@@ -1,37 +1,37 @@
-<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Mon Apr 14 17:55:33 BST 2014 -->
+<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Thu May 15 15:52:12 BST 2014 -->
 
 <report>
   <stats>
     <packages value="11"/>
-    <classes value="77"/>
-    <methods value="370"/>
-    <srcfiles value="58"/>
-    <srclines value="1610"/>
+    <classes value="79"/>
+    <methods value="376"/>
+    <srcfiles value="59"/>
+    <srclines value="1654"/>
   </stats>
   <data>
     <all name="all classes">
-      <coverage type="class, %" value="29%  (22/77)"/>
-      <coverage type="method, %" value="15%  (55/370)"/>
-      <coverage type="block, %" value="13%  (1044/8142)"/>
-      <coverage type="line, %" value="13%  (203/1610)"/>
+      <coverage type="class, %" value="28%  (22/79)"/>
+      <coverage type="method, %" value="15%  (55/376)"/>
+      <coverage type="block, %" value="13%  (1044/8327)"/>
+      <coverage type="line, %" value="12%  (203/1654)"/>
 
       <package name="com.cloudera.oryx.kmeans.computation.evaluate">
         <coverage type="class, %" value="0%   (0/12)"/>
         <coverage type="method, %" value="0%   (0/57)"/>
-        <coverage type="block, %" value="0%   (0/1481)"/>
-        <coverage type="line, %" value="0%   (0/296)"/>
+        <coverage type="block, %" value="0%   (0/1491)"/>
+        <coverage type="line, %" value="0%   (0/300)"/>
 
         <srcfile name="CentersOutputFn.java">
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/4)"/>
-          <coverage type="block, %" value="0%   (0/125)"/>
-          <coverage type="line, %" value="0%   (0/30)"/>
+          <coverage type="block, %" value="0%   (0/127)"/>
+          <coverage type="line, %" value="0%   (0/31)"/>
 
           <class name="CentersOutputFn">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/4)"/>
-            <coverage type="block, %" value="0%   (0/125)"/>
-            <coverage type="line, %" value="0%   (0/30)"/>
+            <coverage type="block, %" value="0%   (0/127)"/>
+            <coverage type="line, %" value="0%   (0/31)"/>
 
             <method name="CentersOutputFn (String): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -45,8 +45,8 @@
             </method>
             <method name="initialize (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/67)"/>
-              <coverage type="line, %" value="0%   (0/14)"/>
+              <coverage type="block, %" value="0%   (0/69)"/>
+              <coverage type="line, %" value="0%   (0/15)"/>
             </method>
             <method name="process (KMeansEvaluationData, Emitter): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -195,14 +195,14 @@
         <srcfile name="ClusteringStep.java">
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/6)"/>
-          <coverage type="block, %" value="0%   (0/410)"/>
-          <coverage type="line, %" value="0%   (0/77)"/>
+          <coverage type="block, %" value="0%   (0/420)"/>
+          <coverage type="line, %" value="0%   (0/80)"/>
 
           <class name="ClusteringStep">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/6)"/>
-            <coverage type="block, %" value="0%   (0/410)"/>
-            <coverage type="line, %" value="0%   (0/77)"/>
+            <coverage type="block, %" value="0%   (0/420)"/>
+            <coverage type="line, %" value="0%   (0/80)"/>
 
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -231,21 +231,21 @@
             </method>
             <method name="uploadCenters (String, String, List): void">
               <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/146)"/>
-              <coverage type="line, %" value="0%   (0/34)"/>
+              <coverage type="block, %" value="0%   (0/156)"/>
+              <coverage type="line, %" value="0%   (0/37)"/>
             </method>
           </class>
         </srcfile>
         <srcfile name="EvaluationSettings.java">
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/9)"/>
-          <coverage type="block, %" value="0%   (0/225)"/>
+          <coverage type="block, %" value="0%   (0/223)"/>
           <coverage type="line, %" value="0%   (0/41)"/>
 
           <class name="EvaluationSettings">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/9)"/>
-            <coverage type="block, %" value="0%   (0/225)"/>
+            <coverage type="block, %" value="0%   (0/223)"/>
             <coverage type="line, %" value="0%   (0/41)"/>
 
             <method name="EvaluationSettings (List, int, int, int, KMeansInitStrategy, KMeansUpdateStrategy, KMeansEvalStrategy): void">
@@ -255,7 +255,7 @@
             </method>
             <method name="create (Config): EvaluationSettings">
               <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/180)"/>
+              <coverage type="block, %" value="0%   (0/178)"/>
               <coverage type="line, %" value="0%   (0/25)"/>
             </method>
             <method name="getEvalStrategy (): KMeansEvalStrategy">
@@ -476,11 +476,45 @@
         </srcfile>
       </package>
       <package name="com.cloudera.oryx.kmeans.computation.local">
-        <coverage type="class, %" value="0%   (0/9)"/>
-        <coverage type="method, %" value="0%   (0/23)"/>
-        <coverage type="block, %" value="0%   (0/1173)"/>
-        <coverage type="line, %" value="0%   (0/228)"/>
+        <coverage type="class, %" value="0%   (0/11)"/>
+        <coverage type="method, %" value="0%   (0/29)"/>
+        <coverage type="block, %" value="0%   (0/1340)"/>
+        <coverage type="line, %" value="0%   (0/265)"/>
 
+        <srcfile name="Assignment.java">
+          <coverage type="class, %" value="0%   (0/1)"/>
+          <coverage type="method, %" value="0%   (0/4)"/>
+          <coverage type="block, %" value="0%   (0/118)"/>
+          <coverage type="line, %" value="0%   (0/25)"/>
+
+          <class name="Assignment">
+            <coverage type="class, %" value="0%   (0/1)"/>
+            <coverage type="method, %" value="0%   (0/4)"/>
+            <coverage type="block, %" value="0%   (0/118)"/>
+            <coverage type="line, %" value="0%   (0/25)"/>
+
+            <method name="&lt;static initializer&gt;">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/7)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="Assignment (List, List): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/9)"/>
+              <coverage type="line, %" value="0%   (0/4)"/>
+            </method>
+            <method name="call (): List">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/90)"/>
+              <coverage type="line, %" value="0%   (0/18)"/>
+            </method>
+            <method name="doOutlierComputation (Config): boolean">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/12)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+          </class>
+        </srcfile>
         <srcfile name="AssignmentRun.java">
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/2)"/>
@@ -508,14 +542,14 @@
         <srcfile name="ClusteringEvaluation.java">
           <coverage type="class, %" value="0%   (0/2)"/>
           <coverage type="method, %" value="0%   (0/4)"/>
-          <coverage type="block, %" value="0%   (0/145)"/>
-          <coverage type="line, %" value="0%   (0/26)"/>
+          <coverage type="block, %" value="0%   (0/127)"/>
+          <coverage type="line, %" value="0%   (0/27)"/>
 
           <class name="ClusteringEvaluation">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/2)"/>
-            <coverage type="block, %" value="0%   (0/136)"/>
-            <coverage type="line, %" value="0%   (0/24)"/>
+            <coverage type="block, %" value="0%   (0/118)"/>
+            <coverage type="line, %" value="0%   (0/25)"/>
 
             <method name="ClusteringEvaluation (List): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -524,8 +558,8 @@
             </method>
             <method name="call (): List">
               <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/130)"/>
-              <coverage type="line, %" value="0%   (0/21)"/>
+              <coverage type="block, %" value="0%   (0/112)"/>
+              <coverage type="line, %" value="0%   (0/22)"/>
             </method>
           </class>
           <class name="ClusteringEvaluation$1">
@@ -571,16 +605,16 @@
           </class>
         </srcfile>
         <srcfile name="KMeansLocalGenerationRunner.java">
-          <coverage type="class, %" value="0%   (0/1)"/>
-          <coverage type="method, %" value="0%   (0/2)"/>
-          <coverage type="block, %" value="0%   (0/152)"/>
-          <coverage type="line, %" value="0%   (0/32)"/>
+          <coverage type="class, %" value="0%   (0/2)"/>
+          <coverage type="method, %" value="0%   (0/4)"/>
+          <coverage type="block, %" value="0%   (0/246)"/>
+          <coverage type="line, %" value="0%   (0/49)"/>
 
           <class name="KMeansLocalGenerationRunner">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/2)"/>
-            <coverage type="block, %" value="0%   (0/152)"/>
-            <coverage type="line, %" value="0%   (0/32)"/>
+            <coverage type="block, %" value="0%   (0/237)"/>
+            <coverage type="line, %" value="0%   (0/47)"/>
 
             <method name="KMeansLocalGenerationRunner (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -589,8 +623,25 @@
             </method>
             <method name="runSteps (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/149)"/>
-              <coverage type="line, %" value="0%   (0/31)"/>
+              <coverage type="block, %" value="0%   (0/234)"/>
+              <coverage type="line, %" value="0%   (0/46)"/>
+            </method>
+          </class>
+          <class name="KMeansLocalGenerationRunner$1">
+            <coverage type="class, %" value="0%   (0/1)"/>
+            <coverage type="method, %" value="0%   (0/2)"/>
+            <coverage type="block, %" value="0%   (0/9)"/>
+            <coverage type="line, %" value="0%   (0/2)"/>
+
+            <method name="KMeansLocalGenerationRunner$1 (KMeansLocalGenerationRunner): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/6)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="apply (KMeansEvaluationData): ClusterValidityStatistics">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/3)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
             </method>
           </class>
         </srcfile>
@@ -684,14 +735,14 @@
         <srcfile name="WeightedPointsByFold.java">
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/4)"/>
-          <coverage type="block, %" value="0%   (0/223)"/>
-          <coverage type="line, %" value="0%   (0/40)"/>
+          <coverage type="block, %" value="0%   (0/196)"/>
+          <coverage type="line, %" value="0%   (0/34)"/>
 
           <class name="WeightedPointsByFold">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/4)"/>
-            <coverage type="block, %" value="0%   (0/223)"/>
-            <coverage type="line, %" value="0%   (0/40)"/>
+            <coverage type="block, %" value="0%   (0/196)"/>
+            <coverage type="line, %" value="0%   (0/34)"/>
 
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -710,8 +761,8 @@
             </method>
             <method name="call (): List">
               <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/158)"/>
-              <coverage type="line, %" value="0%   (0/28)"/>
+              <coverage type="block, %" value="0%   (0/131)"/>
+              <coverage type="line, %" value="0%   (0/22)"/>
             </method>
           </class>
         </srcfile>
@@ -1330,7 +1381,7 @@
       <package name="com.cloudera.oryx.kmeans.computation">
         <coverage type="class, %" value="54%  (7/13)"/>
         <coverage type="method, %" value="17%  (8/48)"/>
-        <coverage type="block, %" value="9%   (60/632)"/>
+        <coverage type="block, %" value="10%  (60/630)"/>
         <coverage type="line, %" value="10%  (13/125)"/>
 
         <srcfile name="AvroUtils.java">
@@ -1365,13 +1416,13 @@
         <srcfile name="KMeansDistributedGenerationRunner.java">
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/9)"/>
-          <coverage type="block, %" value="0%   (0/128)"/>
+          <coverage type="block, %" value="0%   (0/126)"/>
           <coverage type="line, %" value="0%   (0/28)"/>
 
           <class name="KMeansDistributedGenerationRunner">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/9)"/>
-            <coverage type="block, %" value="0%   (0/128)"/>
+            <coverage type="block, %" value="0%   (0/126)"/>
             <coverage type="line, %" value="0%   (0/28)"/>
 
             <method name="&lt;static initializer&gt;">
@@ -1401,7 +1452,7 @@
             </method>
             <method name="doPre (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/31)"/>
+              <coverage type="block, %" value="0%   (0/30)"/>
               <coverage type="line, %" value="0%   (0/8)"/>
             </method>
             <method name="getIterationDependencies (): List">
@@ -1411,7 +1462,7 @@
             </method>
             <method name="getPostDependencies (): List">
               <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/39)"/>
+              <coverage type="block, %" value="0%   (0/38)"/>
               <coverage type="line, %" value="0%   (0/9)"/>
             </method>
             <method name="getPreDependencies (): List">
@@ -2256,20 +2307,20 @@
       <package name="com.cloudera.oryx.kmeans.computation.cluster">
         <coverage type="class, %" value="36%  (4/11)"/>
         <coverage type="method, %" value="22%  (12/54)"/>
-        <coverage type="block, %" value="29%  (395/1373)"/>
-        <coverage type="line, %" value="27%  (76/284)"/>
+        <coverage type="block, %" value="29%  (395/1383)"/>
+        <coverage type="line, %" value="26%  (76/287)"/>
 
         <srcfile name="CentersIndexLoader.java">
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/4)"/>
-          <coverage type="block, %" value="0%   (0/98)"/>
-          <coverage type="line, %" value="0%   (0/22)"/>
+          <coverage type="block, %" value="0%   (0/108)"/>
+          <coverage type="line, %" value="0%   (0/25)"/>
 
           <class name="CentersIndexLoader">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/4)"/>
-            <coverage type="block, %" value="0%   (0/98)"/>
-            <coverage type="line, %" value="0%   (0/22)"/>
+            <coverage type="block, %" value="0%   (0/108)"/>
+            <coverage type="line, %" value="0%   (0/25)"/>
 
             <method name="CentersIndexLoader (ClusterSettings): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -2283,8 +2334,8 @@
             </method>
             <method name="getIndex (String): KSketchIndex">
               <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/74)"/>
-              <coverage type="line, %" value="0%   (0/17)"/>
+              <coverage type="block, %" value="0%   (0/84)"/>
+              <coverage type="line, %" value="0%   (0/20)"/>
             </method>
             <method name="load (String): KSketchIndex">
               <coverage type="method, %" value="0%   (0/1)"/>

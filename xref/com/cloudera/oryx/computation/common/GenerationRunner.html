@@ -267,7 +267,7 @@
 <a class="jxr_linenumber" name="L259" href="#L259">259</a>     stats.put(<span class="jxr_string">"preRunBytes"</span>, startSize);
 <a class="jxr_linenumber" name="L260" href="#L260">260</a>     stats.put(<span class="jxr_string">"postRunBytes"</span>, endSize);
 <a class="jxr_linenumber" name="L261" href="#L261">261</a> 
-<a class="jxr_linenumber" name="L262" href="#L262">262</a>     <em class="jxr_comment">// Now compute some subclass-specific stats if impelmented</em>
+<a class="jxr_linenumber" name="L262" href="#L262">262</a>     <em class="jxr_comment">// Now compute some subclass-specific stats if implemented</em>
 <a class="jxr_linenumber" name="L263" href="#L263">263</a>     Map&lt;String, ?&gt; moreStats = collectStats();
 <a class="jxr_linenumber" name="L264" href="#L264">264</a>     <strong class="jxr_keyword">if</strong> (moreStats != <strong class="jxr_keyword">null</strong>) {
 <a class="jxr_linenumber" name="L265" href="#L265">265</a>       stats.putAll(moreStats);
@@ -304,7 +304,7 @@
 <a class="jxr_linenumber" name="L296" href="#L296">296</a> 
 <a class="jxr_linenumber" name="L297" href="#L297">297</a>     <strong class="jxr_keyword">if</strong> (generationToRun == 0L) {
 <a class="jxr_linenumber" name="L298" href="#L298">298</a>       <em class="jxr_comment">// Special case: let generation 0 run immediately</em>
-<a class="jxr_linenumber" name="L299" href="#L299">299</a>       log.info(<span class="jxr_string">"Generation 0 may run immediately"</span>, generationToWaitFor);
+<a class="jxr_linenumber" name="L299" href="#L299">299</a>       log.info(<span class="jxr_string">"Generation 0 may run immediately"</span>);
 <a class="jxr_linenumber" name="L300" href="#L300">300</a>     } <strong class="jxr_keyword">else</strong> {
 <a class="jxr_linenumber" name="L301" href="#L301">301</a>       String nextGenerationPrefix =
 <a class="jxr_linenumber" name="L302" href="#L302">302</a>           Namespaces.getInstanceGenerationPrefix(instanceDir, generationToWaitFor) + <span class="jxr_string">"inbound/"</span>;

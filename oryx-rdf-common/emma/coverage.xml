@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Mon Apr 14 17:55:33 BST 2014 -->
+<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Thu May 15 15:52:12 BST 2014 -->
 
 <report>
   <stats>
@@ -12,7 +12,7 @@
     <all name="all classes">
       <coverage type="class, %" value="59%  (19/32)"/>
       <coverage type="method, %" value="40%  (76/189)"/>
-      <coverage type="block, %" value="34%  (1648/4885)"/>
+      <coverage type="block, %" value="34%  (1648/4886)"/>
       <coverage type="line, %" value="36%  (360.6/1003)"/>
 
       <package name="com.cloudera.oryx.rdf.common.pmml">
@@ -74,19 +74,19 @@
       <package name="com.cloudera.oryx.rdf.common.tree">
         <coverage type="class, %" value="0%   (0/7)"/>
         <coverage type="method, %" value="0%   (0/58)"/>
-        <coverage type="block, %" value="0%   (0/1439)"/>
+        <coverage type="block, %" value="0%   (0/1440)"/>
         <coverage type="line, %" value="0%   (0/272)"/>
 
         <srcfile name="DecisionForest.java">
           <coverage type="class, %" value="0%   (0/3)"/>
           <coverage type="method, %" value="0%   (0/21)"/>
-          <coverage type="block, %" value="0%   (0/631)"/>
+          <coverage type="block, %" value="0%   (0/632)"/>
           <coverage type="line, %" value="0%   (0/99)"/>
 
           <class name="DecisionForest">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/17)"/>
-            <coverage type="block, %" value="0%   (0/416)"/>
+            <coverage type="block, %" value="0%   (0/417)"/>
             <coverage type="line, %" value="0%   (0/73)"/>
 
             <method name="&lt;static initializer&gt;">
@@ -101,7 +101,7 @@
             </method>
             <method name="DecisionForest (int, double, int, double, int, int, double, ExampleSet): void">
               <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/236)"/>
+              <coverage type="block, %" value="0%   (0/237)"/>
               <coverage type="line, %" value="0%   (0/35)"/>
             </method>
             <method name="access$000 (DecisionForest): DecisionTree []">

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Mon Apr 14 17:55:33 BST 2014 -->
+<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Thu May 15 15:52:12 BST 2014 -->
 
 <report>
   <stats>
@@ -12,7 +12,7 @@
     <all name="all classes">
       <coverage type="class, %" value="9%   (7/78)"/>
       <coverage type="method, %" value="5%   (24/479)"/>
-      <coverage type="block, %" value="8%   (544/7210)"/>
+      <coverage type="block, %" value="8%   (544/7209)"/>
       <coverage type="line, %" value="8%   (119.9/1515)"/>
 
       <package name="com.cloudera.oryx.computation.common.crossfold">
@@ -2458,7 +2458,7 @@
       <package name="com.cloudera.oryx.computation.common">
         <coverage type="class, %" value="14%  (2/14)"/>
         <coverage type="method, %" value="8%   (9/108)"/>
-        <coverage type="block, %" value="7%   (204/2759)"/>
+        <coverage type="block, %" value="7%   (204/2758)"/>
         <coverage type="line, %" value="9%   (53.9/601)"/>
 
         <srcfile name="DistributedGenerationRunner.java">
@@ -2528,13 +2528,13 @@
         <srcfile name="GenerationRunner.java">
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/16)"/>
-          <coverage type="block, %" value="0%   (0/822)"/>
+          <coverage type="block, %" value="0%   (0/820)"/>
           <coverage type="line, %" value="0%   (0/178)"/>
 
           <class name="GenerationRunner">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/16)"/>
-            <coverage type="block, %" value="0%   (0/822)"/>
+            <coverage type="block, %" value="0%   (0/820)"/>
             <coverage type="line, %" value="0%   (0/178)"/>
 
             <method name="&lt;static initializer&gt;">
@@ -2599,7 +2599,7 @@
             </method>
             <method name="maybeWaitToRun (String, int, int): void">
               <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/123)"/>
+              <coverage type="block, %" value="0%   (0/121)"/>
               <coverage type="line, %" value="0%   (0/25)"/>
             </method>
             <method name="readLatestIterationInProgress (): int">
@@ -2705,13 +2705,13 @@
         <srcfile name="JobStep.java">
           <coverage type="class, %" value="0%   (0/2)"/>
           <coverage type="method, %" value="0%   (0/29)"/>
-          <coverage type="block, %" value="0%   (0/865)"/>
+          <coverage type="block, %" value="0%   (0/866)"/>
           <coverage type="line, %" value="0%   (0/175)"/>
 
           <class name="JobStep">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/28)"/>
-            <coverage type="block, %" value="0%   (0/825)"/>
+            <coverage type="block, %" value="0%   (0/826)"/>
             <coverage type="line, %" value="0%   (0/175)"/>
 
             <method name="&lt;static initializer&gt;">
@@ -2741,7 +2741,7 @@
             </method>
             <method name="createBasicPipeline (Class): MRPipeline">
               <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/230)"/>
+              <coverage type="block, %" value="0%   (0/231)"/>
               <coverage type="line, %" value="0%   (0/46)"/>
             </method>
             <method name="createPipeline (): MRPipeline">

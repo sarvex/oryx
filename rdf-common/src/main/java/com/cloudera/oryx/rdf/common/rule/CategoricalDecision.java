@@ -83,7 +83,14 @@ public final class CategoricalDecision extends Decision {
   @Override
   public boolean isPositive(Example example) {
     CategoricalFeature feature = (CategoricalFeature) example.getFeature(getFeatureNumber());
-    return feature == null ? defaultDecision : activeCategories.get(feature.getValueID());
+    if (feature == null) {
+      return defaultDecision;
+    }
+    int valueID = feature.getValueID();
+    if (valueID >= activeCategories.size()) {
+      return defaultDecision;
+    }
+    return activeCategories.get(valueID);
   }
 
   @Override

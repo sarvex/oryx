@@ -21,6 +21,7 @@ import com.cloudera.oryx.common.stats.DoubleWeightedMean;
 import com.cloudera.oryx.rdf.common.rule.CategoricalPrediction;
 import com.cloudera.oryx.rdf.common.rule.NumericPrediction;
 import com.cloudera.oryx.rdf.common.rule.Prediction;
+import com.google.common.base.Preconditions;
 
 /**
  * A utility class with methods for combining the results of many
@@ -43,7 +44,10 @@ public final class WeightedPrediction {
    * @return a single {@link Prediction} represented a weighted combination of the inputs
    */
   public static <T extends Prediction> Prediction voteOnFeature(List<T> predictions, double[] weights) {
-    switch (predictions.iterator().next().getFeatureType()) {
+    Preconditions.checkArgument(!predictions.isEmpty(), "No predictions");
+    Preconditions.checkArgument(predictions.size() == weights.length,
+                                "%s predictions but %s weights?", predictions.size(), weights.length);
+    switch (predictions.get(0).getFeatureType()) {
       case NUMERIC:
         @SuppressWarnings("unchecked")
         List<NumericPrediction> numericVotes = (List<NumericPrediction>) predictions;

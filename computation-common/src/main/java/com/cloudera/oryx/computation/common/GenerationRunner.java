@@ -213,6 +213,9 @@ public abstract class GenerationRunner implements Callable<Object> {
       log.info("No need to make a new generation");
     } else {
       log.info("Making new generation {}", generationToMake);
+      if (!store.exists(Namespaces.getInstancePrefix(instanceDir), false)) {
+        log.warn("No instance directory at {} -- is this a typo?", instanceDir);
+      }
       store.mkdir(Namespaces.getInstanceGenerationPrefix(instanceDir, generationToMake) + "inbound/");
     }
 

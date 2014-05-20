@@ -72,7 +72,7 @@ public final class Evaluation {
    * @param classifier a {@link com.cloudera.oryx.rdf.common.tree.TreeBasedClassifier} (e.g. {@link com.cloudera.oryx.rdf.common.tree.DecisionForest})
    *  trained on data with a numeric target
    * @param testSet test set to evaluate on
-   * @return fractin of test examples whose categorical target value was correctly predicted by the classifier
+   * @return fraction of test examples whose categorical target value was correctly predicted by the classifier
    */
   public static double correctlyClassifiedFraction(TreeBasedClassifier classifier, Iterable<Example> testSet) {
     int correct = 0;

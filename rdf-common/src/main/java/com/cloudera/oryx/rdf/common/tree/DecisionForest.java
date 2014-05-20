@@ -135,6 +135,7 @@ public final class DecisionForest implements Iterable<DecisionTree>, TreeBasedCl
             Preconditions.checkState(!trainingExamples.isEmpty(), "No training examples sampled?");
             Preconditions.checkState(!cvExamples.isEmpty(), "No CV examples sampled?");
 
+            log.info("Starting tree {}", treeID);
             trees[treeID] = new DecisionTree(numFeatures,
                                              featuresToTry,
                                              minNodeSize,
@@ -159,9 +160,9 @@ public final class DecisionForest implements Iterable<DecisionTree>, TreeBasedCl
     }
 
     featureImportances = new double[numFeatures];
-    for (double[] perTreeFeatureImporatance : perTreeFeatureImportances) {
+    for (double[] perTreeFeatureImportance : perTreeFeatureImportances) {
       for (int i = 0; i < numFeatures; i++) {
-        featureImportances[i] += perTreeFeatureImporatance[i];
+        featureImportances[i] += perTreeFeatureImportance[i];
       }
     }
     for (int i = 0; i < numFeatures; i++) {

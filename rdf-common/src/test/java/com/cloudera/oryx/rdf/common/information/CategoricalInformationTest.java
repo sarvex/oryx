@@ -64,6 +64,45 @@ public final class CategoricalInformationTest extends OryxTest {
                  best.getValue().doubleValue());
   }
 
+  @Test
+  public void testInformationCategoricalFeatureVsBinary() {
+    ExampleSet exampleSet = examplesForCategoryCounts(new int[][] {
+        {2, 6},
+        {1, 1},
+        {1, 0},
+        {0, 1},
+        {4, 1},
+    });
+    List<Decision> decisions = Decision.decisionsFromExamples(exampleSet, 0, 100);
+    assertEquals(4, decisions.size());
+    BitSet categories0 = ((CategoricalDecision) decisions.get(0)).getCategoryIDs();
+    BitSet categories1 = ((CategoricalDecision) decisions.get(1)).getCategoryIDs();
+    BitSet categories2 = ((CategoricalDecision) decisions.get(2)).getCategoryIDs();
+    BitSet categories3 = ((CategoricalDecision) decisions.get(3)).getCategoryIDs();
+
+    assertEquals(1, categories0.cardinality());
+    assertTrue(categories0.get(3));
+    assertEquals(2, categories1.cardinality());
+    assertTrue(categories1.get(0));
+    assertTrue(categories1.get(3));
+    assertEquals(3, categories2.cardinality());
+    assertTrue(categories2.get(0));
+    assertTrue(categories2.get(1));
+    assertTrue(categories2.get(3));
+    assertEquals(4, categories3.cardinality());
+    assertTrue(categories3.get(0));
+    assertTrue(categories3.get(1));
+    assertTrue(categories3.get(3));
+    assertTrue(categories3.get(4));
+
+    Pair<Decision,Double> best = CategoricalInformation.bestGain(decisions, exampleSet);
+    assertEquals(categories2, ((CategoricalDecision) best.getFirst()).getCategoryIDs());
+    assertEquals(Information.entropy(new int[] {8,9})
+                     - (11.0/17.0)*Information.entropy(new int[] {3,8})
+                     - ( 6.0/17.0)*Information.entropy(new int[] {5,1}),
+                 best.getValue().doubleValue());
+  }
+
   private static ExampleSet examplesForCategoryCounts(int[][] categoryCountsByCatFeatureValue) {
     List<Example> examples = Lists.newArrayList();
     for (int featureValue = 0; featureValue < categoryCountsByCatFeatureValue.length; featureValue++) {

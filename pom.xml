@@ -957,7 +957,7 @@
     <profile>
       <id>hadoop200</id>
       <properties>
-        <hadoop.version>2.0.0-cdh4.6.0</hadoop.version>
+        <hadoop.version>2.0.0-cdh4.7.0</hadoop.version>
       </properties>
     </profile>
   </profiles>

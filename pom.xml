@@ -220,6 +220,12 @@
       </dependency>
 
       <dependency>
+        <groupId>com.google.protobuf</groupId>
+        <artifactId>protobuf-java</artifactId>
+        <version>${protobuf.version}</version>
+      </dependency>
+
+      <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
         <version>${slf4j.version}</version>
@@ -419,6 +425,7 @@
     <crunch.version>0.11.0-hadoop2</crunch.version>
     <!-- our custom props -->
     <spark.version>1.0.2</spark.version>
+    <protobuf.version>2.5.0</protobuf.version>
     <scala.version>2.10.4</scala.version>
     <module.jspx.package>override-me</module.jspx.package>
   </properties>

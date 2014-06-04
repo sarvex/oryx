@@ -33,7 +33,7 @@ public final class ALSTypes {
 
   public static final PType<Long> LONGS = Avros.longs();
 
-  public static final PType<float[]> FLOAT_ARRAY = Avros.derived(float[].class,
+  public static final PType<float[]> FLOAT_ARRAY = Avros.derivedImmutable(float[].class,
        new MapFn<FloatArray, float[]>() {
          @Override
          public float[] map(FloatArray input) {
@@ -48,7 +48,7 @@ public final class ALSTypes {
        }, Avros.reflects(FloatArray.class));
 
   static final class FloatArray {
-    private final float[] values;
+    float[] values;
     FloatArray() {
       this(null);
     }
@@ -62,7 +62,7 @@ public final class ALSTypes {
 
   public static final PType<NumericIDValue> IDVALUE = Avros.reflects(NumericIDValue.class);
 
-  public static final PType<LongSet> ID_SET = Avros.derived(LongSet.class,
+  public static final PType<LongSet> ID_SET = Avros.derivedImmutable(LongSet.class,
       new MapFn<Collection<Long>, LongSet>() {
         @Override
         public LongSet map(Collection<Long> input) {
@@ -84,7 +84,7 @@ public final class ALSTypes {
         }
       }, Avros.collections(LONGS));
 
-  public static final PType<LongFloatMap> ID_FLOAT_MAP = Avros.derived(LongFloatMap.class,
+  public static final PType<LongFloatMap> ID_FLOAT_MAP = Avros.derivedImmutable(LongFloatMap.class,
       new MapFn<Collection<Pair<Long,Float>>, LongFloatMap>() {
         @Override
         public LongFloatMap map(Collection<Pair<Long,Float>> input) {

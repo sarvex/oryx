@@ -47,15 +47,15 @@ public final class ALSTypes {
          }
        }, Avros.reflects(FloatArray.class));
 
-  static final class FloatArray {
-    float[] values;
-    FloatArray() {
+  public static final class FloatArray {
+    public float[] values;
+    public FloatArray() {
       this(null);
     }
-    FloatArray(float[] values) {
+    public FloatArray(float[] values) {
       this.values = values;
     }
-    float[] getValues() {
+    public float[] getValues() {
       return values;
     }
   }

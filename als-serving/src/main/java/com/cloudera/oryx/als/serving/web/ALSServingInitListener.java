@@ -101,6 +101,7 @@ public final class ALSServingInitListener extends AbstractOryxServingInitListene
     addServlet(context, new ReadyServlet(), "/ready/*");
     addServlet(context, new MostPopularItemsServlet(), "/mostPopularItems/*");
     addServlet(context, new PopularRepresentativeItemsServlet(), "/popularRepresentativeItems/*");
+    addServlet(context, new AllItemIDsServlet(), "/item/allIDs");
     if (!ConfigUtils.getDefaultConfig().getBoolean("serving-layer.api.read-only")) {
       addServlet(context, new PreferenceServlet(), "/pref/*");
       Wrapper ingestWrapper = addServlet(context, new IngestServlet(), "/ingest/*");

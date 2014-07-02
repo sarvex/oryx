@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import org.junit.Test;
@@ -408,6 +409,17 @@ public final class SimpleIT extends AbstractComputationIT {
       fail();
     } catch (NoSuchUserException nsue) {
       // good
+    }
+  }
+
+  @Test
+  public void testGetAllItemIDs() throws Exception {
+    ServerRecommender client = getRecommender();
+
+    Collection<String> itemIDs = client.getAllItemIDs();
+    assertEquals(1682, itemIDs.size());
+    for (int i = 1; i <= 1682; i++) {
+      assertTrue(itemIDs.contains(Integer.toString(i)));
     }
   }
 

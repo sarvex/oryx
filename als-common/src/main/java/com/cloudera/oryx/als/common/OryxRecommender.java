@@ -18,6 +18,7 @@ package com.cloudera.oryx.als.common;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.Collection;
 import java.util.List;
 
 import com.cloudera.oryx.als.common.rescorer.PairRescorer;
@@ -361,6 +362,11 @@ public interface OryxRecommender {
    * @see #setPreference(String, String, float)
    */
   void setPreference(String userID, String itemID);
+
+  /**
+   * @return all item IDs currently present in the model
+   */
+  Collection<String> getAllItemIDs() throws NotReadyException;
 
   /**
    * @return true if and only if the instance is ready to make recommendations; may be false for example

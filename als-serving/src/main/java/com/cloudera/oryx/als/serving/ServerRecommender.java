@@ -1064,6 +1064,25 @@ public final class ServerRecommender implements OryxRecommender, Closeable {
   }
 
   @Override
+  public Collection<String> getAllItemIDs() throws NotReadyException {
+    Generation generation = getCurrentGeneration();
+    LongObjectMap<float[]> Y = generation.getY();
+    StringLongMapping mapping = generation.getIDMapping();
+    Lock yLock = generation.getYLock().readLock();
+    yLock.lock();
+    try {
+      List<String> itemIDs = Lists.newArrayListWithCapacity(Y.size());
+      LongPrimitiveIterator it = Y.keySetIterator();
+      while (it.hasNext()) {
+        itemIDs.add(mapping.toString(it.nextLong()));
+      }
+      return itemIDs;
+    } finally {
+      yLock.unlock();
+    }
+  }
+
+  @Override
   public boolean isReady() {
     try {
       getCurrentGeneration();

@@ -33,9 +33,9 @@
 <form action="#" style="padding:10px">
   <tr><td></td><td>&amp;nbsp;&amp;nbsp;User ID</td><td colspan="2"></td></tr>
   <tr><td><code>/recommend</code></td>
-    <td><code>/</code><input type="text" id="recommend-userid" onkeyup="return handleReturn(event, 'recommend',true,new Array('userid'))"/></td>
+    <td><code>/</code><input type="text" id="recommend-userid" onkeyup="return handleReturn(event, 'recommend',true,['userid'])"/></td>
     <td></td>
-    <td><a href="#" class="arrow" onclick="return doQuery('recommend',true,new Array('userid'))">&amp;#x27AC;</a></td></tr>
+    <td><a href="#" class="arrow" onclick="return doQuery('recommend',true,['userid'])">&amp;#x27AC;</a></td></tr>
 </form>
 
   <tr><td colspan="4"><hr/></td></tr>
@@ -43,9 +43,9 @@
 <form action="#" style="padding:10px">
   <tr><td></td><td>&amp;nbsp;&amp;nbsp;Item ID 1</td><td>&amp;nbsp;&amp;nbsp;<em>(Item ID 2)</em></td><td></td></tr>
   <tr><td><code>/recommendToAnonymous</code></td>
-    <td><code>/</code><input type="text" id="recommendToAnonymous-itemid1" onkeyup="return handleReturn(event,'recommendToAnonymous',true,new Array('itemid1','itemid2'))"/></td>
-    <td><code>/</code><input type="text" id="recommendToAnonymous-itemid2" onkeyup="return handleReturn(event,'recommendToAnonymous',true,new Array('itemid1','itemid2'))"/></td>
-    <td><a href="#" class="arrow" onclick="return doQuery('recommendToAnonymous',true,new Array('itemid1','itemid2'))">&amp;#x27AC;</a></td></tr>
+    <td><code>/</code><input type="text" id="recommendToAnonymous-itemid1" onkeyup="return handleReturn(event,'recommendToAnonymous',true,['itemid1','itemid2'])"/></td>
+    <td><code>/</code><input type="text" id="recommendToAnonymous-itemid2" onkeyup="return handleReturn(event,'recommendToAnonymous',true,['itemid1','itemid2'])"/></td>
+    <td><a href="#" class="arrow" onclick="return doQuery('recommendToAnonymous',true,['itemid1','itemid2'])">&amp;#x27AC;</a></td></tr>
 </form>
 
   <tr><td colspan="4"><hr/></td></tr>
@@ -53,9 +53,9 @@
 <form action="#" style="padding:10px">
   <tr><td></td><td>&amp;nbsp;&amp;nbsp;Item ID 1</td><td>&amp;nbsp;&amp;nbsp;<em>(Item ID 2)</em></td><td></td></tr>
   <tr><td><code>/similarity</code></td>
-    <td><code>/</code><input type="text" id="similarity-itemid1" onkeyup="return handleReturn(event,'similarity',true,new Array('itemid1','itemid2'))"/></td>
-    <td><code>/</code><input type="text" id="similarity-itemid2" onkeyup="return handleReturn(event,'similarity',true,new Array('itemid1','itemid2'))"/></td>
-    <td><a href="#" class="arrow" onclick="return doQuery('similarity',true,new Array('itemid1','itemid2'))">&amp;#x27AC;</a></td></tr>
+    <td><code>/</code><input type="text" id="similarity-itemid1" onkeyup="return handleReturn(event,'similarity',true,['itemid1','itemid2'])"/></td>
+    <td><code>/</code><input type="text" id="similarity-itemid2" onkeyup="return handleReturn(event,'similarity',true,['itemid1','itemid2'])"/></td>
+    <td><a href="#" class="arrow" onclick="return doQuery('similarity',true,['itemid1','itemid2'])">&amp;#x27AC;</a></td></tr>
 </form>
 
   <tr><td colspan="4"><hr/></td></tr>
@@ -63,9 +63,9 @@
 <form action="#" style="padding:10px">
   <tr><td></td><td>&amp;nbsp;&amp;nbsp;To Item</td><td>&amp;nbsp;&amp;nbsp;Item ID</td><td></td></tr>
   <tr><td><code>/similarityToItem</code></td>
-    <td><code>/</code><input type="text" id="similarityToItem-toitem" onkeyup="return handleReturn(event,'similarityToItem',true,new Array('toitem','itemid'))"/></td>
-    <td><code>/</code><input type="text" id="similarityToItem-itemid" onkeyup="return handleReturn(event,'similarityToItem',true,new Array('toitem','itemid'))"/></td>
-    <td><a href="#" class="arrow" onclick="return doQuery('similarityToItem',true,new Array('toitem','itemid'))">&amp;#x27AC;</a></td></tr>
+    <td><code>/</code><input type="text" id="similarityToItem-toitem" onkeyup="return handleReturn(event,'similarityToItem',true,['toitem','itemid'])"/></td>
+    <td><code>/</code><input type="text" id="similarityToItem-itemid" onkeyup="return handleReturn(event,'similarityToItem',true,['toitem','itemid'])"/></td>
+    <td><a href="#" class="arrow" onclick="return doQuery('similarityToItem',true,['toitem','itemid'])">&amp;#x27AC;</a></td></tr>
 </form>
 
   <tr><td colspan="4"><hr/></td></tr>
@@ -73,9 +73,9 @@
 <form action="#" style="padding:10px">
   <tr><td></td><td>&amp;nbsp;&amp;nbsp;User ID</td><td>&amp;nbsp;&amp;nbsp;Item ID</td><td></td></tr>
   <tr><td><code>/estimate</code></td>
-    <td><code>/</code><input type="text" id="estimate-userid" onkeyup="return handleReturn(event,'estimate',true,new Array('userid','itemid'))"/></td>
-    <td><code>/</code><input type="text" id="estimate-itemid" onkeyup="return handleReturn(event,'estimate',true,new Array('userid','itemid'))"/></td>
-    <td><a href="#" class="arrow" onclick="return doQuery('estimate',true,new Array('userid','itemid'))">&amp;#x27AC;</a></td></tr>
+    <td><code>/</code><input type="text" id="estimate-userid" onkeyup="return handleReturn(event,'estimate',true,['userid','itemid'])"/></td>
+    <td><code>/</code><input type="text" id="estimate-itemid" onkeyup="return handleReturn(event,'estimate',true,['userid','itemid'])"/></td>
+    <td><a href="#" class="arrow" onclick="return doQuery('estimate',true,['userid','itemid'])">&amp;#x27AC;</a></td></tr>
 </form>
 
   <tr><td colspan="4"><hr/></td></tr>
@@ -83,9 +83,9 @@
 <form action="#" style="padding:10px">
   <tr><td></td><td>&amp;nbsp;&amp;nbsp;User ID</td><td>&amp;nbsp;&amp;nbsp;Item ID</td><td></td></tr>
   <tr><td><code>/because</code></td>
-    <td><code>/</code><input type="text" id="because-userid" onkeyup="return handleReturn(event,'because',true,new Array('userid','itemid'))"/></td>
-    <td><code>/</code><input type="text" id="because-itemid" onkeyup="return handleReturn(event,'because',true,new Array('userid','itemid'))"/></td>
-    <td><a href="#" class="arrow" onclick="return doQuery('because',true,new Array('userid','itemid'))">&amp;#x27AC;</a></td></tr>
+    <td><code>/</code><input type="text" id="because-userid" onkeyup="return handleReturn(event,'because',true,['userid','itemid'])"/></td>
+    <td><code>/</code><input type="text" id="because-itemid" onkeyup="return handleReturn(event,'because',true,['userid','itemid'])"/></td>
+    <td><a href="#" class="arrow" onclick="return doQuery('because',true,['userid','itemid'])">&amp;#x27AC;</a></td></tr>
 </form>
 
   <tr><td colspan="4"><hr/></td></tr>
@@ -106,6 +106,14 @@
 
   <tr><td colspan="4"><hr/></td></tr>
 
+<form action="#" style="padding:10px">
+  <tr><td><code>/item/allIDs</code></td>
+    <td colspan="2"/>
+    <td><a href="#" class="arrow" onclick="return doQuery('item/allIDs',true)">&amp;#x27AC;</a></td></tr>
+</form>
+
+  <tr><td colspan="4"><hr/></td></tr>
+
   <jsp:scriptlet>
     boolean readOnly = (Boolean) application.getAttribute(AbstractOryxServingInitListener.READ_ONLY_KEY);
     if (readOnly) {
@@ -120,9 +128,9 @@
 <form action="#" style="padding:10px">
   <tr><td></td><td>&amp;nbsp;&amp;nbsp;User ID</td><td>&amp;nbsp;&amp;nbsp;Item ID</td><td></td></tr>
   <tr><td><code>/pref</code></td>
-    <td><code>/</code><input type="text" id="pref-userid" onkeyup="return handleReturn(event,'pref',false,new Array('userid','itemid'))"/></td>
-    <td><code>/</code><input type="text" id="pref-itemid" onkeyup="return handleReturn(event,'pref',false,new Array('userid','itemid'))"/></td>
-    <td><a href="#" class="arrow" onclick="return doQuery('pref',false,new Array('userid','itemid'))">&amp;#x27AC;</a></td></tr>
+    <td><code>/</code><input type="text" id="pref-userid" onkeyup="return handleReturn(event,'pref',false,['userid','itemid'])"/></td>
+    <td><code>/</code><input type="text" id="pref-itemid" onkeyup="return handleReturn(event,'pref',false,['userid','itemid'])"/></td>
+    <td><a href="#" class="arrow" onclick="return doQuery('pref',false,['userid','itemid'])">&amp;#x27AC;</a></td></tr>
 </form>
 
   <tr><td colspan="4"><hr/></td></tr>

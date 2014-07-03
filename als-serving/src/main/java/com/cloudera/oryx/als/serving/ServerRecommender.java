@@ -442,6 +442,56 @@ public final class ServerRecommender implements OryxRecommender, Closeable {
   }
 
   @Override
+  public List<IDValue> mostSurprising(String userID, int howMany)
+      throws NotReadyException, NoSuchUserException {
+
+    Preconditions.checkArgument(howMany > 0, "howMany must be positive");
+
+    Generation generation = getCurrentGeneration();
+    LongObjectMap<float[]> X = generation.getX();
+
+    Lock xLock = generation.getXLock().readLock();
+    float[] userFeatures;
+    xLock.lock();
+    try {
+      userFeatures = X.get(StringLongMapping.toLong(userID));
+    } finally {
+      xLock.unlock();
+    }
+    if (userFeatures == null) {
+      throw new NoSuchUserException(userID);
+    }
+
+    LongObjectMap<LongSet> knownItemIDs = generation.getKnownItemIDs();
+    Lock knownItemLock = generation.getKnownItemLock().readLock();
+    LongSet usersKnownItemIDs = null;
+    knownItemLock.lock();
+    try {
+      usersKnownItemIDs = knownItemIDs.get(StringLongMapping.toLong(userID));
+    } finally {
+      knownItemLock.unlock();
+    }
+    if (usersKnownItemIDs == null) {
+      return Collections.emptyList();
+    }
+    synchronized (usersKnownItemIDs) {
+      usersKnownItemIDs = usersKnownItemIDs.clone();
+    }
+
+    Lock yLock = generation.getYLock().readLock();
+    yLock.lock();
+    try {
+      return translateToStringIDs(
+          TopN.selectTopN(new MostSurprisingIterator(userFeatures,
+                                                     usersKnownItemIDs,
+                                                     generation.getY()), howMany));
+    } finally {
+      yLock.unlock();
+    }
+
+  }
+
+  @Override
   public List<IDValue> mostPopularItems(int howMany) throws NotReadyException {
     return mostPopularItems(howMany, null);
   }

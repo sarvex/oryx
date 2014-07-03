@@ -266,6 +266,15 @@ public interface OryxRecommender {
       throws NotReadyException, NoSuchItemException;
 
   /**
+   * @param userID user for which most-surprising items are to be computed
+   * @param howMany desired number of items
+   * @return {@link List} of recommended {@link IDValue}s, ordered from most surprising to least
+   * @throws NotReadyException if the recommender has no model available yet
+   */
+  List<IDValue> mostSurprising(String userID, int howMany)
+      throws NotReadyException, NoSuchUserException;
+
+  /**
    * @param howMany how many items to return
    * @return most popular items, where popularity is measured by the number of users interacting with
    *  the item

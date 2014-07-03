@@ -91,6 +91,16 @@
   <tr><td colspan="4"><hr/></td></tr>
 
 <form action="#" style="padding:10px">
+    <tr><td></td><td>&amp;nbsp;&amp;nbsp;User ID</td><td colspan="2"></td></tr>
+    <tr><td><code>/mostSurprising</code></td>
+        <td><code>/</code><input type="text" id="mostSurprising-userid" onkeyup="return handleReturn(event, 'mostSurprising',true,['userid'])"/></td>
+        <td></td>
+        <td><a href="#" class="arrow" onclick="return doQuery('mostSurprising',true,['userid'])">&amp;#x27AC;</a></td></tr>
+</form>
+
+  <tr><td colspan="4"><hr/></td></tr>
+
+<form action="#" style="padding:10px">
   <tr><td><code>/mostPopularItems</code></td>
     <td colspan="2"/>
     <td><a href="#" class="arrow" onclick="return doQuery('mostPopularItems',true)">&amp;#x27AC;</a></td></tr>

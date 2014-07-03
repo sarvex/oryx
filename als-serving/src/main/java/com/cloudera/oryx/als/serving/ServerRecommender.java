@@ -231,13 +231,15 @@ public final class ServerRecommender implements OryxRecommender, Closeable {
           if (theKnownItemIDs == null) {
             continue;
           }
-          if (usersKnownItemIDs == null) {
-            usersKnownItemIDs = theKnownItemIDs;
-          } else {
-            LongPrimitiveIterator it = usersKnownItemIDs.iterator();
-            while (it.hasNext()) {
-              if (!theKnownItemIDs.contains(it.nextLong())) {
-                it.remove();
+          synchronized (theKnownItemIDs) {
+            if (usersKnownItemIDs == null) {
+              usersKnownItemIDs = theKnownItemIDs.clone();
+            } else {
+              LongPrimitiveIterator it = usersKnownItemIDs.iterator();
+              while (it.hasNext()) {
+                if (!theKnownItemIDs.contains(it.nextLong())) {
+                  it.remove();
+                }
               }
             }
           }
@@ -463,7 +465,7 @@ public final class ServerRecommender implements OryxRecommender, Closeable {
         xReadLock.lock();
         try {
           
-          for (LongObjectMap.MapEntry<LongSet> entry : generation.getKnownItemIDs().entrySet()) {
+          for (LongObjectMap.MapEntry<LongSet> entry : knownItemIDs.entrySet()) {
             LongSet itemIDs = entry.getValue();
             synchronized (itemIDs) {
               LongPrimitiveIterator it = itemIDs.iterator();

@@ -1,19 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Thu May 15 15:52:12 BST 2014 -->
+<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Mon Jul 07 23:27:11 BST 2014 -->
 
 <report>
   <stats>
     <packages value="12"/>
     <classes value="66"/>
-    <methods value="530"/>
+    <methods value="531"/>
     <srcfiles value="48"/>
-    <srclines value="2221"/>
+    <srclines value="2227"/>
   </stats>
   <data>
     <all name="all classes">
       <coverage type="class, %" value="67%  (44/66)"/>
-      <coverage type="method, %" value="44%  (233/530)"/>
-      <coverage type="block, %" value="44%  (4590/10485)"/>
-      <coverage type="line, %" value="44%  (977.2/2221)"/>
+      <coverage type="method, %" value="44%  (235/531)"/>
+      <coverage type="block, %" value="44%  (4671/10506)"/>
+      <coverage type="line, %" value="45%  (991.2/2227)"/>
 
       <package name="com.cloudera.oryx.common.pmml">
         <coverage type="class, %" value="0%   (0/1)"/>
@@ -2103,9 +2103,9 @@
       </package>
       <package name="com.cloudera.oryx.common.collection">
         <coverage type="class, %" value="56%  (9/16)"/>
-        <coverage type="method, %" value="44%  (78/176)"/>
-        <coverage type="block, %" value="54%  (1972/3666)"/>
-        <coverage type="line, %" value="51%  (372.3/723)"/>
+        <coverage type="method, %" value="45%  (80/177)"/>
+        <coverage type="block, %" value="56%  (2053/3687)"/>
+        <coverage type="line, %" value="53%  (386.3/729)"/>
 
         <srcfile name="LongFloatMap.java">
           <coverage type="class, %" value="20%  (1/5)"/>
@@ -3013,24 +3013,19 @@
         </srcfile>
         <srcfile name="BitSet.java">
           <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="69%  (9/13)"/>
-          <coverage type="block, %" value="67%  (170/254)"/>
-          <coverage type="line, %" value="69%  (30.9/45)"/>
+          <coverage type="method, %" value="79%  (11/14)"/>
+          <coverage type="block, %" value="91%  (251/275)"/>
+          <coverage type="line, %" value="88%  (44.9/51)"/>
 
           <class name="BitSet">
             <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="69%  (9/13)"/>
-            <coverage type="block, %" value="67%  (170/254)"/>
-            <coverage type="line, %" value="69%  (30.9/45)"/>
+            <coverage type="method, %" value="79%  (11/14)"/>
+            <coverage type="block, %" value="91%  (251/275)"/>
+            <coverage type="line, %" value="88%  (44.9/51)"/>
 
-            <method name="equals (Object): boolean">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/14)"/>
-              <coverage type="line, %" value="0%   (0/4)"/>
-            </method>
             <method name="hashCode (): int">
               <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/4)"/>
+              <coverage type="block, %" value="0%   (0/7)"/>
               <coverage type="line, %" value="0%   (0/1)"/>
             </method>
             <method name="set (int, int): void">
@@ -3038,20 +3033,25 @@
               <coverage type="block, %" value="0%   (0/11)"/>
               <coverage type="line, %" value="0%   (0/3)"/>
             </method>
-            <method name="toString (): String">
+            <method name="size (): int">
               <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/54)"/>
-              <coverage type="line, %" value="0%   (0/6)"/>
+              <coverage type="block, %" value="0%   (0/3)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="equals (Object): boolean">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="91%  (21/23)"/>
+              <coverage type="line, %" value="75%  (3/4)"/>
             </method>
             <method name="BitSet (int): void">
               <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="95%  (21/22)"/>
-              <coverage type="line, %" value="99%  (6.9/7)"/>
+              <coverage type="block, %" value="96%  (24/25)"/>
+              <coverage type="line, %" value="99%  (7.9/8)"/>
             </method>
-            <method name="BitSet (long []): void">
+            <method name="BitSet (int, long []): void">
               <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (6/6)"/>
-              <coverage type="line, %" value="100% (3/3)"/>
+              <coverage type="block, %" value="100% (9/9)"/>
+              <coverage type="line, %" value="100% (4/4)"/>
             </method>
             <method name="cardinality (): int">
               <coverage type="method, %" value="100% (1/1)"/>
@@ -3065,18 +3065,18 @@
             </method>
             <method name="clear (int): void">
               <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (17/17)"/>
-              <coverage type="line, %" value="100% (2/2)"/>
+              <coverage type="block, %" value="100% (22/22)"/>
+              <coverage type="line, %" value="100% (3/3)"/>
             </method>
             <method name="clone (): BitSet">
               <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (8/8)"/>
+              <coverage type="block, %" value="100% (10/10)"/>
               <coverage type="line, %" value="100% (1/1)"/>
             </method>
             <method name="get (int): boolean">
               <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (19/19)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (24/24)"/>
+              <coverage type="line, %" value="100% (2/2)"/>
             </method>
             <method name="nextSetBit (int): int">
               <coverage type="method, %" value="100% (1/1)"/>
@@ -3085,8 +3085,13 @@
             </method>
             <method name="set (int): void">
               <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (15/15)"/>
-              <coverage type="line, %" value="100% (2/2)"/>
+              <coverage type="block, %" value="100% (20/20)"/>
+              <coverage type="line, %" value="100% (3/3)"/>
+            </method>
+            <method name="toString (): String">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (37/37)"/>
+              <coverage type="line, %" value="100% (6/6)"/>
             </method>
           </class>
         </srcfile>

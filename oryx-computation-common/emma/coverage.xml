@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Thu May 15 15:52:12 BST 2014 -->
+<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Mon Jul 07 23:27:11 BST 2014 -->
 
 <report>
   <stats>
@@ -6,14 +6,14 @@
     <classes value="78"/>
     <methods value="479"/>
     <srcfiles value="46"/>
-    <srclines value="1515"/>
+    <srclines value="1517"/>
   </stats>
   <data>
     <all name="all classes">
       <coverage type="class, %" value="9%   (7/78)"/>
       <coverage type="method, %" value="5%   (24/479)"/>
-      <coverage type="block, %" value="8%   (544/7209)"/>
-      <coverage type="line, %" value="8%   (119.9/1515)"/>
+      <coverage type="block, %" value="8%   (544/7221)"/>
+      <coverage type="line, %" value="8%   (119.9/1517)"/>
 
       <package name="com.cloudera.oryx.computation.common.crossfold">
         <coverage type="class, %" value="0%   (0/2)"/>
@@ -2458,8 +2458,8 @@
       <package name="com.cloudera.oryx.computation.common">
         <coverage type="class, %" value="14%  (2/14)"/>
         <coverage type="method, %" value="8%   (9/108)"/>
-        <coverage type="block, %" value="7%   (204/2758)"/>
-        <coverage type="line, %" value="9%   (53.9/601)"/>
+        <coverage type="block, %" value="7%   (204/2770)"/>
+        <coverage type="line, %" value="9%   (53.9/603)"/>
 
         <srcfile name="DistributedGenerationRunner.java">
           <coverage type="class, %" value="0%   (0/1)"/>
@@ -2528,14 +2528,14 @@
         <srcfile name="GenerationRunner.java">
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/16)"/>
-          <coverage type="block, %" value="0%   (0/820)"/>
-          <coverage type="line, %" value="0%   (0/178)"/>
+          <coverage type="block, %" value="0%   (0/832)"/>
+          <coverage type="line, %" value="0%   (0/180)"/>
 
           <class name="GenerationRunner">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/16)"/>
-            <coverage type="block, %" value="0%   (0/820)"/>
-            <coverage type="line, %" value="0%   (0/178)"/>
+            <coverage type="block, %" value="0%   (0/832)"/>
+            <coverage type="line, %" value="0%   (0/180)"/>
 
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -2609,8 +2609,8 @@
             </method>
             <method name="runGeneration (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/343)"/>
-              <coverage type="line, %" value="0%   (0/74)"/>
+              <coverage type="block, %" value="0%   (0/355)"/>
+              <coverage type="line, %" value="0%   (0/76)"/>
             </method>
             <method name="storeConfig (Config): void">
               <coverage type="method, %" value="0%   (0/1)"/>

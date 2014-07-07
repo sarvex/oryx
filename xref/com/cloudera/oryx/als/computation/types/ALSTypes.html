@@ -41,7 +41,7 @@
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>  
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>    <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> PType&lt;Long&gt; LONGS = Avros.longs();
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>  
-<a class="jxr_linenumber" name="L36" href="#L36">36</a>    <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> PType&lt;<strong class="jxr_keyword">float</strong>[]&gt; FLOAT_ARRAY = Avros.derived(<strong class="jxr_keyword">float</strong>[].<strong class="jxr_keyword">class</strong>,
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>    <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> PType&lt;<strong class="jxr_keyword">float</strong>[]&gt; FLOAT_ARRAY = Avros.derivedImmutable(<strong class="jxr_keyword">float</strong>[].<strong class="jxr_keyword">class</strong>,
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>         <strong class="jxr_keyword">new</strong> MapFn&lt;FloatArray, <strong class="jxr_keyword">float</strong>[]&gt;() {
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>           @Override
 <a class="jxr_linenumber" name="L39" href="#L39">39</a>           <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">float</strong>[] map(<a href="../../../../../../com/cloudera/oryx/als/computation/types/ALSTypes.html">FloatArray</a> input) {
@@ -55,22 +55,22 @@
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>           }
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>         }, Avros.reflects(FloatArray.<strong class="jxr_keyword">class</strong>));
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>  
-<a class="jxr_linenumber" name="L50" href="#L50">50</a>    <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../com/cloudera/oryx/als/computation/types/ALSTypes.html">FloatArray</a> {
-<a class="jxr_linenumber" name="L51" href="#L51">51</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">float</strong>[] values;
-<a class="jxr_linenumber" name="L52" href="#L52">52</a>      <a href="../../../../../../com/cloudera/oryx/als/computation/types/ALSTypes.html">FloatArray</a>() {
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>    <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../com/cloudera/oryx/als/computation/types/ALSTypes.html">FloatArray</a> {
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">float</strong>[] values;
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../../com/cloudera/oryx/als/computation/types/ALSTypes.html">FloatArray</a>() {
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>        <strong class="jxr_keyword">this</strong>(<strong class="jxr_keyword">null</strong>);
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>      }
-<a class="jxr_linenumber" name="L55" href="#L55">55</a>      <a href="../../../../../../com/cloudera/oryx/als/computation/types/ALSTypes.html">FloatArray</a>(<strong class="jxr_keyword">float</strong>[] values) {
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../../com/cloudera/oryx/als/computation/types/ALSTypes.html">FloatArray</a>(<strong class="jxr_keyword">float</strong>[] values) {
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>        <strong class="jxr_keyword">this</strong>.values = values;
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>      }
-<a class="jxr_linenumber" name="L58" href="#L58">58</a>      <strong class="jxr_keyword">float</strong>[] getValues() {
+<a class="jxr_linenumber" name="L58" href="#L58">58</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">float</strong>[] getValues() {
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>        <strong class="jxr_keyword">return</strong> values;
 <a class="jxr_linenumber" name="L60" href="#L60">60</a>      }
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>    }
 <a class="jxr_linenumber" name="L62" href="#L62">62</a>  
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>    <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> PType&lt;NumericIDValue&gt; IDVALUE = Avros.reflects(NumericIDValue.<strong class="jxr_keyword">class</strong>);
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>  
-<a class="jxr_linenumber" name="L65" href="#L65">65</a>    <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> PType&lt;LongSet&gt; ID_SET = Avros.derived(LongSet.<strong class="jxr_keyword">class</strong>,
+<a class="jxr_linenumber" name="L65" href="#L65">65</a>    <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> PType&lt;LongSet&gt; ID_SET = Avros.derivedImmutable(LongSet.<strong class="jxr_keyword">class</strong>,
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>        <strong class="jxr_keyword">new</strong> MapFn&lt;Collection&lt;Long&gt;, LongSet&gt;() {
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>          @Override
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>          <strong class="jxr_keyword">public</strong> <a href="../../../../../../com/cloudera/oryx/common/collection/LongSet.html">LongSet</a> map(Collection&lt;Long&gt; input) {
@@ -92,7 +92,7 @@
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>          }
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>        }, Avros.collections(LONGS));
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>  
-<a class="jxr_linenumber" name="L87" href="#L87">87</a>    <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> PType&lt;LongFloatMap&gt; ID_FLOAT_MAP = Avros.derived(LongFloatMap.<strong class="jxr_keyword">class</strong>,
+<a class="jxr_linenumber" name="L87" href="#L87">87</a>    <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> PType&lt;LongFloatMap&gt; ID_FLOAT_MAP = Avros.derivedImmutable(LongFloatMap.<strong class="jxr_keyword">class</strong>,
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>        <strong class="jxr_keyword">new</strong> MapFn&lt;Collection&lt;Pair&lt;Long,Float&gt;&gt;, LongFloatMap&gt;() {
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>          @Override
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>          <strong class="jxr_keyword">public</strong> <a href="../../../../../../com/cloudera/oryx/common/collection/LongFloatMap.html">LongFloatMap</a> map(Collection&lt;Pair&lt;Long,Float&gt;&gt; input) {

@@ -1,19 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Thu May 15 15:52:12 BST 2014 -->
+<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Mon Jul 07 23:27:11 BST 2014 -->
 
 <report>
   <stats>
     <packages value="6"/>
     <classes value="32"/>
-    <methods value="189"/>
+    <methods value="192"/>
     <srcfiles value="23"/>
-    <srclines value="1003"/>
+    <srclines value="1033"/>
   </stats>
   <data>
     <all name="all classes">
       <coverage type="class, %" value="59%  (19/32)"/>
-      <coverage type="method, %" value="40%  (76/189)"/>
-      <coverage type="block, %" value="34%  (1648/4886)"/>
-      <coverage type="line, %" value="36%  (360.6/1003)"/>
+      <coverage type="method, %" value="41%  (78/192)"/>
+      <coverage type="block, %" value="33%  (1686/5045)"/>
+      <coverage type="line, %" value="35%  (364.5/1033)"/>
 
       <package name="com.cloudera.oryx.rdf.common.pmml">
         <coverage type="class, %" value="0%   (0/1)"/>
@@ -74,14 +74,14 @@
       <package name="com.cloudera.oryx.rdf.common.tree">
         <coverage type="class, %" value="0%   (0/7)"/>
         <coverage type="method, %" value="0%   (0/58)"/>
-        <coverage type="block, %" value="0%   (0/1440)"/>
-        <coverage type="line, %" value="0%   (0/272)"/>
+        <coverage type="block, %" value="0%   (0/1446)"/>
+        <coverage type="line, %" value="0%   (0/273)"/>
 
         <srcfile name="DecisionForest.java">
           <coverage type="class, %" value="0%   (0/3)"/>
           <coverage type="method, %" value="0%   (0/21)"/>
-          <coverage type="block, %" value="0%   (0/632)"/>
-          <coverage type="line, %" value="0%   (0/99)"/>
+          <coverage type="block, %" value="0%   (0/638)"/>
+          <coverage type="line, %" value="0%   (0/100)"/>
 
           <class name="DecisionForest">
             <coverage type="class, %" value="0%   (0/1)"/>
@@ -104,14 +104,14 @@
               <coverage type="block, %" value="0%   (0/237)"/>
               <coverage type="line, %" value="0%   (0/35)"/>
             </method>
-            <method name="access$000 (DecisionForest): DecisionTree []">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/3)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="access$100 (): Logger">
+            <method name="access$000 (): Logger">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/2)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="access$100 (DecisionForest): DecisionTree []">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/3)"/>
               <coverage type="line, %" value="0%   (0/1)"/>
             </method>
             <method name="access$200 (DecisionForest): double []">
@@ -178,8 +178,8 @@
           <class name="DecisionForest$1">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/2)"/>
-            <coverage type="block, %" value="0%   (0/204)"/>
-            <coverage type="line, %" value="0%   (0/23)"/>
+            <coverage type="block, %" value="0%   (0/210)"/>
+            <coverage type="line, %" value="0%   (0/24)"/>
 
             <method name="DecisionForest$1 (DecisionForest, ExampleSet, double, int, int, int, int, int, int, double, int, int, double [][]): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -188,8 +188,8 @@
             </method>
             <method name="call (): Void">
               <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/162)"/>
-              <coverage type="line, %" value="0%   (0/22)"/>
+              <coverage type="block, %" value="0%   (0/168)"/>
+              <coverage type="line, %" value="0%   (0/23)"/>
             </method>
           </class>
           <class name="DecisionForest$TreeToPredictionFunction">
@@ -448,120 +448,6 @@
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/27)"/>
               <coverage type="line, %" value="0%   (0/4)"/>
-            </method>
-          </class>
-        </srcfile>
-      </package>
-      <package name="com.cloudera.oryx.rdf.common.eval">
-        <coverage type="class, %" value="50%  (2/4)"/>
-        <coverage type="method, %" value="31%  (4/13)"/>
-        <coverage type="block, %" value="43%  (149/344)"/>
-        <coverage type="line, %" value="38%  (22.9/61)"/>
-
-        <srcfile name="Evaluation.java">
-          <coverage type="class, %" value="0%   (0/2)"/>
-          <coverage type="method, %" value="0%   (0/8)"/>
-          <coverage type="block, %" value="0%   (0/186)"/>
-          <coverage type="line, %" value="0%   (0/35)"/>
-
-          <class name="Evaluation">
-            <coverage type="class, %" value="0%   (0/1)"/>
-            <coverage type="method, %" value="0%   (0/7)"/>
-            <coverage type="block, %" value="0%   (0/167)"/>
-            <coverage type="line, %" value="0%   (0/35)"/>
-
-            <method name="Evaluation (): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/3)"/>
-              <coverage type="line, %" value="0%   (0/2)"/>
-            </method>
-            <method name="categoricalTargetWeight (TreeBasedClassifier, Iterable): double []">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/15)"/>
-              <coverage type="line, %" value="0%   (0/2)"/>
-            </method>
-            <method name="correctlyClassifiedFraction (TreeBasedClassifier, Iterable): double">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/37)"/>
-              <coverage type="line, %" value="0%   (0/10)"/>
-            </method>
-            <method name="evaluateToWeight (TreeBasedClassifier, ExampleSet): double []">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/18)"/>
-              <coverage type="line, %" value="0%   (0/4)"/>
-            </method>
-            <method name="meanAbs (Iterable): double">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/28)"/>
-              <coverage type="line, %" value="0%   (0/6)"/>
-            </method>
-            <method name="numericTargetWeight (TreeBasedClassifier, Iterable): double []">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/26)"/>
-              <coverage type="line, %" value="0%   (0/3)"/>
-            </method>
-            <method name="rootMeanSquaredError (TreeBasedClassifier, Iterable): double">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/40)"/>
-              <coverage type="line, %" value="0%   (0/8)"/>
-            </method>
-          </class>
-          <class name="Evaluation$1">
-            <coverage type="class, %" value="0%   (0/1)"/>
-            <coverage type="method, %" value="0%   (0/1)"/>
-            <coverage type="block, %" value="0%   (0/19)"/>
-            <coverage type="line, %" value="0%   (0/1)"/>
-
-            <method name="&lt;static initializer&gt;">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/19)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-          </class>
-        </srcfile>
-        <srcfile name="WeightedPrediction.java">
-          <coverage type="class, %" value="100% (2/2)"/>
-          <coverage type="method, %" value="80%  (4/5)"/>
-          <coverage type="block, %" value="94%  (149/158)"/>
-          <coverage type="line, %" value="88%  (22.9/26)"/>
-
-          <class name="WeightedPrediction$1">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="100% (1/1)"/>
-            <coverage type="block, %" value="89%  (17/19)"/>
-            <coverage type="line, %" value="89%  (0.9/1)"/>
-
-            <method name="&lt;static initializer&gt;">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="89%  (17/19)"/>
-              <coverage type="line, %" value="89%  (0.9/1)"/>
-            </method>
-          </class>
-          <class name="WeightedPrediction">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="75%  (3/4)"/>
-            <coverage type="block, %" value="95%  (132/139)"/>
-            <coverage type="line, %" value="88%  (23/26)"/>
-
-            <method name="WeightedPrediction (): void">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/3)"/>
-              <coverage type="line, %" value="0%   (0/2)"/>
-            </method>
-            <method name="voteOnFeature (List, double []): Prediction">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="84%  (21/25)"/>
-              <coverage type="line, %" value="83%  (5/6)"/>
-            </method>
-            <method name="voteOnCategoricalFeature (List, double []): Prediction">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (78/78)"/>
-              <coverage type="line, %" value="100% (14/14)"/>
-            </method>
-            <method name="voteOnNumericFeature (List, double []): Prediction">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (33/33)"/>
-              <coverage type="line, %" value="100% (4/4)"/>
             </method>
           </class>
         </srcfile>
@@ -872,11 +758,125 @@
           </class>
         </srcfile>
       </package>
+      <package name="com.cloudera.oryx.rdf.common.eval">
+        <coverage type="class, %" value="50%  (2/4)"/>
+        <coverage type="method, %" value="31%  (4/13)"/>
+        <coverage type="block, %" value="48%  (179/376)"/>
+        <coverage type="line, %" value="39%  (24.8/63)"/>
+
+        <srcfile name="Evaluation.java">
+          <coverage type="class, %" value="0%   (0/2)"/>
+          <coverage type="method, %" value="0%   (0/8)"/>
+          <coverage type="block, %" value="0%   (0/186)"/>
+          <coverage type="line, %" value="0%   (0/35)"/>
+
+          <class name="Evaluation">
+            <coverage type="class, %" value="0%   (0/1)"/>
+            <coverage type="method, %" value="0%   (0/7)"/>
+            <coverage type="block, %" value="0%   (0/167)"/>
+            <coverage type="line, %" value="0%   (0/35)"/>
+
+            <method name="Evaluation (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/3)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="categoricalTargetWeight (TreeBasedClassifier, Iterable): double []">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/15)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="correctlyClassifiedFraction (TreeBasedClassifier, Iterable): double">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/37)"/>
+              <coverage type="line, %" value="0%   (0/10)"/>
+            </method>
+            <method name="evaluateToWeight (TreeBasedClassifier, ExampleSet): double []">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/18)"/>
+              <coverage type="line, %" value="0%   (0/4)"/>
+            </method>
+            <method name="meanAbs (Iterable): double">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/28)"/>
+              <coverage type="line, %" value="0%   (0/6)"/>
+            </method>
+            <method name="numericTargetWeight (TreeBasedClassifier, Iterable): double []">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/26)"/>
+              <coverage type="line, %" value="0%   (0/3)"/>
+            </method>
+            <method name="rootMeanSquaredError (TreeBasedClassifier, Iterable): double">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/40)"/>
+              <coverage type="line, %" value="0%   (0/8)"/>
+            </method>
+          </class>
+          <class name="Evaluation$1">
+            <coverage type="class, %" value="0%   (0/1)"/>
+            <coverage type="method, %" value="0%   (0/1)"/>
+            <coverage type="block, %" value="0%   (0/19)"/>
+            <coverage type="line, %" value="0%   (0/1)"/>
+
+            <method name="&lt;static initializer&gt;">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/19)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="WeightedPrediction.java">
+          <coverage type="class, %" value="100% (2/2)"/>
+          <coverage type="method, %" value="80%  (4/5)"/>
+          <coverage type="block, %" value="94%  (179/190)"/>
+          <coverage type="line, %" value="89%  (24.8/28)"/>
+
+          <class name="WeightedPrediction$1">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="100% (1/1)"/>
+            <coverage type="block, %" value="89%  (17/19)"/>
+            <coverage type="line, %" value="89%  (0.9/1)"/>
+
+            <method name="&lt;static initializer&gt;">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="89%  (17/19)"/>
+              <coverage type="line, %" value="89%  (0.9/1)"/>
+            </method>
+          </class>
+          <class name="WeightedPrediction">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="75%  (3/4)"/>
+            <coverage type="block, %" value="95%  (162/171)"/>
+            <coverage type="line, %" value="89%  (24.9/28)"/>
+
+            <method name="WeightedPrediction (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/3)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="voteOnFeature (List, double []): Prediction">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="89%  (51/57)"/>
+              <coverage type="line, %" value="86%  (6.9/8)"/>
+            </method>
+            <method name="voteOnCategoricalFeature (List, double []): Prediction">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (78/78)"/>
+              <coverage type="line, %" value="100% (14/14)"/>
+            </method>
+            <method name="voteOnNumericFeature (List, double []): Prediction">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (33/33)"/>
+              <coverage type="line, %" value="100% (4/4)"/>
+            </method>
+          </class>
+        </srcfile>
+      </package>
       <package name="com.cloudera.oryx.rdf.common.rule">
         <coverage type="class, %" value="90%  (9/10)"/>
-        <coverage type="method, %" value="70%  (42/60)"/>
-        <coverage type="block, %" value="73%  (831/1146)"/>
-        <coverage type="line, %" value="76%  (189.5/249)"/>
+        <coverage type="method, %" value="70%  (44/63)"/>
+        <coverage type="block, %" value="66%  (839/1267)"/>
+        <coverage type="line, %" value="69%  (191.4/276)"/>
 
         <srcfile name="Prediction.java">
           <coverage type="class, %" value="50%  (1/2)"/>
@@ -975,6 +975,139 @@
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="100% (34/34)"/>
               <coverage type="line, %" value="100% (6/6)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="CategoricalDecision.java">
+          <coverage type="class, %" value="100% (3/3)"/>
+          <coverage type="method, %" value="81%  (17/21)"/>
+          <coverage type="block, %" value="67%  (416/618)"/>
+          <coverage type="line, %" value="65%  (84.7/130)"/>
+
+          <class name="CategoricalDecision">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="75%  (12/16)"/>
+            <coverage type="block, %" value="66%  (381/581)"/>
+            <coverage type="line, %" value="64%  (81.8/127)"/>
+
+            <method name="categoricalDecisionsForMulticlassTarget (int, ExampleSet, int): List">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/106)"/>
+              <coverage type="line, %" value="0%   (0/24)"/>
+            </method>
+            <method name="equals (Object): boolean">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/23)"/>
+              <coverage type="line, %" value="0%   (0/4)"/>
+            </method>
+            <method name="hashCode (): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/7)"/>
+              <coverage type="line, %" value="0%   (0/1)"/>
+            </method>
+            <method name="toString (): String">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/47)"/>
+              <coverage type="line, %" value="0%   (0/11)"/>
+            </method>
+            <method name="categoricalDecisionsForCategoricalTarget (int, ExampleSet, int): List">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="64%  (9/14)"/>
+              <coverage type="line, %" value="67%  (2/3)"/>
+            </method>
+            <method name="categoricalDecisionsFromExamples (int, ExampleSet, int): List">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="80%  (16/20)"/>
+              <coverage type="line, %" value="75%  (3/4)"/>
+            </method>
+            <method name="isPositive (Example): boolean">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="89%  (24/27)"/>
+              <coverage type="line, %" value="86%  (6/7)"/>
+            </method>
+            <method name="sortAndGetDecisionsOverSubset (int, int, List, int, int): List">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="95%  (37/39)"/>
+              <coverage type="line, %" value="88%  (7/8)"/>
+            </method>
+            <method name="findMaxCategory (int []): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="97%  (30/31)"/>
+              <coverage type="line, %" value="98%  (7.9/8)"/>
+            </method>
+            <method name="categoricalDecisionsForNumericTarget (int, ExampleSet, int): List">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="98%  (122/124)"/>
+              <coverage type="line, %" value="96%  (25.9/27)"/>
+            </method>
+            <method name="CategoricalDecision (int, BitSet, boolean): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (10/10)"/>
+              <coverage type="line, %" value="100% (4/4)"/>
+            </method>
+            <method name="CategoricalDecision (int, int, List, int, int, int): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (33/33)"/>
+              <coverage type="line, %" value="100% (6/6)"/>
+            </method>
+            <method name="categoricalDecisionsForBinaryTarget (int, ExampleSet, int): List">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (92/92)"/>
+              <coverage type="line, %" value="100% (17/17)"/>
+            </method>
+            <method name="getCategoryIDs (): BitSet">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="getDefaultDecision (): boolean">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="getType (): FeatureType">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (2/2)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+          </class>
+          <class name="CategoricalDecision$1">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="100% (1/1)"/>
+            <coverage type="block, %" value="89%  (17/19)"/>
+            <coverage type="line, %" value="89%  (0.9/1)"/>
+
+            <method name="&lt;static initializer&gt;">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="89%  (17/19)"/>
+              <coverage type="line, %" value="89%  (0.9/1)"/>
+            </method>
+          </class>
+          <class name="CategoricalDecision$PairComparator">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="100% (4/4)"/>
+            <coverage type="block, %" value="100% (18/18)"/>
+            <coverage type="line, %" value="100% (3/3)"/>
+
+            <method name="&lt;static initializer&gt;">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (5/5)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="CategoricalDecision$PairComparator (): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (3/3)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="access$000 (): Comparator">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (2/2)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
+            </method>
+            <method name="compare (Pair, Pair): int">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (8/8)"/>
+              <coverage type="line, %" value="100% (1/1)"/>
             </method>
           </class>
         </srcfile>
@@ -1169,124 +1302,6 @@
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="89%  (17/19)"/>
               <coverage type="line, %" value="89%  (0.9/1)"/>
-            </method>
-          </class>
-        </srcfile>
-        <srcfile name="CategoricalDecision.java">
-          <coverage type="class, %" value="100% (3/3)"/>
-          <coverage type="method, %" value="83%  (15/18)"/>
-          <coverage type="block, %" value="82%  (408/497)"/>
-          <coverage type="line, %" value="80%  (82.7/103)"/>
-
-          <class name="CategoricalDecision">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="77%  (10/13)"/>
-            <coverage type="block, %" value="81%  (373/460)"/>
-            <coverage type="line, %" value="80%  (79.8/100)"/>
-
-            <method name="equals (Object): boolean">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/23)"/>
-              <coverage type="line, %" value="0%   (0/4)"/>
-            </method>
-            <method name="hashCode (): int">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/7)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
-            </method>
-            <method name="toString (): String">
-              <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/47)"/>
-              <coverage type="line, %" value="0%   (0/11)"/>
-            </method>
-            <method name="categoricalDecisionsFromExamples (int, ExampleSet, int): List">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="80%  (16/20)"/>
-              <coverage type="line, %" value="75%  (3/4)"/>
-            </method>
-            <method name="sortAndGetDecisionsOverSubset (int, int, List, int, int): List">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="95%  (37/39)"/>
-              <coverage type="line, %" value="88%  (7/8)"/>
-            </method>
-            <method name="categoricalDecisionsForNumericTarget (int, ExampleSet, int): List">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="98%  (122/124)"/>
-              <coverage type="line, %" value="96%  (25.9/27)"/>
-            </method>
-            <method name="categoricalDecisionsForCategoricalTarget (int, ExampleSet, int): List">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="98%  (130/132)"/>
-              <coverage type="line, %" value="96%  (28.9/30)"/>
-            </method>
-            <method name="CategoricalDecision (int, BitSet, boolean): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (10/10)"/>
-              <coverage type="line, %" value="100% (4/4)"/>
-            </method>
-            <method name="CategoricalDecision (int, int, List, int, int, int): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (33/33)"/>
-              <coverage type="line, %" value="100% (6/6)"/>
-            </method>
-            <method name="getCategoryIDs (): BitSet">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="getDefaultDecision (): boolean">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="getType (): FeatureType">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (2/2)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="isPositive (Example): boolean">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (17/17)"/>
-              <coverage type="line, %" value="100% (2/2)"/>
-            </method>
-          </class>
-          <class name="CategoricalDecision$1">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="100% (1/1)"/>
-            <coverage type="block, %" value="89%  (17/19)"/>
-            <coverage type="line, %" value="89%  (0.9/1)"/>
-
-            <method name="&lt;static initializer&gt;">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="89%  (17/19)"/>
-              <coverage type="line, %" value="89%  (0.9/1)"/>
-            </method>
-          </class>
-          <class name="CategoricalDecision$PairComparator">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="100% (4/4)"/>
-            <coverage type="block, %" value="100% (18/18)"/>
-            <coverage type="line, %" value="100% (3/3)"/>
-
-            <method name="&lt;static initializer&gt;">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (5/5)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="CategoricalDecision$PairComparator (): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (3/3)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="access$000 (): Comparator">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (2/2)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
-            </method>
-            <method name="compare (Pair, Pair): int">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (8/8)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
             </method>
           </class>
         </srcfile>

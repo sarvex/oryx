@@ -143,117 +143,118 @@
 <a class="jxr_linenumber" name="L135" href="#L135">135</a>             Preconditions.checkState(!trainingExamples.isEmpty(), <span class="jxr_string">"No training examples sampled?"</span>);
 <a class="jxr_linenumber" name="L136" href="#L136">136</a>             Preconditions.checkState(!cvExamples.isEmpty(), <span class="jxr_string">"No CV examples sampled?"</span>);
 <a class="jxr_linenumber" name="L137" href="#L137">137</a> 
-<a class="jxr_linenumber" name="L138" href="#L138">138</a>             trees[treeID] = <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/tree/DecisionTree.html">DecisionTree</a>(numFeatures,
-<a class="jxr_linenumber" name="L139" href="#L139">139</a>                                              featuresToTry,
-<a class="jxr_linenumber" name="L140" href="#L140">140</a>                                              minNodeSize,
-<a class="jxr_linenumber" name="L141" href="#L141">141</a>                                              minInfoGainNats,
-<a class="jxr_linenumber" name="L142" href="#L142">142</a>                                              suggestedMaxSplitCandidates,
-<a class="jxr_linenumber" name="L143" href="#L143">143</a>                                              maxDepth,
-<a class="jxr_linenumber" name="L144" href="#L144">144</a>                                              examples.subset(trainingExamples));
-<a class="jxr_linenumber" name="L145" href="#L145">145</a>             log.info(<span class="jxr_string">"Finished tree {}"</span>, treeID);
-<a class="jxr_linenumber" name="L146" href="#L146">146</a>             <a href="../../../../../../com/cloudera/oryx/rdf/common/example/ExampleSet.html">ExampleSet</a> cvExampleSet = examples.subset(cvExamples);
-<a class="jxr_linenumber" name="L147" href="#L147">147</a>             <strong class="jxr_keyword">double</strong>[] weightEval = Evaluation.evaluateToWeight(trees[treeID], cvExampleSet);
-<a class="jxr_linenumber" name="L148" href="#L148">148</a>             weights[treeID] = weightEval[0];
-<a class="jxr_linenumber" name="L149" href="#L149">149</a>             evaluations[treeID] = weightEval[1];
-<a class="jxr_linenumber" name="L150" href="#L150">150</a>             perTreeFeatureImportances[treeID] = trees[treeID].featureImportance(cvExampleSet);
-<a class="jxr_linenumber" name="L151" href="#L151">151</a>             log.info(<span class="jxr_string">"Tree {} eval: {}"</span>, treeID, weightEval[1]);
-<a class="jxr_linenumber" name="L152" href="#L152">152</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">null</strong>;
-<a class="jxr_linenumber" name="L153" href="#L153">153</a>           }
-<a class="jxr_linenumber" name="L154" href="#L154">154</a>         }));
-<a class="jxr_linenumber" name="L155" href="#L155">155</a>       }
-<a class="jxr_linenumber" name="L156" href="#L156">156</a>       ExecutorUtils.getResults(futures);
-<a class="jxr_linenumber" name="L157" href="#L157">157</a>     } <strong class="jxr_keyword">finally</strong> {
-<a class="jxr_linenumber" name="L158" href="#L158">158</a>       ExecutorUtils.shutdownNowAndAwait(executor);
-<a class="jxr_linenumber" name="L159" href="#L159">159</a>     }
-<a class="jxr_linenumber" name="L160" href="#L160">160</a> 
-<a class="jxr_linenumber" name="L161" href="#L161">161</a>     featureImportances = <strong class="jxr_keyword">new</strong> <strong class="jxr_keyword">double</strong>[numFeatures];
-<a class="jxr_linenumber" name="L162" href="#L162">162</a>     <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">double</strong>[] perTreeFeatureImporatance : perTreeFeatureImportances) {
-<a class="jxr_linenumber" name="L163" href="#L163">163</a>       <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 0; i &lt; numFeatures; i++) {
-<a class="jxr_linenumber" name="L164" href="#L164">164</a>         featureImportances[i] += perTreeFeatureImporatance[i];
-<a class="jxr_linenumber" name="L165" href="#L165">165</a>       }
-<a class="jxr_linenumber" name="L166" href="#L166">166</a>     }
-<a class="jxr_linenumber" name="L167" href="#L167">167</a>     <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 0; i &lt; numFeatures; i++) {
-<a class="jxr_linenumber" name="L168" href="#L168">168</a>       featureImportances[i] /= numTrees;
-<a class="jxr_linenumber" name="L169" href="#L169">169</a>     }
-<a class="jxr_linenumber" name="L170" href="#L170">170</a>   }
-<a class="jxr_linenumber" name="L171" href="#L171">171</a> 
-<a class="jxr_linenumber" name="L172" href="#L172">172</a>   <strong class="jxr_keyword">public</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/tree/DecisionForest.html">DecisionForest</a>(<a href="../../../../../../com/cloudera/oryx/rdf/common/tree/DecisionTree.html">DecisionTree</a>[] trees, <strong class="jxr_keyword">double</strong>[] weights, <strong class="jxr_keyword">double</strong>[] featureImportances) {
-<a class="jxr_linenumber" name="L173" href="#L173">173</a>     <strong class="jxr_keyword">this</strong>.trees = trees;
-<a class="jxr_linenumber" name="L174" href="#L174">174</a>     <strong class="jxr_keyword">this</strong>.weights = weights;
-<a class="jxr_linenumber" name="L175" href="#L175">175</a>     <strong class="jxr_keyword">this</strong>.evaluations = <strong class="jxr_keyword">new</strong> <strong class="jxr_keyword">double</strong>[weights.length];
-<a class="jxr_linenumber" name="L176" href="#L176">176</a>     <strong class="jxr_keyword">this</strong>.featureImportances = featureImportances;
-<a class="jxr_linenumber" name="L177" href="#L177">177</a>   }
-<a class="jxr_linenumber" name="L178" href="#L178">178</a> 
-<a class="jxr_linenumber" name="L179" href="#L179">179</a>   @Override
-<a class="jxr_linenumber" name="L180" href="#L180">180</a>   <strong class="jxr_keyword">public</strong> Iterator&lt;DecisionTree&gt; iterator() {
-<a class="jxr_linenumber" name="L181" href="#L181">181</a>     <strong class="jxr_keyword">return</strong> ArrayIterator.forArray(trees);
-<a class="jxr_linenumber" name="L182" href="#L182">182</a>   }
-<a class="jxr_linenumber" name="L183" href="#L183">183</a> 
-<a class="jxr_linenumber" name="L184" href="#L184">184</a>   <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L185" href="#L185">185</a> <em class="jxr_javadoccomment">   * @return {@link DecisionTree}s in the ensemble forest</em>
-<a class="jxr_linenumber" name="L186" href="#L186">186</a> <em class="jxr_javadoccomment">   */</em>
-<a class="jxr_linenumber" name="L187" href="#L187">187</a>   <strong class="jxr_keyword">public</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/tree/DecisionTree.html">DecisionTree</a>[] getTrees() {
-<a class="jxr_linenumber" name="L188" href="#L188">188</a>     <strong class="jxr_keyword">return</strong> trees;
-<a class="jxr_linenumber" name="L189" href="#L189">189</a>   }
-<a class="jxr_linenumber" name="L190" href="#L190">190</a> 
-<a class="jxr_linenumber" name="L191" href="#L191">191</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">double</strong>[] getWeights() {
-<a class="jxr_linenumber" name="L192" href="#L192">192</a>     <strong class="jxr_keyword">return</strong> weights;
-<a class="jxr_linenumber" name="L193" href="#L193">193</a>   }
-<a class="jxr_linenumber" name="L194" href="#L194">194</a> 
-<a class="jxr_linenumber" name="L195" href="#L195">195</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">double</strong>[] getEvaluations() {
-<a class="jxr_linenumber" name="L196" href="#L196">196</a>     <strong class="jxr_keyword">return</strong> evaluations;
-<a class="jxr_linenumber" name="L197" href="#L197">197</a>   }
-<a class="jxr_linenumber" name="L198" href="#L198">198</a> 
-<a class="jxr_linenumber" name="L199" href="#L199">199</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">double</strong>[] getFeatureImportances() {
-<a class="jxr_linenumber" name="L200" href="#L200">200</a>     <strong class="jxr_keyword">return</strong> featureImportances;
-<a class="jxr_linenumber" name="L201" href="#L201">201</a>   }
-<a class="jxr_linenumber" name="L202" href="#L202">202</a>   
-<a class="jxr_linenumber" name="L203" href="#L203">203</a>   @Override
-<a class="jxr_linenumber" name="L204" href="#L204">204</a>   <strong class="jxr_keyword">public</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/rule/Prediction.html">Prediction</a> classify(<a href="../../../../../../com/cloudera/oryx/rdf/common/example/Example.html">Example</a> test) {
-<a class="jxr_linenumber" name="L205" href="#L205">205</a>     <strong class="jxr_keyword">return</strong> WeightedPrediction.voteOnFeature(
-<a class="jxr_linenumber" name="L206" href="#L206">206</a>         Lists.transform(Arrays.asList(trees), <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/tree/DecisionForest.html">TreeToPredictionFunction</a>(test)), weights);
-<a class="jxr_linenumber" name="L207" href="#L207">207</a>   }
-<a class="jxr_linenumber" name="L208" href="#L208">208</a> 
-<a class="jxr_linenumber" name="L209" href="#L209">209</a>   @Override
-<a class="jxr_linenumber" name="L210" href="#L210">210</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> update(<a href="../../../../../../com/cloudera/oryx/rdf/common/example/Example.html">Example</a> train) {
-<a class="jxr_linenumber" name="L211" href="#L211">211</a>     <strong class="jxr_keyword">for</strong> (TreeBasedClassifier tree : trees) {
-<a class="jxr_linenumber" name="L212" href="#L212">212</a>       tree.update(train);
-<a class="jxr_linenumber" name="L213" href="#L213">213</a>     }
-<a class="jxr_linenumber" name="L214" href="#L214">214</a>   }
-<a class="jxr_linenumber" name="L215" href="#L215">215</a> 
-<a class="jxr_linenumber" name="L216" href="#L216">216</a>   <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">int</strong> determineParallelism(<strong class="jxr_keyword">int</strong> numTrees) {
-<a class="jxr_linenumber" name="L217" href="#L217">217</a>     <strong class="jxr_keyword">int</strong> numCores = ExecutorUtils.getParallelism();
-<a class="jxr_linenumber" name="L218" href="#L218">218</a>     <strong class="jxr_keyword">if</strong> (numCores &gt;= numTrees) {
-<a class="jxr_linenumber" name="L219" href="#L219">219</a>       <strong class="jxr_keyword">return</strong> numTrees;
-<a class="jxr_linenumber" name="L220" href="#L220">220</a>     }
-<a class="jxr_linenumber" name="L221" href="#L221">221</a>     <em class="jxr_comment">// Try to round up threads so trees is a multiple of it</em>
-<a class="jxr_linenumber" name="L222" href="#L222">222</a>     <strong class="jxr_keyword">int</strong> numThreads = numCores;
-<a class="jxr_linenumber" name="L223" href="#L223">223</a>     <strong class="jxr_keyword">while</strong> (numTrees % numThreads != 0 &amp;&amp; numThreads &lt; 2 * numCores) {
-<a class="jxr_linenumber" name="L224" href="#L224">224</a>       numThreads++;
-<a class="jxr_linenumber" name="L225" href="#L225">225</a>     }
-<a class="jxr_linenumber" name="L226" href="#L226">226</a>     <strong class="jxr_keyword">return</strong> numThreads;
-<a class="jxr_linenumber" name="L227" href="#L227">227</a>   }
-<a class="jxr_linenumber" name="L228" href="#L228">228</a> 
-<a class="jxr_linenumber" name="L229" href="#L229">229</a>   @Override
-<a class="jxr_linenumber" name="L230" href="#L230">230</a>   <strong class="jxr_keyword">public</strong> String toString() {
-<a class="jxr_linenumber" name="L231" href="#L231">231</a>     StringBuilder result = <strong class="jxr_keyword">new</strong> StringBuilder();
-<a class="jxr_linenumber" name="L232" href="#L232">232</a>     <strong class="jxr_keyword">for</strong> (DecisionTree tree : trees) {
-<a class="jxr_linenumber" name="L233" href="#L233">233</a>       result.append(tree).append('\n');
-<a class="jxr_linenumber" name="L234" href="#L234">234</a>     }
-<a class="jxr_linenumber" name="L235" href="#L235">235</a>     <strong class="jxr_keyword">return</strong> result.toString();
-<a class="jxr_linenumber" name="L236" href="#L236">236</a>   }
-<a class="jxr_linenumber" name="L237" href="#L237">237</a> 
-<a class="jxr_linenumber" name="L238" href="#L238">238</a>   <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/tree/DecisionForest.html">TreeToPredictionFunction</a> <strong class="jxr_keyword">implements</strong> Function&lt;DecisionTree, Prediction&gt; {
-<a class="jxr_linenumber" name="L239" href="#L239">239</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/example/Example.html">Example</a> test;
-<a class="jxr_linenumber" name="L240" href="#L240">240</a>     <a href="../../../../../../com/cloudera/oryx/rdf/common/tree/DecisionForest.html">TreeToPredictionFunction</a>(<a href="../../../../../../com/cloudera/oryx/rdf/common/example/Example.html">Example</a> test) {
-<a class="jxr_linenumber" name="L241" href="#L241">241</a>       <strong class="jxr_keyword">this</strong>.test = test;
-<a class="jxr_linenumber" name="L242" href="#L242">242</a>     }
-<a class="jxr_linenumber" name="L243" href="#L243">243</a>     @Override
-<a class="jxr_linenumber" name="L244" href="#L244">244</a>     <strong class="jxr_keyword">public</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/rule/Prediction.html">Prediction</a> apply(<a href="../../../../../../com/cloudera/oryx/rdf/common/tree/DecisionTree.html">DecisionTree</a> tree) {
-<a class="jxr_linenumber" name="L245" href="#L245">245</a>       <strong class="jxr_keyword">return</strong> tree.classify(test);
-<a class="jxr_linenumber" name="L246" href="#L246">246</a>     }
-<a class="jxr_linenumber" name="L247" href="#L247">247</a>   }
-<a class="jxr_linenumber" name="L248" href="#L248">248</a> }
+<a class="jxr_linenumber" name="L138" href="#L138">138</a>             log.info(<span class="jxr_string">"Starting tree {}"</span>, treeID);
+<a class="jxr_linenumber" name="L139" href="#L139">139</a>             trees[treeID] = <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/tree/DecisionTree.html">DecisionTree</a>(numFeatures,
+<a class="jxr_linenumber" name="L140" href="#L140">140</a>                                              featuresToTry,
+<a class="jxr_linenumber" name="L141" href="#L141">141</a>                                              minNodeSize,
+<a class="jxr_linenumber" name="L142" href="#L142">142</a>                                              minInfoGainNats,
+<a class="jxr_linenumber" name="L143" href="#L143">143</a>                                              suggestedMaxSplitCandidates,
+<a class="jxr_linenumber" name="L144" href="#L144">144</a>                                              maxDepth,
+<a class="jxr_linenumber" name="L145" href="#L145">145</a>                                              examples.subset(trainingExamples));
+<a class="jxr_linenumber" name="L146" href="#L146">146</a>             log.info(<span class="jxr_string">"Finished tree {}"</span>, treeID);
+<a class="jxr_linenumber" name="L147" href="#L147">147</a>             <a href="../../../../../../com/cloudera/oryx/rdf/common/example/ExampleSet.html">ExampleSet</a> cvExampleSet = examples.subset(cvExamples);
+<a class="jxr_linenumber" name="L148" href="#L148">148</a>             <strong class="jxr_keyword">double</strong>[] weightEval = Evaluation.evaluateToWeight(trees[treeID], cvExampleSet);
+<a class="jxr_linenumber" name="L149" href="#L149">149</a>             weights[treeID] = weightEval[0];
+<a class="jxr_linenumber" name="L150" href="#L150">150</a>             evaluations[treeID] = weightEval[1];
+<a class="jxr_linenumber" name="L151" href="#L151">151</a>             perTreeFeatureImportances[treeID] = trees[treeID].featureImportance(cvExampleSet);
+<a class="jxr_linenumber" name="L152" href="#L152">152</a>             log.info(<span class="jxr_string">"Tree {} eval: {}"</span>, treeID, weightEval[1]);
+<a class="jxr_linenumber" name="L153" href="#L153">153</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">null</strong>;
+<a class="jxr_linenumber" name="L154" href="#L154">154</a>           }
+<a class="jxr_linenumber" name="L155" href="#L155">155</a>         }));
+<a class="jxr_linenumber" name="L156" href="#L156">156</a>       }
+<a class="jxr_linenumber" name="L157" href="#L157">157</a>       ExecutorUtils.getResults(futures);
+<a class="jxr_linenumber" name="L158" href="#L158">158</a>     } <strong class="jxr_keyword">finally</strong> {
+<a class="jxr_linenumber" name="L159" href="#L159">159</a>       ExecutorUtils.shutdownNowAndAwait(executor);
+<a class="jxr_linenumber" name="L160" href="#L160">160</a>     }
+<a class="jxr_linenumber" name="L161" href="#L161">161</a> 
+<a class="jxr_linenumber" name="L162" href="#L162">162</a>     featureImportances = <strong class="jxr_keyword">new</strong> <strong class="jxr_keyword">double</strong>[numFeatures];
+<a class="jxr_linenumber" name="L163" href="#L163">163</a>     <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">double</strong>[] perTreeFeatureImportance : perTreeFeatureImportances) {
+<a class="jxr_linenumber" name="L164" href="#L164">164</a>       <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 0; i &lt; numFeatures; i++) {
+<a class="jxr_linenumber" name="L165" href="#L165">165</a>         featureImportances[i] += perTreeFeatureImportance[i];
+<a class="jxr_linenumber" name="L166" href="#L166">166</a>       }
+<a class="jxr_linenumber" name="L167" href="#L167">167</a>     }
+<a class="jxr_linenumber" name="L168" href="#L168">168</a>     <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 0; i &lt; numFeatures; i++) {
+<a class="jxr_linenumber" name="L169" href="#L169">169</a>       featureImportances[i] /= numTrees;
+<a class="jxr_linenumber" name="L170" href="#L170">170</a>     }
+<a class="jxr_linenumber" name="L171" href="#L171">171</a>   }
+<a class="jxr_linenumber" name="L172" href="#L172">172</a> 
+<a class="jxr_linenumber" name="L173" href="#L173">173</a>   <strong class="jxr_keyword">public</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/tree/DecisionForest.html">DecisionForest</a>(<a href="../../../../../../com/cloudera/oryx/rdf/common/tree/DecisionTree.html">DecisionTree</a>[] trees, <strong class="jxr_keyword">double</strong>[] weights, <strong class="jxr_keyword">double</strong>[] featureImportances) {
+<a class="jxr_linenumber" name="L174" href="#L174">174</a>     <strong class="jxr_keyword">this</strong>.trees = trees;
+<a class="jxr_linenumber" name="L175" href="#L175">175</a>     <strong class="jxr_keyword">this</strong>.weights = weights;
+<a class="jxr_linenumber" name="L176" href="#L176">176</a>     <strong class="jxr_keyword">this</strong>.evaluations = <strong class="jxr_keyword">new</strong> <strong class="jxr_keyword">double</strong>[weights.length];
+<a class="jxr_linenumber" name="L177" href="#L177">177</a>     <strong class="jxr_keyword">this</strong>.featureImportances = featureImportances;
+<a class="jxr_linenumber" name="L178" href="#L178">178</a>   }
+<a class="jxr_linenumber" name="L179" href="#L179">179</a> 
+<a class="jxr_linenumber" name="L180" href="#L180">180</a>   @Override
+<a class="jxr_linenumber" name="L181" href="#L181">181</a>   <strong class="jxr_keyword">public</strong> Iterator&lt;DecisionTree&gt; iterator() {
+<a class="jxr_linenumber" name="L182" href="#L182">182</a>     <strong class="jxr_keyword">return</strong> ArrayIterator.forArray(trees);
+<a class="jxr_linenumber" name="L183" href="#L183">183</a>   }
+<a class="jxr_linenumber" name="L184" href="#L184">184</a> 
+<a class="jxr_linenumber" name="L185" href="#L185">185</a>   <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L186" href="#L186">186</a> <em class="jxr_javadoccomment">   * @return {@link DecisionTree}s in the ensemble forest</em>
+<a class="jxr_linenumber" name="L187" href="#L187">187</a> <em class="jxr_javadoccomment">   */</em>
+<a class="jxr_linenumber" name="L188" href="#L188">188</a>   <strong class="jxr_keyword">public</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/tree/DecisionTree.html">DecisionTree</a>[] getTrees() {
+<a class="jxr_linenumber" name="L189" href="#L189">189</a>     <strong class="jxr_keyword">return</strong> trees;
+<a class="jxr_linenumber" name="L190" href="#L190">190</a>   }
+<a class="jxr_linenumber" name="L191" href="#L191">191</a> 
+<a class="jxr_linenumber" name="L192" href="#L192">192</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">double</strong>[] getWeights() {
+<a class="jxr_linenumber" name="L193" href="#L193">193</a>     <strong class="jxr_keyword">return</strong> weights;
+<a class="jxr_linenumber" name="L194" href="#L194">194</a>   }
+<a class="jxr_linenumber" name="L195" href="#L195">195</a> 
+<a class="jxr_linenumber" name="L196" href="#L196">196</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">double</strong>[] getEvaluations() {
+<a class="jxr_linenumber" name="L197" href="#L197">197</a>     <strong class="jxr_keyword">return</strong> evaluations;
+<a class="jxr_linenumber" name="L198" href="#L198">198</a>   }
+<a class="jxr_linenumber" name="L199" href="#L199">199</a> 
+<a class="jxr_linenumber" name="L200" href="#L200">200</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">double</strong>[] getFeatureImportances() {
+<a class="jxr_linenumber" name="L201" href="#L201">201</a>     <strong class="jxr_keyword">return</strong> featureImportances;
+<a class="jxr_linenumber" name="L202" href="#L202">202</a>   }
+<a class="jxr_linenumber" name="L203" href="#L203">203</a>   
+<a class="jxr_linenumber" name="L204" href="#L204">204</a>   @Override
+<a class="jxr_linenumber" name="L205" href="#L205">205</a>   <strong class="jxr_keyword">public</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/rule/Prediction.html">Prediction</a> classify(<a href="../../../../../../com/cloudera/oryx/rdf/common/example/Example.html">Example</a> test) {
+<a class="jxr_linenumber" name="L206" href="#L206">206</a>     <strong class="jxr_keyword">return</strong> WeightedPrediction.voteOnFeature(
+<a class="jxr_linenumber" name="L207" href="#L207">207</a>         Lists.transform(Arrays.asList(trees), <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/tree/DecisionForest.html">TreeToPredictionFunction</a>(test)), weights);
+<a class="jxr_linenumber" name="L208" href="#L208">208</a>   }
+<a class="jxr_linenumber" name="L209" href="#L209">209</a> 
+<a class="jxr_linenumber" name="L210" href="#L210">210</a>   @Override
+<a class="jxr_linenumber" name="L211" href="#L211">211</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> update(<a href="../../../../../../com/cloudera/oryx/rdf/common/example/Example.html">Example</a> train) {
+<a class="jxr_linenumber" name="L212" href="#L212">212</a>     <strong class="jxr_keyword">for</strong> (TreeBasedClassifier tree : trees) {
+<a class="jxr_linenumber" name="L213" href="#L213">213</a>       tree.update(train);
+<a class="jxr_linenumber" name="L214" href="#L214">214</a>     }
+<a class="jxr_linenumber" name="L215" href="#L215">215</a>   }
+<a class="jxr_linenumber" name="L216" href="#L216">216</a> 
+<a class="jxr_linenumber" name="L217" href="#L217">217</a>   <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">int</strong> determineParallelism(<strong class="jxr_keyword">int</strong> numTrees) {
+<a class="jxr_linenumber" name="L218" href="#L218">218</a>     <strong class="jxr_keyword">int</strong> numCores = ExecutorUtils.getParallelism();
+<a class="jxr_linenumber" name="L219" href="#L219">219</a>     <strong class="jxr_keyword">if</strong> (numCores &gt;= numTrees) {
+<a class="jxr_linenumber" name="L220" href="#L220">220</a>       <strong class="jxr_keyword">return</strong> numTrees;
+<a class="jxr_linenumber" name="L221" href="#L221">221</a>     }
+<a class="jxr_linenumber" name="L222" href="#L222">222</a>     <em class="jxr_comment">// Try to round up threads so trees is a multiple of it</em>
+<a class="jxr_linenumber" name="L223" href="#L223">223</a>     <strong class="jxr_keyword">int</strong> numThreads = numCores;
+<a class="jxr_linenumber" name="L224" href="#L224">224</a>     <strong class="jxr_keyword">while</strong> (numTrees % numThreads != 0 &amp;&amp; numThreads &lt; 2 * numCores) {
+<a class="jxr_linenumber" name="L225" href="#L225">225</a>       numThreads++;
+<a class="jxr_linenumber" name="L226" href="#L226">226</a>     }
+<a class="jxr_linenumber" name="L227" href="#L227">227</a>     <strong class="jxr_keyword">return</strong> numThreads;
+<a class="jxr_linenumber" name="L228" href="#L228">228</a>   }
+<a class="jxr_linenumber" name="L229" href="#L229">229</a> 
+<a class="jxr_linenumber" name="L230" href="#L230">230</a>   @Override
+<a class="jxr_linenumber" name="L231" href="#L231">231</a>   <strong class="jxr_keyword">public</strong> String toString() {
+<a class="jxr_linenumber" name="L232" href="#L232">232</a>     StringBuilder result = <strong class="jxr_keyword">new</strong> StringBuilder();
+<a class="jxr_linenumber" name="L233" href="#L233">233</a>     <strong class="jxr_keyword">for</strong> (DecisionTree tree : trees) {
+<a class="jxr_linenumber" name="L234" href="#L234">234</a>       result.append(tree).append('\n');
+<a class="jxr_linenumber" name="L235" href="#L235">235</a>     }
+<a class="jxr_linenumber" name="L236" href="#L236">236</a>     <strong class="jxr_keyword">return</strong> result.toString();
+<a class="jxr_linenumber" name="L237" href="#L237">237</a>   }
+<a class="jxr_linenumber" name="L238" href="#L238">238</a> 
+<a class="jxr_linenumber" name="L239" href="#L239">239</a>   <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/tree/DecisionForest.html">TreeToPredictionFunction</a> <strong class="jxr_keyword">implements</strong> Function&lt;DecisionTree, Prediction&gt; {
+<a class="jxr_linenumber" name="L240" href="#L240">240</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/example/Example.html">Example</a> test;
+<a class="jxr_linenumber" name="L241" href="#L241">241</a>     <a href="../../../../../../com/cloudera/oryx/rdf/common/tree/DecisionForest.html">TreeToPredictionFunction</a>(<a href="../../../../../../com/cloudera/oryx/rdf/common/example/Example.html">Example</a> test) {
+<a class="jxr_linenumber" name="L242" href="#L242">242</a>       <strong class="jxr_keyword">this</strong>.test = test;
+<a class="jxr_linenumber" name="L243" href="#L243">243</a>     }
+<a class="jxr_linenumber" name="L244" href="#L244">244</a>     @Override
+<a class="jxr_linenumber" name="L245" href="#L245">245</a>     <strong class="jxr_keyword">public</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/rule/Prediction.html">Prediction</a> apply(<a href="../../../../../../com/cloudera/oryx/rdf/common/tree/DecisionTree.html">DecisionTree</a> tree) {
+<a class="jxr_linenumber" name="L246" href="#L246">246</a>       <strong class="jxr_keyword">return</strong> tree.classify(test);
+<a class="jxr_linenumber" name="L247" href="#L247">247</a>     }
+<a class="jxr_linenumber" name="L248" href="#L248">248</a>   }
+<a class="jxr_linenumber" name="L249" href="#L249">249</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2013&#x2013;2014. All rights reserved.</div>

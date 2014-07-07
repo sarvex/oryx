@@ -108,15 +108,18 @@
 <a class="jxr_linenumber" name="L100" href="#L100">100</a>     addServlet(context, <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/als/serving/web/BecauseServlet.html">BecauseServlet</a>(), <span class="jxr_string">"/because/*"</span>);
 <a class="jxr_linenumber" name="L101" href="#L101">101</a>     addServlet(context, <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/als/serving/web/ReadyServlet.html">ReadyServlet</a>(), <span class="jxr_string">"/ready/*"</span>);
 <a class="jxr_linenumber" name="L102" href="#L102">102</a>     addServlet(context, <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/als/serving/web/MostPopularItemsServlet.html">MostPopularItemsServlet</a>(), <span class="jxr_string">"/mostPopularItems/*"</span>);
-<a class="jxr_linenumber" name="L103" href="#L103">103</a>     <strong class="jxr_keyword">if</strong> (!ConfigUtils.getDefaultConfig().getBoolean(<span class="jxr_string">"serving-layer.api.read-only"</span>)) {
-<a class="jxr_linenumber" name="L104" href="#L104">104</a>       addServlet(context, <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/als/serving/web/PreferenceServlet.html">PreferenceServlet</a>(), <span class="jxr_string">"/pref/*"</span>);
-<a class="jxr_linenumber" name="L105" href="#L105">105</a>       Wrapper ingestWrapper = addServlet(context, <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/als/serving/web/IngestServlet.html">IngestServlet</a>(), <span class="jxr_string">"/ingest/*"</span>);
-<a class="jxr_linenumber" name="L106" href="#L106">106</a>       ingestWrapper.setMultipartConfigElement(<strong class="jxr_keyword">new</strong> MultipartConfigElement(<span class="jxr_string">"/tmp"</span>));
-<a class="jxr_linenumber" name="L107" href="#L107">107</a>       addServlet(context, <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/als/serving/web/RefreshServlet.html">RefreshServlet</a>(), <span class="jxr_string">"/refresh/*"</span>);
-<a class="jxr_linenumber" name="L108" href="#L108">108</a>     }
-<a class="jxr_linenumber" name="L109" href="#L109">109</a>   }
-<a class="jxr_linenumber" name="L110" href="#L110">110</a> 
-<a class="jxr_linenumber" name="L111" href="#L111">111</a> }
+<a class="jxr_linenumber" name="L103" href="#L103">103</a>     addServlet(context, <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/als/serving/web/PopularRepresentativeItemsServlet.html">PopularRepresentativeItemsServlet</a>(), <span class="jxr_string">"/popularRepresentativeItems/*"</span>);
+<a class="jxr_linenumber" name="L104" href="#L104">104</a>     addServlet(context, <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/als/serving/web/AllItemIDsServlet.html">AllItemIDsServlet</a>(), <span class="jxr_string">"/item/allIDs"</span>);
+<a class="jxr_linenumber" name="L105" href="#L105">105</a>     addServlet(context, <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/als/serving/web/MostSurprisingServlet.html">MostSurprisingServlet</a>(), <span class="jxr_string">"/mostSurprising/*"</span>);
+<a class="jxr_linenumber" name="L106" href="#L106">106</a>     <strong class="jxr_keyword">if</strong> (!ConfigUtils.getDefaultConfig().getBoolean(<span class="jxr_string">"serving-layer.api.read-only"</span>)) {
+<a class="jxr_linenumber" name="L107" href="#L107">107</a>       addServlet(context, <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/als/serving/web/PreferenceServlet.html">PreferenceServlet</a>(), <span class="jxr_string">"/pref/*"</span>);
+<a class="jxr_linenumber" name="L108" href="#L108">108</a>       Wrapper ingestWrapper = addServlet(context, <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/als/serving/web/IngestServlet.html">IngestServlet</a>(), <span class="jxr_string">"/ingest/*"</span>);
+<a class="jxr_linenumber" name="L109" href="#L109">109</a>       ingestWrapper.setMultipartConfigElement(<strong class="jxr_keyword">new</strong> MultipartConfigElement(<span class="jxr_string">"/tmp"</span>));
+<a class="jxr_linenumber" name="L110" href="#L110">110</a>       addServlet(context, <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/als/serving/web/RefreshServlet.html">RefreshServlet</a>(), <span class="jxr_string">"/refresh/*"</span>);
+<a class="jxr_linenumber" name="L111" href="#L111">111</a>     }
+<a class="jxr_linenumber" name="L112" href="#L112">112</a>   }
+<a class="jxr_linenumber" name="L113" href="#L113">113</a> 
+<a class="jxr_linenumber" name="L114" href="#L114">114</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2013&#x2013;2014. All rights reserved.</div>

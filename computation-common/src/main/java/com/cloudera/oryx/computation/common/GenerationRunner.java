@@ -62,7 +62,6 @@ public abstract class GenerationRunner implements Callable<Object> {
     instanceDir = ConfigUtils.getDefaultConfig().getString("model.instance-dir");
     generationID = -1;
     lastGenerationID = -1;
-    //stateSources = Lists.newCopyOnWriteArrayList();
     stateSources = new CopyOnWriteArrayList<HasState>();
   }
 
@@ -87,14 +86,14 @@ public abstract class GenerationRunner implements Callable<Object> {
    *  started
    */
   public final GenerationRunnerState getState() throws IOException, InterruptedException {
-    if (getGenerationID() < 0) {
+    if (generationID < 0) {
       return null;
     }
     List<StepState> stepStates = Lists.newArrayList();
     for (HasState state : stateSources) {
       stepStates.addAll(state.getStepStates());
     }
-    return new GenerationRunnerState(getGenerationID(), stepStates, isRunning, startTime, endTime);
+    return new GenerationRunnerState(generationID, stepStates, isRunning, startTime, endTime);
   }
 
   /**
@@ -213,6 +212,9 @@ public abstract class GenerationRunner implements Callable<Object> {
       log.info("No need to make a new generation");
     } else {
       log.info("Making new generation {}", generationToMake);
+      if (!store.exists(Namespaces.getInstancePrefix(instanceDir), false)) {
+        log.warn("No instance directory at {} -- is this a typo?", instanceDir);
+      }
       store.mkdir(Namespaces.getInstanceGenerationPrefix(instanceDir, generationToMake) + "inbound/");
     }
 
@@ -234,7 +236,7 @@ public abstract class GenerationRunner implements Callable<Object> {
       runSteps();
       log.info("Signaling completion of generation {}", generationID);
       store.touch(Namespaces.getGenerationDoneKey(instanceDir, generationID));
-      store.recursiveDelete(Namespaces.getTempPrefix(instanceDir, getGenerationID()));
+      store.recursiveDelete(Namespaces.getTempPrefix(instanceDir, generationID));
       log.info("Dumping some stats on generation {}", generationID);
       endSize = store.getSizeRecursive(Namespaces.getInstanceGenerationPrefix(instanceDir, generationID));
       dumpStats();
@@ -369,7 +371,7 @@ public abstract class GenerationRunner implements Callable<Object> {
   }
 
   protected final int readLatestIterationInProgress() throws IOException {
-    String iterationsPrefix = Namespaces.getIterationsPrefix(instanceDir,  getGenerationID());
+    String iterationsPrefix = Namespaces.getIterationsPrefix(instanceDir, generationID);
     List<String> iterationPaths = Store.get().list(iterationsPrefix, false);
     if (iterationPaths == null || iterationPaths.isEmpty()) {
       return 1;

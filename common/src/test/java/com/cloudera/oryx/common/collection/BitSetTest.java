@@ -58,13 +58,19 @@ public final class BitSetTest extends OryxTest {
     assertTrue(bitSet.get(NUM_BITS-1));
   }
 
-  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  @Test(expected = IndexOutOfBoundsException.class)
+  public void testBounds0() {
+    BitSet bitSet = new BitSet(NUM_BITS);
+    bitSet.set(NUM_BITS);
+  }
+
+  @Test(expected = IndexOutOfBoundsException.class)
   public void testBounds1() {
     BitSet bitSet = new BitSet(NUM_BITS);
     bitSet.set(1000);
   }
 
-  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  @Test(expected = IndexOutOfBoundsException.class)
   public void testBounds2() {
     BitSet bitSet = new BitSet(NUM_BITS);
     bitSet.set(-1);
@@ -159,6 +165,29 @@ public final class BitSetTest extends OryxTest {
     bitSet.set(NUM_BITS-1);
     bitSet = bitSet.clone();
     assertTrue(bitSet.get(NUM_BITS-1));
+  }
+
+  @Test
+  public void testEquals() {
+    BitSet a = new BitSet(NUM_BITS);
+    BitSet b = new BitSet(NUM_BITS);
+    a.set(0);
+    b.set(0);
+    a.set(10);
+    b.set(10);
+    assertEquals(a, b);
+    BitSet c = new BitSet(NUM_BITS);
+    c.set(10);
+    assertNotEquals(a, c);
+  }
+
+  @Test
+  public void testString() {
+    BitSet a = new BitSet(NUM_BITS);
+    for (int i = 0; i < NUM_BITS; i += 2) {
+      a.set(i);
+    }
+    assertEquals("1010101010101010101010101010101010101010101010101010101010101010 101010101010101010101010101010101010", a.toString());
   }
 
 }

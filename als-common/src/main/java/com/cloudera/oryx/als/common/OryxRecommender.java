@@ -18,6 +18,7 @@ package com.cloudera.oryx.als.common;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.Collection;
 import java.util.List;
 
 import com.cloudera.oryx.als.common.rescorer.PairRescorer;
@@ -265,6 +266,15 @@ public interface OryxRecommender {
       throws NotReadyException, NoSuchItemException;
 
   /**
+   * @param userID user for which most-surprising items are to be computed
+   * @param howMany desired number of items
+   * @return {@link List} of recommended {@link IDValue}s, ordered from most surprising to least
+   * @throws NotReadyException if the recommender has no model available yet
+   */
+  List<IDValue> mostSurprising(String userID, int howMany)
+      throws NotReadyException, NoSuchUserException;
+
+  /**
    * @param howMany how many items to return
    * @return most popular items, where popularity is measured by the number of users interacting with
    *  the item
@@ -361,6 +371,11 @@ public interface OryxRecommender {
    * @see #setPreference(String, String, float)
    */
   void setPreference(String userID, String itemID);
+
+  /**
+   * @return all item IDs currently present in the model
+   */
+  Collection<String> getAllItemIDs() throws NotReadyException;
 
   /**
    * @return true if and only if the instance is ready to make recommendations; may be false for example

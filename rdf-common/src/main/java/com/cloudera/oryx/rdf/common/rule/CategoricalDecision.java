@@ -83,7 +83,14 @@ public final class CategoricalDecision extends Decision {
   @Override
   public boolean isPositive(Example example) {
     CategoricalFeature feature = (CategoricalFeature) example.getFeature(getFeatureNumber());
-    return feature == null ? defaultDecision : activeCategories.get(feature.getValueID());
+    if (feature == null) {
+      return defaultDecision;
+    }
+    int valueID = feature.getValueID();
+    if (valueID >= activeCategories.size()) {
+      return defaultDecision;
+    }
+    return activeCategories.get(valueID);
   }
 
   @Override
@@ -184,6 +191,49 @@ public final class CategoricalDecision extends Decision {
   private static List<Decision> categoricalDecisionsForCategoricalTarget(int featureNumber,
                                                                          ExampleSet examples,
                                                                          int suggestedMaxSplitCandidates) {
+    if (examples.getTargetCategoryCount() > 2) {
+      return categoricalDecisionsForMulticlassTarget(featureNumber, examples, suggestedMaxSplitCandidates);
+    } else {
+      return categoricalDecisionsForBinaryTarget(featureNumber, examples, suggestedMaxSplitCandidates);
+    }
+  }
+
+  private static List<Decision> categoricalDecisionsForBinaryTarget(int featureNumber,
+                                                                    ExampleSet examples,
+                                                                    int suggestedMaxSplitCandidates) {
+    int categoryCount = examples.getCategoryCount(featureNumber);
+    int[] countsForFeature = new int[categoryCount];
+    int[] target0CountsForFeature = new int[categoryCount];
+    for (Example example : examples) {
+      CategoricalFeature feature = (CategoricalFeature) example.getFeature(featureNumber);
+      if (feature != null) {
+        int featureCategory = feature.getValueID();
+        countsForFeature[featureCategory]++;
+        if (((CategoricalFeature) example.getTarget()).getValueID() == 0) {
+          target0CountsForFeature[featureCategory]++;
+        }
+        // else assume it is value 1
+      }
+    }
+
+    int maxCategory = findMaxCategory(countsForFeature);
+
+    List<Pair<Double,Integer>> byScore = Lists.newArrayListWithCapacity(target0CountsForFeature.length);
+    for (int featureCategory = 0; featureCategory < target0CountsForFeature.length; featureCategory++) {
+      double ratio = (double) target0CountsForFeature[featureCategory] / countsForFeature[featureCategory];
+      byScore.add(new Pair<Double,Integer>(ratio, featureCategory));
+    }
+
+    return sortAndGetDecisionsOverSubset(featureNumber,
+                                         categoryCount,
+                                         byScore,
+                                         maxCategory,
+                                         suggestedMaxSplitCandidates);
+  }
+
+  private static List<Decision> categoricalDecisionsForMulticlassTarget(int featureNumber,
+                                                                        ExampleSet examples,
+                                                                        int suggestedMaxSplitCandidates) {
     int categoryCount = examples.getCategoryCount(featureNumber);
     int[] countsForFeature = new int[categoryCount];
     int[][] targetCountsForFeature = new int[categoryCount][];
@@ -203,15 +253,7 @@ public final class CategoricalDecision extends Decision {
       targetCounts[targetCategory]++;
     }
 
-    int maxCategory = -1;
-    int maxCount = -1;
-    for (int i = 0; i < countsForFeature.length; i++) {
-      if (countsForFeature[i] > maxCount) {
-        maxCount = countsForFeature[i];
-        maxCategory = i;
-      }
-    }
-    Preconditions.checkArgument(maxCategory >= 0);
+    int maxCategory = findMaxCategory(countsForFeature);
 
     List<Pair<Double,Integer>> byScore = Lists.newArrayListWithCapacity(targetCountsForFeature.length);
     for (int featureCategory = 0; featureCategory < targetCountsForFeature.length; featureCategory++) {
@@ -227,6 +269,19 @@ public final class CategoricalDecision extends Decision {
                                          byScore,
                                          maxCategory,
                                          suggestedMaxSplitCandidates);
+  }
+
+  private static int findMaxCategory(int[] countsForFeature) {
+    int maxCategory = -1;
+    int maxCount = -1;
+    for (int i = 0; i < countsForFeature.length; i++) {
+      if (countsForFeature[i] > maxCount) {
+        maxCount = countsForFeature[i];
+        maxCategory = i;
+      }
+    }
+    Preconditions.checkArgument(maxCategory >= 0);
+    return maxCategory;
   }
 
   private static List<Decision> sortAndGetDecisionsOverSubset(int featureNumber,

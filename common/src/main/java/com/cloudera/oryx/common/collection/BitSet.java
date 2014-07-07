@@ -44,7 +44,8 @@ import java.util.Arrays;
  * @author Mahout
  */
 public final class BitSet implements Serializable, Cloneable {
-  
+
+  private final int size;
   private final long[] bits;
 
   /**
@@ -54,31 +55,37 @@ public final class BitSet implements Serializable, Cloneable {
    */
   public BitSet(int numBits) {
     Preconditions.checkArgument(numBits >= 0);
-    int numLongs = numBits >>> 6;
-    if ((numBits & 0x3F) != 0) {
+    this.size = numBits;
+    int numLongs = numBits / 64;
+    if ((numBits % 64) != 0) {
       numLongs++;
     }
     bits = new long[numLongs];
   }
   
-  private BitSet(long[] bits) {
+  private BitSet(int size, long[] bits) {
+    this.size = size;
     this.bits = bits;
+  }
+
+  public int size() {
+    return size;
   }
 
   /**
    * @return true iff given bit is set
    */
   public boolean get(int index) {
-    // skipping range check for speed
-    return (bits[index >>> 6] & 1L << (index & 0x3F)) != 0L;
+    Preconditions.checkElementIndex(index, size);
+    return (bits[index / 64] & 1L << (index % 64)) != 0L;
   }
 
   /**
    * Sets given bit to "1" or "true".
    */
   public void set(int index) {
-    // skipping range check for speed
-    bits[index >>> 6] |= 1L << (index & 0x3F);
+    Preconditions.checkElementIndex(index, size);
+    bits[index / 64] |= 1L << (index % 64);
   }
 
   /**
@@ -95,8 +102,8 @@ public final class BitSet implements Serializable, Cloneable {
    * Clears given bit -- sets to "0" or "false".
    */
   public void clear(int index) {
-    // skipping range check for speed
-    bits[index >>> 6] &= ~(1L << (index & 0x3F));
+    Preconditions.checkElementIndex(index, size);
+    bits[index / 64] &= ~(1L << (index % 64));
   }
 
   /**
@@ -123,8 +130,8 @@ public final class BitSet implements Serializable, Cloneable {
    *  the given index, or -1 if no such bit exists
    */
   public int nextSetBit(int index) {
-    int offset = index >>> 6;
-    int offsetInLong = index & 0x3F;
+    int offset = index / 64;
+    int offsetInLong = index % 64;
     long mask = ~((1L << offsetInLong) - 1);
     while (offset < bits.length && (bits[offset] & mask) == 0) {
       offset++;
@@ -133,17 +140,17 @@ public final class BitSet implements Serializable, Cloneable {
     if (offset == bits.length) {
       return -1;
     }
-    return (offset << 6) + Long.numberOfTrailingZeros(bits[offset] & mask);
+    return (offset * 64) + Long.numberOfTrailingZeros(bits[offset] & mask);
   }
   
   @Override
   public BitSet clone() {
-    return new BitSet(bits.clone());
+    return new BitSet(size, bits.clone());
   }
 
   @Override
   public int hashCode() {
-    return Arrays.hashCode(bits);
+    return size ^ Arrays.hashCode(bits);
   }
 
   @Override
@@ -152,17 +159,17 @@ public final class BitSet implements Serializable, Cloneable {
       return false;
     }
     BitSet other = (BitSet) o;
-    return Arrays.equals(bits, other.bits);
+    return size == other.size && Arrays.equals(bits, other.bits);
   }
   
   @Override
   public String toString() {
-    StringBuilder result = new StringBuilder(64 * bits.length);
-    for (long l : bits) {
-      for (int j = 0; j < 64; j++) {
-        result.append((l & 1L << j) == 0 ? '0' : '1');
+    StringBuilder result = new StringBuilder(size);
+    for (int i = 0; i < size; i++) {
+      if (i > 0 && i % 64 == 0) {
+        result.append(' ');
       }
-      result.append(' ');
+      result.append(get(i) ? '1' : '0');
     }
     return result.toString();
   }

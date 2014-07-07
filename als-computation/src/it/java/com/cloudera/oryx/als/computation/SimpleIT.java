@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import org.junit.Test;
@@ -177,6 +178,24 @@ public final class SimpleIT extends AbstractComputationIT {
   @Test(expected = NoSuchItemException.class)
   public void testRecommendToAnonymousNonexistent2() throws Exception {
     getRecommender().recommendToAnonymous(new String[] {"ABC", "DEF"}, 3);
+  }
+
+  @Test
+  public void testMostSurprising() throws Exception {
+    ServerRecommender client = getRecommender();
+    List<IDValue> surprising = client.mostSurprising("229", 3);
+
+    assertNotNull(surprising);
+    assertEquals(3, surprising.size());
+
+    log.info("{}", surprising);
+
+    assertEquals("875", surprising.get(0).getID());
+    assertEquals("937", surprising.get(1).getID());
+    assertEquals("358", surprising.get(2).getID());
+    assertEquals(0.918288f, surprising.get(0).getValue());
+    assertEquals(0.7711351f, surprising.get(1).getValue());
+    assertEquals(0.7579555f, surprising.get(2).getValue());
   }
 
   @Test
@@ -408,6 +427,17 @@ public final class SimpleIT extends AbstractComputationIT {
       fail();
     } catch (NoSuchUserException nsue) {
       // good
+    }
+  }
+
+  @Test
+  public void testGetAllItemIDs() throws Exception {
+    ServerRecommender client = getRecommender();
+
+    Collection<String> itemIDs = client.getAllItemIDs();
+    assertEquals(1682, itemIDs.size());
+    for (int i = 1; i <= 1682; i++) {
+      assertTrue(itemIDs.contains(Integer.toString(i)));
     }
   }
 

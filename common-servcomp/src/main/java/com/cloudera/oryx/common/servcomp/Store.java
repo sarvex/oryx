@@ -279,7 +279,7 @@ public final class Store {
   }
 
   /**
-   * Uploads a directory recurisvely
+   * Uploads a directory recursively
    *
    * @param dirKey location under which to store the contents found under {@code dir}
    * @param dir directory whose <em>contents</em> will be uploaded

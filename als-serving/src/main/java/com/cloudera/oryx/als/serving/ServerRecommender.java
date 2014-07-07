@@ -231,13 +231,15 @@ public final class ServerRecommender implements OryxRecommender, Closeable {
           if (theKnownItemIDs == null) {
             continue;
           }
-          if (usersKnownItemIDs == null) {
-            usersKnownItemIDs = theKnownItemIDs;
-          } else {
-            LongPrimitiveIterator it = usersKnownItemIDs.iterator();
-            while (it.hasNext()) {
-              if (!theKnownItemIDs.contains(it.nextLong())) {
-                it.remove();
+          synchronized (theKnownItemIDs) {
+            if (usersKnownItemIDs == null) {
+              usersKnownItemIDs = theKnownItemIDs.clone();
+            } else {
+              LongPrimitiveIterator it = usersKnownItemIDs.iterator();
+              while (it.hasNext()) {
+                if (!theKnownItemIDs.contains(it.nextLong())) {
+                  it.remove();
+                }
               }
             }
           }
@@ -440,6 +442,56 @@ public final class ServerRecommender implements OryxRecommender, Closeable {
   }
 
   @Override
+  public List<IDValue> mostSurprising(String userID, int howMany)
+      throws NotReadyException, NoSuchUserException {
+
+    Preconditions.checkArgument(howMany > 0, "howMany must be positive");
+
+    Generation generation = getCurrentGeneration();
+    LongObjectMap<float[]> X = generation.getX();
+
+    Lock xLock = generation.getXLock().readLock();
+    float[] userFeatures;
+    xLock.lock();
+    try {
+      userFeatures = X.get(StringLongMapping.toLong(userID));
+    } finally {
+      xLock.unlock();
+    }
+    if (userFeatures == null) {
+      throw new NoSuchUserException(userID);
+    }
+
+    LongObjectMap<LongSet> knownItemIDs = generation.getKnownItemIDs();
+    Lock knownItemLock = generation.getKnownItemLock().readLock();
+    LongSet usersKnownItemIDs = null;
+    knownItemLock.lock();
+    try {
+      usersKnownItemIDs = knownItemIDs.get(StringLongMapping.toLong(userID));
+    } finally {
+      knownItemLock.unlock();
+    }
+    if (usersKnownItemIDs == null) {
+      return Collections.emptyList();
+    }
+    synchronized (usersKnownItemIDs) {
+      usersKnownItemIDs = usersKnownItemIDs.clone();
+    }
+
+    Lock yLock = generation.getYLock().readLock();
+    yLock.lock();
+    try {
+      return translateToStringIDs(
+          TopN.selectTopN(new MostSurprisingIterator(userFeatures,
+                                                     usersKnownItemIDs,
+                                                     generation.getY()), howMany));
+    } finally {
+      yLock.unlock();
+    }
+
+  }
+
+  @Override
   public List<IDValue> mostPopularItems(int howMany) throws NotReadyException {
     return mostPopularItems(howMany, null);
   }
@@ -463,7 +515,7 @@ public final class ServerRecommender implements OryxRecommender, Closeable {
         xReadLock.lock();
         try {
           
-          for (LongObjectMap.MapEntry<LongSet> entry : generation.getKnownItemIDs().entrySet()) {
+          for (LongObjectMap.MapEntry<LongSet> entry : knownItemIDs.entrySet()) {
             LongSet itemIDs = entry.getValue();
             synchronized (itemIDs) {
               LongPrimitiveIterator it = itemIDs.iterator();
@@ -1058,6 +1110,25 @@ public final class ServerRecommender implements OryxRecommender, Closeable {
           TopN.selectTopN(new RecommendedBecauseIterator(toFeatures.entrySet().iterator(),
                                                          features),
                           howMany));
+    } finally {
+      yLock.unlock();
+    }
+  }
+
+  @Override
+  public Collection<String> getAllItemIDs() throws NotReadyException {
+    Generation generation = getCurrentGeneration();
+    LongObjectMap<float[]> Y = generation.getY();
+    StringLongMapping mapping = generation.getIDMapping();
+    Lock yLock = generation.getYLock().readLock();
+    yLock.lock();
+    try {
+      List<String> itemIDs = Lists.newArrayListWithCapacity(Y.size());
+      LongPrimitiveIterator it = Y.keySetIterator();
+      while (it.hasNext()) {
+        itemIDs.add(mapping.toString(it.nextLong()));
+      }
+      return itemIDs;
     } finally {
       yLock.unlock();
     }

@@ -43,7 +43,7 @@ public final class Vectors {
   }
 
   /**
-   * Constructs a spasre {@link RealVector} of the given dimension.
+   * Constructs a sparse {@link RealVector} of the given dimension.
    *
    * @param dimension The dimension of the sparse vector to create
    */
@@ -52,7 +52,7 @@ public final class Vectors {
   }
 
   /**
-   * Constructs a spasre {@link RealVector} of the given dimension.
+   * Constructs a sparse {@link RealVector} of the given dimension.
    *
    * @param dimension The dimension of the sparse vector to create
    */

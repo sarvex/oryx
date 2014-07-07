@@ -17,6 +17,7 @@ package com.cloudera.oryx.serving.web;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
@@ -134,7 +135,7 @@ public abstract class AbstractOryxServlet extends HttpServlet {
 
   protected final void output(HttpServletRequest request,
                               ServletResponse response,
-                              List<?> values) throws IOException {
+                              Collection<?> values) throws IOException {
     if (values.isEmpty()) {
       return;
     }
@@ -144,7 +145,7 @@ public abstract class AbstractOryxServlet extends HttpServlet {
         response.setContentType("application/json");
         // Single value written alone
         if (values.size() == 1) {
-          writer.write(String.valueOf(values.get(0)));
+          writer.write(String.valueOf(values.iterator().next()));
           writer.write('\n');
         } else {
           // Many values written as array

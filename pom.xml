@@ -558,7 +558,9 @@
             <!-- Try to reduce impact of ERROR: Unabel to determine if... plugin bug -->
             <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
             <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
-            <remoteRepositories>https://repository.cloudera.com/artifactory/cloudera-repos</remoteRepositories>
+            <remoteRepositories>
+              <remoteRepository>https://repository.cloudera.com/artifactory/cloudera-repos</remoteRepository>
+            </remoteRepositories>
           </configuration>
         </plugin>
         <plugin>

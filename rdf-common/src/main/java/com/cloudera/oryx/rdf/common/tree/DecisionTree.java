@@ -121,7 +121,7 @@ public final class DecisionTree implements TreeBasedClassifier {
     Decision bestDecision = null;
 
     for (int featureNumber : randomFeatures(examples, featuresToTry, numFeatures, random)) {
-      Iterable<Decision> decisions =
+      Collection<Decision> decisions =
           Decision.decisionsFromExamples(examples, featureNumber, suggestedMaxSplitCandidates);
       Pair<Decision,Double> decisionAndGain = Information.bestGain(decisions, examples);
       if (decisionAndGain != null) {

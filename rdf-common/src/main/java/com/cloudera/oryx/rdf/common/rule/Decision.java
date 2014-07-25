@@ -15,6 +15,7 @@
 
 package com.cloudera.oryx.rdf.common.rule;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.cloudera.oryx.rdf.common.example.Example;
@@ -84,6 +85,9 @@ public abstract class Decision {
   public static List<Decision> decisionsFromExamples(ExampleSet examples,
                                                      int featureNumber,
                                                      int suggestedMaxSplitCandidates) {
+    if (examples.getExamples().isEmpty()) {
+      return Collections.emptyList();
+    }
     switch (examples.getFeatureType(featureNumber)) {
       case NUMERIC:
         return NumericDecision.numericDecisionsFromExamples(featureNumber, examples, suggestedMaxSplitCandidates);

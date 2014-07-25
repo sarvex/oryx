@@ -168,11 +168,14 @@ public final class CategoricalDecision extends Decision {
     for (int i = 0; i < averageTargetForCategory.length; i++) {
       Mean average = averageTargetForCategory[i];
       if (average != null && average.getN() > maxCount) {
-        maxCount = (int) averageTargetForCategory[i].getN();
+        maxCount = (int) average.getN();
         maxCategory = i;
       }
     }
-    Preconditions.checkArgument(maxCategory >= 0);
+    if (maxCategory < 0) {
+      // This means none of the examples had any value for the predictor!
+      return Collections.emptyList();
+    }
     
     List<Pair<Double,Integer>> byScore = Lists.newArrayListWithCapacity(averageTargetForCategory.length);
     for (int featureCategory = 0; featureCategory < averageTargetForCategory.length; featureCategory++) {

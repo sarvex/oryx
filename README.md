@@ -1,3 +1,5 @@
+_See also the experimental [Oryx 2 incubating](https://github.com/OryxProject/oryx) project!_
+
 # Summary
 
 <img align="right" src="https://raw.github.com/wiki/cloudera/oryx/OryxLogoSmall.png"/>

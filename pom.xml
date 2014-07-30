@@ -374,7 +374,7 @@
     <java.version>1.6</java.version>
     <javadoc.version>1.7</javadoc.version>
     <slf4j.version>1.7.7</slf4j.version>
-    <tomcat.version>7.0.54</tomcat.version>
+    <tomcat.version>7.0.55</tomcat.version>
     <!-- Don't update to 1.7.5+ until Hadoop uses Jackson 1.9+ -->
     <avro.version>1.7.4</avro.version>
     <hadoop.version>2.3.0</hadoop.version>

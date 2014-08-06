@@ -339,7 +339,7 @@
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
-        <version>4.11</version>
+        <version>4.12-beta-1</version>
         <scope>test</scope>
       </dependency>
 
@@ -555,7 +555,7 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>2.7</version>
           <configuration>
-            <!-- Try to reduce impact of ERROR: Unabel to determine if... plugin bug -->
+            <!-- Try to reduce impact of ERROR: Unable to determine if... plugin bug -->
             <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
             <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
             <remoteRepositories>
@@ -885,6 +885,13 @@
 
   <repositories>
     <repository>
+      <id>central</id>
+      <url>https://repo1.maven.org/maven2</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
+    <repository>
       <id>oryx.repo</id>
       <url>https://repository.cloudera.com/artifactory/cloudera-repos</url>
       <name>Cloudera Repositories</name>
@@ -907,6 +914,16 @@
       </releases>
     </repository>
   </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>central</id>
+      <url>https://repo1.maven.org/maven2</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </pluginRepository>
+  </pluginRepositories>
+
 
   <distributionManagement>
     <repository>

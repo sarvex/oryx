@@ -151,6 +151,7 @@ public final class BuildTreeFn extends OryxReduceDoFn<Integer, Iterable<String>,
       log.info("Built tree {}", treeID);
       ExampleSet cvSet = new ExampleSet(cvExamples);
       double[] weightEval = Evaluation.evaluateToWeight(tree, cvSet);
+      progress();
       double weight = weightEval[0];
       double eval = weightEval[1];
       double[] featureImportances = tree.featureImportance(cvSet);
@@ -172,6 +173,7 @@ public final class BuildTreeFn extends OryxReduceDoFn<Integer, Iterable<String>,
 
       log.info("Emitting tree {}", treeID);
       emitter.emit(pmmlFileContents);
+      progress();
     }
 
   }

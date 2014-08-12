@@ -119,7 +119,7 @@ public final class BuildTreeFn extends OryxReduceDoFn<Integer, Iterable<String>,
           features[col] = buildFeature(col, tokens[col], inboundSettings, columnToCategoryNameToIDMapping);
         }
       }
-      Preconditions.checkNotNull(target);
+      Preconditions.checkNotNull(target, "No target value in line %s", line);
       allExamples.add(new Example(target, features));
     }
 

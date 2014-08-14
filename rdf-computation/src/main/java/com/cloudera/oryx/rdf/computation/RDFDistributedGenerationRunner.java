@@ -18,11 +18,14 @@ package com.cloudera.oryx.rdf.computation;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import org.apache.commons.math3.stat.descriptive.moment.Mean;
+import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.MiningField;
 import org.dmg.pmml.MiningModel;
 import org.dmg.pmml.Model;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.Segment;
+import org.dmg.pmml.TypeDefinitionField;
+import org.dmg.pmml.Value;
 import org.jpmml.model.ImportFilter;
 import org.jpmml.model.JAXBUtil;
 import org.slf4j.Logger;
@@ -37,9 +40,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.StringReader;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.cloudera.oryx.common.io.IOUtils;
 import com.cloudera.oryx.common.iterator.FileLineIterable;
@@ -117,6 +123,7 @@ public final class RDFDistributedGenerationRunner extends DistributedGenerationR
           MiningModel existingModel = (MiningModel) joinedForest.getModels().get(0);
           MiningModel nextModel = (MiningModel) treePMML.getModels().get(0);
           updateMeanImportances(columnNameToMeanImportance, nextModel);
+          updateDataDictionary(joinedForest.getDataDictionary(), treePMML.getDataDictionary());
           existingModel.getSegmentation().getSegments().addAll(nextModel.getSegmentation().getSegments());
         }
       }
@@ -171,6 +178,28 @@ public final class RDFDistributedGenerationRunner extends DistributedGenerationR
           columnNameToMeanImportance.put(fieldName, mean);
         }
         mean.increment(importance);
+      }
+    }
+  }
+
+  private static void updateDataDictionary(DataDictionary existingDict, DataDictionary newDict) {
+    for (TypeDefinitionField newField : newDict.getDataFields()) {
+      Collection<Value> newValues = newField.getValues();
+      if (newValues != null && !newValues.isEmpty()) {
+        for (TypeDefinitionField existingField : existingDict.getDataFields()) {
+          if (existingField.getName().equals(newField.getName())) {
+            Set<String> existingStrings = new HashSet<String>(existingField.getValues().size());
+            for (Value existingValue : existingField.getValues()) {
+              existingStrings.add(existingValue.getValue());
+            }
+            for (Value newValue : newValues) {
+              if (!existingStrings.contains(newValue.getValue())) {
+                existingField.getValues().add(newValue);
+              }
+            }
+            break;
+          }
+        }
       }
     }
   }

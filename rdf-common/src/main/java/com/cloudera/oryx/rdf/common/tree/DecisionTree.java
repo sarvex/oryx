@@ -94,6 +94,7 @@ public final class DecisionTree implements TreeBasedClassifier {
   }
 
   public DecisionTree(TreeNode root) {
+    Preconditions.checkNotNull(root);
     this.root = root;
   }
 
@@ -102,6 +103,25 @@ public final class DecisionTree implements TreeBasedClassifier {
    */
   public TreeNode getRoot() {
     return root;
+  }
+
+  /**
+   * @return count of nodes in the tree
+   */
+  public int countNodes() {
+    LinkedList<TreeNode> nodes = new LinkedList<TreeNode>();
+    nodes.add(root);
+    int count = 0;
+    while (!nodes.isEmpty()) {
+      count++;
+      TreeNode node = nodes.removeFirst();
+      if (!node.isTerminal()) {
+        DecisionNode decision = (DecisionNode) node;
+        nodes.add(decision.getLeft());
+        nodes.add(decision.getRight());
+      }
+    }
+    return count;
   }
 
   private static TreeNode build(ExampleSet examples,

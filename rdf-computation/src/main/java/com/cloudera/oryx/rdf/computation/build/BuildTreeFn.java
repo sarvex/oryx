@@ -148,7 +148,7 @@ public final class BuildTreeFn extends OryxReduceDoFn<Integer, Iterable<String>,
       progress(); // Helps prevent timeouts
       DecisionTree tree = DecisionTree.fromExamplesWithDefault(trainingExamples);
       progress(); // Helps prevent timeouts
-      log.info("Built tree {}", treeID);
+      log.info("Built tree {} with {} nodes", treeID, tree.countNodes());
       ExampleSet cvSet = new ExampleSet(cvExamples);
       double[] weightEval = Evaluation.evaluateToWeight(tree, cvSet);
       progress();

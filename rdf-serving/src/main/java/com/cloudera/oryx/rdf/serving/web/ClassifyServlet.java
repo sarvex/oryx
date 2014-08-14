@@ -40,6 +40,9 @@ import com.cloudera.oryx.rdf.serving.generation.Generation;
  * delimited, like "1,foo,3.0". The response body contains the result of classification on one line.
  * The result depends on the classifier --  could be a number or a category name.</p>
  *
+ * <p>If request parameter {@code report} is present and set to {@code probability}, the
+ * output will be the probability of the most-probable class instead of its name.</p>
+ *
  * @author Sean Owen
  */
 public final class ClassifyServlet extends AbstractRDFServlet {
@@ -53,6 +56,7 @@ public final class ClassifyServlet extends AbstractRDFServlet {
       return;
     }
     String line = pathInfo.subSequence(1, pathInfo.length()).toString();
+    boolean probabilityOnly = "probability".equals(request.getParameter("report"));
 
     Generation generation = getGenerationManager().getCurrentGeneration();
     if (generation == null) {
@@ -95,10 +99,15 @@ public final class ClassifyServlet extends AbstractRDFServlet {
     Prediction prediction = forest.classify(example);
 
     if (prediction.getFeatureType() == FeatureType.CATEGORICAL) {
-      Map<Integer,String> targetIDToCategory =
-          columnToCategoryNameToIDMapping.get(inboundSettings.getTargetColumn()).inverse();
-      int categoryID = ((CategoricalPrediction) prediction).getMostProbableCategoryID();
-      out.write(targetIDToCategory.get(categoryID));
+      CategoricalPrediction categoricalPrediction = (CategoricalPrediction) prediction;
+      int categoryID = categoricalPrediction.getMostProbableCategoryID();
+      if (probabilityOnly) {
+        out.write(Float.toString(categoricalPrediction.getCategoryProbabilities()[categoryID]));
+      } else {
+        Map<Integer, String> targetIDToCategory =
+            columnToCategoryNameToIDMapping.get(inboundSettings.getTargetColumn()).inverse();
+        out.write(targetIDToCategory.get(categoryID));
+      }
     } else {
       out.write(Float.toString(((NumericPrediction) prediction).getPrediction()));
     }

@@ -19,11 +19,17 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import org.apache.commons.math3.stat.descriptive.moment.Mean;
 import org.dmg.pmml.DataDictionary;
+import org.dmg.pmml.Field;
 import org.dmg.pmml.MiningField;
+import org.dmg.pmml.MiningFunctionType;
 import org.dmg.pmml.MiningModel;
+import org.dmg.pmml.MiningSchema;
 import org.dmg.pmml.Model;
+import org.dmg.pmml.MultipleModelMethodType;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.Segment;
+import org.dmg.pmml.Segmentation;
+import org.dmg.pmml.True;
 import org.dmg.pmml.TypeDefinitionField;
 import org.dmg.pmml.Value;
 import org.jpmml.model.ImportFilter;
@@ -96,7 +102,7 @@ public final class RDFDistributedGenerationRunner extends DistributedGenerationR
         Namespaces.getInstanceGenerationPrefix(getInstanceDir(), getGenerationID());
     String outputPathKey = instanceGenerationPrefix + "trees/";
     Store store = Store.get();
-    PMML joinedForest = null;
+    PMML joinedPMML = null;
 
     // TODO This is still loading all trees into memory, which can be quite large.
     // To do better we would have to manage XML output more directly.
@@ -106,9 +112,9 @@ public final class RDFDistributedGenerationRunner extends DistributedGenerationR
     for (String treePrefix : store.list(outputPathKey, true)) {
       log.info("Reading trees from file {}", treePrefix);
       for (String treePMMLAsLine : new FileLineIterable(store.readFrom(treePrefix))) {
-        PMML treePMML;
+        PMML nextPMML;
         try {
-          treePMML = JAXBUtil.unmarshalPMML(
+          nextPMML = JAXBUtil.unmarshalPMML(
               ImportFilter.apply(new InputSource(new StringReader(treePMMLAsLine))));
         } catch (JAXBException e) {
           throw new IOException(e);
@@ -116,37 +122,93 @@ public final class RDFDistributedGenerationRunner extends DistributedGenerationR
           throw new IOException(e);
         }
 
-        if (joinedForest == null) {
-          joinedForest = treePMML;
-          updateMeanImportances(columnNameToMeanImportance, treePMML.getModels().get(0));
+        updateMeanImportances(columnNameToMeanImportance,
+                              nextPMML.getModels().get(0).getMiningSchema().getMiningFields());
+
+        if (joinedPMML == null) {
+
+          // No prior model. Just use this one as the current model.
+          joinedPMML = nextPMML;
+
         } else {
-          MiningModel existingModel = (MiningModel) joinedForest.getModels().get(0);
-          MiningModel nextModel = (MiningModel) treePMML.getModels().get(0);
-          updateMeanImportances(columnNameToMeanImportance, nextModel);
-          updateDataDictionary(joinedForest.getDataDictionary(), treePMML.getDataDictionary());
-          existingModel.getSegmentation().getSegments().addAll(nextModel.getSegmentation().getSegments());
+
+          Model currentModel = joinedPMML.getModels().get(0);
+          Segmentation segmentation;
+          if (currentModel instanceof MiningModel) {
+            // Already have a MiningModel, to which new models can be added in its Segmentation
+            segmentation = ((MiningModel) currentModel).getSegmentation();
+          } else {
+            // Lone tree model. Build a MiningModel around it, first, and swap it in
+            boolean classificationTask = currentModel.getFunctionName() == MiningFunctionType.CLASSIFICATION;
+            MiningModel miningModel = new MiningModel();
+            MultipleModelMethodType multipleModelMethodType = classificationTask ?
+                MultipleModelMethodType.WEIGHTED_MAJORITY_VOTE :
+                MultipleModelMethodType.WEIGHTED_AVERAGE;
+            segmentation = new Segmentation(multipleModelMethodType);
+            miningModel.setSegmentation(segmentation);
+            miningModel.setFunctionName(currentModel.getFunctionName());
+            MiningSchema cloneSchema = new MiningSchema();
+            for (MiningField field : currentModel.getMiningSchema().getMiningFields()) {
+              cloneSchema.getMiningFields().add(
+                  new MiningField(field.getName())
+                      .withOptype(field.getOptype()
+                      ).withImportance(field.getImportance()));
+            }
+            miningModel.setMiningSchema(cloneSchema);
+
+            Segment segment = new Segment();
+            // This will get overriden below when renumbering happens
+            segment.setId("0");
+            segment.setPredicate(new True());
+            segment.setModel(currentModel);
+            // Don't actually know the weight, so use 1
+            segment.setWeight(1.0);
+            segmentation.getSegments().add(segment);
+            // Swap in new model
+            joinedPMML.getModels().clear();
+            joinedPMML.getModels().add(miningModel);
+          }
+
+          Model nextModel = nextPMML.getModels().get(0);
+          if (nextModel instanceof MiningModel) {
+            segmentation.getSegments().addAll(((MiningModel) nextModel).getSegmentation().getSegments());
+          } else {
+            Segment segment = new Segment();
+            // This will get overriden below when renumbering happens
+            segment.setId("0");
+            segment.setPredicate(new True());
+            segment.setModel(nextModel);
+            // Don't actually know the weight, so use 1
+            segment.setWeight(1.0);
+            segmentation.getSegments().add(segment);
+          }
+
+          updateDataDictionary(joinedPMML.getDataDictionary(), nextPMML.getDataDictionary());
         }
       }
     }
 
-    Preconditions.checkNotNull(joinedForest, "No forests to join?");
+    Preconditions.checkNotNull(joinedPMML, "No forests to join?");
 
-    MiningModel model = (MiningModel) joinedForest.getModels().get(0);
+    Model model = joinedPMML.getModels().get(0);
 
-    // Renumber segments with distinct IDs
-    List<Segment> segments = model.getSegmentation().getSegments();
-    for (int treeID = 0; treeID < segments.size(); treeID++) {
-      segments.get(treeID).setId(Integer.toString(treeID));
-    }
+    if (model instanceof MiningModel) {
 
-    // Stitch together feature importances
-    for (MiningField field : model.getMiningSchema().getMiningFields()) {
-      String name = field.getName().getValue();
-      Mean importance = columnNameToMeanImportance.get(name);
-      if (importance == null) {
-        field.setImportance(null);
-      } else {
-        field.setImportance(importance.getResult());
+      // Renumber segments with distinct IDs
+      List<Segment> segments = ((MiningModel) model).getSegmentation().getSegments();
+      for (int treeID = 0; treeID < segments.size(); treeID++) {
+        segments.get(treeID).setId(Integer.toString(treeID));
+      }
+
+      // Stitch together feature importances; only needed in an ensemble
+      for (MiningField field : model.getMiningSchema().getMiningFields()) {
+        String name = field.getName().getValue();
+        Mean importance = columnNameToMeanImportance.get(name);
+        if (importance == null) {
+          field.setImportance(null);
+        } else {
+          field.setImportance(importance.getResult());
+        }
       }
     }
 
@@ -155,7 +217,7 @@ public final class RDFDistributedGenerationRunner extends DistributedGenerationR
     tempJoinedForestFile.deleteOnExit();
     OutputStream out = IOUtils.buildGZIPOutputStream(new FileOutputStream(tempJoinedForestFile));
     try {
-      JAXBUtil.marshalPMML(joinedForest, new StreamResult(out));
+      JAXBUtil.marshalPMML(joinedPMML, new StreamResult(out));
     } catch (JAXBException e) {
       throw new IOException(e);
     } finally {
@@ -167,8 +229,9 @@ public final class RDFDistributedGenerationRunner extends DistributedGenerationR
     IOUtils.delete(tempJoinedForestFile);
   }
 
-  private static void updateMeanImportances(Map<String,Mean> columnNameToMeanImportance, Model model) {
-    for (MiningField field : model.getMiningSchema().getMiningFields()) {
+  private static void updateMeanImportances(Map<String,Mean> columnNameToMeanImportance,
+                                            List<MiningField> miningFields) {
+    for (MiningField field : miningFields) {
       Double importance = field.getImportance();
       if (importance != null) {
         String fieldName = field.getName().getValue();

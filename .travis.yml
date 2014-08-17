@@ -1,0 +1,10 @@
+language: java
+jdk:
+  - oraclejdk6
+  - oraclejdk7
+  - oraclejdk8
+cache:
+  directories:
+    - $HOME/.m2
+git:
+  depth: 1

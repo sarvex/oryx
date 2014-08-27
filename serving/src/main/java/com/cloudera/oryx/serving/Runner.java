@@ -60,7 +60,6 @@ import org.apache.catalina.connector.Connector;
 import org.apache.catalina.core.JasperListener;
 import org.apache.catalina.core.JreMemoryLeakPreventionListener;
 import org.apache.catalina.core.ThreadLocalLeakPreventionListener;
-import org.apache.catalina.deploy.ApplicationListener;
 import org.apache.catalina.deploy.ErrorPage;
 import org.apache.catalina.deploy.LoginConfig;
 import org.apache.catalina.deploy.SecurityCollection;
@@ -170,7 +169,7 @@ public final class Runner implements Callable<Object>, Closeable {
     Context context = makeContext(tomcat, noSuchBaseDir);
 
     AbstractOryxServingInitListener apiListener = chooseAPIListener();
-    context.addApplicationListener(new ApplicationListener(apiListener.getClass().getName(), false));
+    context.addApplicationListener(apiListener.getClass().getName());
 
     AbstractOryxServingInitListener.addServlet(context, new style_jspx(), "/style.jspx");
     AbstractOryxServingInitListener.addServlet(context, new index_jspx(), "/index.jspx");

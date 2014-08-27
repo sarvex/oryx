@@ -44,7 +44,6 @@ import org.apache.catalina.connector.Connector;
 import org.apache.catalina.core.JasperListener;
 import org.apache.catalina.core.JreMemoryLeakPreventionListener;
 import org.apache.catalina.core.ThreadLocalLeakPreventionListener;
-import org.apache.catalina.deploy.ApplicationListener;
 import org.apache.catalina.deploy.ErrorPage;
 import org.apache.catalina.deploy.LoginConfig;
 import org.apache.catalina.deploy.SecurityCollection;
@@ -123,7 +122,7 @@ public final class Runner implements Callable<Object>, Closeable {
     configureHost(tomcat.getHost());
     Context context = makeContext(tomcat, noSuchBaseDir);
 
-    context.addApplicationListener(new ApplicationListener(ComputationInitListener.class.getName(), false));
+    context.addApplicationListener(ComputationInitListener.class.getName());
 
     addServlet(context, new PeriodicRunnerServlet(), "/periodicRunner/*");
     addServlet(context, new style_jspx(), "/style.jspx");

@@ -35,6 +35,10 @@ public final class ClassUtils {
   /**
    * Like {@link #loadInstanceOf(String, Class)} where the reference returned is of the same type as
    * the class being loaded -- not any supertype.
+   *
+   * @param <T> class of instance returned
+   * @param clazz {@link Class} of instance returned
+   * @return instance of {@code clazz}
    */
   public static <T> T loadInstanceOf(Class<T> clazz) {
     return loadInstanceOf(clazz.getName(), clazz);
@@ -43,6 +47,12 @@ public final class ClassUtils {
   /**
    * Like {@link #loadInstanceOf(String, Class, Class[], Object[])} where the reference returned is
    * of the same type as the class being loaded -- not any supertype.
+   *
+   * @param <T> class of instance returned
+   * @param clazz {@link Class} of instance returned
+   * @param constructorTypes argument types of constructor to use
+   * @param constructorArgs actual constructor arguments
+   * @return instance of {@code clazz}
    */
   public static <T> T loadInstanceOf(Class<T> clazz, Class<?>[] constructorTypes, Object[] constructorArgs) {
     return loadInstanceOf(clazz.getName(), clazz, constructorTypes, constructorArgs);
@@ -50,6 +60,11 @@ public final class ClassUtils {
 
   /**
    * Like {@link #loadInstanceOf(String, Class, Class[], Object[])} for no-arg constructors.
+   *
+   * @param <T> (super)class of instance returned
+   * @param implClassName implementation class name
+   * @param superClass superclass or interface that the implementation extends
+   * @return instance of {@code implClassName}
    */
   public static <T> T loadInstanceOf(String implClassName, Class<T> superClass) {
     return loadInstanceOf(implClassName, superClass, NO_TYPES, NO_ARGS);
@@ -59,6 +74,7 @@ public final class ClassUtils {
    * Loads and instantiates a named implementation class, a subclass of a given supertype,
    * whose constructor takes the given arguments.
    *
+   * @param <T> (super)class of instance returned
    * @param implClassName implementation class name
    * @param superClass superclass or interface that the implementation extends
    * @param constructorTypes argument types of constructor to use

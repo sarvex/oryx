@@ -15,6 +15,7 @@
 
 package com.cloudera.oryx.als.computation.local;
 
+import com.google.common.base.Preconditions;
 import com.typesafe.config.Config;
 import org.apache.commons.math3.util.FastMath;
 import org.slf4j.Logger;
@@ -47,6 +48,8 @@ final class ReadInputs implements Callable<Object> {
   private final LongObjectMap<LongFloatMap> RbyRow;
   private final LongObjectMap<LongFloatMap> RbyColumn;
   private final StringLongMapping idMapping;
+  private final float zeroThreshold;
+  private final float decayFactor;
 
   ReadInputs(File inputDir,
              boolean isInbound,
@@ -60,6 +63,11 @@ final class ReadInputs implements Callable<Object> {
     RbyRow = rbyRow;
     RbyColumn = rbyColumn;
     this.idMapping = idMapping;
+    Config config = ConfigUtils.getDefaultConfig();
+    zeroThreshold = (float) config.getDouble("model.decay.zeroThreshold");
+    decayFactor = (float) config.getDouble("model.decay.factor");
+    Preconditions.checkArgument(zeroThreshold >= 0.0f);
+    Preconditions.checkArgument(decayFactor > 0.0f && decayFactor <= 1.0f);
   }
 
   @Override
@@ -67,12 +75,11 @@ final class ReadInputs implements Callable<Object> {
 
     readInput();
 
-    log.info("Pruning near-zero entries");
-    Config config = ConfigUtils.getDefaultConfig();
-    float zeroThreshold = (float) config.getDouble("model.decay.zeroThreshold");
-
-    removeSmall(RbyRow, zeroThreshold);
-    removeSmall(RbyColumn, zeroThreshold);
+    if (zeroThreshold > 0.0f) {
+      log.info("Pruning near-zero entries");
+      removeSmall(RbyRow);
+      removeSmall(RbyColumn);
+    }
 
     return null;
   }
@@ -101,6 +108,10 @@ final class ReadInputs implements Callable<Object> {
           value = valueToken.isEmpty() ? Float.NaN : LangUtils.parseFloat(valueToken);
         } else {
           value = 1.0f;
+        }
+
+        if (!isInbound) {
+          value *= decayFactor;
         }
 
         if (Float.isNaN(value)) {
@@ -134,7 +145,7 @@ final class ReadInputs implements Callable<Object> {
 
   }
 
-  private static void removeSmall(LongObjectMap<LongFloatMap> matrix, float zeroThreshold) {
+  private void removeSmall(LongObjectMap<LongFloatMap> matrix) {
     for (LongObjectMap.MapEntry<LongFloatMap> entry : matrix.entrySet()) {
       for (Iterator<LongFloatMap.MapEntry> it = entry.getValue().entrySet().iterator(); it.hasNext();) {
         LongFloatMap.MapEntry entry2 = it.next();

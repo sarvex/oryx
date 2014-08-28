@@ -43,10 +43,13 @@ public final class RDFGenerationManager extends GenerationManager {
 
   private int modelGeneration;
   private Generation currentModel;
+  private final boolean disableWriteUpdates;
 
   public RDFGenerationManager(File appendTempDir) throws IOException {
     super(appendTempDir);
     modelGeneration = NO_GENERATION;
+    Config config = ConfigUtils.getDefaultConfig();
+    disableWriteUpdates = config.getBoolean("serving-layer.disable-write-updates");
   }
 
   public Generation getCurrentGeneration() {
@@ -54,11 +57,13 @@ public final class RDFGenerationManager extends GenerationManager {
   }
 
   public synchronized void append(CharSequence example) throws IOException {
-    Writer appender = getAppender();
-    if (appender != null) {
-      appender.append(example + "\n");
+    if (!disableWriteUpdates) {
+      Writer appender = getAppender();
+      if (appender != null) {
+        appender.append(example + "\n");
+      }
+      decrementCountdownToUpload();
     }
-    decrementCountdownToUpload();
   }
 
   @Override

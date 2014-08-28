@@ -26,7 +26,6 @@ import org.dmg.pmml.FieldName;
 import org.dmg.pmml.MiningField;
 import org.dmg.pmml.MiningFunctionType;
 import org.dmg.pmml.MiningModel;
-import org.dmg.pmml.MiningSchema;
 import org.dmg.pmml.MissingValueStrategyType;
 import org.dmg.pmml.Model;
 import org.dmg.pmml.MultipleModelMethodType;
@@ -120,32 +119,41 @@ public final class DecisionForestPMML {
     int targetColumn = inboundSettings.getTargetColumn();
     boolean classificationTask = inboundSettings.isCategorical(targetColumn);
 
-    MiningFunctionType miningFunctionType =
-        classificationTask ? MiningFunctionType.CLASSIFICATION : MiningFunctionType.REGRESSION;
-    MiningSchema miningSchema = PMMLUtils.buildMiningSchema(inboundSettings, forest.getFeatureImportances());
-    MiningModel miningModel = new MiningModel(miningSchema, miningFunctionType);
-    MultipleModelMethodType multipleModelMethodType = classificationTask ?
-        MultipleModelMethodType.WEIGHTED_MAJORITY_VOTE :
-        MultipleModelMethodType.WEIGHTED_AVERAGE;
-    Segmentation segmentation = new Segmentation(multipleModelMethodType);
-    miningModel.setSegmentation(segmentation);
+    Model model;
+    if (forest.getTrees().length == 1) {
+      model = buildTreeModel(columnToCategoryNameToIDMapping,
+                             forest.getTrees()[0],
+                             inboundSettings);
+    } else {
+      MiningModel miningModel = new MiningModel();
+      model = miningModel;
+      MultipleModelMethodType multipleModelMethodType = classificationTask ?
+          MultipleModelMethodType.WEIGHTED_MAJORITY_VOTE :
+          MultipleModelMethodType.WEIGHTED_AVERAGE;
+      Segmentation segmentation = new Segmentation(multipleModelMethodType);
+      miningModel.setSegmentation(segmentation);
 
-    int treeID = 0;
-    for (DecisionTree tree : forest) {
-      Segment segment = buildTreeModel(forest,
-                                       columnToCategoryNameToIDMapping,
-                                       miningFunctionType,
-                                       miningSchema,
-                                       treeID,
-                                       tree,
-                                       inboundSettings);
-      segmentation.getSegments().add(segment);
-      treeID++;
+      int treeID = 0;
+      for (DecisionTree tree : forest) {
+        TreeModel treeModel = buildTreeModel(columnToCategoryNameToIDMapping,
+                                             tree,
+                                             inboundSettings);
+        Segment segment = new Segment();
+        segment.setId(Integer.toString(treeID));
+        segment.setPredicate(new True());
+        segment.setModel(treeModel);
+        segment.setWeight(forest.getWeights()[treeID]);
+        segmentation.getSegments().add(segment);
+        treeID++;
+      }
     }
+
+    model.setFunctionName(classificationTask ? MiningFunctionType.CLASSIFICATION : MiningFunctionType.REGRESSION);
+    model.setMiningSchema(PMMLUtils.buildMiningSchema(inboundSettings, forest.getFeatureImportances()));
 
     DataDictionary dictionary = PMMLUtils.buildDataDictionary(inboundSettings, columnToCategoryNameToIDMapping);
     PMML pmml = new PMML(null, dictionary, "4.2");
-    pmml.getModels().add(miningModel);
+    pmml.getModels().add(model);
 
     try {
       JAXBUtil.marshalPMML(pmml, new StreamResult(pmmlOut));
@@ -154,13 +162,9 @@ public final class DecisionForestPMML {
     }
   }
 
-  private static Segment buildTreeModel(DecisionForest forest,
-                                        Map<Integer,BiMap<String,Integer>> columnToCategoryNameToIDMapping,
-                                        MiningFunctionType miningFunctionType,
-                                        MiningSchema miningSchema,
-                                        int treeID,
-                                        DecisionTree tree,
-                                        InboundSettings settings) {
+  private static TreeModel buildTreeModel(Map<Integer,BiMap<String,Integer>> columnToCategoryNameToIDMapping,
+                                          DecisionTree tree,
+                                          InboundSettings settings) {
 
     List<String> columnNames = settings.getColumnNames();
     int targetColumn = settings.getTargetColumn();
@@ -240,17 +244,11 @@ public final class DecisionForestPMML {
 
     }
 
-    TreeModel treeModel = new TreeModel(miningSchema, root, miningFunctionType);
+    TreeModel treeModel = new TreeModel();
+    treeModel.setNode(root);
     treeModel.setSplitCharacteristic(TreeModel.SplitCharacteristic.BINARY_SPLIT);
     treeModel.setMissingValueStrategy(MissingValueStrategyType.DEFAULT_CHILD);
-
-    Segment segment = new Segment();
-    segment.setId(Integer.toString(treeID));
-    segment.setPredicate(new True());
-    segment.setModel(treeModel);
-    segment.setWeight(forest.getWeights()[treeID]);
-
-    return segment;
+    return treeModel;
   }
 
   private static Predicate buildPredicate(Decision decision,
@@ -307,36 +305,39 @@ public final class DecisionForestPMML {
       in.close();
     }
 
-    List<Model> models = pmml.getModels();
-    Preconditions.checkNotNull(models);
-    Preconditions.checkArgument(!models.isEmpty());
-    Preconditions.checkArgument(models.get(0) instanceof MiningModel);
-    MiningModel miningModel = (MiningModel) models.get(0);
-
-    Segmentation segmentation = miningModel.getSegmentation();
-    Preconditions.checkNotNull(segmentation);
-
-    List<Segment> segments = segmentation.getSegments();
-    Preconditions.checkNotNull(segments);
-    Preconditions.checkArgument(!segments.isEmpty());
-
-    Map<Integer,BiMap<String,Integer>> columnToCategoryNameToIDMapping = PMMLUtils.buildColumnCategoryMapping(
-        pmml.getDataDictionary());
     InboundSettings settings = InboundSettings.create(ConfigUtils.getDefaultConfig());
-    DecisionTree[] trees = new DecisionTree[segments.size()];
-    double[] weights = new double[trees.length];
-    for (int i = 0; i < trees.length; i++) {
-      Segment segment = segments.get(i);
-      weights[i] = segment.getWeight();
-      TreeModel treeModel = (TreeModel) segment.getModel();
-      TreeNode root = translateFromPMML(treeModel.getNode(), columnToCategoryNameToIDMapping, settings);
-      trees[i] = new DecisionTree(root);
+    Map<Integer,BiMap<String,Integer>> columnToCategoryNameToIDMapping =
+        PMMLUtils.buildColumnCategoryMapping(pmml.getDataDictionary());
+
+    DecisionTree[] trees;
+    double[] weights;
+
+    List<Model> models = pmml.getModels();
+    Model model = models.get(0);
+    if (model instanceof MiningModel) {
+      MiningModel miningModel = (MiningModel) model;
+      List<Segment> segments = miningModel.getSegmentation().getSegments();
+      Preconditions.checkArgument(!segments.isEmpty());
+
+      trees = new DecisionTree[segments.size()];
+      weights = new double[trees.length];
+      for (int i = 0; i < trees.length; i++) {
+        Segment segment = segments.get(i);
+        weights[i] = segment.getWeight();
+        TreeModel treeModel = (TreeModel) segment.getModel();
+        TreeNode root = translateFromPMML(treeModel.getNode(), columnToCategoryNameToIDMapping, settings);
+        trees[i] = new DecisionTree(root);
+      }
+    } else {
+      // Single tree model
+      TreeNode root = translateFromPMML(((TreeModel) model).getNode(), columnToCategoryNameToIDMapping, settings);
+      trees = new DecisionTree[] { new DecisionTree(root) };
+      weights = new double[] { 1.0 };
     }
 
     List<String> columnNames = settings.getColumnNames();
-    List<MiningField> fields = miningModel.getMiningSchema().getMiningFields();
     double[] featureImportances = new double[columnNames.size()];
-    for (MiningField field : fields) {
+    for (MiningField field : model.getMiningSchema().getMiningFields()) {
       Double importance = field.getImportance();
       if (importance != null) {
         int featureNumber = columnNames.indexOf(field.getName().getValue());

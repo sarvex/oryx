@@ -81,6 +81,10 @@ public final class ReloadingReference<V> implements Supplier<V> {
   /**
    * Like {@link #get()}, but when a value already exists, will only wait for the given amount of time before
    * just proceeding to return the existing value instead of waiting for a new value to load.
+   *
+   * @param timeout time to wait before returning the existing value
+   * @param timeUnit units of time for duration
+   * @return object that is returned by the provided {@link Callable}. See {@link #get()}
    */
   public V get(long timeout, TimeUnit timeUnit) {
     try {

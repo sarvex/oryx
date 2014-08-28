@@ -118,8 +118,12 @@ public final class IrisIT extends AbstractComputationIT {
     TerminalNode root1Neg = (TerminalNode) root1.getLeft();
     assertEquals(34, root1Neg.getCount());
     CategoricalPrediction root1NegPrediction = (CategoricalPrediction) root1Neg.getPrediction();
-    assertArrayEquals(new int[] {0,34,0}, root1NegPrediction.getCategoryCounts());
-    assertArrayEquals(new float[] {0.0f, 1.0f, 0.0f}, root1NegPrediction.getCategoryProbabilities());
+    int[] expectedCounts = new int[3];
+    expectedCounts[targetCategoryValueMapping.get("Iris-setosa")] = 34;
+    assertArrayEquals(expectedCounts, root1NegPrediction.getCategoryCounts());
+    float[] expectedProbs = new float[3];
+    expectedProbs[targetCategoryValueMapping.get("Iris-setosa")] = 1.0f;
+    assertArrayEquals(expectedProbs, root1NegPrediction.getCategoryProbabilities());
 
     Feature[] features = {
         //5.9,3.0,5.1,1.8,Iris-virginica
@@ -134,7 +138,7 @@ public final class IrisIT extends AbstractComputationIT {
     assertEquals(expectedCategory, prediction.getMostProbableCategoryID());
     float[] expectedProbabilities = new float[3];
     expectedProbabilities[expectedCategory] = 1.0f;
-     assertArrayEquals(expectedProbabilities, prediction.getCategoryProbabilities());
+    assertArrayEquals(expectedProbabilities, prediction.getCategoryProbabilities());
   }
 
 }

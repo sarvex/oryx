@@ -119,7 +119,7 @@ public final class BuildTreeFn extends OryxReduceDoFn<Integer, Iterable<String>,
           features[col] = buildFeature(col, tokens[col], inboundSettings, columnToCategoryNameToIDMapping);
         }
       }
-      Preconditions.checkNotNull(target);
+      Preconditions.checkNotNull(target, "No target value in line %s", line);
       allExamples.add(new Example(target, features));
     }
 
@@ -148,9 +148,10 @@ public final class BuildTreeFn extends OryxReduceDoFn<Integer, Iterable<String>,
       progress(); // Helps prevent timeouts
       DecisionTree tree = DecisionTree.fromExamplesWithDefault(trainingExamples);
       progress(); // Helps prevent timeouts
-      log.info("Built tree {}", treeID);
+      log.info("Built tree {} with {} nodes", treeID, tree.countNodes());
       ExampleSet cvSet = new ExampleSet(cvExamples);
       double[] weightEval = Evaluation.evaluateToWeight(tree, cvSet);
+      progress();
       double weight = weightEval[0];
       double eval = weightEval[1];
       double[] featureImportances = tree.featureImportance(cvSet);
@@ -172,6 +173,7 @@ public final class BuildTreeFn extends OryxReduceDoFn<Integer, Iterable<String>,
 
       log.info("Emitting tree {}", treeID);
       emitter.emit(pmmlFileContents);
+      progress();
     }
 
   }

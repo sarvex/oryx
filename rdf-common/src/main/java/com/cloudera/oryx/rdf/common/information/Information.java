@@ -15,6 +15,8 @@
 
 package com.cloudera.oryx.rdf.common.information;
 
+import java.util.Collection;
+
 import org.apache.commons.math3.util.Pair;
 
 import com.cloudera.oryx.rdf.common.example.ExampleSet;
@@ -38,7 +40,10 @@ public final class Information {
    * @return the best {@link Decision} from {@code decisions} -- the one that maximizes information gain --
    *  along with the information gain it achieves, in nats
    */
-  public static Pair<Decision,Double> bestGain(Iterable<Decision> decisions, ExampleSet examples) {
+  public static Pair<Decision,Double> bestGain(Collection<Decision> decisions, ExampleSet examples) {
+    if (decisions.isEmpty()) {
+      return null;
+    }
     switch (examples.getTargetType()) {
       case NUMERIC:
         return NumericalInformation.bestGain(decisions, examples);

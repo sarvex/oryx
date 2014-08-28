@@ -46,6 +46,8 @@ public final class LangUtils {
   }
 
   /**
+   * @param s {@link String} to parse
+   * @return floating-point value in the {@link String}
    * @see #parseFloat(String)
    */
   public static double parseDouble(String s) {
@@ -56,6 +58,8 @@ public final class LangUtils {
 
   /**
    * Like {@link Doubles#hashCode(double)} but avoids creating a whole new object!
+   *
+   * @param d double to hash
    * @return the same value produced by {@link Double#hashCode()}
    */
   public static int hashDouble(double d) {

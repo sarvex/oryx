@@ -1,3 +1,5 @@
+_See also the experimental [Oryx 2 incubating](https://github.com/OryxProject/oryx) project!_
+
 # Summary
 
 <img align="right" src="https://raw.github.com/wiki/cloudera/oryx/OryxLogoSmall.png"/>
@@ -12,12 +14,7 @@ models approximately in response to streaming new data. This two-tier design, co
 Computation Layer and Serving Layer, respectively, implement a
 [lambda architecture](http://jameskinley.tumblr.com/post/37398560534/the-lambda-architecture-principles-for-architecting).
 Models are exchanged in [PMML](http://www.dmg.org/v4-1/GeneralStructure.html) format.
-
 It is not a library, visualization tool, exploratory analytics tool, or environment.
-Oryx represents a unified continuation of the [Myrrix](http://myrrix.com) and
-[cloudera/ml](https://github.com/cloudera/ml) projects.
-
-_Oryx should be considered alpha software; it may have bugs and will change in incompatible ways._
 
 # Architecture
 
@@ -98,14 +95,6 @@ and regression tasks -- predicting a numeric value like salary.
 
 Oryx implements [scalable k-means++](http://arxiv.org/abs/1203.6402) for clustering. This is a type of unsupervised
 learning, which seeks to find structure in its input in the form of natural groupings.
-
-## Availability
-
-|                           | Collaborative Filtering | Classification/Regression | Clustering |
-| ------------------------- | ----------------------- | ------------------------- | ---------- |
-| Serving Layer             | beta                    | alpha                     | alpha      |
-| Computation Layer (dist.) | beta                    | alpha                     | alpha      |
-| Computation Layer (local) | beta                    | alpha                     | alpha      |
 
 # Download
 

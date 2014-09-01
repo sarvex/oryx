@@ -46,6 +46,7 @@ public final class ALSGenerationManager extends GenerationManager {
   private final LongSet recentlyActiveUsers;
   private final LongSet recentlyActiveItems;
   private final GenerationLoader loader;
+  private final boolean disableWriteUpdates;
 
   public ALSGenerationManager(File appendTempDir) throws IOException {
     super(appendTempDir);
@@ -54,6 +55,7 @@ public final class ALSGenerationManager extends GenerationManager {
     recentlyActiveItems = new LongSet();
     Config config = ConfigUtils.getDefaultConfig();
     loader = new GenerationLoader(config.getString("model.instance-dir"), recentlyActiveUsers, recentlyActiveItems, this);
+    disableWriteUpdates = config.getBoolean("serving-layer.disable-write-updates");
   }
 
   /**
@@ -74,9 +76,11 @@ public final class ALSGenerationManager extends GenerationManager {
    * @throws IOException if an error occurs while sending the update
    */
   public void append(String userID, String itemID, float value) throws IOException {
-    StringBuilder line = new StringBuilder(32);
-    line.append(DelimitedDataUtils.encode(',', userID, itemID, Float.toString(value))).append('\n');
-    doAppend(line, userID, itemID);
+    if (!disableWriteUpdates) {
+      StringBuilder line = new StringBuilder(32);
+      line.append(DelimitedDataUtils.encode(',', userID, itemID, Float.toString(value))).append('\n');
+      doAppend(line, userID, itemID);
+    }
   }
 
   /**
@@ -88,9 +92,11 @@ public final class ALSGenerationManager extends GenerationManager {
    * @throws IOException if an error occurs while sending the update
    */
   public void remove(String userID, String itemID) throws IOException {
-    StringBuilder line = new StringBuilder(32);
-    line.append(DelimitedDataUtils.encode(',', userID, itemID, "")).append('\n');
-    doAppend(line, userID, itemID);
+    if (!disableWriteUpdates) {
+      StringBuilder line = new StringBuilder(32);
+      line.append(DelimitedDataUtils.encode(',', userID, itemID, "")).append('\n');
+      doAppend(line, userID, itemID);
+    }
   }
 
   private synchronized void doAppend(CharSequence line, String userID, String itemID) throws IOException {

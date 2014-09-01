@@ -15,6 +15,7 @@
 
 package com.cloudera.oryx.kmeans.serving.generation;
 
+import com.typesafe.config.Config;
 import org.dmg.pmml.ClusteringModel;
 import org.dmg.pmml.PMML;
 import org.slf4j.Logger;
@@ -37,10 +38,13 @@ public final class KMeansGenerationManager extends GenerationManager {
 
   private int modelGeneration;
   private Generation currentGeneration;
+  private final boolean disableWriteUpdates;
 
   public KMeansGenerationManager(File appendTempDir) throws IOException {
     super(appendTempDir);
     modelGeneration = NO_GENERATION;
+    Config config = ConfigUtils.getDefaultConfig();
+    disableWriteUpdates = config.getBoolean("serving-layer.disable-write-updates");
   }
 
   /**
@@ -83,11 +87,13 @@ public final class KMeansGenerationManager extends GenerationManager {
   }
 
   public synchronized void append(CharSequence example) throws IOException {
-    Writer appender = getAppender();
-    if (appender != null) {
-      appender.append(example + "\n");
+    if (!disableWriteUpdates) {
+      Writer appender = getAppender();
+      if (appender != null) {
+        appender.append(example + "\n");
+      }
+      decrementCountdownToUpload();
     }
-    decrementCountdownToUpload();
   }
 
 }

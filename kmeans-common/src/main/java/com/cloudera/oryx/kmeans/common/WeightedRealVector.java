@@ -15,10 +15,18 @@
 
 package com.cloudera.oryx.kmeans.common;
 
+import java.io.Serializable;
+
 import org.apache.commons.math3.linear.RealVector;
 
-public final class WeightedRealVector extends Weighted<RealVector> {
+public final class WeightedRealVector extends Weighted<RealVector> implements Serializable {
+
+  public WeightedRealVector() {
+    // Mainly exists for serialization
+  }
+
   public WeightedRealVector(RealVector thing, double weight) {
     super(thing, weight);
   }
+
 }

@@ -765,6 +765,9 @@
               </goals>
             </execution>
           </executions>
+          <configuration>
+            <failOnError>false</failOnError>
+          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>

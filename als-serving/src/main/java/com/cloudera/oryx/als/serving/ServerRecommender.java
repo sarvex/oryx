@@ -19,6 +19,7 @@ import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -1132,6 +1133,37 @@ public final class ServerRecommender implements OryxRecommender, Closeable {
     } finally {
       yLock.unlock();
     }
+  }
+
+  public Collection<String> getKnownItemsForUser(String userID) throws NotReadyException {
+    Generation generation = getCurrentGeneration();
+    LongObjectMap<LongSet> knownItemIDs = generation.getKnownItemIDs();
+    if (knownItemIDs == null) {
+      throw new UnsupportedOperationException("Can't return known items because no known items available");
+    }
+    LongSet usersKnownItemIDs = null;
+    Lock knownItemLock = generation.getKnownItemLock().readLock();
+    knownItemLock.lock();
+    try {
+      LongSet theKnownItemIDs = knownItemIDs.get(StringLongMapping.toLong(userID));
+      if (theKnownItemIDs != null) {
+        synchronized (theKnownItemIDs) {
+          usersKnownItemIDs = theKnownItemIDs.clone();
+        }
+      }
+    } finally {
+      knownItemLock.unlock();
+    }
+
+    StringLongMapping mapping = generation.getIDMapping();
+    Collection<String> userIDStrings = new ArrayList<String>();
+    if (usersKnownItemIDs != null) {
+      LongPrimitiveIterator it = usersKnownItemIDs.iterator();
+      while (it.hasNext()) {
+        userIDStrings.add(mapping.toString(it.nextLong()));
+      }
+    }
+    return userIDStrings;
   }
 
   @Override

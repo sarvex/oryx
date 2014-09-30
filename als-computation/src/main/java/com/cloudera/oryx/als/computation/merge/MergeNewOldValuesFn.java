@@ -48,7 +48,7 @@ public final class MergeNewOldValuesFn extends OryxReduceDoFn<Pair<Long, Integer
     Config config = ConfigUtils.getDefaultConfig();
     decayFactor = (float) config.getDouble("model.decay.factor");
     Preconditions.checkArgument(decayFactor > 0.0f && decayFactor <= 1.0f,
-                                "Decay factor must be in (0,1]: %s", zeroThreshold);
+                                "Decay factor must be in (0,1]: %s", decayFactor);
     zeroThreshold = (float) config.getDouble("model.decay.zeroThreshold");
     Preconditions.checkArgument(zeroThreshold >= 0.0f,
                                 "Zero threshold must be nonnegative: %s", zeroThreshold);

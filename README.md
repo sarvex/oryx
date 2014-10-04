@@ -294,3 +294,6 @@ a new line of CSV data that does not contain a value for the identifier column. 
 # [Configuration Reference](https://github.com/cloudera/oryx/wiki/Configuration-Reference)
 
 # [API Endpoint Reference](https://github.com/cloudera/oryx/wiki/API-Endpoint-Reference)
+
+[![Build Status](https://travis-ci.org/cloudera/oryx.png?branch=master)](https://travis-ci.org/cloudera/oryx)
+[![codecov.io](https://codecov.io/github/cloudera/oryx/coverage.svg?branch=master)](https://codecov.io/github/cloudera/oryx?branch=master)

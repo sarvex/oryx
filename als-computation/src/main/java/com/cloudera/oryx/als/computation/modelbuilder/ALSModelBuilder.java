@@ -69,7 +69,6 @@ import org.apache.crunch.PTable;
 import org.apache.crunch.Pair;
 import org.apache.crunch.Pipeline;
 import org.apache.crunch.Target;
-import org.apache.crunch.impl.mr.MRPipeline;
 import org.apache.crunch.lib.Channels;
 import org.apache.crunch.lib.PTables;
 import org.apache.crunch.lib.join.DefaultJoinStrategy;
@@ -177,10 +176,9 @@ public class ALSModelBuilder extends AbstractModelBuilder<String, String, ALSJob
     }
 
     if (getConfig().getBoolean("model.recommend.compute") || getConfig().getBoolean("model.item-similarity.compute")) {
-      MRPipeline mrp = new MRPipeline(RecommendReduceFn.class, p.getConfiguration());
       if (getConfig().getBoolean("model.recommend.compute")) {
-        PCollection<String> knownItems = mrp.read(textInput(instancePrefix + "knownItems/"));
-        PCollection<MatrixRow> Xprime = mrp.read(input(iterationKey + "X/", ALSTypes.DENSE_ROW_MATRIX));
+        PCollection<String> knownItems = p.read(textInput(instancePrefix + "knownItems/"));
+        PCollection<MatrixRow> Xprime = p.read(input(iterationKey + "X/", ALSTypes.DENSE_ROW_MATRIX));
         PTable<Integer, Pair<Long, Pair<float[], LongSet>>> distRecs = distributeRecs(knownItems, Xprime)
             .write(output(tempPrefix + "distributeRecommend/"), Target.WriteMode.CHECKPOINT);
         PTable<Long, NumericIDValue> partialRecs = partialRecs(distRecs, iterationKey + "Y/")
@@ -190,14 +188,14 @@ public class ALSModelBuilder extends AbstractModelBuilder<String, String, ALSJob
       }
 
       if (getConfig().getBoolean("model.item-similarity.compute")) {
-        PCollection<MatrixRow> Yprime = mrp.read(input(iterationKey + "Y/", ALSTypes.DENSE_ROW_MATRIX));
+        PCollection<MatrixRow> Yprime = p.read(input(iterationKey + "Y/", ALSTypes.DENSE_ROW_MATRIX));
         PTable<Long, NumericIDValue> distSimilar = distributeSimilar(Yprime, iterationKey + "Y/")
             .write(output(tempPrefix + "distributeSimilar/"), Target.WriteMode.CHECKPOINT);
         similar(distSimilar, instancePrefix + "idMapping/")
             .write(compressedTextOutput(conf, instancePrefix + "similarItems/"), Target.WriteMode.CHECKPOINT);
       }
 
-      mrp.run();
+      p.run();
     }
 
     return instancePrefix;

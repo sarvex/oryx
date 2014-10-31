@@ -19,6 +19,7 @@ import com.cloudera.oryx.common.servcomp.OryxConfiguration;
 import com.cloudera.oryx.common.settings.ConfigUtils;
 import com.cloudera.oryx.computation.common.JobStep;
 
+import com.cloudera.oryx.computation.common.modelbuilder.AbstractModelBuilder;
 import com.google.common.base.Preconditions;
 import org.apache.crunch.DoFn;
 import org.apache.crunch.Pair;
@@ -50,9 +51,9 @@ public abstract class OryxReduceDoFn<K, V, T> extends DoFn<Pair<K, V>, T> {
     ConfigUtils.overlayConfigOnDefault(rawConfiguration.get(JobStep.CONFIG_SERIALIZATION_KEY));
     this.configuration = OryxConfiguration.get(rawConfiguration);
 
-    numPartitions = getContext().getNumReduceTasks();
+    numPartitions = AbstractModelBuilder.getNumReducers();
     if (numPartitions > 1) {
-      partition = configuration.getInt(MRJobConfig.TASK_PARTITION, 0);
+      partition = getContext().getTaskAttemptID().getTaskID().getId();
     } else {
       partition = 0;
     }

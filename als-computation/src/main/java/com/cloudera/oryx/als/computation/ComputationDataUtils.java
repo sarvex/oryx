@@ -85,7 +85,7 @@ public final class ComputationDataUtils {
     List<String> partitionFileKeys = store.list(partitionsPrefix, true);
     if (partitionFileKeys.size() != numPartitions) {
       log.warn("Number of partitions doesn't match number of ID files ({} vs {}). " +
-          "Was the number of reducers changed?", partitionFileKeys.size(), numPartitions);
+          "Was the number of reducers changed?", numPartitions, partitionFileKeys.size());
       return null;
     }
 

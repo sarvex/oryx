@@ -105,7 +105,7 @@ public abstract class AbstractModelBuilder<Input, Output, Conf extends JobStepCo
     return b.build();
   }
 
-  protected final int getNumReducers() {
+  public static final int getNumReducers() {
     String parallelismString = ConfigUtils.getDefaultConfig().getString("computation-layer.parallelism");
     if ("auto".equals(parallelismString)) {
       return 11; // Default to a prime. Helps avoid problems with funny distributions of IDs.

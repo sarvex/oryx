@@ -13,7 +13,7 @@
  * License.
  */
 
-package com.cloudera.oryx.rdf.serving.web;
+package com.cloudera.oryx.kmeans.serving.web;
 
 import com.google.common.io.Files;
 import org.junit.Assume;

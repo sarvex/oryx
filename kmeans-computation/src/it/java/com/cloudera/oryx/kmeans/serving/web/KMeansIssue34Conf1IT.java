@@ -13,7 +13,7 @@
  * License.
  */
 
-package com.cloudera.oryx.rdf.serving.web;
+package com.cloudera.oryx.kmeans.serving.web;
 
 import org.junit.Test;
 
@@ -21,11 +21,11 @@ import java.io.File;
 
 import com.cloudera.oryx.kmeans.computation.local.KMeansLocalGenerationRunner;
 
-public final class KMeansIssue34Conf2IT extends AbstractComputationIT {
+public final class KMeansIssue34Conf1IT extends AbstractComputationIT {
 
   @Override
   protected File getTestDataPath() {
-    return getResourceAsFile("issue34Conf2");
+    return getResourceAsFile("issue34Conf1");
   }
 
   @Test

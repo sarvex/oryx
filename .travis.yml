@@ -9,5 +9,5 @@ cache:
   directories:
     - $HOME/.m2
 git:
-  depth: 1
+  depth: 2
 after_success: codecov

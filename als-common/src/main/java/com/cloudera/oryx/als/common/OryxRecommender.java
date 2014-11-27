@@ -378,9 +378,20 @@ public interface OryxRecommender {
   Collection<String> getAllItemIDs() throws NotReadyException;
 
   /**
-   * @return true if and only if the instance is ready to make recommendations; may be false for example
-   *  while the recommender is still building an initial model
+   * @param userID user to get known items for
+   * @return a {@link Collection} of item IDs that the model records that the user has interacted
+   *  with. This is the same set of items that are excluded from
+   *  {@link #recommend(String, int, boolean, com.cloudera.oryx.als.common.rescorer.Rescorer)}
+   *  if {@code considerKnownItems} is {@code false}.
+   * @throws UnsupportedOperationException if known items for each user have been configured to not
+   *  be loaded or recorded
    */
+  Collection<String> getKnownItemsForUser(String userID) throws NotReadyException;
+
+    /**
+     * @return true if and only if the instance is ready to make recommendations; may be false for example
+     *  while the recommender is still building an initial model
+     */
   boolean isReady();
 
   /**

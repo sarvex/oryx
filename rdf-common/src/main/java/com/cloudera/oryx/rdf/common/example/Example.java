@@ -17,6 +17,8 @@ package com.cloudera.oryx.rdf.common.example;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
+import com.google.common.hash.Hasher;
+import com.google.common.hash.Hashing;
 
 import java.util.Arrays;
 
@@ -36,7 +38,16 @@ public final class Example {
     Preconditions.checkNotNull(features);
     this.features = features;
     this.target = target;
-    cachedHashCode = Arrays.hashCode(features) ^ (target == null ? 0 : target.hashCode());
+    Hasher hasher = Hashing.goodFastHash(32).newHasher();
+    for (Feature feature : features) {
+      if (feature != null) {
+        hasher.putInt(feature.hashCode());
+      }
+    }
+    if (target != null) {
+      hasher.putInt(target.hashCode());
+    }
+    cachedHashCode = hasher.hashCode();
   }
   
   public Feature getFeature(int i) {

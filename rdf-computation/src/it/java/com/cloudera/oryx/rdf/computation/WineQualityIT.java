@@ -70,8 +70,8 @@ public final class WineQualityIT extends AbstractComputationIT {
     assertEquals(importances[8], Doubles.max(importances));
     assertTrue(importances[1] > 0.6);
     assertTrue(importances[5] > 0.6);
-    assertTrue(importances[8] > 0.8);
-    assertTrue(importances[9] > 0.6);
+    assertTrue(importances[8] > 0.75);
+    assertTrue(importances[9] > 0.55);
     assertTrue(importances[10] > 0.7);
   }
 

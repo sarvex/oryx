@@ -136,6 +136,8 @@ public final class RowStep extends IterationStep {
       for (double ap : aps.materialize()) {
         meanAveragePrecision.increment(ap);
       }
+      log.info("Mean average precision: {}", meanAveragePrecision);
+
       File tempMAPFile = File.createTempFile("MAP", ".txt");
       tempMAPFile.deleteOnExit();
       Files.write(Double.toString(meanAveragePrecision.getResult()), tempMAPFile, Charsets.UTF_8);

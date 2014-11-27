@@ -91,6 +91,10 @@ public class Weighted<T> {
     return Lists.newArrayList(sampled.values());
   }
 
+  public Weighted() {
+    this(null); // Mainly exists for serialization
+  }
+
   /**
    * Create a new instance with weight 1.0.
    * 

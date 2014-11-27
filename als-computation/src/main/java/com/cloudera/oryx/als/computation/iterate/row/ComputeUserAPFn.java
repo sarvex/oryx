@@ -19,6 +19,8 @@ import org.apache.commons.math3.stat.descriptive.moment.Mean;
 import org.apache.crunch.CrunchRuntimeException;
 import org.apache.crunch.Emitter;
 import org.apache.crunch.Pair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -33,6 +35,8 @@ import com.cloudera.oryx.common.servcomp.Store;
 import com.cloudera.oryx.computation.common.fn.OryxDoFn;
 
 public final class ComputeUserAPFn extends OryxDoFn<Pair<Long, float[]>, Double> {
+
+  private static final Logger log = LoggerFactory.getLogger(ComputeUserAPFn.class);
 
   private final YState yState;
   private LongObjectMap<LongSet> testData;
@@ -110,6 +114,8 @@ public final class ComputeUserAPFn extends OryxDoFn<Pair<Long, float[]>, Double>
       totalPrecisionTimesRelevance += precision.getResult();
     }
     double averagePrecision = totalPrecisionTimesRelevance / rank.length;
+
+    log.info("Average precision: {}", averagePrecision);
 
     emitter.emit(averagePrecision);
   }

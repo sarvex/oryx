@@ -58,7 +58,8 @@ public final class Namespaces {
       URI defaultURI = FileSystem.getDefaultUri(OryxConfiguration.get());
       String host = defaultURI.getHost();
       Preconditions.checkNotNull(host,
-          "Hadoop FS has no host? Did you intent to set model.local-data=true?");
+          "Hadoop FS has no host in '%s'. Did you intend to set model.local-data=true?",
+          defaultURI);
       int port = defaultURI.getPort();
       if (port > 0) {
         prefix = "hdfs://" + host + ':' + port;

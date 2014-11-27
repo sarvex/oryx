@@ -57,12 +57,7 @@ public final class SummaryTest extends OryxTest {
 
   @Test
   public void testZScores() {
-    PCollection<Record> elems = VECS.parallelDo(new MapFn<RealVector, Record>() {
-      @Override
-      public Record map(RealVector vec) {
-        return new VectorRecord(vec);
-      }
-    }, null);
+    PCollection<Record> elems = VECS.parallelDo(new ZScoreMapFn(), null);
     Summarizer sr = new Summarizer();
     Summary s = sr.build(elems).getValue();
     StandardizeFn fn = new StandardizeFn(s, Transform.Z);
@@ -73,12 +68,9 @@ public final class SummaryTest extends OryxTest {
   
   @Test
   public void testMissing() throws Exception {
-    PCollection<Record> elems = STRINGS.parallelDo(new MapFn<String, Record>() {
-      @Override
-      public Record map(String input) {
-        return new CSVRecord(Arrays.asList(input.split(",")));
-      }
-    }, MLRecords.csvRecord(AvroTypeFamily.getInstance(), ","));
+    PCollection<Record> elems =
+        STRINGS.parallelDo(new MissingMapFn(),
+                           MLRecords.csvRecord(AvroTypeFamily.getInstance(), ","));
     Summarizer sr = new Summarizer();
     Summary s = sr.build(elems).getValue();
     assertEquals(1, s.getStats(1).getMissing());
@@ -90,13 +82,31 @@ public final class SummaryTest extends OryxTest {
   public void testTrailingIgnoredFields() throws Exception {
     Spec spec = RecordSpec.builder().add("field1", DataType.DOUBLE)
         .add("field2", DataType.DOUBLE).add("field3", DataType.DOUBLE).build();
-    PCollection<Record> elems = STRINGS.parallelDo(new MapFn<String, Record>() {
-      @Override
-      public Record map(String input) {
-        return new CSVRecord(Arrays.asList(input.split(",")));
-      }
-    }, MLRecords.csvRecord(AvroTypeFamily.getInstance(), ","));
+    PCollection<Record> elems =
+        STRINGS.parallelDo(new TrailingIgnoredFieldsMapFn(),
+                           MLRecords.csvRecord(AvroTypeFamily.getInstance(), ","));
     Summarizer sr = new Summarizer().spec(spec).ignoreColumns(2);
     sr.build(elems).getValue();
+  }
+
+  private static final class ZScoreMapFn extends MapFn<RealVector, Record> {
+    @Override
+    public Record map(RealVector vec) {
+      return new VectorRecord(vec);
+    }
+  }
+
+  private static final class TrailingIgnoredFieldsMapFn extends MapFn<String, Record> {
+    @Override
+    public Record map(String input) {
+      return new CSVRecord(Arrays.asList(input.split(",")));
+    }
+  }
+
+  private static final class MissingMapFn extends MapFn<String, Record> {
+    @Override
+    public Record map(String input) {
+      return new CSVRecord(Arrays.asList(input.split(",")));
+    }
   }
 }

@@ -122,6 +122,16 @@
     <td><a href="#" class="arrow" onclick="return doQuery('item/allIDs',true)">&amp;#x27AC;</a></td></tr>
 </form>
 
+    <tr><td colspan="4"><hr/></td></tr>
+
+<form action="#" style="padding:10px">
+    <tr><td></td><td>&amp;nbsp;&amp;nbsp;User ID</td><td colspan="2"></td></tr>
+    <tr><td><code>/knownItems</code></td>
+        <td><code>/</code><input type="text" id="knownItems-userid" onkeyup="return handleReturn(event, 'knownItems',true,['userid'])"/></td>
+        <td></td>
+        <td><a href="#" class="arrow" onclick="return doQuery('knownItems',true,['userid'])">&amp;#x27AC;</a></td></tr>
+</form>
+
   <tr><td colspan="4"><hr/></td></tr>
 
   <jsp:scriptlet>

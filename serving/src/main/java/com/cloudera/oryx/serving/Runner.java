@@ -272,7 +272,7 @@ public final class Runner implements Callable<Object>, Closeable {
       connector.setSecure(true);
       connector.setScheme("https");
       connector.setAttribute("SSLEnabled", "true");
-      String protocol = chooseSSLProtocol("TLSv1.1", "TLSv1");
+      String protocol = chooseSSLProtocol("TLSv1.2", "TLSv1.1", "TLSv1");
       if (protocol != null) {
         connector.setAttribute("sslProtocol", protocol);
       }
@@ -299,7 +299,7 @@ public final class Runner implements Callable<Object>, Closeable {
     connector.setAttribute("disableUploadTimeout", false);
 
     // Allow long URLs
-    connector.setAttribute("maxHttpHeaderSize", 32768);
+    connector.setAttribute("maxHttpHeaderSize", 65536);
 
     return connector;
   }

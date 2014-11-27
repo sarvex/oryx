@@ -24,12 +24,30 @@ public final class IgnoredFeature implements Feature {
 
   public static final IgnoredFeature INSTANCE = new IgnoredFeature();
 
+  private IgnoredFeature() {
+  }
+
   /**
    * @return {@link FeatureType#IGNORED}
    */
   @Override
   public FeatureType getFeatureType() {
     return FeatureType.IGNORED;
+  }
+
+  @Override
+  public int hashCode() {
+    return 0xDEADBEEF;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    return o instanceof IgnoredFeature;
+  }
+
+  @Override
+  public String toString() {
+    return "Ignored";
   }
 
 }

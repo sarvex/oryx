@@ -15,6 +15,7 @@
 
 package com.cloudera.oryx.kmeans.common;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -28,7 +29,7 @@ import org.apache.commons.math3.linear.RealVector;
  * Represents a collection of {@code Vector} instances that act as the centers of
  * a set of clusters, as in a k-means model.
  */
-public final class Centers implements Iterable<RealVector> {
+public final class Centers implements Iterable<RealVector>, Serializable {
 
   // The vectors, where each vector is the center of a particular cluster
   private final List<RealVector> centers;

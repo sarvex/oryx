@@ -71,7 +71,7 @@ public final class WineQualityIT extends AbstractComputationIT {
     assertTrue(importances[8] == mostImportant || importances[10] == mostImportant);
     assertTrue(importances[1] > 0.6);
     assertTrue(importances[5] > 0.6);
-    assertTrue(importances[8] > 0.75);
+    assertTrue(importances[8] > 0.7);
     assertTrue(importances[9] > 0.55);
     assertTrue(importances[10] > 0.7);
   }

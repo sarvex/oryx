@@ -18,13 +18,13 @@ package com.cloudera.oryx.rdf.computation;
 import com.google.common.collect.BiMap;
 import com.google.common.io.CharStreams;
 import com.google.common.primitives.Doubles;
+import com.google.common.primitives.Floats;
 import org.apache.commons.math3.util.Pair;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.Map;
 
 import com.cloudera.oryx.common.io.IOUtils;
@@ -35,11 +35,8 @@ import com.cloudera.oryx.rdf.common.example.Feature;
 import com.cloudera.oryx.rdf.common.example.NumericFeature;
 import com.cloudera.oryx.rdf.common.pmml.DecisionForestPMML;
 import com.cloudera.oryx.rdf.common.rule.CategoricalPrediction;
-import com.cloudera.oryx.rdf.common.rule.NumericDecision;
 import com.cloudera.oryx.rdf.common.tree.DecisionForest;
-import com.cloudera.oryx.rdf.common.tree.DecisionNode;
 import com.cloudera.oryx.rdf.common.tree.DecisionTree;
-import com.cloudera.oryx.rdf.common.tree.TerminalNode;
 import com.cloudera.oryx.rdf.computation.local.RDFLocalGenerationRunner;
 
 /**
@@ -81,49 +78,14 @@ public final class IrisIT extends AbstractComputationIT {
     // petal length ought to be most predictive
     InboundSettings settings = InboundSettings.create(ConfigUtils.getDefaultConfig());
     int petalLengthColumn = settings.getColumnNames().indexOf("petal length");
-    assertEquals(importances[petalLengthColumn], Doubles.max(importances));
+    int petalWidthColumn = settings.getColumnNames().indexOf("petal width");
+    double mostImportant = Doubles.max(importances);
+    assertTrue(importances[petalLengthColumn] == mostImportant ||
+                   importances[petalWidthColumn] == mostImportant);
 
-    // Simple tests of the structure:
 
     DecisionTree[] trees = forest.getTrees();
     assertEquals(2, trees.length);
-
-    DecisionTree tree0;
-    DecisionTree tree1;
-
-    double[] weights = forest.getWeights();
-    if (weights[0] == 0.8904109589041096) {
-      assertEquals(0.922077922077922, weights[1]);
-      tree0 = trees[0];
-      tree1 = trees[1];
-    } else if (weights[1] == 0.8904109589041096) {
-      assertEquals(0.922077922077922, weights[0]);
-      tree0 = trees[1];
-      tree1 = trees[0];
-    } else {
-      fail(Arrays.toString(weights));
-      return;
-    }
-
-    DecisionNode root0 = (DecisionNode) tree0.getRoot();
-    NumericDecision decision0 = (NumericDecision) root0.getDecision();
-    assertEquals(4.8500004f, decision0.getThreshold());
-    assertEquals(2, decision0.getFeatureNumber());
-
-    DecisionNode root1 = (DecisionNode) tree1.getRoot();
-    NumericDecision decision1 = (NumericDecision) root1.getDecision();
-    assertEquals(2.75f, decision1.getThreshold());
-    assertEquals(2, decision1.getFeatureNumber());
-
-    TerminalNode root1Neg = (TerminalNode) root1.getLeft();
-    assertEquals(34, root1Neg.getCount());
-    CategoricalPrediction root1NegPrediction = (CategoricalPrediction) root1Neg.getPrediction();
-    int[] expectedCounts = new int[3];
-    expectedCounts[targetCategoryValueMapping.get("Iris-setosa")] = 34;
-    assertArrayEquals(expectedCounts, root1NegPrediction.getCategoryCounts());
-    float[] expectedProbs = new float[3];
-    expectedProbs[targetCategoryValueMapping.get("Iris-setosa")] = 1.0f;
-    assertArrayEquals(expectedProbs, root1NegPrediction.getCategoryProbabilities());
 
     Feature[] features = {
         //5.9,3.0,5.1,1.8,Iris-virginica
@@ -136,9 +98,8 @@ public final class IrisIT extends AbstractComputationIT {
     CategoricalPrediction prediction = (CategoricalPrediction) forest.classify(example);
     int expectedCategory = targetCategoryValueMapping.get("Iris-virginica");
     assertEquals(expectedCategory, prediction.getMostProbableCategoryID());
-    float[] expectedProbabilities = new float[3];
-    expectedProbabilities[expectedCategory] = 1.0f;
-    assertArrayEquals(expectedProbabilities, prediction.getCategoryProbabilities());
+    assertEquals(prediction.getCategoryProbabilities()[expectedCategory],
+                 Floats.max(prediction.getCategoryProbabilities()));
   }
 
 }

@@ -70,8 +70,8 @@ public final class CovtypeIT extends AbstractComputationIT {
     assertEquals(importances[0], Doubles.max(importances));
     // Assert something about important features
     assertTrue(importances[0] > 0.9);
-    assertTrue(importances[5] > 0.4);
-    assertTrue(importances[9] > 0.4);
+    assertTrue(importances[5] > 0.35);
+    assertTrue(importances[9] > 0.35);
     assertTrue(importances[13] > 0.4);
   }
 

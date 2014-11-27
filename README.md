@@ -1,4 +1,6 @@
-_See also the experimental [Oryx 2 incubating](https://github.com/OryxProject/oryx) project!_
+# Development has moved to [Oryx 2](https://github.com/OryxProject/oryx)!
+
+This site contains the current stable 1.x version of Oryx.
 
 # Summary
 

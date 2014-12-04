@@ -66,19 +66,26 @@ final class ReadInputs implements Callable<Object> {
     Config config = ConfigUtils.getDefaultConfig();
     zeroThreshold = (float) config.getDouble("model.decay.zeroThreshold");
     decayFactor = (float) config.getDouble("model.decay.factor");
-    Preconditions.checkArgument(zeroThreshold >= 0.0f);
-    Preconditions.checkArgument(decayFactor > 0.0f && decayFactor <= 1.0f);
+    Preconditions.checkArgument(zeroThreshold >= 0.0f,
+                                "Zero threshold must be nonnegative: %s", zeroThreshold);
+    Preconditions.checkArgument(decayFactor >= 0.0f && decayFactor <= 1.0f,
+                                "Decay factor must be in [0,1]: %s", decayFactor);
   }
 
   @Override
   public Void call() throws IOException {
+    // Always read inbound; only read past data if decay factor is positive.
+    // If it's 0, all past data is ignored.
+    if (isInbound || decayFactor > 0.0f) {
 
-    readInput();
+      readInput();
 
-    if (zeroThreshold > 0.0f) {
-      log.info("Pruning near-zero entries");
-      removeSmall(RbyRow);
-      removeSmall(RbyColumn);
+      if (zeroThreshold > 0.0f) {
+        log.info("Pruning near-zero entries");
+        removeSmall(RbyRow);
+        removeSmall(RbyColumn);
+      }
+
     }
 
     return null;

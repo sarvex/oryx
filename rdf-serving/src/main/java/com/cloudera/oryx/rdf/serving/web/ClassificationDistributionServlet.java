@@ -15,6 +15,7 @@
 
 package com.cloudera.oryx.rdf.serving.web;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.BiMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +39,8 @@ import com.cloudera.oryx.rdf.serving.generation.Generation;
  * <p>Like {@link ClassifyServlet}, but responds at endpoint {@code /classificationDistribution}.
  * This returns not just the most probable category, but all categories and their associated probability.
  * The output is "category,probability", one per line for each category value.
- * Returns an error for models with numeric target feature.</p>
+ * Returns an error for models with numeric target feature. That is, this is only supported
+ * for classification problems, not regression.</p>
  *
  * @author Sean Owen
  */
@@ -61,14 +63,21 @@ public final class ClassificationDistributionServlet extends AbstractRDFServlet 
       return;
     }
 
-    Writer out = response.getWriter();
     InboundSettings inboundSettings = getInboundSettings();
+    Integer targetColumn = inboundSettings.getTargetColumn();
+    boolean isClassification =
+        inboundSettings.getCategoricalColumns().contains(targetColumn);
+    if (!isClassification) {
+      response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Only supported for classification");
+      return;
+    }
+
     TreeBasedClassifier forest = generation.getForest();
 
     Map<Integer,BiMap<String,Integer>> columnToCategoryNameToIDMapping =
         generation.getColumnToCategoryNameToIDMapping();
     Map<Integer,String> targetIDToCategory =
-        columnToCategoryNameToIDMapping.get(inboundSettings.getTargetColumn()).inverse();
+        columnToCategoryNameToIDMapping.get(targetColumn).inverse();
 
     int totalColumns = getTotalColumns();
 
@@ -96,17 +105,15 @@ public final class ClassificationDistributionServlet extends AbstractRDFServlet 
     Example example = new Example(null, features);
     Prediction prediction = forest.classify(example);
 
-    if (prediction.getFeatureType() == FeatureType.CATEGORICAL) {
-      CategoricalPrediction categoricalPrediction = (CategoricalPrediction) prediction;
-      float[] probabilities = categoricalPrediction.getCategoryProbabilities();
-      for (int categoryID = 0; categoryID < probabilities.length; categoryID++) {
-        out.write(targetIDToCategory.get(categoryID));
-        out.write(',');
-        out.write(Float.toString(probabilities[categoryID]));
-        out.write('\n');
-      }
-    } else {
-      response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Not a categorical target");
+    Preconditions.checkState(prediction.getFeatureType() == FeatureType.CATEGORICAL);
+    CategoricalPrediction categoricalPrediction = (CategoricalPrediction) prediction;
+    float[] probabilities = categoricalPrediction.getCategoryProbabilities();
+    Writer out = response.getWriter();
+    for (int categoryID = 0; categoryID < probabilities.length; categoryID++) {
+      out.write(targetIDToCategory.get(categoryID));
+      out.write(',');
+      out.write(Float.toString(probabilities[categoryID]));
+      out.write('\n');
     }
   }
 

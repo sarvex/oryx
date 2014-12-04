@@ -24,7 +24,8 @@ import com.cloudera.oryx.kmeans.serving.generation.Generation;
 import org.apache.commons.math3.linear.RealVector;
 
 /**
- * <p>Responds to a GET request to {@code /assign/[datum]}. The input is one data point to cluster,
+ * <p>Responds to a GET request to {@code /assign/[datum]}, or a POST to {@code /assign}
+ * containing the datum on one line. The input is one data point to cluster,
  * delimited, like "1,-4,3.0". The response body contains the ID of the nearest cluster, on one line.</p>
  *
  * @author Sean Owen
@@ -32,13 +33,26 @@ import org.apache.commons.math3.linear.RealVector;
 public final class AssignServlet extends AbstractKMeansServlet {
 
   @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  protected void doGet(HttpServletRequest request,
+                       HttpServletResponse response) throws IOException {
     CharSequence pathInfo = request.getPathInfo();
     if (pathInfo == null) {
       response.sendError(HttpServletResponse.SC_BAD_REQUEST, "No path");
       return;
     }
     String line = pathInfo.subSequence(1, pathInfo.length()).toString();
+    doAssign(line, response);
+  }
+
+  @Override
+  protected void doPost(HttpServletRequest request,
+                        HttpServletResponse response) throws IOException {
+    String line = request.getReader().readLine();
+    doAssign(line, response);
+  }
+
+  private void doAssign(String line, HttpServletResponse response) throws IOException {
+
     Generation generation = getGenerationManager().getCurrentGeneration();
     if (generation == null) {
       response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE,

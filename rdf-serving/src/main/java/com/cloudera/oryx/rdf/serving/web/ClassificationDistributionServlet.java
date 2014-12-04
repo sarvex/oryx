@@ -47,14 +47,26 @@ import com.cloudera.oryx.rdf.serving.generation.Generation;
 public final class ClassificationDistributionServlet extends AbstractRDFServlet {
 
   @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
+  protected void doGet(HttpServletRequest request,
+                       HttpServletResponse response) throws IOException {
     CharSequence pathInfo = request.getPathInfo();
     if (pathInfo == null) {
       response.sendError(HttpServletResponse.SC_BAD_REQUEST, "No path");
       return;
     }
     String line = pathInfo.subSequence(1, pathInfo.length()).toString();
+    doClassificationDistribution(line, response);
+  }
+
+  @Override
+  protected void doPost(HttpServletRequest request,
+                        HttpServletResponse response) throws IOException {
+    String line = request.getReader().readLine();
+    doClassificationDistribution(line, response);
+  }
+
+  private void doClassificationDistribution(String line,
+                                            HttpServletResponse response) throws IOException {
 
     Generation generation = getGenerationManager().getCurrentGeneration();
     if (generation == null) {

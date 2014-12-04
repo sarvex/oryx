@@ -36,7 +36,8 @@ import com.cloudera.oryx.rdf.common.tree.TreeBasedClassifier;
 import com.cloudera.oryx.rdf.serving.generation.Generation;
 
 /**
- * <p>Responds to a GET request to {@code /classify/[datum]}. The input is one data point to classify,
+ * <p>Responds to a GET request to {@code /classify/[datum]}, or a POST to {@code /classify}
+ * containing the datum on one line. The input is one data point to classify,
  * delimited, like "1,foo,3.0". The response body contains the result of classification on one line.
  * The result depends on the classifier --  could be a number or a category name.</p>
  *
@@ -48,14 +49,28 @@ import com.cloudera.oryx.rdf.serving.generation.Generation;
 public final class ClassifyServlet extends AbstractRDFServlet {
 
   @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
+  protected void doGet(HttpServletRequest request,
+                       HttpServletResponse response) throws IOException {
     CharSequence pathInfo = request.getPathInfo();
     if (pathInfo == null) {
       response.sendError(HttpServletResponse.SC_BAD_REQUEST, "No path");
       return;
     }
     String line = pathInfo.subSequence(1, pathInfo.length()).toString();
+    doClassify(line, request, response);
+  }
+
+  @Override
+  protected void doPost(HttpServletRequest request,
+                        HttpServletResponse response) throws IOException {
+    String line = request.getReader().readLine();
+    doClassify(line, request, response);
+  }
+
+  private void doClassify(String line,
+                          HttpServletRequest request,
+                          HttpServletResponse response) throws IOException {
+
     boolean probabilityOnly = "probability".equals(request.getParameter("report"));
 
     Generation generation = getGenerationManager().getCurrentGeneration();
@@ -65,7 +80,6 @@ public final class ClassifyServlet extends AbstractRDFServlet {
       return;
     }
 
-    Writer out = response.getWriter();
     InboundSettings inboundSettings = getInboundSettings();
     TreeBasedClassifier forest = generation.getForest();
 
@@ -98,6 +112,7 @@ public final class ClassifyServlet extends AbstractRDFServlet {
     Example example = new Example(null, features);
     Prediction prediction = forest.classify(example);
 
+    Writer out = response.getWriter();
     if (prediction.getFeatureType() == FeatureType.CATEGORICAL) {
       CategoricalPrediction categoricalPrediction = (CategoricalPrediction) prediction;
       int categoryID = categoricalPrediction.getMostProbableCategoryID();

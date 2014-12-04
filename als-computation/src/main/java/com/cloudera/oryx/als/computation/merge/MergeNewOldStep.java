@@ -30,6 +30,7 @@ import org.apache.crunch.types.PTableType;
 import org.apache.crunch.types.avro.Avros;
 
 import com.cloudera.oryx.als.computation.ALSJobStep;
+import com.cloudera.oryx.common.settings.ConfigUtils;
 import com.cloudera.oryx.computation.common.JobStepConfig;
 import com.cloudera.oryx.common.servcomp.Namespaces;
 import com.cloudera.oryx.common.servcomp.Store;
@@ -67,7 +68,10 @@ public final class MergeNewOldStep extends ALSJobStep {
 
     PTable<Pair<Long, Integer>, NumericIDValue> train = parsed.parallelDo("train", new InboundJoinFn(), JOIN_TYPE);
 
-    if (lastGenerationID >= 0) {
+    float decayFactor = (float) ConfigUtils.getDefaultConfig().getDouble("model.decay.factor");
+
+    // Only join past data if it exists, and, decay factor is not 0
+    if (lastGenerationID >= 0 && decayFactor > 0.0f) {
       String inputPrefix = Namespaces.getInstanceGenerationPrefix(instanceDir, lastGenerationID) + "input/";
       Store store = Store.get();
       Preconditions.checkState(store.exists(inputPrefix, false), "Input path does not exist: %s", inputPrefix);

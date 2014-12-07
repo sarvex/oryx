@@ -65,8 +65,11 @@ public final class InitialYReduceFn extends OryxReduceMapFn<Long, float[], Matri
         System.arraycopy(maybeFeatureVector, 0, featureVector, 0, featureVector.length);
         SimpleVectorMath.normalize(featureVector);
       } else if (maybeLength < features) {
+        // Use existing vector and extend with more random values
         featureVector = new float[features];
-        System.arraycopy(maybeFeatureVector, 0, featureVector, 0, maybeLength);
+        if (maybeLength > 0) {
+          System.arraycopy(maybeFeatureVector, 0, featureVector, 0, maybeLength);
+        }
         for (int i = maybeLength; i < featureVector.length; i++) {
           featureVector[i] = FastMath.abs((float) random.nextGaussian());
         }

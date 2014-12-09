@@ -115,7 +115,7 @@ public final class AlternatingLeastSquares implements MatrixFactorizer {
   private static final Logger log = LoggerFactory.getLogger(AlternatingLeastSquares.class);
 
   private static final int WORK_UNIT_SIZE = 100;
-  private static final int NUM_USER_ITEMS_TO_TEST_CONVERGENCE = 100;
+  private static final int NUM_USER_ITEMS_TO_TEST_CONVERGENCE = 128;
   
   private static final long LOG_INTERVAL = 100000;
   private static final int MAX_FAR_FROM_VECTORS = 100000;
@@ -221,22 +221,25 @@ public final class AlternatingLeastSquares implements MatrixFactorizer {
             }
           }
         }
-      
+
         iterationNumber++;
         log.info("Finished iteration {}", iterationNumber);
         if (maxIterations > 0 && iterationNumber >= maxIterations) {
           log.info("Reached iteration limit");
           break;
         }
-        log.info("Avg absolute difference in estimate vs prior iteration: {}", averageAbsoluteEstimateDiff);
+
+        long numSamples = averageAbsoluteEstimateDiff.getN();
         double convergenceValue = averageAbsoluteEstimateDiff.getResult();
+        log.info("Avg absolute difference in estimate vs prior iteration over {} samples: {}",
+                 numSamples, convergenceValue);
         if (!Doubles.isFinite(convergenceValue)) {
           log.warn("Invalid convergence value, aborting iteration! {}", convergenceValue);
           break;
         }
         // Don't converge after 1 iteration if starting from a random point
         if (!(randomY && iterationNumber == 1) && convergenceValue < estimateErrorConvergenceThreshold) {
-          log.info("Converged");          
+          log.info("Converged");
           break;
         }
       }

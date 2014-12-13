@@ -279,6 +279,7 @@ public final class ALSDistributedGenerationRunner extends DistributedGenerationR
     }
 
     if (iterationNumber < 2) {
+      log.info("Iterations not done because only on iteration {}", iterationNumber);
       return false;
     }
 
@@ -326,14 +327,16 @@ public final class ALSDistributedGenerationRunner extends DistributedGenerationR
       }
     }
 
+    long numSamples = averageAbsoluteEstimateDiff.getN();
     double convergenceValue;
-    if (averageAbsoluteEstimateDiff.getN() == 0) {
+    if (numSamples == 0) {
       // Fake value to cover corner case
       convergenceValue = FastMath.pow(2.0, -(iterationNumber + 1));
       log.info("No samples for convergence; using artificial convergence value: {}", convergenceValue);
     } else {
       convergenceValue = averageAbsoluteEstimateDiff.getResult();
-      log.info("Avg absolute difference in estimate vs prior iteration: {}", convergenceValue);
+      log.info("Avg absolute difference in estimate vs prior iteration over {} samples: {}",
+               numSamples, convergenceValue);
       if (!Doubles.isFinite(convergenceValue)) {
         log.warn("Invalid convergence value, aborting iteration! {}", convergenceValue);
         return true;

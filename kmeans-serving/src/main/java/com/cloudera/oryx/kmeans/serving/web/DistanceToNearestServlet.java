@@ -28,7 +28,8 @@ import com.cloudera.oryx.common.io.DelimitedDataUtils;
 import com.cloudera.oryx.kmeans.serving.generation.Generation;
 
 /**
- * <p>Responds to a GET request to {@code /distanceToNearest/[datum]}. The input is one data point to cluster,
+ * <p>Responds to a GET request to {@code /distanceToNearest/[datum]}, or a POST to
+ * {@code /distanceToNearest} containing the datum on one line. The input is one data point to cluster,
  * delimited, like "1,-4,3.0". The response body contains the distance to the nearest cluster, on one line.</p>
  *
  * @author Sean Owen
@@ -36,13 +37,25 @@ import com.cloudera.oryx.kmeans.serving.generation.Generation;
 public final class DistanceToNearestServlet extends AbstractKMeansServlet {
 
   @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  protected void doGet(HttpServletRequest request,
+                       HttpServletResponse response) throws IOException {
     CharSequence pathInfo = request.getPathInfo();
     if (pathInfo == null) {
       response.sendError(HttpServletResponse.SC_BAD_REQUEST, "No path");
       return;
     }
     String line = pathInfo.subSequence(1, pathInfo.length()).toString();
+    doDistanceToNearest(line, response);
+  }
+
+  @Override
+  protected void doPost(HttpServletRequest request,
+                        HttpServletResponse response) throws IOException {
+    String line = request.getReader().readLine();
+    doDistanceToNearest(line, response);
+  }
+
+  private void doDistanceToNearest(String line, HttpServletResponse response) throws IOException {
 
     Generation generation = getGenerationManager().getCurrentGeneration();
     if (generation == null) {

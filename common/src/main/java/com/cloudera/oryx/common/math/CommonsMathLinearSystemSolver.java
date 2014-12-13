@@ -39,22 +39,30 @@ public final class CommonsMathLinearSystemSolver implements LinearSystemSolver {
     if (solver.isNonSingular()) {
       return new CommonsMathSolver(solver);
     }
-    // Otherwise try to report apparent rank
-    int apparentRank = decomposition.getRank(0.01); // Better value?
-    log.warn("{} x {} matrix is near-singular (threshold {}). Add more data or decrease the value of model.features, " +
-             "to <= about {}",
-             M.getRowDimension(), 
-             M.getColumnDimension(), 
-             SINGULARITY_THRESHOLD,
-             apparentRank);
+    int apparentRank = findApparentRank(M, decomposition);
     throw new SingularMatrixSolverException(apparentRank, "Apparent rank: " + apparentRank);
   }  
 
   @Override
   public boolean isNonSingular(RealMatrix M) {
-    QRDecomposition decomposition = new RRQRDecomposition(M, SINGULARITY_THRESHOLD);
+    RRQRDecomposition decomposition = new RRQRDecomposition(M, SINGULARITY_THRESHOLD);
     DecompositionSolver solver = decomposition.getSolver();
-    return solver.isNonSingular();
-  }  
+    boolean nonSingular = solver.isNonSingular();
+    if (!nonSingular) {
+      findApparentRank(M, decomposition);
+    }
+    return nonSingular;
+  }
+
+  private static int findApparentRank(RealMatrix M, RRQRDecomposition decomposition) {
+    int apparentRank = decomposition.getRank(0.01); // Better value?
+    log.warn("{} x {} matrix is near-singular (threshold {}). Add more data or decrease the value of model.features, " +
+             "to <= about {}",
+             M.getRowDimension(),
+             M.getColumnDimension(),
+             SINGULARITY_THRESHOLD,
+             apparentRank);
+    return apparentRank;
+  }
 
 }

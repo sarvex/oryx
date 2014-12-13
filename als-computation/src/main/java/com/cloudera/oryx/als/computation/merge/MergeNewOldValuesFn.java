@@ -34,7 +34,6 @@ public final class MergeNewOldValuesFn extends OryxReduceDoFn<Pair<Long, Integer
   static final int BEFORE = 0;
   static final int AFTER = 1;
 
-  private boolean doDecay;
   private float decayFactor;
   private float zeroThreshold;
   private Long previousUserID;
@@ -47,12 +46,11 @@ public final class MergeNewOldValuesFn extends OryxReduceDoFn<Pair<Long, Integer
     super.initialize();
     Config config = ConfigUtils.getDefaultConfig();
     decayFactor = (float) config.getDouble("model.decay.factor");
-    Preconditions.checkArgument(decayFactor > 0.0f && decayFactor <= 1.0f,
-                                "Decay factor must be in (0,1]: %s", decayFactor);
     zeroThreshold = (float) config.getDouble("model.decay.zeroThreshold");
+    Preconditions.checkArgument(decayFactor >= 0.0f && decayFactor <= 1.0f,
+                                "Decay factor must be in [0,1]: %s", decayFactor);
     Preconditions.checkArgument(zeroThreshold >= 0.0f,
                                 "Zero threshold must be nonnegative: %s", zeroThreshold);
-    doDecay = decayFactor < 1.0f;
 
     testSetFraction = config.getDouble("model.test-set-fraction");
     Preconditions.checkArgument(testSetFraction >= 0.0 && testSetFraction <= 1.0);
@@ -69,6 +67,9 @@ public final class MergeNewOldValuesFn extends OryxReduceDoFn<Pair<Long, Integer
 
     if (key.second() == BEFORE) {
 
+      // Should only be mapping historical data if decay factor is positive
+      Preconditions.checkState(decayFactor > 0.0f);
+
       // Last old data had no match, just output it
       if (previousUserPrefs != null) {
         Preconditions.checkNotNull(previousUserID);
@@ -82,7 +83,7 @@ public final class MergeNewOldValuesFn extends OryxReduceDoFn<Pair<Long, Integer
         float oldPrefValue = itemPref.getValue();
         Preconditions.checkState(!Float.isNaN(oldPrefValue), "No prior pref value?");
         // Apply decay factor here, if applicable:
-        oldPrefs.increment(itemPref.getID(), doDecay ? oldPrefValue * decayFactor : oldPrefValue);
+        oldPrefs.increment(itemPref.getID(), oldPrefValue * decayFactor);
       }
 
       previousUserPrefs = oldPrefs;
@@ -158,14 +159,8 @@ public final class MergeNewOldValuesFn extends OryxReduceDoFn<Pair<Long, Integer
           }
         }
 
-        boolean remove = false;
-        if (removedItemIDs != null && removedItemIDs.contains(itemID)) {
-          remove = true;
-        } else if (FastMath.abs(sum) <= zeroThreshold) {
-          remove = true;
-        }
-
-        if (!remove) {
+        if ((removedItemIDs == null || !removedItemIDs.contains(itemID)) &&
+            FastMath.abs(sum) > zeroThreshold) {
           emitter.emit(Pair.of(userID, new NumericIDValue(itemID, sum)));
         }
       }

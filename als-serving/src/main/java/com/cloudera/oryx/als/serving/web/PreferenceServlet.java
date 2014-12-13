@@ -15,7 +15,6 @@
 
 package com.cloudera.oryx.als.serving.web;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -99,13 +98,7 @@ public final class PreferenceServlet extends AbstractALSServlet {
   }
 
   private static float readValue(ServletRequest request) throws IOException {
-    String line;
-    BufferedReader reader = request.getReader();
-    try {
-      line = reader.readLine();
-    } finally {
-      reader.close();
-    }
+    String line = request.getReader().readLine();
     if (line == null || line.isEmpty()) {
       return 1.0f;
     }

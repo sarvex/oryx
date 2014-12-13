@@ -136,7 +136,7 @@ public final class RowStep extends IterationStep {
       for (double ap : aps.materialize()) {
         meanAveragePrecision.increment(ap);
       }
-      log.info("Mean average precision: {}", meanAveragePrecision);
+      log.info("Mean average precision: {}", meanAveragePrecision.getResult());
 
       File tempMAPFile = File.createTempFile("MAP", ".txt");
       tempMAPFile.deleteOnExit();
@@ -150,7 +150,7 @@ public final class RowStep extends IterationStep {
   
   private static int chooseConvergenceSamplingModulus(GroupingOptions opts) {
     // Kind of arbitrary formula, determined empirically.
-    int modulus = RandomUtils.nextTwinPrime(16 * opts.getNumReducers() * opts.getNumReducers());
+    int modulus = RandomUtils.nextTwinPrime(4 * opts.getNumReducers() * opts.getNumReducers());
     log.info("Using convergence sampling modulus {} to sample about {}% of all user-item pairs for convergence",
              modulus, 100.0f / modulus / modulus);
     return modulus;

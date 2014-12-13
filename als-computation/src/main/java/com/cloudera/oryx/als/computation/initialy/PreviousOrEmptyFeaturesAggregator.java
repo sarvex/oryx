@@ -20,7 +20,7 @@ import org.apache.crunch.fn.Aggregators;
 
 public final class PreviousOrEmptyFeaturesAggregator extends Aggregators.SimpleAggregator<float[]> {
 
-  private static final float[] EMPTY = {0.0f};
+  private static final float[] EMPTY = {};
 
   private Iterable<float[]> values;
 

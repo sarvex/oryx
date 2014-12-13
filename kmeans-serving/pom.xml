@@ -18,7 +18,7 @@
   <parent>
     <groupId>com.cloudera.oryx</groupId>
     <artifactId>oryx</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
@@ -26,7 +26,7 @@
   <packaging>jar</packaging>
   <name>Oryx K-Means Serving</name>
   <description>K-Means model serving</description>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.1</version>
 
   <properties>
     <module.jspx.package>com.cloudera.oryx.kmeans.serving.web</module.jspx.package>

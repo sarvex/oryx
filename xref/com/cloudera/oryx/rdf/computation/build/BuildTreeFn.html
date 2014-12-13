@@ -127,7 +127,7 @@
 <a class="jxr_linenumber" name="L119" href="#L119">119</a>           features[col] = buildFeature(col, tokens[col], inboundSettings, columnToCategoryNameToIDMapping);
 <a class="jxr_linenumber" name="L120" href="#L120">120</a>         }
 <a class="jxr_linenumber" name="L121" href="#L121">121</a>       }
-<a class="jxr_linenumber" name="L122" href="#L122">122</a>       Preconditions.checkNotNull(target);
+<a class="jxr_linenumber" name="L122" href="#L122">122</a>       Preconditions.checkNotNull(target, <span class="jxr_string">"No target value in line %s"</span>, line);
 <a class="jxr_linenumber" name="L123" href="#L123">123</a>       allExamples.add(<strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/example/Example.html">Example</a>(target, features));
 <a class="jxr_linenumber" name="L124" href="#L124">124</a>     }
 <a class="jxr_linenumber" name="L125" href="#L125">125</a> 
@@ -156,68 +156,70 @@
 <a class="jxr_linenumber" name="L148" href="#L148">148</a>       progress(); <em class="jxr_comment">// Helps prevent timeouts</em>
 <a class="jxr_linenumber" name="L149" href="#L149">149</a>       <a href="../../../../../../com/cloudera/oryx/rdf/common/tree/DecisionTree.html">DecisionTree</a> tree = DecisionTree.fromExamplesWithDefault(trainingExamples);
 <a class="jxr_linenumber" name="L150" href="#L150">150</a>       progress(); <em class="jxr_comment">// Helps prevent timeouts</em>
-<a class="jxr_linenumber" name="L151" href="#L151">151</a>       log.info(<span class="jxr_string">"Built tree {}"</span>, treeID);
+<a class="jxr_linenumber" name="L151" href="#L151">151</a>       log.info(<span class="jxr_string">"Built tree {} with {} nodes"</span>, treeID, tree.countNodes());
 <a class="jxr_linenumber" name="L152" href="#L152">152</a>       <a href="../../../../../../com/cloudera/oryx/rdf/common/example/ExampleSet.html">ExampleSet</a> cvSet = <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/example/ExampleSet.html">ExampleSet</a>(cvExamples);
 <a class="jxr_linenumber" name="L153" href="#L153">153</a>       <strong class="jxr_keyword">double</strong>[] weightEval = Evaluation.evaluateToWeight(tree, cvSet);
-<a class="jxr_linenumber" name="L154" href="#L154">154</a>       <strong class="jxr_keyword">double</strong> weight = weightEval[0];
-<a class="jxr_linenumber" name="L155" href="#L155">155</a>       <strong class="jxr_keyword">double</strong> eval = weightEval[1];
-<a class="jxr_linenumber" name="L156" href="#L156">156</a>       <strong class="jxr_keyword">double</strong>[] featureImportances = tree.featureImportance(cvSet);
-<a class="jxr_linenumber" name="L157" href="#L157">157</a>       progress(); <em class="jxr_comment">// Helps prevent timeouts</em>
-<a class="jxr_linenumber" name="L158" href="#L158">158</a>       log.info(<span class="jxr_string">"Evaluated tree {}: {}"</span>, treeID, eval);
-<a class="jxr_linenumber" name="L159" href="#L159">159</a>       log.info(<span class="jxr_string">"Feature importances: {}"</span>, featureImportances);
-<a class="jxr_linenumber" name="L160" href="#L160">160</a> 
-<a class="jxr_linenumber" name="L161" href="#L161">161</a>       <a href="../../../../../../com/cloudera/oryx/rdf/common/tree/DecisionForest.html">DecisionForest</a> singletonForest = <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/tree/DecisionForest.html">DecisionForest</a>(
-<a class="jxr_linenumber" name="L162" href="#L162">162</a>           <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/tree/DecisionTree.html">DecisionTree</a>[] { tree }, <strong class="jxr_keyword">new</strong> <strong class="jxr_keyword">double</strong>[] { weight }, featureImportances);
-<a class="jxr_linenumber" name="L163" href="#L163">163</a> 
-<a class="jxr_linenumber" name="L164" href="#L164">164</a>       String pmmlFileContents;
-<a class="jxr_linenumber" name="L165" href="#L165">165</a>       <strong class="jxr_keyword">try</strong>  {
-<a class="jxr_linenumber" name="L166" href="#L166">166</a>         StringWriter treePMML = <strong class="jxr_keyword">new</strong> StringWriter();
-<a class="jxr_linenumber" name="L167" href="#L167">167</a>         DecisionForestPMML.write(treePMML, singletonForest, columnToCategoryNameToIDMapping);
-<a class="jxr_linenumber" name="L168" href="#L168">168</a>         pmmlFileContents = NEWLINES.removeFrom(treePMML.toString());
-<a class="jxr_linenumber" name="L169" href="#L169">169</a>       } <strong class="jxr_keyword">catch</strong> (IOException ioe) {
-<a class="jxr_linenumber" name="L170" href="#L170">170</a>         <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalStateException(ioe);
-<a class="jxr_linenumber" name="L171" href="#L171">171</a>       }
-<a class="jxr_linenumber" name="L172" href="#L172">172</a> 
-<a class="jxr_linenumber" name="L173" href="#L173">173</a>       log.info(<span class="jxr_string">"Emitting tree {}"</span>, treeID);
-<a class="jxr_linenumber" name="L174" href="#L174">174</a>       emitter.emit(pmmlFileContents);
-<a class="jxr_linenumber" name="L175" href="#L175">175</a>     }
-<a class="jxr_linenumber" name="L176" href="#L176">176</a> 
-<a class="jxr_linenumber" name="L177" href="#L177">177</a>   }
+<a class="jxr_linenumber" name="L154" href="#L154">154</a>       progress();
+<a class="jxr_linenumber" name="L155" href="#L155">155</a>       <strong class="jxr_keyword">double</strong> weight = weightEval[0];
+<a class="jxr_linenumber" name="L156" href="#L156">156</a>       <strong class="jxr_keyword">double</strong> eval = weightEval[1];
+<a class="jxr_linenumber" name="L157" href="#L157">157</a>       <strong class="jxr_keyword">double</strong>[] featureImportances = tree.featureImportance(cvSet);
+<a class="jxr_linenumber" name="L158" href="#L158">158</a>       progress(); <em class="jxr_comment">// Helps prevent timeouts</em>
+<a class="jxr_linenumber" name="L159" href="#L159">159</a>       log.info(<span class="jxr_string">"Evaluated tree {}: {}"</span>, treeID, eval);
+<a class="jxr_linenumber" name="L160" href="#L160">160</a>       log.info(<span class="jxr_string">"Feature importances: {}"</span>, featureImportances);
+<a class="jxr_linenumber" name="L161" href="#L161">161</a> 
+<a class="jxr_linenumber" name="L162" href="#L162">162</a>       <a href="../../../../../../com/cloudera/oryx/rdf/common/tree/DecisionForest.html">DecisionForest</a> singletonForest = <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/tree/DecisionForest.html">DecisionForest</a>(
+<a class="jxr_linenumber" name="L163" href="#L163">163</a>           <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/tree/DecisionTree.html">DecisionTree</a>[] { tree }, <strong class="jxr_keyword">new</strong> <strong class="jxr_keyword">double</strong>[] { weight }, featureImportances);
+<a class="jxr_linenumber" name="L164" href="#L164">164</a> 
+<a class="jxr_linenumber" name="L165" href="#L165">165</a>       String pmmlFileContents;
+<a class="jxr_linenumber" name="L166" href="#L166">166</a>       <strong class="jxr_keyword">try</strong>  {
+<a class="jxr_linenumber" name="L167" href="#L167">167</a>         StringWriter treePMML = <strong class="jxr_keyword">new</strong> StringWriter();
+<a class="jxr_linenumber" name="L168" href="#L168">168</a>         DecisionForestPMML.write(treePMML, singletonForest, columnToCategoryNameToIDMapping);
+<a class="jxr_linenumber" name="L169" href="#L169">169</a>         pmmlFileContents = NEWLINES.removeFrom(treePMML.toString());
+<a class="jxr_linenumber" name="L170" href="#L170">170</a>       } <strong class="jxr_keyword">catch</strong> (IOException ioe) {
+<a class="jxr_linenumber" name="L171" href="#L171">171</a>         <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalStateException(ioe);
+<a class="jxr_linenumber" name="L172" href="#L172">172</a>       }
+<a class="jxr_linenumber" name="L173" href="#L173">173</a> 
+<a class="jxr_linenumber" name="L174" href="#L174">174</a>       log.info(<span class="jxr_string">"Emitting tree {}"</span>, treeID);
+<a class="jxr_linenumber" name="L175" href="#L175">175</a>       emitter.emit(pmmlFileContents);
+<a class="jxr_linenumber" name="L176" href="#L176">176</a>       progress();
+<a class="jxr_linenumber" name="L177" href="#L177">177</a>     }
 <a class="jxr_linenumber" name="L178" href="#L178">178</a> 
-<a class="jxr_linenumber" name="L179" href="#L179">179</a>   <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/example/Feature.html">Feature</a> buildFeature(<strong class="jxr_keyword">int</strong> columnNumber,
-<a class="jxr_linenumber" name="L180" href="#L180">180</a>                                       String token,
-<a class="jxr_linenumber" name="L181" href="#L181">181</a>                                       <a href="../../../../../../com/cloudera/oryx/common/settings/InboundSettings.html">InboundSettings</a> inboundSettings,
-<a class="jxr_linenumber" name="L182" href="#L182">182</a>                                       Map&lt;Integer, BiMap&lt;String, Integer&gt;&gt; columnToCategoryNameToIDMapping) {
-<a class="jxr_linenumber" name="L183" href="#L183">183</a>     <strong class="jxr_keyword">if</strong> (token == <strong class="jxr_keyword">null</strong> || token.isEmpty()) {
-<a class="jxr_linenumber" name="L184" href="#L184">184</a>       <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">null</strong>;
-<a class="jxr_linenumber" name="L185" href="#L185">185</a>     }
-<a class="jxr_linenumber" name="L186" href="#L186">186</a>     <strong class="jxr_keyword">if</strong> (inboundSettings.isNumeric(columnNumber)) {
-<a class="jxr_linenumber" name="L187" href="#L187">187</a>       <strong class="jxr_keyword">return</strong> NumericFeature.forValue(Float.parseFloat(token));
-<a class="jxr_linenumber" name="L188" href="#L188">188</a>     }
-<a class="jxr_linenumber" name="L189" href="#L189">189</a>     <strong class="jxr_keyword">if</strong> (inboundSettings.isCategorical(columnNumber)) {
-<a class="jxr_linenumber" name="L190" href="#L190">190</a>       <strong class="jxr_keyword">return</strong> CategoricalFeature.forValue(categoricalFromString(columnNumber, token, columnToCategoryNameToIDMapping));
-<a class="jxr_linenumber" name="L191" href="#L191">191</a>     }
-<a class="jxr_linenumber" name="L192" href="#L192">192</a>     <strong class="jxr_keyword">return</strong> IgnoredFeature.INSTANCE;
-<a class="jxr_linenumber" name="L193" href="#L193">193</a>   }
-<a class="jxr_linenumber" name="L194" href="#L194">194</a> 
-<a class="jxr_linenumber" name="L195" href="#L195">195</a>   <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">int</strong> categoricalFromString(<strong class="jxr_keyword">int</strong> columnNumber,
-<a class="jxr_linenumber" name="L196" href="#L196">196</a>                                            String value,
-<a class="jxr_linenumber" name="L197" href="#L197">197</a>                                            Map&lt;Integer, BiMap&lt;String, Integer&gt;&gt; columnToCategoryNameToIDMapping) {
-<a class="jxr_linenumber" name="L198" href="#L198">198</a>     BiMap&lt;String,Integer&gt; categoryNameToID = columnToCategoryNameToIDMapping.get(columnNumber);
-<a class="jxr_linenumber" name="L199" href="#L199">199</a>     <strong class="jxr_keyword">if</strong> (categoryNameToID == <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L200" href="#L200">200</a>       categoryNameToID = HashBiMap.create();
-<a class="jxr_linenumber" name="L201" href="#L201">201</a>       columnToCategoryNameToIDMapping.put(columnNumber, categoryNameToID);
-<a class="jxr_linenumber" name="L202" href="#L202">202</a>     }
-<a class="jxr_linenumber" name="L203" href="#L203">203</a>     Integer mapped = categoryNameToID.get(value);
-<a class="jxr_linenumber" name="L204" href="#L204">204</a>     <strong class="jxr_keyword">if</strong> (mapped != <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L205" href="#L205">205</a>       <strong class="jxr_keyword">return</strong> mapped;
-<a class="jxr_linenumber" name="L206" href="#L206">206</a>     }
-<a class="jxr_linenumber" name="L207" href="#L207">207</a>     <strong class="jxr_keyword">int</strong> newCategory = categoryNameToID.size();
-<a class="jxr_linenumber" name="L208" href="#L208">208</a>     categoryNameToID.put(value, newCategory);
-<a class="jxr_linenumber" name="L209" href="#L209">209</a>     <strong class="jxr_keyword">return</strong> newCategory;
-<a class="jxr_linenumber" name="L210" href="#L210">210</a>   }
-<a class="jxr_linenumber" name="L211" href="#L211">211</a> 
-<a class="jxr_linenumber" name="L212" href="#L212">212</a> }
+<a class="jxr_linenumber" name="L179" href="#L179">179</a>   }
+<a class="jxr_linenumber" name="L180" href="#L180">180</a> 
+<a class="jxr_linenumber" name="L181" href="#L181">181</a>   <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../../com/cloudera/oryx/rdf/common/example/Feature.html">Feature</a> buildFeature(<strong class="jxr_keyword">int</strong> columnNumber,
+<a class="jxr_linenumber" name="L182" href="#L182">182</a>                                       String token,
+<a class="jxr_linenumber" name="L183" href="#L183">183</a>                                       <a href="../../../../../../com/cloudera/oryx/common/settings/InboundSettings.html">InboundSettings</a> inboundSettings,
+<a class="jxr_linenumber" name="L184" href="#L184">184</a>                                       Map&lt;Integer, BiMap&lt;String, Integer&gt;&gt; columnToCategoryNameToIDMapping) {
+<a class="jxr_linenumber" name="L185" href="#L185">185</a>     <strong class="jxr_keyword">if</strong> (token == <strong class="jxr_keyword">null</strong> || token.isEmpty()) {
+<a class="jxr_linenumber" name="L186" href="#L186">186</a>       <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">null</strong>;
+<a class="jxr_linenumber" name="L187" href="#L187">187</a>     }
+<a class="jxr_linenumber" name="L188" href="#L188">188</a>     <strong class="jxr_keyword">if</strong> (inboundSettings.isNumeric(columnNumber)) {
+<a class="jxr_linenumber" name="L189" href="#L189">189</a>       <strong class="jxr_keyword">return</strong> NumericFeature.forValue(Float.parseFloat(token));
+<a class="jxr_linenumber" name="L190" href="#L190">190</a>     }
+<a class="jxr_linenumber" name="L191" href="#L191">191</a>     <strong class="jxr_keyword">if</strong> (inboundSettings.isCategorical(columnNumber)) {
+<a class="jxr_linenumber" name="L192" href="#L192">192</a>       <strong class="jxr_keyword">return</strong> CategoricalFeature.forValue(categoricalFromString(columnNumber, token, columnToCategoryNameToIDMapping));
+<a class="jxr_linenumber" name="L193" href="#L193">193</a>     }
+<a class="jxr_linenumber" name="L194" href="#L194">194</a>     <strong class="jxr_keyword">return</strong> IgnoredFeature.INSTANCE;
+<a class="jxr_linenumber" name="L195" href="#L195">195</a>   }
+<a class="jxr_linenumber" name="L196" href="#L196">196</a> 
+<a class="jxr_linenumber" name="L197" href="#L197">197</a>   <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">int</strong> categoricalFromString(<strong class="jxr_keyword">int</strong> columnNumber,
+<a class="jxr_linenumber" name="L198" href="#L198">198</a>                                            String value,
+<a class="jxr_linenumber" name="L199" href="#L199">199</a>                                            Map&lt;Integer, BiMap&lt;String, Integer&gt;&gt; columnToCategoryNameToIDMapping) {
+<a class="jxr_linenumber" name="L200" href="#L200">200</a>     BiMap&lt;String,Integer&gt; categoryNameToID = columnToCategoryNameToIDMapping.get(columnNumber);
+<a class="jxr_linenumber" name="L201" href="#L201">201</a>     <strong class="jxr_keyword">if</strong> (categoryNameToID == <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L202" href="#L202">202</a>       categoryNameToID = HashBiMap.create();
+<a class="jxr_linenumber" name="L203" href="#L203">203</a>       columnToCategoryNameToIDMapping.put(columnNumber, categoryNameToID);
+<a class="jxr_linenumber" name="L204" href="#L204">204</a>     }
+<a class="jxr_linenumber" name="L205" href="#L205">205</a>     Integer mapped = categoryNameToID.get(value);
+<a class="jxr_linenumber" name="L206" href="#L206">206</a>     <strong class="jxr_keyword">if</strong> (mapped != <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L207" href="#L207">207</a>       <strong class="jxr_keyword">return</strong> mapped;
+<a class="jxr_linenumber" name="L208" href="#L208">208</a>     }
+<a class="jxr_linenumber" name="L209" href="#L209">209</a>     <strong class="jxr_keyword">int</strong> newCategory = categoryNameToID.size();
+<a class="jxr_linenumber" name="L210" href="#L210">210</a>     categoryNameToID.put(value, newCategory);
+<a class="jxr_linenumber" name="L211" href="#L211">211</a>     <strong class="jxr_keyword">return</strong> newCategory;
+<a class="jxr_linenumber" name="L212" href="#L212">212</a>   }
+<a class="jxr_linenumber" name="L213" href="#L213">213</a> 
+<a class="jxr_linenumber" name="L214" href="#L214">214</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2013&#x2013;2014. All rights reserved.</div>

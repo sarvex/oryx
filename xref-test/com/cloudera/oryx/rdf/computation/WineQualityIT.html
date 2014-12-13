@@ -75,41 +75,42 @@
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>        assertTrue(d &gt;= 0.0);
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>        assertTrue(d &lt;= 1.0);
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>      }
-<a class="jxr_linenumber" name="L70" href="#L70">70</a>      assertEquals(importances[8], Doubles.max(importances));
-<a class="jxr_linenumber" name="L71" href="#L71">71</a>      assertTrue(importances[1] &gt; 0.6);
-<a class="jxr_linenumber" name="L72" href="#L72">72</a>      assertTrue(importances[5] &gt; 0.6);
-<a class="jxr_linenumber" name="L73" href="#L73">73</a>      assertTrue(importances[8] &gt; 0.8);
-<a class="jxr_linenumber" name="L74" href="#L74">74</a>      assertTrue(importances[9] &gt; 0.6);
-<a class="jxr_linenumber" name="L75" href="#L75">75</a>      assertTrue(importances[10] &gt; 0.7);
-<a class="jxr_linenumber" name="L76" href="#L76">76</a>    }
-<a class="jxr_linenumber" name="L77" href="#L77">77</a>  
-<a class="jxr_linenumber" name="L78" href="#L78">78</a>    @Test
-<a class="jxr_linenumber" name="L79" href="#L79">79</a>    <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testPMMLOutput() <strong class="jxr_keyword">throws</strong> Exception {
-<a class="jxr_linenumber" name="L80" href="#L80">80</a>      <strong class="jxr_keyword">new</strong> RDFLocalGenerationRunner().call();
-<a class="jxr_linenumber" name="L81" href="#L81">81</a>      File pmmlFile = <strong class="jxr_keyword">new</strong> File(TEST_TEMP_BASE_DIR, <span class="jxr_string">"00000/model.pmml.gz"</span>);
-<a class="jxr_linenumber" name="L82" href="#L82">82</a>      DecisionForestPMML.read(pmmlFile);
-<a class="jxr_linenumber" name="L83" href="#L83">83</a>    }
-<a class="jxr_linenumber" name="L84" href="#L84">84</a>  
-<a class="jxr_linenumber" name="L85" href="#L85">85</a>    <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> List&lt;Example&gt; readWineQualityExamples() <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L86" href="#L86">86</a>      List&lt;Example&gt; allExamples = Lists.newArrayList();
-<a class="jxr_linenumber" name="L87" href="#L87">87</a>      Pattern delimiter = Pattern.compile(<span class="jxr_string">";"</span>);
-<a class="jxr_linenumber" name="L88" href="#L88">88</a>      File dataFile = <strong class="jxr_keyword">new</strong> File(TEST_TEMP_INBOUND_DIR, <span class="jxr_string">"winequality-white.csv"</span>);
-<a class="jxr_linenumber" name="L89" href="#L89">89</a>      <strong class="jxr_keyword">for</strong> (CharSequence line : <strong class="jxr_keyword">new</strong> FileLineIterable(dataFile)) {
-<a class="jxr_linenumber" name="L90" href="#L90">90</a>        <strong class="jxr_keyword">if</strong> (line.length() == 0) {
-<a class="jxr_linenumber" name="L91" href="#L91">91</a>          <strong class="jxr_keyword">continue</strong>;
-<a class="jxr_linenumber" name="L92" href="#L92">92</a>        }
-<a class="jxr_linenumber" name="L93" href="#L93">93</a>        String[] tokens = delimiter.split(line);
-<a class="jxr_linenumber" name="L94" href="#L94">94</a>        Feature[] features = <strong class="jxr_keyword">new</strong> Feature[11];
-<a class="jxr_linenumber" name="L95" href="#L95">95</a>        <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 0; i &lt; features.length; i++) {
-<a class="jxr_linenumber" name="L96" href="#L96">96</a>          features[i] = NumericFeature.forValue(Float.parseFloat(tokens[i]));
-<a class="jxr_linenumber" name="L97" href="#L97">97</a>        }
-<a class="jxr_linenumber" name="L98" href="#L98">98</a>        Example trainingExample = <strong class="jxr_keyword">new</strong> Example(NumericFeature.forValue(Float.parseFloat(tokens[11])), features);
-<a class="jxr_linenumber" name="L99" href="#L99">99</a>        allExamples.add(trainingExample);
-<a class="jxr_linenumber" name="L100" href="#L100">100</a>     }
-<a class="jxr_linenumber" name="L101" href="#L101">101</a>     <strong class="jxr_keyword">return</strong> allExamples;
-<a class="jxr_linenumber" name="L102" href="#L102">102</a>   }
-<a class="jxr_linenumber" name="L103" href="#L103">103</a> 
-<a class="jxr_linenumber" name="L104" href="#L104">104</a> }
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>      <strong class="jxr_keyword">double</strong> mostImportant = Doubles.max(importances);
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>      assertTrue(importances[8] == mostImportant || importances[10] == mostImportant);
+<a class="jxr_linenumber" name="L72" href="#L72">72</a>      assertTrue(importances[1] &gt; 0.6);
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>      assertTrue(importances[5] &gt; 0.6);
+<a class="jxr_linenumber" name="L74" href="#L74">74</a>      assertTrue(importances[8] &gt; 0.7);
+<a class="jxr_linenumber" name="L75" href="#L75">75</a>      assertTrue(importances[9] &gt; 0.55);
+<a class="jxr_linenumber" name="L76" href="#L76">76</a>      assertTrue(importances[10] &gt; 0.7);
+<a class="jxr_linenumber" name="L77" href="#L77">77</a>    }
+<a class="jxr_linenumber" name="L78" href="#L78">78</a>  
+<a class="jxr_linenumber" name="L79" href="#L79">79</a>    @Test
+<a class="jxr_linenumber" name="L80" href="#L80">80</a>    <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testPMMLOutput() <strong class="jxr_keyword">throws</strong> Exception {
+<a class="jxr_linenumber" name="L81" href="#L81">81</a>      <strong class="jxr_keyword">new</strong> RDFLocalGenerationRunner().call();
+<a class="jxr_linenumber" name="L82" href="#L82">82</a>      File pmmlFile = <strong class="jxr_keyword">new</strong> File(TEST_TEMP_BASE_DIR, <span class="jxr_string">"00000/model.pmml.gz"</span>);
+<a class="jxr_linenumber" name="L83" href="#L83">83</a>      DecisionForestPMML.read(pmmlFile);
+<a class="jxr_linenumber" name="L84" href="#L84">84</a>    }
+<a class="jxr_linenumber" name="L85" href="#L85">85</a>  
+<a class="jxr_linenumber" name="L86" href="#L86">86</a>    <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> List&lt;Example&gt; readWineQualityExamples() <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L87" href="#L87">87</a>      List&lt;Example&gt; allExamples = Lists.newArrayList();
+<a class="jxr_linenumber" name="L88" href="#L88">88</a>      Pattern delimiter = Pattern.compile(<span class="jxr_string">";"</span>);
+<a class="jxr_linenumber" name="L89" href="#L89">89</a>      File dataFile = <strong class="jxr_keyword">new</strong> File(TEST_TEMP_INBOUND_DIR, <span class="jxr_string">"winequality-white.csv"</span>);
+<a class="jxr_linenumber" name="L90" href="#L90">90</a>      <strong class="jxr_keyword">for</strong> (CharSequence line : <strong class="jxr_keyword">new</strong> FileLineIterable(dataFile)) {
+<a class="jxr_linenumber" name="L91" href="#L91">91</a>        <strong class="jxr_keyword">if</strong> (line.length() == 0) {
+<a class="jxr_linenumber" name="L92" href="#L92">92</a>          <strong class="jxr_keyword">continue</strong>;
+<a class="jxr_linenumber" name="L93" href="#L93">93</a>        }
+<a class="jxr_linenumber" name="L94" href="#L94">94</a>        String[] tokens = delimiter.split(line);
+<a class="jxr_linenumber" name="L95" href="#L95">95</a>        Feature[] features = <strong class="jxr_keyword">new</strong> Feature[11];
+<a class="jxr_linenumber" name="L96" href="#L96">96</a>        <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 0; i &lt; features.length; i++) {
+<a class="jxr_linenumber" name="L97" href="#L97">97</a>          features[i] = NumericFeature.forValue(Float.parseFloat(tokens[i]));
+<a class="jxr_linenumber" name="L98" href="#L98">98</a>        }
+<a class="jxr_linenumber" name="L99" href="#L99">99</a>        Example trainingExample = <strong class="jxr_keyword">new</strong> Example(NumericFeature.forValue(Float.parseFloat(tokens[11])), features);
+<a class="jxr_linenumber" name="L100" href="#L100">100</a>       allExamples.add(trainingExample);
+<a class="jxr_linenumber" name="L101" href="#L101">101</a>     }
+<a class="jxr_linenumber" name="L102" href="#L102">102</a>     <strong class="jxr_keyword">return</strong> allExamples;
+<a class="jxr_linenumber" name="L103" href="#L103">103</a>   }
+<a class="jxr_linenumber" name="L104" href="#L104">104</a> 
+<a class="jxr_linenumber" name="L105" href="#L105">105</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2013&#x2013;2014. All rights reserved.</div>

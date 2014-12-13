@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Mon Jul 07 23:27:11 BST 2014 -->
+<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Sat Dec 13 23:33:41 GMT 2014 -->
 
 <report>
   <stats>
@@ -6,37 +6,37 @@
     <classes value="23"/>
     <methods value="122"/>
     <srcfiles value="19"/>
-    <srclines value="642"/>
+    <srclines value="656"/>
   </stats>
   <data>
     <all name="all classes">
       <coverage type="class, %" value="52%  (12/23)"/>
       <coverage type="method, %" value="46%  (56/122)"/>
-      <coverage type="block, %" value="49%  (1485/3023)"/>
-      <coverage type="line, %" value="54%  (345.1/642)"/>
+      <coverage type="block, %" value="49%  (1491/3029)"/>
+      <coverage type="line, %" value="54%  (353.2/656)"/>
 
       <package name="com.cloudera.oryx.als.common.candidate">
         <coverage type="class, %" value="0%   (0/3)"/>
         <coverage type="method, %" value="0%   (0/8)"/>
         <coverage type="block, %" value="0%   (0/124)"/>
-        <coverage type="line, %" value="0%   (0/27)"/>
+        <coverage type="line, %" value="0%   (0/29)"/>
 
         <srcfile name="CandidateFilterFactory.java">
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/2)"/>
           <coverage type="block, %" value="0%   (0/90)"/>
-          <coverage type="line, %" value="0%   (0/16)"/>
+          <coverage type="line, %" value="0%   (0/18)"/>
 
           <class name="CandidateFilterFactory">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/2)"/>
             <coverage type="block, %" value="0%   (0/90)"/>
-            <coverage type="line, %" value="0%   (0/16)"/>
+            <coverage type="line, %" value="0%   (0/18)"/>
 
             <method name="CandidateFilterFactory (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/26)"/>
-              <coverage type="line, %" value="0%   (0/6)"/>
+              <coverage type="line, %" value="0%   (0/8)"/>
             </method>
             <method name="buildCandidateFilter (LongObjectMap, Lock): CandidateFilter">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -108,19 +108,19 @@
         <coverage type="class, %" value="0%   (0/4)"/>
         <coverage type="method, %" value="0%   (0/22)"/>
         <coverage type="block, %" value="0%   (0/656)"/>
-        <coverage type="line, %" value="0%   (0/118)"/>
+        <coverage type="line, %" value="0%   (0/119)"/>
 
         <srcfile name="LocationSensitiveHash.java">
           <coverage type="class, %" value="0%   (0/4)"/>
           <coverage type="method, %" value="0%   (0/22)"/>
           <coverage type="block, %" value="0%   (0/656)"/>
-          <coverage type="line, %" value="0%   (0/118)"/>
+          <coverage type="line, %" value="0%   (0/119)"/>
 
           <class name="LocationSensitiveHash">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/7)"/>
             <coverage type="block, %" value="0%   (0/524)"/>
-            <coverage type="line, %" value="0%   (0/90)"/>
+            <coverage type="line, %" value="0%   (0/91)"/>
 
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -130,7 +130,7 @@
             <method name="LocationSensitiveHash (LongObjectMap, double, int): void">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/263)"/>
-              <coverage type="line, %" value="0%   (0/44)"/>
+              <coverage type="line, %" value="0%   (0/45)"/>
             </method>
             <method name="access$300 (LocationSensitiveHash): LongObjectMap">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -260,19 +260,19 @@
         <coverage type="class, %" value="56%  (5/9)"/>
         <coverage type="method, %" value="51%  (21/41)"/>
         <coverage type="block, %" value="63%  (338/533)"/>
-        <coverage type="line, %" value="69%  (99.5/144)"/>
+        <coverage type="line, %" value="68%  (99.5/146)"/>
 
         <srcfile name="IDValue.java">
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/6)"/>
           <coverage type="block, %" value="0%   (0/74)"/>
-          <coverage type="line, %" value="0%   (0/12)"/>
+          <coverage type="line, %" value="0%   (0/14)"/>
 
           <class name="IDValue">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/6)"/>
             <coverage type="block, %" value="0%   (0/74)"/>
-            <coverage type="line, %" value="0%   (0/12)"/>
+            <coverage type="line, %" value="0%   (0/14)"/>
 
             <method name="IDValue (String, float): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -282,7 +282,7 @@
             <method name="equals (Object): boolean">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/33)"/>
-              <coverage type="line, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/6)"/>
             </method>
             <method name="getID (): String">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -648,13 +648,13 @@
           <coverage type="class, %" value="100% (1/1)"/>
           <coverage type="method, %" value="67%  (2/3)"/>
           <coverage type="block, %" value="61%  (46/76)"/>
-          <coverage type="line, %" value="64%  (9/14)"/>
+          <coverage type="line, %" value="64%  (8.9/14)"/>
 
           <class name="MultiRescorer">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="67%  (2/3)"/>
             <coverage type="block, %" value="61%  (46/76)"/>
-            <coverage type="line, %" value="64%  (9/14)"/>
+            <coverage type="line, %" value="64%  (8.9/14)"/>
 
             <method name="rescore (String, double): double">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -677,13 +677,13 @@
           <coverage type="class, %" value="100% (1/1)"/>
           <coverage type="method, %" value="67%  (2/3)"/>
           <coverage type="block, %" value="61%  (48/79)"/>
-          <coverage type="line, %" value="66%  (10/15)"/>
+          <coverage type="line, %" value="66%  (9.9/15)"/>
 
           <class name="MultiLongPairRescorer">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="67%  (2/3)"/>
             <coverage type="block, %" value="61%  (48/79)"/>
-            <coverage type="line, %" value="66%  (10/15)"/>
+            <coverage type="line, %" value="66%  (9.9/15)"/>
 
             <method name="rescore (String, String, double): double">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -755,20 +755,20 @@
       <package name="com.cloudera.oryx.als.common.factorizer.als">
         <coverage type="class, %" value="100% (2/2)"/>
         <coverage type="method, %" value="87%  (13/15)"/>
-        <coverage type="block, %" value="66%  (686/1035)"/>
-        <coverage type="line, %" value="69%  (144.5/208)"/>
+        <coverage type="block, %" value="66%  (692/1041)"/>
+        <coverage type="line, %" value="70%  (152.5/217)"/>
 
         <srcfile name="AlternatingLeastSquares.java">
           <coverage type="class, %" value="100% (2/2)"/>
           <coverage type="method, %" value="87%  (13/15)"/>
-          <coverage type="block, %" value="66%  (686/1035)"/>
-          <coverage type="line, %" value="69%  (144.5/208)"/>
+          <coverage type="block, %" value="66%  (692/1041)"/>
+          <coverage type="line, %" value="70%  (152.5/217)"/>
 
           <class name="AlternatingLeastSquares">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="91%  (10/11)"/>
-            <coverage type="block, %" value="62%  (454/732)"/>
-            <coverage type="line, %" value="66%  (100/151)"/>
+            <coverage type="block, %" value="62%  (460/738)"/>
+            <coverage type="line, %" value="68%  (107/158)"/>
 
             <method name="access$100 (): Logger">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -797,13 +797,13 @@
             </method>
             <method name="call (): Void">
               <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="75%  (165/221)"/>
-              <coverage type="line, %" value="80%  (32/40)"/>
+              <coverage type="block, %" value="75%  (171/227)"/>
+              <coverage type="line, %" value="83%  (38/46)"/>
             </method>
             <method name="AlternatingLeastSquares (LongObjectMap, LongObjectMap, int, double, int): void">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="97%  (56/58)"/>
-              <coverage type="line, %" value="99%  (10.9/11)"/>
+              <coverage type="line, %" value="99%  (11.9/12)"/>
             </method>
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="100% (1/1)"/>
@@ -830,7 +830,7 @@
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="75%  (3/4)"/>
             <coverage type="block, %" value="77%  (232/303)"/>
-            <coverage type="line, %" value="78%  (44.5/57)"/>
+            <coverage type="line, %" value="77%  (45.6/59)"/>
 
             <method name="partialTransposeTimesSelf (LongObjectMap, int, LongPrimitiveIterator): RealMatrix">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -840,7 +840,7 @@
             <method name="call (): Void">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="91%  (206/227)"/>
-              <coverage type="line, %" value="94%  (36.5/39)"/>
+              <coverage type="line, %" value="92%  (37.6/41)"/>
             </method>
             <method name="AlternatingLeastSquares$Worker (int, LongObjectMap, RealMatrix, LongObjectMap, Iterable): void">
               <coverage type="method, %" value="100% (1/1)"/>

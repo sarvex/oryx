@@ -1,19 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Mon Jul 07 23:27:11 BST 2014 -->
+<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Sat Dec 13 23:33:41 GMT 2014 -->
 
 <report>
   <stats>
     <packages value="2"/>
     <classes value="19"/>
-    <methods value="88"/>
+    <methods value="90"/>
     <srcfiles value="14"/>
-    <srclines value="358"/>
+    <srclines value="372"/>
   </stats>
   <data>
     <all name="all classes">
       <coverage type="class, %" value="89%  (17/19)"/>
-      <coverage type="method, %" value="70%  (62/88)"/>
-      <coverage type="block, %" value="76%  (1481/1959)"/>
-      <coverage type="line, %" value="77%  (277.2/358)"/>
+      <coverage type="method, %" value="69%  (62/90)"/>
+      <coverage type="block, %" value="75%  (1481/1966)"/>
+      <coverage type="line, %" value="77%  (286.2/372)"/>
 
       <package name="com.cloudera.oryx.kmeans.common.pmml">
         <coverage type="class, %" value="0%   (0/1)"/>
@@ -78,9 +78,9 @@
       </package>
       <package name="com.cloudera.oryx.kmeans.common">
         <coverage type="class, %" value="94%  (17/18)"/>
-        <coverage type="method, %" value="78%  (62/80)"/>
-        <coverage type="block, %" value="83%  (1481/1783)"/>
-        <coverage type="line, %" value="87%  (277.2/318)"/>
+        <coverage type="method, %" value="76%  (62/82)"/>
+        <coverage type="block, %" value="83%  (1481/1790)"/>
+        <coverage type="line, %" value="86%  (286.2/332)"/>
 
         <srcfile name="Distance.java">
           <coverage type="class, %" value="100% (1/1)"/>
@@ -123,9 +123,9 @@
         </srcfile>
         <srcfile name="Weighted.java">
           <coverage type="class, %" value="50%  (1/2)"/>
-          <coverage type="method, %" value="38%  (5/13)"/>
-          <coverage type="block, %" value="50%  (78/155)"/>
-          <coverage type="line, %" value="63%  (19/30)"/>
+          <coverage type="method, %" value="36%  (5/14)"/>
+          <coverage type="block, %" value="49%  (78/159)"/>
+          <coverage type="line, %" value="59%  (19/32)"/>
 
           <class name="Weighted$WeightFunction">
             <coverage type="class, %" value="0%   (0/1)"/>
@@ -151,10 +151,15 @@
           </class>
           <class name="Weighted">
             <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="50%  (5/10)"/>
-            <coverage type="block, %" value="54%  (78/144)"/>
-            <coverage type="line, %" value="68%  (19/28)"/>
+            <coverage type="method, %" value="45%  (5/11)"/>
+            <coverage type="block, %" value="53%  (78/148)"/>
+            <coverage type="line, %" value="63%  (19/30)"/>
 
+            <method name="Weighted (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
             <method name="create (Collection): Collection">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/7)"/>
@@ -211,13 +216,13 @@
           <coverage type="class, %" value="100% (1/1)"/>
           <coverage type="method, %" value="75%  (3/4)"/>
           <coverage type="block, %" value="61%  (42/69)"/>
-          <coverage type="line, %" value="77%  (10/13)"/>
+          <coverage type="line, %" value="71%  (9.9/14)"/>
 
           <class name="KMeans">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="75%  (3/4)"/>
             <coverage type="block, %" value="61%  (42/69)"/>
-            <coverage type="line, %" value="77%  (10/13)"/>
+            <coverage type="line, %" value="71%  (9.9/14)"/>
 
             <method name="KMeans (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -227,7 +232,7 @@
             <method name="compute (List, int, RandomGenerator): Centers">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="57%  (25/44)"/>
-              <coverage type="line, %" value="82%  (5/6)"/>
+              <coverage type="line, %" value="71%  (5/7)"/>
             </method>
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="100% (1/1)"/>
@@ -238,6 +243,30 @@
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="100% (13/13)"/>
               <coverage type="line, %" value="100% (4/4)"/>
+            </method>
+          </class>
+        </srcfile>
+        <srcfile name="WeightedRealVector.java">
+          <coverage type="class, %" value="100% (1/1)"/>
+          <coverage type="method, %" value="50%  (1/2)"/>
+          <coverage type="block, %" value="62%  (5/8)"/>
+          <coverage type="line, %" value="50%  (2/4)"/>
+
+          <class name="WeightedRealVector">
+            <coverage type="class, %" value="100% (1/1)"/>
+            <coverage type="method, %" value="50%  (1/2)"/>
+            <coverage type="block, %" value="62%  (5/8)"/>
+            <coverage type="line, %" value="50%  (2/4)"/>
+
+            <method name="WeightedRealVector (): void">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/3)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
+            </method>
+            <method name="WeightedRealVector (RealVector, double): void">
+              <coverage type="method, %" value="100% (1/1)"/>
+              <coverage type="block, %" value="100% (5/5)"/>
+              <coverage type="line, %" value="100% (2/2)"/>
             </method>
           </class>
         </srcfile>
@@ -382,13 +411,13 @@
           <coverage type="class, %" value="100% (2/2)"/>
           <coverage type="method, %" value="89%  (16/18)"/>
           <coverage type="block, %" value="90%  (415/461)"/>
-          <coverage type="line, %" value="97%  (67/69)"/>
+          <coverage type="line, %" value="97%  (76/78)"/>
 
           <class name="ClusterValidityStatistics">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="86%  (12/14)"/>
             <coverage type="block, %" value="89%  (364/410)"/>
-            <coverage type="line, %" value="97%  (60/62)"/>
+            <coverage type="line, %" value="97%  (69/71)"/>
 
             <method name="getReplica (): int">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -403,12 +432,12 @@
             <method name="parse (String): ClusterValidityStatistics">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="98%  (53/54)"/>
-              <coverage type="line, %" value="99%  (3/3)"/>
+              <coverage type="line, %" value="100% (9/9)"/>
             </method>
             <method name="create (Iterable, Centers, Centers, int): ClusterValidityStatistics">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="99%  (132/133)"/>
-              <coverage type="line, %" value="100% (19/19)"/>
+              <coverage type="line, %" value="100% (22/22)"/>
             </method>
             <method name="ClusterValidityStatistics (int, int, double, double, double, double): void">
               <coverage type="method, %" value="100% (1/1)"/>
@@ -548,7 +577,7 @@
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="100% (2/2)"/>
             <coverage type="block, %" value="100% (19/19)"/>
-            <coverage type="line, %" value="100% (2/2)"/>
+            <coverage type="line, %" value="100% (3/3)"/>
 
             <method name="KMeansInitStrategy$1 (String, int): void">
               <coverage type="method, %" value="100% (1/1)"/>
@@ -558,7 +587,7 @@
             <method name="apply (List, int, RandomGenerator): Centers">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="100% (13/13)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
+              <coverage type="line, %" value="100% (2/2)"/>
             </method>
           </class>
           <class name="KMeansInitStrategy$1$1">
@@ -677,25 +706,6 @@
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="100% (125/125)"/>
               <coverage type="line, %" value="100% (20/20)"/>
-            </method>
-          </class>
-        </srcfile>
-        <srcfile name="WeightedRealVector.java">
-          <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="100% (1/1)"/>
-          <coverage type="block, %" value="100% (5/5)"/>
-          <coverage type="line, %" value="100% (2/2)"/>
-
-          <class name="WeightedRealVector">
-            <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="100% (1/1)"/>
-            <coverage type="block, %" value="100% (5/5)"/>
-            <coverage type="line, %" value="100% (2/2)"/>
-
-            <method name="WeightedRealVector (RealVector, double): void">
-              <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="100% (5/5)"/>
-              <coverage type="line, %" value="100% (2/2)"/>
             </method>
           </class>
         </srcfile>

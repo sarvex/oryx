@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Mon Jul 07 23:27:11 BST 2014 -->
+<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Sat Dec 13 23:33:41 GMT 2014 -->
 
 <report>
   <stats>
@@ -6,20 +6,20 @@
     <classes value="79"/>
     <methods value="376"/>
     <srcfiles value="59"/>
-    <srclines value="1654"/>
+    <srclines value="1766"/>
   </stats>
   <data>
     <all name="all classes">
       <coverage type="class, %" value="28%  (22/79)"/>
       <coverage type="method, %" value="15%  (55/376)"/>
-      <coverage type="block, %" value="13%  (1044/8327)"/>
-      <coverage type="line, %" value="12%  (203/1654)"/>
+      <coverage type="block, %" value="13%  (1044/8328)"/>
+      <coverage type="line, %" value="12%  (210.1/1766)"/>
 
       <package name="com.cloudera.oryx.kmeans.computation.evaluate">
         <coverage type="class, %" value="0%   (0/12)"/>
         <coverage type="method, %" value="0%   (0/57)"/>
         <coverage type="block, %" value="0%   (0/1491)"/>
-        <coverage type="line, %" value="0%   (0/300)"/>
+        <coverage type="line, %" value="0%   (0/326)"/>
 
         <srcfile name="CentersOutputFn.java">
           <coverage type="class, %" value="0%   (0/1)"/>
@@ -93,13 +93,13 @@
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/10)"/>
           <coverage type="block, %" value="0%   (0/134)"/>
-          <coverage type="line, %" value="0%   (0/26)"/>
+          <coverage type="line, %" value="0%   (0/27)"/>
 
           <class name="ClosestSketchVectorData">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/10)"/>
             <coverage type="block, %" value="0%   (0/134)"/>
-            <coverage type="line, %" value="0%   (0/26)"/>
+            <coverage type="line, %" value="0%   (0/27)"/>
 
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -149,7 +149,7 @@
             <method name="update (ClosestSketchVectorData): void">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/50)"/>
-              <coverage type="line, %" value="0%   (0/5)"/>
+              <coverage type="line, %" value="0%   (0/6)"/>
             </method>
           </class>
         </srcfile>
@@ -196,13 +196,13 @@
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/6)"/>
           <coverage type="block, %" value="0%   (0/420)"/>
-          <coverage type="line, %" value="0%   (0/80)"/>
+          <coverage type="line, %" value="0%   (0/88)"/>
 
           <class name="ClusteringStep">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/6)"/>
             <coverage type="block, %" value="0%   (0/420)"/>
-            <coverage type="line, %" value="0%   (0/80)"/>
+            <coverage type="line, %" value="0%   (0/88)"/>
 
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -217,7 +217,7 @@
             <method name="createPipeline (): MRPipeline">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/129)"/>
-              <coverage type="line, %" value="0%   (0/17)"/>
+              <coverage type="line, %" value="0%   (0/25)"/>
             </method>
             <method name="findBest (String): List">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -240,13 +240,13 @@
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/9)"/>
           <coverage type="block, %" value="0%   (0/223)"/>
-          <coverage type="line, %" value="0%   (0/41)"/>
+          <coverage type="line, %" value="0%   (0/45)"/>
 
           <class name="EvaluationSettings">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/9)"/>
             <coverage type="block, %" value="0%   (0/223)"/>
-            <coverage type="line, %" value="0%   (0/41)"/>
+            <coverage type="line, %" value="0%   (0/45)"/>
 
             <method name="EvaluationSettings (List, int, int, int, KMeansInitStrategy, KMeansUpdateStrategy, KMeansEvalStrategy): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -256,7 +256,7 @@
             <method name="create (Config): EvaluationSettings">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/178)"/>
-              <coverage type="line, %" value="0%   (0/25)"/>
+              <coverage type="line, %" value="0%   (0/29)"/>
             </method>
             <method name="getEvalStrategy (): KMeansEvalStrategy">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -323,13 +323,13 @@
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/7)"/>
           <coverage type="block, %" value="0%   (0/148)"/>
-          <coverage type="line, %" value="0%   (0/25)"/>
+          <coverage type="line, %" value="0%   (0/31)"/>
 
           <class name="KMeansEvaluationData">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/7)"/>
             <coverage type="block, %" value="0%   (0/148)"/>
-            <coverage type="line, %" value="0%   (0/25)"/>
+            <coverage type="line, %" value="0%   (0/31)"/>
 
             <method name="KMeansEvaluationData (List, int, int, EvaluationSettings): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -339,7 +339,7 @@
             <method name="compute (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/102)"/>
-              <coverage type="line, %" value="0%   (0/13)"/>
+              <coverage type="line, %" value="0%   (0/19)"/>
             </method>
             <method name="getBest (): Centers">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -420,13 +420,13 @@
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/2)"/>
           <coverage type="block, %" value="0%   (0/120)"/>
-          <coverage type="line, %" value="0%   (0/16)"/>
+          <coverage type="line, %" value="0%   (0/23)"/>
 
           <class name="VoronoiPartitionStep">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/2)"/>
             <coverage type="block, %" value="0%   (0/120)"/>
-            <coverage type="line, %" value="0%   (0/16)"/>
+            <coverage type="line, %" value="0%   (0/23)"/>
 
             <method name="VoronoiPartitionStep (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -436,7 +436,7 @@
             <method name="createPipeline (): MRPipeline">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/117)"/>
-              <coverage type="line, %" value="0%   (0/15)"/>
+              <coverage type="line, %" value="0%   (0/22)"/>
             </method>
           </class>
         </srcfile>
@@ -479,19 +479,19 @@
         <coverage type="class, %" value="0%   (0/11)"/>
         <coverage type="method, %" value="0%   (0/29)"/>
         <coverage type="block, %" value="0%   (0/1340)"/>
-        <coverage type="line, %" value="0%   (0/265)"/>
+        <coverage type="line, %" value="0%   (0/271)"/>
 
         <srcfile name="Assignment.java">
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/4)"/>
           <coverage type="block, %" value="0%   (0/118)"/>
-          <coverage type="line, %" value="0%   (0/25)"/>
+          <coverage type="line, %" value="0%   (0/26)"/>
 
           <class name="Assignment">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/4)"/>
             <coverage type="block, %" value="0%   (0/118)"/>
-            <coverage type="line, %" value="0%   (0/25)"/>
+            <coverage type="line, %" value="0%   (0/26)"/>
 
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -506,7 +506,7 @@
             <method name="call (): List">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/90)"/>
-              <coverage type="line, %" value="0%   (0/18)"/>
+              <coverage type="line, %" value="0%   (0/19)"/>
             </method>
             <method name="doOutlierComputation (Config): boolean">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -608,13 +608,13 @@
           <coverage type="class, %" value="0%   (0/2)"/>
           <coverage type="method, %" value="0%   (0/4)"/>
           <coverage type="block, %" value="0%   (0/246)"/>
-          <coverage type="line, %" value="0%   (0/49)"/>
+          <coverage type="line, %" value="0%   (0/50)"/>
 
           <class name="KMeansLocalGenerationRunner">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/2)"/>
             <coverage type="block, %" value="0%   (0/237)"/>
-            <coverage type="line, %" value="0%   (0/47)"/>
+            <coverage type="line, %" value="0%   (0/48)"/>
 
             <method name="KMeansLocalGenerationRunner (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -624,7 +624,7 @@
             <method name="runSteps (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/234)"/>
-              <coverage type="line, %" value="0%   (0/46)"/>
+              <coverage type="line, %" value="0%   (0/47)"/>
             </method>
           </class>
           <class name="KMeansLocalGenerationRunner$1">
@@ -673,13 +673,13 @@
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/4)"/>
           <coverage type="block, %" value="0%   (0/301)"/>
-          <coverage type="line, %" value="0%   (0/57)"/>
+          <coverage type="line, %" value="0%   (0/59)"/>
 
           <class name="Standardize">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/4)"/>
             <coverage type="block, %" value="0%   (0/301)"/>
-            <coverage type="line, %" value="0%   (0/57)"/>
+            <coverage type="line, %" value="0%   (0/59)"/>
 
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -699,7 +699,7 @@
             <method name="call (): List">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/277)"/>
-              <coverage type="line, %" value="0%   (0/48)"/>
+              <coverage type="line, %" value="0%   (0/50)"/>
             </method>
           </class>
         </srcfile>
@@ -736,13 +736,13 @@
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/4)"/>
           <coverage type="block, %" value="0%   (0/196)"/>
-          <coverage type="line, %" value="0%   (0/34)"/>
+          <coverage type="line, %" value="0%   (0/36)"/>
 
           <class name="WeightedPointsByFold">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/4)"/>
             <coverage type="block, %" value="0%   (0/196)"/>
-            <coverage type="line, %" value="0%   (0/34)"/>
+            <coverage type="line, %" value="0%   (0/36)"/>
 
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -757,12 +757,12 @@
             <method name="buildIndex (List, ClusterSettings): KSketchIndex">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/55)"/>
-              <coverage type="line, %" value="0%   (0/8)"/>
+              <coverage type="line, %" value="0%   (0/9)"/>
             </method>
             <method name="call (): List">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/131)"/>
-              <coverage type="line, %" value="0%   (0/22)"/>
+              <coverage type="line, %" value="0%   (0/23)"/>
             </method>
           </class>
         </srcfile>
@@ -771,7 +771,7 @@
         <coverage type="class, %" value="0%   (0/3)"/>
         <coverage type="method, %" value="0%   (0/8)"/>
         <coverage type="block, %" value="0%   (0/274)"/>
-        <coverage type="line, %" value="0%   (0/56)"/>
+        <coverage type="line, %" value="0%   (0/66)"/>
 
         <srcfile name="OutlierScoreFn.java">
           <coverage type="class, %" value="0%   (0/1)"/>
@@ -835,13 +835,13 @@
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/2)"/>
           <coverage type="block, %" value="0%   (0/137)"/>
-          <coverage type="line, %" value="0%   (0/23)"/>
+          <coverage type="line, %" value="0%   (0/33)"/>
 
           <class name="OutlierStep">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/2)"/>
             <coverage type="block, %" value="0%   (0/137)"/>
-            <coverage type="line, %" value="0%   (0/23)"/>
+            <coverage type="line, %" value="0%   (0/33)"/>
 
             <method name="OutlierStep (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -851,7 +851,7 @@
             <method name="createPipeline (): MRPipeline">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/134)"/>
-              <coverage type="line, %" value="0%   (0/22)"/>
+              <coverage type="line, %" value="0%   (0/32)"/>
             </method>
           </class>
         </srcfile>
@@ -859,20 +859,20 @@
       <package name="com.cloudera.oryx.kmeans.computation.pmml">
         <coverage type="class, %" value="0%   (0/1)"/>
         <coverage type="method, %" value="0%   (0/6)"/>
-        <coverage type="block, %" value="0%   (0/406)"/>
-        <coverage type="line, %" value="0%   (0/72)"/>
+        <coverage type="block, %" value="0%   (0/407)"/>
+        <coverage type="line, %" value="0%   (0/78)"/>
 
         <srcfile name="ClusteringModelBuilder.java">
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/6)"/>
-          <coverage type="block, %" value="0%   (0/406)"/>
-          <coverage type="line, %" value="0%   (0/72)"/>
+          <coverage type="block, %" value="0%   (0/407)"/>
+          <coverage type="line, %" value="0%   (0/78)"/>
 
           <class name="ClusteringModelBuilder">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/6)"/>
-            <coverage type="block, %" value="0%   (0/406)"/>
-            <coverage type="line, %" value="0%   (0/72)"/>
+            <coverage type="block, %" value="0%   (0/407)"/>
+            <coverage type="line, %" value="0%   (0/78)"/>
 
             <method name="ClusteringModelBuilder (Summary): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -881,13 +881,13 @@
             </method>
             <method name="build (String, Centers): ClusteringModel">
               <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/53)"/>
-              <coverage type="line, %" value="0%   (0/8)"/>
+              <coverage type="block, %" value="0%   (0/54)"/>
+              <coverage type="line, %" value="0%   (0/10)"/>
             </method>
             <method name="buildSummaryInfo (Summary, InboundSettings): void">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/278)"/>
-              <coverage type="line, %" value="0%   (0/45)"/>
+              <coverage type="line, %" value="0%   (0/49)"/>
             </method>
             <method name="getDictionary (): DataDictionary">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -911,19 +911,19 @@
         <coverage type="class, %" value="0%   (0/1)"/>
         <coverage type="method, %" value="0%   (0/4)"/>
         <coverage type="block, %" value="0%   (0/126)"/>
-        <coverage type="line, %" value="0%   (0/25)"/>
+        <coverage type="line, %" value="0%   (0/29)"/>
 
         <srcfile name="SummaryStep.java">
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/4)"/>
           <coverage type="block, %" value="0%   (0/126)"/>
-          <coverage type="line, %" value="0%   (0/25)"/>
+          <coverage type="line, %" value="0%   (0/29)"/>
 
           <class name="SummaryStep">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/4)"/>
             <coverage type="block, %" value="0%   (0/126)"/>
-            <coverage type="line, %" value="0%   (0/25)"/>
+            <coverage type="line, %" value="0%   (0/29)"/>
 
             <method name="SummaryStep (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -943,7 +943,7 @@
             <method name="getSummarizer (InboundSettings): Summarizer">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/16)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
+              <coverage type="line, %" value="0%   (0/5)"/>
             </method>
           </class>
         </srcfile>
@@ -952,24 +952,24 @@
         <coverage type="class, %" value="0%   (0/1)"/>
         <coverage type="method, %" value="0%   (0/2)"/>
         <coverage type="block, %" value="0%   (0/8)"/>
-        <coverage type="line, %" value="0%   (0/3)"/>
+        <coverage type="line, %" value="0%   (0/4)"/>
 
         <srcfile name="KMeansTypes.java">
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/2)"/>
           <coverage type="block, %" value="0%   (0/8)"/>
-          <coverage type="line, %" value="0%   (0/3)"/>
+          <coverage type="line, %" value="0%   (0/4)"/>
 
           <class name="KMeansTypes">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/2)"/>
             <coverage type="block, %" value="0%   (0/8)"/>
-            <coverage type="line, %" value="0%   (0/3)"/>
+            <coverage type="line, %" value="0%   (0/4)"/>
 
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/5)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
             </method>
             <method name="KMeansTypes (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -1382,7 +1382,7 @@
         <coverage type="class, %" value="54%  (7/13)"/>
         <coverage type="method, %" value="17%  (8/48)"/>
         <coverage type="block, %" value="10%  (60/630)"/>
-        <coverage type="line, %" value="10%  (13/125)"/>
+        <coverage type="line, %" value="11%  (16/141)"/>
 
         <srcfile name="AvroUtils.java">
           <coverage type="class, %" value="0%   (0/1)"/>
@@ -1417,13 +1417,13 @@
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/9)"/>
           <coverage type="block, %" value="0%   (0/126)"/>
-          <coverage type="line, %" value="0%   (0/28)"/>
+          <coverage type="line, %" value="0%   (0/31)"/>
 
           <class name="KMeansDistributedGenerationRunner">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/9)"/>
             <coverage type="block, %" value="0%   (0/126)"/>
-            <coverage type="line, %" value="0%   (0/28)"/>
+            <coverage type="line, %" value="0%   (0/31)"/>
 
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -1443,7 +1443,7 @@
             <method name="buildConfig (int): JobStepConfig">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/11)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
+              <coverage type="line, %" value="0%   (0/4)"/>
             </method>
             <method name="doOutlierComputation (Config): boolean">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -1476,13 +1476,13 @@
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/7)"/>
           <coverage type="block, %" value="0%   (0/67)"/>
-          <coverage type="line, %" value="0%   (0/10)"/>
+          <coverage type="line, %" value="0%   (0/13)"/>
 
           <class name="KMeansJobStep">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/7)"/>
             <coverage type="block, %" value="0%   (0/67)"/>
-            <coverage type="line, %" value="0%   (0/10)"/>
+            <coverage type="line, %" value="0%   (0/13)"/>
 
             <method name="KMeansJobStep (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -1512,7 +1512,7 @@
             <method name="parseConfig (String []): JobStepConfig">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/30)"/>
-              <coverage type="line, %" value="0%   (0/3)"/>
+              <coverage type="line, %" value="0%   (0/6)"/>
             </method>
             <method name="toRecords (PCollection): PCollection">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -1525,13 +1525,13 @@
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/2)"/>
           <coverage type="block, %" value="0%   (0/33)"/>
-          <coverage type="line, %" value="0%   (0/3)"/>
+          <coverage type="line, %" value="0%   (0/7)"/>
 
           <class name="KMeansJobStepConfig">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/2)"/>
             <coverage type="block, %" value="0%   (0/33)"/>
-            <coverage type="line, %" value="0%   (0/3)"/>
+            <coverage type="line, %" value="0%   (0/7)"/>
 
             <method name="KMeansJobStepConfig (String, int, int, int): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -1541,7 +1541,7 @@
             <method name="toArgsArray (): String []">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/26)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
+              <coverage type="line, %" value="0%   (0/5)"/>
             </method>
           </class>
         </srcfile>
@@ -1549,18 +1549,18 @@
           <coverage type="class, %" value="0%   (0/2)"/>
           <coverage type="method, %" value="0%   (0/10)"/>
           <coverage type="block, %" value="0%   (0/247)"/>
-          <coverage type="line, %" value="0%   (0/49)"/>
+          <coverage type="line, %" value="0%   (0/52)"/>
 
           <class name="VectorConvert">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/8)"/>
             <coverage type="block, %" value="0%   (0/225)"/>
-            <coverage type="line, %" value="0%   (0/46)"/>
+            <coverage type="line, %" value="0%   (0/49)"/>
 
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/16)"/>
-              <coverage type="line, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/5)"/>
             </method>
             <method name="VectorConvert (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -1575,7 +1575,7 @@
             <method name="fromVector (RealVector): MLVector">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/63)"/>
-              <coverage type="line, %" value="0%   (0/13)"/>
+              <coverage type="line, %" value="0%   (0/15)"/>
             </method>
             <method name="fromWeightedVector (WeightedRealVector): MLWeightedVector">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -1620,7 +1620,7 @@
           <coverage type="class, %" value="100% (7/7)"/>
           <coverage type="method, %" value="47%  (8/17)"/>
           <coverage type="block, %" value="70%  (60/86)"/>
-          <coverage type="line, %" value="59%  (13/22)"/>
+          <coverage type="line, %" value="64%  (16/25)"/>
 
           <class name="MLAvros$3">
             <coverage type="class, %" value="100% (1/1)"/>
@@ -1728,7 +1728,7 @@
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="40%  (2/5)"/>
             <coverage type="block, %" value="86%  (42/49)"/>
-            <coverage type="line, %" value="70%  (7/10)"/>
+            <coverage type="line, %" value="77%  (10/13)"/>
 
             <method name="MLAvros (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -1748,7 +1748,7 @@
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="100% (40/40)"/>
-              <coverage type="line, %" value="100% (6/6)"/>
+              <coverage type="line, %" value="100% (9/9)"/>
             </method>
             <method name="vector (): AvroType">
               <coverage type="method, %" value="100% (1/1)"/>
@@ -1762,7 +1762,7 @@
         <coverage type="class, %" value="14%  (2/14)"/>
         <coverage type="method, %" value="13%  (9/70)"/>
         <coverage type="block, %" value="20%  (227/1160)"/>
-        <coverage type="line, %" value="15%  (29.8/202)"/>
+        <coverage type="line, %" value="13%  (29.8/230)"/>
 
         <srcfile name="AssignFn.java">
           <coverage type="class, %" value="0%   (0/1)"/>
@@ -1943,13 +1943,13 @@
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/11)"/>
           <coverage type="block, %" value="0%   (0/233)"/>
-          <coverage type="line, %" value="0%   (0/31)"/>
+          <coverage type="line, %" value="0%   (0/39)"/>
 
           <class name="CovarianceData">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/11)"/>
             <coverage type="block, %" value="0%   (0/233)"/>
-            <coverage type="line, %" value="0%   (0/31)"/>
+            <coverage type="line, %" value="0%   (0/39)"/>
 
             <method name="CovarianceData (int, int, int, int, double, double): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -1959,7 +1959,7 @@
             <method name="equals (Object): boolean">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/44)"/>
-              <coverage type="line, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/6)"/>
             </method>
             <method name="getCenterId (): int">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -1999,7 +1999,7 @@
             <method name="parse (String): CovarianceData">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/53)"/>
-              <coverage type="line, %" value="0%   (0/3)"/>
+              <coverage type="line, %" value="0%   (0/9)"/>
             </method>
             <method name="toString (): String">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -2012,13 +2012,13 @@
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/3)"/>
           <coverage type="block, %" value="0%   (0/53)"/>
-          <coverage type="line, %" value="0%   (0/10)"/>
+          <coverage type="line, %" value="0%   (0/11)"/>
 
           <class name="CovarianceDataBuilder">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/3)"/>
             <coverage type="block, %" value="0%   (0/53)"/>
-            <coverage type="line, %" value="0%   (0/10)"/>
+            <coverage type="line, %" value="0%   (0/11)"/>
 
             <method name="CovarianceDataBuilder (int): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -2028,7 +2028,7 @@
             <method name="getDistanceData (): DistanceData">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/13)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
             </method>
             <method name="update (CovarianceData): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -2041,13 +2041,13 @@
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/2)"/>
           <coverage type="block, %" value="0%   (0/36)"/>
-          <coverage type="line, %" value="0%   (0/5)"/>
+          <coverage type="line, %" value="0%   (0/11)"/>
 
           <class name="CovarianceDataStringFn">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/2)"/>
             <coverage type="block, %" value="0%   (0/36)"/>
-            <coverage type="line, %" value="0%   (0/5)"/>
+            <coverage type="line, %" value="0%   (0/11)"/>
 
             <method name="CovarianceDataStringFn (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -2057,7 +2057,7 @@
             <method name="map (Pair): String">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/33)"/>
-              <coverage type="line, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/10)"/>
             </method>
           </class>
         </srcfile>
@@ -2094,13 +2094,13 @@
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/3)"/>
           <coverage type="block, %" value="0%   (0/109)"/>
-          <coverage type="line, %" value="0%   (0/17)"/>
+          <coverage type="line, %" value="0%   (0/25)"/>
 
           <class name="CovarianceStep">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/3)"/>
             <coverage type="block, %" value="0%   (0/109)"/>
-            <coverage type="line, %" value="0%   (0/17)"/>
+            <coverage type="line, %" value="0%   (0/25)"/>
 
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -2115,7 +2115,7 @@
             <method name="createPipeline (): MRPipeline">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/96)"/>
-              <coverage type="line, %" value="0%   (0/13)"/>
+              <coverage type="line, %" value="0%   (0/21)"/>
             </method>
           </class>
         </srcfile>
@@ -2238,13 +2238,13 @@
           <coverage type="class, %" value="100% (1/1)"/>
           <coverage type="method, %" value="55%  (6/11)"/>
           <coverage type="block, %" value="77%  (189/244)"/>
-          <coverage type="line, %" value="78%  (21.9/28)"/>
+          <coverage type="line, %" value="66%  (21.9/33)"/>
 
           <class name="CoMoment">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="55%  (6/11)"/>
             <coverage type="block, %" value="77%  (189/244)"/>
-            <coverage type="line, %" value="78%  (21.9/28)"/>
+            <coverage type="line, %" value="66%  (21.9/33)"/>
 
             <method name="getCovariance (): double">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -2264,7 +2264,7 @@
             <method name="hashCode (): int">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/17)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
+              <coverage type="line, %" value="0%   (0/6)"/>
             </method>
             <method name="toString (): String">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -2308,19 +2308,19 @@
         <coverage type="class, %" value="36%  (4/11)"/>
         <coverage type="method, %" value="22%  (12/54)"/>
         <coverage type="block, %" value="29%  (395/1383)"/>
-        <coverage type="line, %" value="26%  (76/287)"/>
+        <coverage type="line, %" value="27%  (79/298)"/>
 
         <srcfile name="CentersIndexLoader.java">
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/4)"/>
           <coverage type="block, %" value="0%   (0/108)"/>
-          <coverage type="line, %" value="0%   (0/25)"/>
+          <coverage type="line, %" value="0%   (0/26)"/>
 
           <class name="CentersIndexLoader">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/4)"/>
             <coverage type="block, %" value="0%   (0/108)"/>
-            <coverage type="line, %" value="0%   (0/25)"/>
+            <coverage type="line, %" value="0%   (0/26)"/>
 
             <method name="CentersIndexLoader (ClusterSettings): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -2335,7 +2335,7 @@
             <method name="getIndex (String): KSketchIndex">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/84)"/>
-              <coverage type="line, %" value="0%   (0/20)"/>
+              <coverage type="line, %" value="0%   (0/21)"/>
             </method>
             <method name="load (String): KSketchIndex">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -2436,13 +2436,13 @@
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/3)"/>
           <coverage type="block, %" value="0%   (0/234)"/>
-          <coverage type="line, %" value="0%   (0/42)"/>
+          <coverage type="line, %" value="0%   (0/49)"/>
 
           <class name="KSketchSamplingStep">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/3)"/>
             <coverage type="block, %" value="0%   (0/234)"/>
-            <coverage type="line, %" value="0%   (0/42)"/>
+            <coverage type="line, %" value="0%   (0/49)"/>
 
             <method name="KSketchSamplingStep (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -2452,12 +2452,12 @@
             <method name="createInitialIndex (ClusterSettings, PCollection): KSketchIndex">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/89)"/>
-              <coverage type="line, %" value="0%   (0/16)"/>
+              <coverage type="line, %" value="0%   (0/20)"/>
             </method>
             <method name="createPipeline (): MRPipeline">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/142)"/>
-              <coverage type="line, %" value="0%   (0/25)"/>
+              <coverage type="line, %" value="0%   (0/28)"/>
             </method>
           </class>
         </srcfile>
@@ -2647,13 +2647,13 @@
           <coverage type="class, %" value="100% (3/3)"/>
           <coverage type="method, %" value="100% (7/7)"/>
           <coverage type="block, %" value="98%  (205/209)"/>
-          <coverage type="line, %" value="97%  (36/37)"/>
+          <coverage type="line, %" value="98%  (39/40)"/>
 
           <class name="KMeansParallel">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="100% (2/2)"/>
             <coverage type="block, %" value="96%  (87/91)"/>
-            <coverage type="line, %" value="93%  (14/15)"/>
+            <coverage type="line, %" value="94%  (17/18)"/>
 
             <method name="KMeansParallel (RandomGenerator, int, int): void">
               <coverage type="method, %" value="100% (1/1)"/>
@@ -2663,7 +2663,7 @@
             <method name="lloydsAlgorithm (PCollection, List, int, boolean): List">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="100% (72/72)"/>
-              <coverage type="line, %" value="100% (8/8)"/>
+              <coverage type="line, %" value="100% (11/11)"/>
             </method>
           </class>
           <class name="KMeansParallel$LloydsCenters">
@@ -2711,19 +2711,19 @@
         <coverage type="class, %" value="88%  (7/8)"/>
         <coverage type="method, %" value="71%  (20/28)"/>
         <coverage type="block, %" value="45%  (338/749)"/>
-        <coverage type="line, %" value="50%  (78.2/157)"/>
+        <coverage type="line, %" value="49%  (79.3/161)"/>
 
         <srcfile name="NormalizeStep.java">
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/3)"/>
           <coverage type="block, %" value="0%   (0/104)"/>
-          <coverage type="line, %" value="0%   (0/20)"/>
+          <coverage type="line, %" value="0%   (0/22)"/>
 
           <class name="NormalizeStep">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/3)"/>
             <coverage type="block, %" value="0%   (0/104)"/>
-            <coverage type="line, %" value="0%   (0/20)"/>
+            <coverage type="line, %" value="0%   (0/22)"/>
 
             <method name="NormalizeStep (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -2733,7 +2733,7 @@
             <method name="createPipeline (): MRPipeline">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/91)"/>
-              <coverage type="line, %" value="0%   (0/18)"/>
+              <coverage type="line, %" value="0%   (0/20)"/>
             </method>
             <method name="getStandardizeFn (InboundSettings, NormalizeSettings, String): StandardizeFn">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -2897,18 +2897,18 @@
           <coverage type="class, %" value="100% (1/1)"/>
           <coverage type="method, %" value="100% (6/6)"/>
           <coverage type="block, %" value="67%  (236/350)"/>
-          <coverage type="line, %" value="71%  (52.2/73)"/>
+          <coverage type="line, %" value="71%  (53.3/75)"/>
 
           <class name="StandardizeFn">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="100% (6/6)"/>
             <coverage type="block, %" value="67%  (236/350)"/>
-            <coverage type="line, %" value="71%  (52.2/73)"/>
+            <coverage type="line, %" value="71%  (53.3/75)"/>
 
             <method name="initialize (): void">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="35%  (45/129)"/>
-              <coverage type="line, %" value="31%  (6.2/20)"/>
+              <coverage type="line, %" value="33%  (7.3/22)"/>
             </method>
             <method name="process (Record, Emitter): void">
               <coverage type="method, %" value="100% (1/1)"/>

@@ -73,27 +73,30 @@
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>          System.arraycopy(maybeFeatureVector, 0, featureVector, 0, featureVector.length);
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>          SimpleVectorMath.normalize(featureVector);
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>        } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (maybeLength &lt; features) {
-<a class="jxr_linenumber" name="L68" href="#L68">68</a>          featureVector = <strong class="jxr_keyword">new</strong> <strong class="jxr_keyword">float</strong>[features];
-<a class="jxr_linenumber" name="L69" href="#L69">69</a>          System.arraycopy(maybeFeatureVector, 0, featureVector, 0, maybeLength);
-<a class="jxr_linenumber" name="L70" href="#L70">70</a>          <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = maybeLength; i &lt; featureVector.length; i++) {
-<a class="jxr_linenumber" name="L71" href="#L71">71</a>            featureVector[i] = FastMath.abs((<strong class="jxr_keyword">float</strong>) random.nextGaussian());
+<a class="jxr_linenumber" name="L68" href="#L68">68</a>          <em class="jxr_comment">// Use existing vector and extend with more random values</em>
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>          featureVector = <strong class="jxr_keyword">new</strong> <strong class="jxr_keyword">float</strong>[features];
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>          <strong class="jxr_keyword">if</strong> (maybeLength &gt; 0) {
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>            System.arraycopy(maybeFeatureVector, 0, featureVector, 0, maybeLength);
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>          }
-<a class="jxr_linenumber" name="L73" href="#L73">73</a>          SimpleVectorMath.normalize(featureVector);
-<a class="jxr_linenumber" name="L74" href="#L74">74</a>        }
-<a class="jxr_linenumber" name="L75" href="#L75">75</a>      }
-<a class="jxr_linenumber" name="L76" href="#L76">76</a>  
-<a class="jxr_linenumber" name="L77" href="#L77">77</a>      <strong class="jxr_keyword">if</strong> (featureVector == <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L78" href="#L78">78</a>        <em class="jxr_comment">// No suitable prior vector, build a new one</em>
-<a class="jxr_linenumber" name="L79" href="#L79">79</a>        featureVector = RandomUtils.randomUnitVectorFarFrom(features, farFrom, random);
-<a class="jxr_linenumber" name="L80" href="#L80">80</a>      }
-<a class="jxr_linenumber" name="L81" href="#L81">81</a>  
-<a class="jxr_linenumber" name="L82" href="#L82">82</a>      <strong class="jxr_keyword">if</strong> (farFrom.size() &lt; MAX_FAR_FROM_VECTORS) { <em class="jxr_comment">// Simple cap to keep from getting too big</em>
-<a class="jxr_linenumber" name="L83" href="#L83">83</a>        farFrom.add(featureVector);
-<a class="jxr_linenumber" name="L84" href="#L84">84</a>      }
-<a class="jxr_linenumber" name="L85" href="#L85">85</a>  
-<a class="jxr_linenumber" name="L86" href="#L86">86</a>      <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/als/computation/types/MatrixRow.html">MatrixRow</a>(itemID, featureVector);
-<a class="jxr_linenumber" name="L87" href="#L87">87</a>    }
-<a class="jxr_linenumber" name="L88" href="#L88">88</a>  }
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>          <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = maybeLength; i &lt; featureVector.length; i++) {
+<a class="jxr_linenumber" name="L74" href="#L74">74</a>            featureVector[i] = FastMath.abs((<strong class="jxr_keyword">float</strong>) random.nextGaussian());
+<a class="jxr_linenumber" name="L75" href="#L75">75</a>          }
+<a class="jxr_linenumber" name="L76" href="#L76">76</a>          SimpleVectorMath.normalize(featureVector);
+<a class="jxr_linenumber" name="L77" href="#L77">77</a>        }
+<a class="jxr_linenumber" name="L78" href="#L78">78</a>      }
+<a class="jxr_linenumber" name="L79" href="#L79">79</a>  
+<a class="jxr_linenumber" name="L80" href="#L80">80</a>      <strong class="jxr_keyword">if</strong> (featureVector == <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L81" href="#L81">81</a>        <em class="jxr_comment">// No suitable prior vector, build a new one</em>
+<a class="jxr_linenumber" name="L82" href="#L82">82</a>        featureVector = RandomUtils.randomUnitVectorFarFrom(features, farFrom, random);
+<a class="jxr_linenumber" name="L83" href="#L83">83</a>      }
+<a class="jxr_linenumber" name="L84" href="#L84">84</a>  
+<a class="jxr_linenumber" name="L85" href="#L85">85</a>      <strong class="jxr_keyword">if</strong> (farFrom.size() &lt; MAX_FAR_FROM_VECTORS) { <em class="jxr_comment">// Simple cap to keep from getting too big</em>
+<a class="jxr_linenumber" name="L86" href="#L86">86</a>        farFrom.add(featureVector);
+<a class="jxr_linenumber" name="L87" href="#L87">87</a>      }
+<a class="jxr_linenumber" name="L88" href="#L88">88</a>  
+<a class="jxr_linenumber" name="L89" href="#L89">89</a>      <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/als/computation/types/MatrixRow.html">MatrixRow</a>(itemID, featureVector);
+<a class="jxr_linenumber" name="L90" href="#L90">90</a>    }
+<a class="jxr_linenumber" name="L91" href="#L91">91</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2013&#x2013;2014. All rights reserved.</div>

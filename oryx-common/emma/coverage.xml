@@ -1,19 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Mon Jul 07 23:27:11 BST 2014 -->
+<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Sat Dec 13 23:33:41 GMT 2014 -->
 
 <report>
   <stats>
     <packages value="12"/>
     <classes value="66"/>
-    <methods value="531"/>
+    <methods value="532"/>
     <srcfiles value="48"/>
-    <srclines value="2227"/>
+    <srclines value="2249"/>
   </stats>
   <data>
     <all name="all classes">
       <coverage type="class, %" value="67%  (44/66)"/>
-      <coverage type="method, %" value="44%  (235/531)"/>
-      <coverage type="block, %" value="44%  (4671/10506)"/>
-      <coverage type="line, %" value="45%  (991.2/2227)"/>
+      <coverage type="method, %" value="44%  (235/532)"/>
+      <coverage type="block, %" value="44%  (4671/10520)"/>
+      <coverage type="line, %" value="44%  (997.2/2249)"/>
 
       <package name="com.cloudera.oryx.common.pmml">
         <coverage type="class, %" value="0%   (0/1)"/>
@@ -497,7 +497,7 @@
         <coverage type="class, %" value="67%  (4/6)"/>
         <coverage type="method, %" value="48%  (24/50)"/>
         <coverage type="block, %" value="35%  (290/833)"/>
-        <coverage type="line, %" value="40%  (68.1/170)"/>
+        <coverage type="line, %" value="39%  (68.1/173)"/>
 
         <srcfile name="RunningStatisticsPerTime.java">
           <coverage type="class, %" value="0%   (0/1)"/>
@@ -596,13 +596,13 @@
           <coverage type="class, %" value="100% (1/1)"/>
           <coverage type="method, %" value="55%  (6/11)"/>
           <coverage type="block, %" value="54%  (78/145)"/>
-          <coverage type="line, %" value="64%  (19.9/31)"/>
+          <coverage type="line, %" value="60%  (19.9/33)"/>
 
           <class name="DoubleWeightedMean">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="55%  (6/11)"/>
             <coverage type="block, %" value="54%  (78/145)"/>
-            <coverage type="line, %" value="64%  (19.9/31)"/>
+            <coverage type="line, %" value="60%  (19.9/33)"/>
 
             <method name="clear (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -617,7 +617,7 @@
             <method name="equals (Object): boolean">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/30)"/>
-              <coverage type="line, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/6)"/>
             </method>
             <method name="hashCode (): int">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -719,13 +719,13 @@
           <coverage type="class, %" value="100% (1/1)"/>
           <coverage type="method, %" value="58%  (7/12)"/>
           <coverage type="block, %" value="64%  (124/193)"/>
-          <coverage type="line, %" value="70%  (25.8/37)"/>
+          <coverage type="line, %" value="68%  (25.8/38)"/>
 
           <class name="IntegerWeightedMean">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="58%  (7/12)"/>
             <coverage type="block, %" value="64%  (124/193)"/>
-            <coverage type="line, %" value="70%  (25.8/37)"/>
+            <coverage type="line, %" value="68%  (25.8/38)"/>
 
             <method name="clear (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -740,7 +740,7 @@
             <method name="equals (Object): boolean">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/30)"/>
-              <coverage type="line, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/5)"/>
             </method>
             <method name="hashCode (): int">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -836,9 +836,9 @@
       </package>
       <package name="com.cloudera.oryx.common.math">
         <coverage type="class, %" value="80%  (16/20)"/>
-        <coverage type="method, %" value="43%  (69/160)"/>
-        <coverage type="block, %" value="35%  (1196/3378)"/>
-        <coverage type="line, %" value="35%  (255.6/737)"/>
+        <coverage type="method, %" value="43%  (69/161)"/>
+        <coverage type="block, %" value="35%  (1196/3392)"/>
+        <coverage type="line, %" value="34%  (255.6/749)"/>
 
         <srcfile name="IllConditionedSolverException.java">
           <coverage type="class, %" value="0%   (0/1)"/>
@@ -955,13 +955,13 @@
           <coverage type="class, %" value="100% (4/4)"/>
           <coverage type="method, %" value="32%  (20/63)"/>
           <coverage type="block, %" value="16%  (220/1385)"/>
-          <coverage type="line, %" value="16%  (54/342)"/>
+          <coverage type="line, %" value="16%  (54/343)"/>
 
           <class name="OpenMapRealVector">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="22%  (11/51)"/>
             <coverage type="block, %" value="8%   (96/1241)"/>
-            <coverage type="line, %" value="8%   (26/310)"/>
+            <coverage type="line, %" value="8%   (26/311)"/>
 
             <method name="OpenMapRealVector (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -1046,7 +1046,7 @@
             <method name="equals (Object): boolean">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/80)"/>
-              <coverage type="line, %" value="0%   (0/24)"/>
+              <coverage type="line, %" value="0%   (0/25)"/>
             </method>
             <method name="getDistance (OpenMapRealVector): double">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -1305,13 +1305,13 @@
           <coverage type="class, %" value="100% (1/1)"/>
           <coverage type="method, %" value="24%  (4/17)"/>
           <coverage type="block, %" value="19%  (27/143)"/>
-          <coverage type="line, %" value="28%  (7.9/28)"/>
+          <coverage type="line, %" value="26%  (7.9/30)"/>
 
           <class name="NamedRealVector">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="24%  (4/17)"/>
             <coverage type="block, %" value="19%  (27/143)"/>
-            <coverage type="line, %" value="28%  (7.9/28)"/>
+            <coverage type="line, %" value="26%  (7.9/30)"/>
 
             <method name="append (RealVector): RealVector">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -1341,7 +1341,7 @@
             <method name="equals (Object): boolean">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/38)"/>
-              <coverage type="line, %" value="0%   (0/4)"/>
+              <coverage type="line, %" value="0%   (0/6)"/>
             </method>
             <method name="getDelegate (): RealVector">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -1402,25 +1402,30 @@
         </srcfile>
         <srcfile name="CommonsMathLinearSystemSolver.java">
           <coverage type="class, %" value="100% (1/1)"/>
-          <coverage type="method, %" value="75%  (3/4)"/>
-          <coverage type="block, %" value="31%  (26/84)"/>
-          <coverage type="line, %" value="50%  (7/14)"/>
+          <coverage type="method, %" value="60%  (3/5)"/>
+          <coverage type="block, %" value="27%  (26/98)"/>
+          <coverage type="line, %" value="30%  (7/23)"/>
 
           <class name="CommonsMathLinearSystemSolver">
             <coverage type="class, %" value="100% (1/1)"/>
-            <coverage type="method, %" value="75%  (3/4)"/>
-            <coverage type="block, %" value="31%  (26/84)"/>
-            <coverage type="line, %" value="50%  (7/14)"/>
+            <coverage type="method, %" value="60%  (3/5)"/>
+            <coverage type="block, %" value="27%  (26/98)"/>
+            <coverage type="line, %" value="30%  (7/23)"/>
 
+            <method name="findApparentRank (RealMatrix, RRQRDecomposition): int">
+              <coverage type="method, %" value="0%   (0/1)"/>
+              <coverage type="block, %" value="0%   (0/33)"/>
+              <coverage type="line, %" value="0%   (0/7)"/>
+            </method>
             <method name="isNonSingular (RealMatrix): boolean">
               <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/12)"/>
-              <coverage type="line, %" value="0%   (0/3)"/>
+              <coverage type="block, %" value="0%   (0/20)"/>
+              <coverage type="line, %" value="0%   (0/6)"/>
             </method>
             <method name="getSolver (RealMatrix): Solver">
               <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="29%  (19/65)"/>
-              <coverage type="line, %" value="56%  (5/9)"/>
+              <coverage type="block, %" value="50%  (19/38)"/>
+              <coverage type="line, %" value="62%  (5/8)"/>
             </method>
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="100% (1/1)"/>
@@ -1946,19 +1951,19 @@
         <coverage type="class, %" value="100% (3/3)"/>
         <coverage type="method, %" value="68%  (15/22)"/>
         <coverage type="block, %" value="51%  (217/424)"/>
-        <coverage type="line, %" value="57%  (51.1/89)"/>
+        <coverage type="line, %" value="58%  (52.1/90)"/>
 
         <srcfile name="ClassUtils.java">
           <coverage type="class, %" value="100% (1/1)"/>
           <coverage type="method, %" value="60%  (6/10)"/>
           <coverage type="block, %" value="29%  (51/174)"/>
-          <coverage type="line, %" value="38%  (12/32)"/>
+          <coverage type="line, %" value="39%  (13/33)"/>
 
           <class name="ClassUtils">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="60%  (6/10)"/>
             <coverage type="block, %" value="29%  (51/174)"/>
-            <coverage type="line, %" value="38%  (12/32)"/>
+            <coverage type="line, %" value="39%  (13/33)"/>
 
             <method name="ClassUtils (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -2008,7 +2013,7 @@
             <method name="loadInstanceOf (String, Class, Class [], Object []): Object">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="100% (8/8)"/>
-              <coverage type="line, %" value="100% (1/1)"/>
+              <coverage type="line, %" value="100% (2/2)"/>
             </method>
           </class>
         </srcfile>
@@ -2365,7 +2370,7 @@
             <method name="put (long, float): void">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="99%  (83/84)"/>
-              <coverage type="line, %" value="100% (15/15)"/>
+              <coverage type="line, %" value="100% (14.9/15)"/>
             </method>
             <method name="LongFloatMap (): void">
               <coverage type="method, %" value="100% (1/1)"/>
@@ -3144,7 +3149,7 @@
         <coverage type="class, %" value="100% (4/4)"/>
         <coverage type="method, %" value="52%  (17/33)"/>
         <coverage type="block, %" value="64%  (335/527)"/>
-        <coverage type="line, %" value="69%  (79.4/115)"/>
+        <coverage type="line, %" value="70%  (84.4/120)"/>
 
         <srcfile name="ConfigUtils.java">
           <coverage type="class, %" value="100% (1/1)"/>
@@ -3273,7 +3278,7 @@
           <coverage type="class, %" value="100% (2/2)"/>
           <coverage type="method, %" value="71%  (10/14)"/>
           <coverage type="block, %" value="81%  (240/295)"/>
-          <coverage type="line, %" value="88%  (54.8/62)"/>
+          <coverage type="line, %" value="89%  (59.8/67)"/>
 
           <class name="InboundSettings$LookupFunction">
             <coverage type="class, %" value="100% (1/1)"/>
@@ -3296,7 +3301,7 @@
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="67%  (8/12)"/>
             <coverage type="block, %" value="85%  (215/253)"/>
-            <coverage type="line, %" value="88%  (46.8/53)"/>
+            <coverage type="line, %" value="89%  (51.8/58)"/>
 
             <method name="getColumnNames (): List">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -3321,7 +3326,7 @@
             <method name="create (Config): InboundSettings">
               <coverage type="method, %" value="100% (1/1)"/>
               <coverage type="block, %" value="96%  (173/180)"/>
-              <coverage type="line, %" value="94%  (32.8/35)"/>
+              <coverage type="line, %" value="94%  (37.8/40)"/>
             </method>
             <method name="InboundSettings (List, Collection, Collection, Collection, Collection, Integer): void">
               <coverage type="method, %" value="100% (1/1)"/>
@@ -3365,19 +3370,19 @@
         <coverage type="class, %" value="100% (2/2)"/>
         <coverage type="method, %" value="57%  (12/21)"/>
         <coverage type="block, %" value="67%  (359/539)"/>
-        <coverage type="line, %" value="74%  (92.2/124)"/>
+        <coverage type="line, %" value="74%  (92.2/125)"/>
 
         <srcfile name="IOUtils.java">
           <coverage type="class, %" value="100% (1/1)"/>
           <coverage type="method, %" value="43%  (6/14)"/>
           <coverage type="block, %" value="41%  (105/258)"/>
-          <coverage type="line, %" value="58%  (30.3/52)"/>
+          <coverage type="line, %" value="57%  (30.3/53)"/>
 
           <class name="IOUtils">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="43%  (6/14)"/>
             <coverage type="block, %" value="41%  (105/258)"/>
-            <coverage type="line, %" value="58%  (30.3/52)"/>
+            <coverage type="line, %" value="57%  (30.3/53)"/>
 
             <method name="IOUtils (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -3392,7 +3397,7 @@
             <method name="buildGZIPOutputStream (OutputStream): GZIPOutputStream">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/31)"/>
-              <coverage type="line, %" value="0%   (0/3)"/>
+              <coverage type="line, %" value="0%   (0/4)"/>
             </method>
             <method name="buildGZIPWriter (File): Writer">
               <coverage type="method, %" value="0%   (0/1)"/>

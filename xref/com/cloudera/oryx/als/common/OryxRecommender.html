@@ -386,19 +386,30 @@
 <a class="jxr_linenumber" name="L378" href="#L378">378</a>   Collection&lt;String&gt; getAllItemIDs() <strong class="jxr_keyword">throws</strong> NotReadyException;
 <a class="jxr_linenumber" name="L379" href="#L379">379</a> 
 <a class="jxr_linenumber" name="L380" href="#L380">380</a>   <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L381" href="#L381">381</a> <em class="jxr_javadoccomment">   * @return true if and only if the instance is ready to make recommendations; may be false for example</em>
-<a class="jxr_linenumber" name="L382" href="#L382">382</a> <em class="jxr_javadoccomment">   *  while the recommender is still building an initial model</em>
-<a class="jxr_linenumber" name="L383" href="#L383">383</a> <em class="jxr_javadoccomment">   */</em>
-<a class="jxr_linenumber" name="L384" href="#L384">384</a>   <strong class="jxr_keyword">boolean</strong> isReady();
-<a class="jxr_linenumber" name="L385" href="#L385">385</a> 
-<a class="jxr_linenumber" name="L386" href="#L386">386</a>   <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L387" href="#L387">387</a> <em class="jxr_javadoccomment">   * Blocks indefinitely until {@link #isReady()} returns {@code true}.</em>
-<a class="jxr_linenumber" name="L388" href="#L388">388</a> <em class="jxr_javadoccomment">   * </em>
-<a class="jxr_linenumber" name="L389" href="#L389">389</a> <em class="jxr_javadoccomment">   * @throws InterruptedException if the thread is interrupted while waiting</em>
-<a class="jxr_linenumber" name="L390" href="#L390">390</a> <em class="jxr_javadoccomment">   */</em>
-<a class="jxr_linenumber" name="L391" href="#L391">391</a>   <strong class="jxr_keyword">void</strong> await() <strong class="jxr_keyword">throws</strong> InterruptedException;
-<a class="jxr_linenumber" name="L392" href="#L392">392</a> 
-<a class="jxr_linenumber" name="L393" href="#L393">393</a> }
+<a class="jxr_linenumber" name="L381" href="#L381">381</a> <em class="jxr_javadoccomment">   * @param userID user to get known items for</em>
+<a class="jxr_linenumber" name="L382" href="#L382">382</a> <em class="jxr_javadoccomment">   * @return a {@link Collection} of item IDs that the model records that the user has interacted</em>
+<a class="jxr_linenumber" name="L383" href="#L383">383</a> <em class="jxr_javadoccomment">   *  with. This is the same set of items that are excluded from</em>
+<a class="jxr_linenumber" name="L384" href="#L384">384</a> <em class="jxr_javadoccomment">   *  {@link #recommend(String, int, boolean, com.cloudera.oryx.als.common.rescorer.Rescorer)}</em>
+<a class="jxr_linenumber" name="L385" href="#L385">385</a> <em class="jxr_javadoccomment">   *  if {@code considerKnownItems} is {@code false}.</em>
+<a class="jxr_linenumber" name="L386" href="#L386">386</a> <em class="jxr_javadoccomment">   * @throws UnsupportedOperationException if known items for each user have been configured to not</em>
+<a class="jxr_linenumber" name="L387" href="#L387">387</a> <em class="jxr_javadoccomment">   *  be loaded or recorded</em>
+<a class="jxr_linenumber" name="L388" href="#L388">388</a> <em class="jxr_javadoccomment">   */</em>
+<a class="jxr_linenumber" name="L389" href="#L389">389</a>   Collection&lt;String&gt; getKnownItemsForUser(String userID) <strong class="jxr_keyword">throws</strong> NotReadyException;
+<a class="jxr_linenumber" name="L390" href="#L390">390</a> 
+<a class="jxr_linenumber" name="L391" href="#L391">391</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L392" href="#L392">392</a> <em class="jxr_javadoccomment">     * @return true if and only if the instance is ready to make recommendations; may be false for example</em>
+<a class="jxr_linenumber" name="L393" href="#L393">393</a> <em class="jxr_javadoccomment">     *  while the recommender is still building an initial model</em>
+<a class="jxr_linenumber" name="L394" href="#L394">394</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L395" href="#L395">395</a>   <strong class="jxr_keyword">boolean</strong> isReady();
+<a class="jxr_linenumber" name="L396" href="#L396">396</a> 
+<a class="jxr_linenumber" name="L397" href="#L397">397</a>   <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L398" href="#L398">398</a> <em class="jxr_javadoccomment">   * Blocks indefinitely until {@link #isReady()} returns {@code true}.</em>
+<a class="jxr_linenumber" name="L399" href="#L399">399</a> <em class="jxr_javadoccomment">   * </em>
+<a class="jxr_linenumber" name="L400" href="#L400">400</a> <em class="jxr_javadoccomment">   * @throws InterruptedException if the thread is interrupted while waiting</em>
+<a class="jxr_linenumber" name="L401" href="#L401">401</a> <em class="jxr_javadoccomment">   */</em>
+<a class="jxr_linenumber" name="L402" href="#L402">402</a>   <strong class="jxr_keyword">void</strong> await() <strong class="jxr_keyword">throws</strong> InterruptedException;
+<a class="jxr_linenumber" name="L403" href="#L403">403</a> 
+<a class="jxr_linenumber" name="L404" href="#L404">404</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2013&#x2013;2014. All rights reserved.</div>

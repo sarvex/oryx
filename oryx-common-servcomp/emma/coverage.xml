@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Mon Jul 07 23:27:11 BST 2014 -->
+<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Sat Dec 13 23:33:41 GMT 2014 -->
 
 <report>
   <stats>
@@ -6,20 +6,20 @@
     <classes value="8"/>
     <methods value="62"/>
     <srcfiles value="8"/>
-    <srclines value="368"/>
+    <srclines value="372"/>
   </stats>
   <data>
     <all name="all classes">
       <coverage type="class, %" value="38%  (3/8)"/>
       <coverage type="method, %" value="31%  (19/62)"/>
-      <coverage type="block, %" value="15%  (240/1651)"/>
-      <coverage type="line, %" value="15%  (56/368)"/>
+      <coverage type="block, %" value="14%  (240/1663)"/>
+      <coverage type="line, %" value="15%  (56/372)"/>
 
       <package name="com.cloudera.oryx.common.servcomp.web">
         <coverage type="class, %" value="0%   (0/3)"/>
         <coverage type="method, %" value="0%   (0/15)"/>
-        <coverage type="block, %" value="0%   (0/237)"/>
-        <coverage type="line, %" value="0%   (0/57)"/>
+        <coverage type="block, %" value="0%   (0/243)"/>
+        <coverage type="line, %" value="0%   (0/61)"/>
 
         <srcfile name="InMemoryRealm.java">
           <coverage type="class, %" value="0%   (0/1)"/>
@@ -97,19 +97,19 @@
         <srcfile name="style_jspx.java">
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/6)"/>
-          <coverage type="block, %" value="0%   (0/101)"/>
-          <coverage type="line, %" value="0%   (0/29)"/>
+          <coverage type="block, %" value="0%   (0/107)"/>
+          <coverage type="line, %" value="0%   (0/33)"/>
 
           <class name="style_jspx">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/6)"/>
-            <coverage type="block, %" value="0%   (0/101)"/>
-            <coverage type="line, %" value="0%   (0/29)"/>
+            <coverage type="block, %" value="0%   (0/107)"/>
+            <coverage type="line, %" value="0%   (0/33)"/>
 
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="0%   (0/1)"/>
               <coverage type="block, %" value="0%   (0/3)"/>
-              <coverage type="line, %" value="0%   (0/1)"/>
+              <coverage type="line, %" value="0%   (0/2)"/>
             </method>
             <method name="_jspDestroy (): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -123,8 +123,8 @@
             </method>
             <method name="_jspService (HttpServletRequest, HttpServletResponse): void">
               <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/78)"/>
-              <coverage type="line, %" value="0%   (0/22)"/>
+              <coverage type="block, %" value="0%   (0/84)"/>
+              <coverage type="line, %" value="0%   (0/25)"/>
             </method>
             <method name="getDependants (): Map">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -142,7 +142,7 @@
       <package name="com.cloudera.oryx.common.servcomp">
         <coverage type="class, %" value="60%  (3/5)"/>
         <coverage type="method, %" value="40%  (19/47)"/>
-        <coverage type="block, %" value="17%  (240/1414)"/>
+        <coverage type="block, %" value="17%  (240/1420)"/>
         <coverage type="line, %" value="18%  (56/311)"/>
 
         <srcfile name="FilesOrDirsPathFilter.java">
@@ -384,18 +384,18 @@
         <srcfile name="Namespaces.java">
           <coverage type="class, %" value="100% (1/1)"/>
           <coverage type="method, %" value="100% (11/11)"/>
-          <coverage type="block, %" value="73%  (133/181)"/>
+          <coverage type="block, %" value="71%  (133/187)"/>
           <coverage type="line, %" value="70%  (21/30)"/>
 
           <class name="Namespaces">
             <coverage type="class, %" value="100% (1/1)"/>
             <coverage type="method, %" value="100% (11/11)"/>
-            <coverage type="block, %" value="73%  (133/181)"/>
+            <coverage type="block, %" value="71%  (133/187)"/>
             <coverage type="line, %" value="70%  (21/30)"/>
 
             <method name="Namespaces (): void">
               <coverage type="method, %" value="100% (1/1)"/>
-              <coverage type="block, %" value="33%  (24/72)"/>
+              <coverage type="block, %" value="31%  (24/78)"/>
               <coverage type="line, %" value="47%  (8/17)"/>
             </method>
             <method name="&lt;static initializer&gt;">

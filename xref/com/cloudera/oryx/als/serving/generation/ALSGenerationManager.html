@@ -54,106 +54,112 @@
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>    <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a href="../../../../../../com/cloudera/oryx/common/collection/LongSet.html">LongSet</a> recentlyActiveUsers;
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>    <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a href="../../../../../../com/cloudera/oryx/common/collection/LongSet.html">LongSet</a> recentlyActiveItems;
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>    <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a href="../../../../../../com/cloudera/oryx/als/serving/generation/GenerationLoader.html">GenerationLoader</a> loader;
-<a class="jxr_linenumber" name="L49" href="#L49">49</a>  
-<a class="jxr_linenumber" name="L50" href="#L50">50</a>    <strong class="jxr_keyword">public</strong> <a href="../../../../../../com/cloudera/oryx/als/serving/generation/ALSGenerationManager.html">ALSGenerationManager</a>(File appendTempDir) <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L51" href="#L51">51</a>      <strong class="jxr_keyword">super</strong>(appendTempDir);
-<a class="jxr_linenumber" name="L52" href="#L52">52</a>      modelGeneration = NO_GENERATION;
-<a class="jxr_linenumber" name="L53" href="#L53">53</a>      recentlyActiveUsers = <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/common/collection/LongSet.html">LongSet</a>();
-<a class="jxr_linenumber" name="L54" href="#L54">54</a>      recentlyActiveItems = <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/common/collection/LongSet.html">LongSet</a>();
-<a class="jxr_linenumber" name="L55" href="#L55">55</a>      Config config = ConfigUtils.getDefaultConfig();
-<a class="jxr_linenumber" name="L56" href="#L56">56</a>      loader = <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/als/serving/generation/GenerationLoader.html">GenerationLoader</a>(config.getString(<span class="jxr_string">"model.instance-dir"</span>), recentlyActiveUsers, recentlyActiveItems, <strong class="jxr_keyword">this</strong>);
-<a class="jxr_linenumber" name="L57" href="#L57">57</a>    }
-<a class="jxr_linenumber" name="L58" href="#L58">58</a>  
-<a class="jxr_linenumber" name="L59" href="#L59">59</a>    <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L60" href="#L60">60</a>  <em class="jxr_javadoccomment">   * @return an instance of the latest {@link Generation} that has been made available by the</em>
-<a class="jxr_linenumber" name="L61" href="#L61">61</a>  <em class="jxr_javadoccomment">   * implementation.</em>
-<a class="jxr_linenumber" name="L62" href="#L62">62</a>  <em class="jxr_javadoccomment">   */</em>
-<a class="jxr_linenumber" name="L63" href="#L63">63</a>    <strong class="jxr_keyword">public</strong> <a href="../../../../../../com/cloudera/oryx/als/serving/generation/Generation.html">Generation</a> getCurrentGeneration() {
-<a class="jxr_linenumber" name="L64" href="#L64">64</a>      <strong class="jxr_keyword">return</strong> currentGeneration;
-<a class="jxr_linenumber" name="L65" href="#L65">65</a>    }
-<a class="jxr_linenumber" name="L66" href="#L66">66</a>  
-<a class="jxr_linenumber" name="L67" href="#L67">67</a>    <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L68" href="#L68">68</a>  <em class="jxr_javadoccomment">   * Sends a new user / item association to the component responsible for later recomputing</em>
-<a class="jxr_linenumber" name="L69" href="#L69">69</a>  <em class="jxr_javadoccomment">   * the model based on this, and other, updates.</em>
-<a class="jxr_linenumber" name="L70" href="#L70">70</a>  <em class="jxr_javadoccomment">   *</em>
-<a class="jxr_linenumber" name="L71" href="#L71">71</a>  <em class="jxr_javadoccomment">   * @param userID user involved in new association</em>
-<a class="jxr_linenumber" name="L72" href="#L72">72</a>  <em class="jxr_javadoccomment">   * @param itemID item involved</em>
-<a class="jxr_linenumber" name="L73" href="#L73">73</a>  <em class="jxr_javadoccomment">   * @param value strength of the user/item association</em>
-<a class="jxr_linenumber" name="L74" href="#L74">74</a>  <em class="jxr_javadoccomment">   * @throws IOException if an error occurs while sending the update</em>
-<a class="jxr_linenumber" name="L75" href="#L75">75</a>  <em class="jxr_javadoccomment">   */</em>
-<a class="jxr_linenumber" name="L76" href="#L76">76</a>    <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> append(String userID, String itemID, <strong class="jxr_keyword">float</strong> value) <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L77" href="#L77">77</a>      StringBuilder line = <strong class="jxr_keyword">new</strong> StringBuilder(32);
-<a class="jxr_linenumber" name="L78" href="#L78">78</a>      line.append(DelimitedDataUtils.encode(',', userID, itemID, Float.toString(value))).append('\n');
-<a class="jxr_linenumber" name="L79" href="#L79">79</a>      doAppend(line, userID, itemID);
-<a class="jxr_linenumber" name="L80" href="#L80">80</a>    }
-<a class="jxr_linenumber" name="L81" href="#L81">81</a>  
-<a class="jxr_linenumber" name="L82" href="#L82">82</a>    <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L83" href="#L83">83</a>  <em class="jxr_javadoccomment">   * Records that the user-item association should be removed. This is different from recording a</em>
-<a class="jxr_linenumber" name="L84" href="#L84">84</a>  <em class="jxr_javadoccomment">   * negative association.</em>
-<a class="jxr_linenumber" name="L85" href="#L85">85</a>  <em class="jxr_javadoccomment">   *</em>
-<a class="jxr_linenumber" name="L86" href="#L86">86</a>  <em class="jxr_javadoccomment">   * @param userID user involved in new association</em>
-<a class="jxr_linenumber" name="L87" href="#L87">87</a>  <em class="jxr_javadoccomment">   * @param itemID item involved</em>
-<a class="jxr_linenumber" name="L88" href="#L88">88</a>  <em class="jxr_javadoccomment">   * @throws IOException if an error occurs while sending the update</em>
-<a class="jxr_linenumber" name="L89" href="#L89">89</a>  <em class="jxr_javadoccomment">   */</em>
-<a class="jxr_linenumber" name="L90" href="#L90">90</a>    <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> remove(String userID, String itemID) <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L91" href="#L91">91</a>      StringBuilder line = <strong class="jxr_keyword">new</strong> StringBuilder(32);
-<a class="jxr_linenumber" name="L92" href="#L92">92</a>      line.append(DelimitedDataUtils.encode(',', userID, itemID, <span class="jxr_string">""</span>)).append('\n');
-<a class="jxr_linenumber" name="L93" href="#L93">93</a>      doAppend(line, userID, itemID);
-<a class="jxr_linenumber" name="L94" href="#L94">94</a>    }
-<a class="jxr_linenumber" name="L95" href="#L95">95</a>  
-<a class="jxr_linenumber" name="L96" href="#L96">96</a>    <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">synchronized</strong> <strong class="jxr_keyword">void</strong> doAppend(CharSequence line, String userID, String itemID) <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L97" href="#L97">97</a>      Writer appender = getAppender();
-<a class="jxr_linenumber" name="L98" href="#L98">98</a>      <strong class="jxr_keyword">if</strong> (appender != <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L99" href="#L99">99</a>        appender.append(line);
-<a class="jxr_linenumber" name="L100" href="#L100">100</a>     }
-<a class="jxr_linenumber" name="L101" href="#L101">101</a>     <em class="jxr_comment">// User ID reverse mapping is not important to serving layer</em>
-<a class="jxr_linenumber" name="L102" href="#L102">102</a>     <strong class="jxr_keyword">long</strong> numericUserID = StringLongMapping.toLong(userID);
-<a class="jxr_linenumber" name="L103" href="#L103">103</a>     <strong class="jxr_keyword">long</strong> numericItemID;
-<a class="jxr_linenumber" name="L104" href="#L104">104</a>     <strong class="jxr_keyword">if</strong> (currentGeneration == <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L105" href="#L105">105</a>       numericItemID = StringLongMapping.toLong(itemID);
-<a class="jxr_linenumber" name="L106" href="#L106">106</a>     } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L107" href="#L107">107</a>       numericItemID = currentGeneration.getIDMapping().add(itemID);
-<a class="jxr_linenumber" name="L108" href="#L108">108</a>     }
-<a class="jxr_linenumber" name="L109" href="#L109">109</a>     recentlyActiveUsers.add(numericUserID);
-<a class="jxr_linenumber" name="L110" href="#L110">110</a>     recentlyActiveItems.add(numericItemID);
-<a class="jxr_linenumber" name="L111" href="#L111">111</a>     decrementCountdownToUpload();
-<a class="jxr_linenumber" name="L112" href="#L112">112</a>   }
-<a class="jxr_linenumber" name="L113" href="#L113">113</a> 
-<a class="jxr_linenumber" name="L114" href="#L114">114</a>   @Override
-<a class="jxr_linenumber" name="L115" href="#L115">115</a>   <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">void</strong> loadRecentModel(<strong class="jxr_keyword">int</strong> mostRecentModelGeneration) <strong class="jxr_keyword">throws</strong> IOException {
-<a class="jxr_linenumber" name="L116" href="#L116">116</a>     <strong class="jxr_keyword">if</strong> (mostRecentModelGeneration &lt;= modelGeneration) {
-<a class="jxr_linenumber" name="L117" href="#L117">117</a>       <strong class="jxr_keyword">return</strong>;
-<a class="jxr_linenumber" name="L118" href="#L118">118</a>     }
-<a class="jxr_linenumber" name="L119" href="#L119">119</a>     <strong class="jxr_keyword">if</strong> (modelGeneration == NO_GENERATION) {
-<a class="jxr_linenumber" name="L120" href="#L120">120</a>       log.info(<span class="jxr_string">"Most recent generation {} is the first available one"</span>, mostRecentModelGeneration);
-<a class="jxr_linenumber" name="L121" href="#L121">121</a>     } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L122" href="#L122">122</a>       log.info(<span class="jxr_string">"Most recent generation {} is newer than current {}"</span>,
-<a class="jxr_linenumber" name="L123" href="#L123">123</a>                mostRecentModelGeneration, modelGeneration);
+<a class="jxr_linenumber" name="L49" href="#L49">49</a>    <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">boolean</strong> disableWriteUpdates;
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>  
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>    <strong class="jxr_keyword">public</strong> <a href="../../../../../../com/cloudera/oryx/als/serving/generation/ALSGenerationManager.html">ALSGenerationManager</a>(File appendTempDir) <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>      <strong class="jxr_keyword">super</strong>(appendTempDir);
+<a class="jxr_linenumber" name="L53" href="#L53">53</a>      modelGeneration = NO_GENERATION;
+<a class="jxr_linenumber" name="L54" href="#L54">54</a>      recentlyActiveUsers = <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/common/collection/LongSet.html">LongSet</a>();
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>      recentlyActiveItems = <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/common/collection/LongSet.html">LongSet</a>();
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>      Config config = ConfigUtils.getDefaultConfig();
+<a class="jxr_linenumber" name="L57" href="#L57">57</a>      loader = <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/als/serving/generation/GenerationLoader.html">GenerationLoader</a>(config.getString(<span class="jxr_string">"model.instance-dir"</span>), recentlyActiveUsers, recentlyActiveItems, <strong class="jxr_keyword">this</strong>);
+<a class="jxr_linenumber" name="L58" href="#L58">58</a>      disableWriteUpdates = config.getBoolean(<span class="jxr_string">"serving-layer.disable-write-updates"</span>);
+<a class="jxr_linenumber" name="L59" href="#L59">59</a>    }
+<a class="jxr_linenumber" name="L60" href="#L60">60</a>  
+<a class="jxr_linenumber" name="L61" href="#L61">61</a>    <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L62" href="#L62">62</a>  <em class="jxr_javadoccomment">   * @return an instance of the latest {@link Generation} that has been made available by the</em>
+<a class="jxr_linenumber" name="L63" href="#L63">63</a>  <em class="jxr_javadoccomment">   * implementation.</em>
+<a class="jxr_linenumber" name="L64" href="#L64">64</a>  <em class="jxr_javadoccomment">   */</em>
+<a class="jxr_linenumber" name="L65" href="#L65">65</a>    <strong class="jxr_keyword">public</strong> <a href="../../../../../../com/cloudera/oryx/als/serving/generation/Generation.html">Generation</a> getCurrentGeneration() {
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>      <strong class="jxr_keyword">return</strong> currentGeneration;
+<a class="jxr_linenumber" name="L67" href="#L67">67</a>    }
+<a class="jxr_linenumber" name="L68" href="#L68">68</a>  
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>    <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>  <em class="jxr_javadoccomment">   * Sends a new user / item association to the component responsible for later recomputing</em>
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>  <em class="jxr_javadoccomment">   * the model based on this, and other, updates.</em>
+<a class="jxr_linenumber" name="L72" href="#L72">72</a>  <em class="jxr_javadoccomment">   *</em>
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>  <em class="jxr_javadoccomment">   * @param userID user involved in new association</em>
+<a class="jxr_linenumber" name="L74" href="#L74">74</a>  <em class="jxr_javadoccomment">   * @param itemID item involved</em>
+<a class="jxr_linenumber" name="L75" href="#L75">75</a>  <em class="jxr_javadoccomment">   * @param value strength of the user/item association</em>
+<a class="jxr_linenumber" name="L76" href="#L76">76</a>  <em class="jxr_javadoccomment">   * @throws IOException if an error occurs while sending the update</em>
+<a class="jxr_linenumber" name="L77" href="#L77">77</a>  <em class="jxr_javadoccomment">   */</em>
+<a class="jxr_linenumber" name="L78" href="#L78">78</a>    <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> append(String userID, String itemID, <strong class="jxr_keyword">float</strong> value) <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L79" href="#L79">79</a>      <strong class="jxr_keyword">if</strong> (!disableWriteUpdates) {
+<a class="jxr_linenumber" name="L80" href="#L80">80</a>        StringBuilder line = <strong class="jxr_keyword">new</strong> StringBuilder(32);
+<a class="jxr_linenumber" name="L81" href="#L81">81</a>        line.append(DelimitedDataUtils.encode(',', userID, itemID, Float.toString(value))).append('\n');
+<a class="jxr_linenumber" name="L82" href="#L82">82</a>        doAppend(line, userID, itemID);
+<a class="jxr_linenumber" name="L83" href="#L83">83</a>      }
+<a class="jxr_linenumber" name="L84" href="#L84">84</a>    }
+<a class="jxr_linenumber" name="L85" href="#L85">85</a>  
+<a class="jxr_linenumber" name="L86" href="#L86">86</a>    <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L87" href="#L87">87</a>  <em class="jxr_javadoccomment">   * Records that the user-item association should be removed. This is different from recording a</em>
+<a class="jxr_linenumber" name="L88" href="#L88">88</a>  <em class="jxr_javadoccomment">   * negative association.</em>
+<a class="jxr_linenumber" name="L89" href="#L89">89</a>  <em class="jxr_javadoccomment">   *</em>
+<a class="jxr_linenumber" name="L90" href="#L90">90</a>  <em class="jxr_javadoccomment">   * @param userID user involved in new association</em>
+<a class="jxr_linenumber" name="L91" href="#L91">91</a>  <em class="jxr_javadoccomment">   * @param itemID item involved</em>
+<a class="jxr_linenumber" name="L92" href="#L92">92</a>  <em class="jxr_javadoccomment">   * @throws IOException if an error occurs while sending the update</em>
+<a class="jxr_linenumber" name="L93" href="#L93">93</a>  <em class="jxr_javadoccomment">   */</em>
+<a class="jxr_linenumber" name="L94" href="#L94">94</a>    <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> remove(String userID, String itemID) <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L95" href="#L95">95</a>      <strong class="jxr_keyword">if</strong> (!disableWriteUpdates) {
+<a class="jxr_linenumber" name="L96" href="#L96">96</a>        StringBuilder line = <strong class="jxr_keyword">new</strong> StringBuilder(32);
+<a class="jxr_linenumber" name="L97" href="#L97">97</a>        line.append(DelimitedDataUtils.encode(',', userID, itemID, <span class="jxr_string">""</span>)).append('\n');
+<a class="jxr_linenumber" name="L98" href="#L98">98</a>        doAppend(line, userID, itemID);
+<a class="jxr_linenumber" name="L99" href="#L99">99</a>      }
+<a class="jxr_linenumber" name="L100" href="#L100">100</a>   }
+<a class="jxr_linenumber" name="L101" href="#L101">101</a> 
+<a class="jxr_linenumber" name="L102" href="#L102">102</a>   <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">synchronized</strong> <strong class="jxr_keyword">void</strong> doAppend(CharSequence line, String userID, String itemID) <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L103" href="#L103">103</a>     Writer appender = getAppender();
+<a class="jxr_linenumber" name="L104" href="#L104">104</a>     <strong class="jxr_keyword">if</strong> (appender != <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L105" href="#L105">105</a>       appender.append(line);
+<a class="jxr_linenumber" name="L106" href="#L106">106</a>     }
+<a class="jxr_linenumber" name="L107" href="#L107">107</a>     <em class="jxr_comment">// User ID reverse mapping is not important to serving layer</em>
+<a class="jxr_linenumber" name="L108" href="#L108">108</a>     <strong class="jxr_keyword">long</strong> numericUserID = StringLongMapping.toLong(userID);
+<a class="jxr_linenumber" name="L109" href="#L109">109</a>     <strong class="jxr_keyword">long</strong> numericItemID;
+<a class="jxr_linenumber" name="L110" href="#L110">110</a>     <strong class="jxr_keyword">if</strong> (currentGeneration == <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L111" href="#L111">111</a>       numericItemID = StringLongMapping.toLong(itemID);
+<a class="jxr_linenumber" name="L112" href="#L112">112</a>     } <strong class="jxr_keyword">else</strong> {
+<a class="jxr_linenumber" name="L113" href="#L113">113</a>       numericItemID = currentGeneration.getIDMapping().add(itemID);
+<a class="jxr_linenumber" name="L114" href="#L114">114</a>     }
+<a class="jxr_linenumber" name="L115" href="#L115">115</a>     recentlyActiveUsers.add(numericUserID);
+<a class="jxr_linenumber" name="L116" href="#L116">116</a>     recentlyActiveItems.add(numericItemID);
+<a class="jxr_linenumber" name="L117" href="#L117">117</a>     decrementCountdownToUpload();
+<a class="jxr_linenumber" name="L118" href="#L118">118</a>   }
+<a class="jxr_linenumber" name="L119" href="#L119">119</a> 
+<a class="jxr_linenumber" name="L120" href="#L120">120</a>   @Override
+<a class="jxr_linenumber" name="L121" href="#L121">121</a>   <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">void</strong> loadRecentModel(<strong class="jxr_keyword">int</strong> mostRecentModelGeneration) <strong class="jxr_keyword">throws</strong> IOException {
+<a class="jxr_linenumber" name="L122" href="#L122">122</a>     <strong class="jxr_keyword">if</strong> (mostRecentModelGeneration &lt;= modelGeneration) {
+<a class="jxr_linenumber" name="L123" href="#L123">123</a>       <strong class="jxr_keyword">return</strong>;
 <a class="jxr_linenumber" name="L124" href="#L124">124</a>     }
-<a class="jxr_linenumber" name="L125" href="#L125">125</a>     <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L126" href="#L126">126</a> 
-<a class="jxr_linenumber" name="L127" href="#L127">127</a>       <a href="../../../../../../com/cloudera/oryx/als/serving/generation/Generation.html">Generation</a> theCurrentGeneration = currentGeneration;
-<a class="jxr_linenumber" name="L128" href="#L128">128</a>       <strong class="jxr_keyword">if</strong> (theCurrentGeneration == <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L129" href="#L129">129</a>         theCurrentGeneration = <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/als/serving/generation/Generation.html">Generation</a>();
-<a class="jxr_linenumber" name="L130" href="#L130">130</a>       }
-<a class="jxr_linenumber" name="L131" href="#L131">131</a> 
-<a class="jxr_linenumber" name="L132" href="#L132">132</a>       loader.loadModel(mostRecentModelGeneration, theCurrentGeneration);
-<a class="jxr_linenumber" name="L133" href="#L133">133</a> 
-<a class="jxr_linenumber" name="L134" href="#L134">134</a>       modelGeneration = mostRecentModelGeneration;
-<a class="jxr_linenumber" name="L135" href="#L135">135</a>       currentGeneration = theCurrentGeneration;
-<a class="jxr_linenumber" name="L136" href="#L136">136</a> 
-<a class="jxr_linenumber" name="L137" href="#L137">137</a>     } <strong class="jxr_keyword">catch</strong> (OutOfMemoryError oome) {
-<a class="jxr_linenumber" name="L138" href="#L138">138</a>       log.warn(<span class="jxr_string">"Increase heap size with -Xmx, decrease new generation size with larger "</span> +
-<a class="jxr_linenumber" name="L139" href="#L139">139</a>                    <span class="jxr_string">"-XX:NewRatio value, and/or use -XX:+UseCompressedOops"</span>);
-<a class="jxr_linenumber" name="L140" href="#L140">140</a>       currentGeneration = <strong class="jxr_keyword">null</strong>;
-<a class="jxr_linenumber" name="L141" href="#L141">141</a>       <strong class="jxr_keyword">throw</strong> oome;
-<a class="jxr_linenumber" name="L142" href="#L142">142</a>     } <strong class="jxr_keyword">catch</strong> (SolverException ignored) {
-<a class="jxr_linenumber" name="L143" href="#L143">143</a>       log.warn(<span class="jxr_string">"Unable to compute a valid generation yet; waiting for more data"</span>);
-<a class="jxr_linenumber" name="L144" href="#L144">144</a>       currentGeneration = <strong class="jxr_keyword">null</strong>;
-<a class="jxr_linenumber" name="L145" href="#L145">145</a>     }
-<a class="jxr_linenumber" name="L146" href="#L146">146</a>   }
-<a class="jxr_linenumber" name="L147" href="#L147">147</a> 
-<a class="jxr_linenumber" name="L148" href="#L148">148</a> }
+<a class="jxr_linenumber" name="L125" href="#L125">125</a>     <strong class="jxr_keyword">if</strong> (modelGeneration == NO_GENERATION) {
+<a class="jxr_linenumber" name="L126" href="#L126">126</a>       log.info(<span class="jxr_string">"Most recent generation {} is the first available one"</span>, mostRecentModelGeneration);
+<a class="jxr_linenumber" name="L127" href="#L127">127</a>     } <strong class="jxr_keyword">else</strong> {
+<a class="jxr_linenumber" name="L128" href="#L128">128</a>       log.info(<span class="jxr_string">"Most recent generation {} is newer than current {}"</span>,
+<a class="jxr_linenumber" name="L129" href="#L129">129</a>                mostRecentModelGeneration, modelGeneration);
+<a class="jxr_linenumber" name="L130" href="#L130">130</a>     }
+<a class="jxr_linenumber" name="L131" href="#L131">131</a>     <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="L132" href="#L132">132</a> 
+<a class="jxr_linenumber" name="L133" href="#L133">133</a>       <a href="../../../../../../com/cloudera/oryx/als/serving/generation/Generation.html">Generation</a> theCurrentGeneration = currentGeneration;
+<a class="jxr_linenumber" name="L134" href="#L134">134</a>       <strong class="jxr_keyword">if</strong> (theCurrentGeneration == <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L135" href="#L135">135</a>         theCurrentGeneration = <strong class="jxr_keyword">new</strong> <a href="../../../../../../com/cloudera/oryx/als/serving/generation/Generation.html">Generation</a>();
+<a class="jxr_linenumber" name="L136" href="#L136">136</a>       }
+<a class="jxr_linenumber" name="L137" href="#L137">137</a> 
+<a class="jxr_linenumber" name="L138" href="#L138">138</a>       loader.loadModel(mostRecentModelGeneration, theCurrentGeneration);
+<a class="jxr_linenumber" name="L139" href="#L139">139</a> 
+<a class="jxr_linenumber" name="L140" href="#L140">140</a>       modelGeneration = mostRecentModelGeneration;
+<a class="jxr_linenumber" name="L141" href="#L141">141</a>       currentGeneration = theCurrentGeneration;
+<a class="jxr_linenumber" name="L142" href="#L142">142</a> 
+<a class="jxr_linenumber" name="L143" href="#L143">143</a>     } <strong class="jxr_keyword">catch</strong> (OutOfMemoryError oome) {
+<a class="jxr_linenumber" name="L144" href="#L144">144</a>       log.warn(<span class="jxr_string">"Increase heap size with -Xmx, decrease new generation size with larger "</span> +
+<a class="jxr_linenumber" name="L145" href="#L145">145</a>                    <span class="jxr_string">"-XX:NewRatio value, and/or use -XX:+UseCompressedOops"</span>);
+<a class="jxr_linenumber" name="L146" href="#L146">146</a>       currentGeneration = <strong class="jxr_keyword">null</strong>;
+<a class="jxr_linenumber" name="L147" href="#L147">147</a>       <strong class="jxr_keyword">throw</strong> oome;
+<a class="jxr_linenumber" name="L148" href="#L148">148</a>     } <strong class="jxr_keyword">catch</strong> (SolverException ignored) {
+<a class="jxr_linenumber" name="L149" href="#L149">149</a>       log.warn(<span class="jxr_string">"Unable to compute a valid generation yet; waiting for more data"</span>);
+<a class="jxr_linenumber" name="L150" href="#L150">150</a>       currentGeneration = <strong class="jxr_keyword">null</strong>;
+<a class="jxr_linenumber" name="L151" href="#L151">151</a>     }
+<a class="jxr_linenumber" name="L152" href="#L152">152</a>   }
+<a class="jxr_linenumber" name="L153" href="#L153">153</a> 
+<a class="jxr_linenumber" name="L154" href="#L154">154</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2013&#x2013;2014. All rights reserved.</div>

@@ -88,11 +88,8 @@ public final class ClusteringModelBuilder {
     this.clusteringFields = Lists.newArrayList();
     NormalizeSettings normalize = NormalizeSettings.create(ConfigUtils.getDefaultConfig());
     List<String> columnNames = settings.getColumnNames();
-    int offset = 0;
     for (int i = 0; i < columnNames.size(); i++) {
-      if (settings.isIgnored(i)) {
-        // Skip processing
-      } else {
+      if (!settings.isIgnored(i)) {
         SummaryStats ss = summary.getStats(i);
         FieldName baseName = new FieldName(columnNames.get(i));
         if (settings.isNumeric(i)) {
@@ -116,7 +113,6 @@ public final class ClusteringModelBuilder {
             df.setName(fn);
             df.setExpression(e);
             transforms.getDerivedFields().add(df);
-            offset++;
           }
           ClusteringField cf = new ClusteringField(fn);
           if (normalize.getScale(i) != 1.0) {
@@ -137,7 +133,6 @@ public final class ClusteringModelBuilder {
               cf.setFieldWeight(normalize.getScale(i));
             }
             clusteringFields.add(cf);
-            offset++;
           }
         }
       }

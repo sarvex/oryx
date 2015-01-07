@@ -270,6 +270,8 @@ public abstract class JobStep extends Configured implements Tool, HasState {
 
     Config appConfig = ConfigUtils.getDefaultConfig();
 
+    conf.set("crunch.tmp.dir", appConfig.getString("computation-layer.tmp-dir"));
+
     int mapMemoryMB = appConfig.getInt("computation-layer.mapper-memory-mb");
     log.info("Mapper memory: {}", mapMemoryMB);
     int mapHeapMB = (int) (mapMemoryMB / 1.3); // Matches Hadoop's default

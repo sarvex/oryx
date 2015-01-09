@@ -66,9 +66,9 @@
 <form action="#" style="padding:10px">
     <tr><td><code>/add</code></td>
         <td colspan="2">
-            <textarea rows="5" id="add-data">foo,1,bar,3</textarea>
+            <textarea rows="5" id="addData">foo,1,bar,3</textarea>
         </td>
-        <td><a href="#" class="arrow" onclick="return doQuery('add',false,[],'data')">&amp;#x27AC;</a></td>
+        <td><a href="#" class="arrow" onclick="return doQuery('add',false,[],'addData')">&amp;#x27AC;</a></td>
     </tr>
 </form>
 

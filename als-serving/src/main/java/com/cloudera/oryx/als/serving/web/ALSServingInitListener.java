@@ -102,6 +102,8 @@ public final class ALSServingInitListener extends AbstractOryxServingInitListene
     addServlet(context, new MostPopularItemsServlet(), "/mostPopularItems/*");
     addServlet(context, new PopularRepresentativeItemsServlet(), "/popularRepresentativeItems/*");
     addServlet(context, new AllItemIDsServlet(), "/item/allIDs");
+    addServlet(context, new AllUserIDsServlet(), "/user/allIDs");
+    addServlet(context, new MostActiveUsersServlet(), "/user/mostActiveIDs");
     addServlet(context, new KnownItemsServlet(), "/knownItems/*");
     addServlet(context, new MostSurprisingServlet(), "/mostSurprising/*");
     if (!ConfigUtils.getDefaultConfig().getBoolean("serving-layer.api.read-only")) {

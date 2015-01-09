@@ -119,7 +119,7 @@ public interface OryxRecommender {
    * @param howMany desired number of most similar items to find
    * @param rescorer {@link PairRescorer} which can adjust item-item similarity estimates used to determine
    *  most similar items. The longs that will be passed to the {@link PairRescorer} are
-   *  the candidate item that might be returned in the result as its first element, and the 
+   *  the candidate item that might be returned in the result as its first element, and the
    *  {@code itemID} argument here as its second element.
    * @return items most similar to the given item, ordered from most similar to least
    * @throws NoSuchItemException if the item is not known
@@ -142,7 +142,7 @@ public interface OryxRecommender {
    * @param howMany desired number of most similar items to find
    * @param rescorer {@link PairRescorer} which can adjust item-item similarity estimates used to determine
    *  most similar items. The longs that will be passed to the {@link PairRescorer} are
-   *  the candidate item that might be returned in the result as its first element, and one of the 
+   *  the candidate item that might be returned in the result as its first element, and one of the
    *  {@code itemID} arguments here as its second element.
    * @return items most similar to the given items, ordered from most similar to least
    * @throws NoSuchItemException if <em>none</em> of {@code itemIDs}
@@ -208,7 +208,7 @@ public interface OryxRecommender {
    * Computes recommendations for a user that is not known to the model yet; instead, the user's
    * associated items are supplied to the method and it proceeds as if a user with these associated
    * items were in the model.
-   * 
+   *
    * @param itemIDs item IDs that the anonymous user has interacted with
    * @param howMany how many recommendations to return
    * @see #recommend(String, int)
@@ -325,19 +325,19 @@ public interface OryxRecommender {
    * vector formed by projecting the given items together into the latent feature space, and then
    * recommending to that user vector (high dot product items), which is slightly different
    * from the other method.</p>
-   * 
+   *
    * @param toItemID item for which the anonymous user's strength of interaction is to be estimated
    * @param itemIDs item IDs that the anonymous user has interacted with
    * @see #recommendToAnonymous(String[], float[], int)
    * @see #mostSimilarItems(String, int)
    */
   float estimateForAnonymous(String toItemID, String[] itemIDs) throws NotReadyException, NoSuchItemException;
-  
+
   /**
    * A version of {@link #estimatePreference(String, String)} that, like
    * {@link #recommendToAnonymous(String[], float[], int)}, operates on "anonymous" users --
    * defined not by a previously known set of data, but data given in the request.
-   * 
+   *
    * @param toItemID item for which the anonymous user's strength of interaction is to be estimated
    * @param itemIDs item IDs that the anonymous user has interacted with
    * @param values values corresponding to {@code itemIDs}
@@ -345,7 +345,7 @@ public interface OryxRecommender {
    */
   float estimateForAnonymous(String toItemID, String[] itemIDs, float[] values)
       throws NotReadyException, NoSuchItemException;
-  
+
   /**
    * Like {@link #ingest(File)}, but reads from a {@link Reader}.
    *
@@ -378,6 +378,12 @@ public interface OryxRecommender {
   Collection<String> getAllItemIDs() throws NotReadyException;
 
   /**
+   * @return all user IDs currently present in the model
+   * @throws NotReadyException
+   */
+  Collection<String> getAllUserIDs() throws NotReadyException;
+
+  /**
    * @param userID user to get known items for
    * @return a {@link Collection} of item IDs that the model records that the user has interacted
    *  with. This is the same set of items that are excluded from
@@ -388,6 +394,14 @@ public interface OryxRecommender {
    */
   Collection<String> getKnownItemsForUser(String userID) throws NotReadyException;
 
+  /**
+   * @param howMany how many users to return
+   * @return {@link List} of user {@link IDValue}s, ordered from the most number of interaction with
+   * distinct items to least.
+   * @throws NotReadyException if the implementation has no usable model yet
+   */
+  List<IDValue> getMostActiveUsers(int howMany) throws NotReadyException;
+
     /**
      * @return true if and only if the instance is ready to make recommendations; may be false for example
      *  while the recommender is still building an initial model
@@ -396,7 +410,7 @@ public interface OryxRecommender {
 
   /**
    * Blocks indefinitely until {@link #isReady()} returns {@code true}.
-   * 
+   *
    * @throws InterruptedException if the thread is interrupted while waiting
    */
   void await() throws InterruptedException;

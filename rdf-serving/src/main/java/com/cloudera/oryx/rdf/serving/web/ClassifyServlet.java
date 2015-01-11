@@ -64,6 +64,10 @@ public final class ClassifyServlet extends AbstractRDFServlet {
   protected void doPost(HttpServletRequest request,
                         HttpServletResponse response) throws IOException {
     String line = request.getReader().readLine();
+    if (line == null) {
+      response.sendError(HttpServletResponse.SC_BAD_REQUEST, "No body");
+      return;
+    }
     doClassify(line, request, response);
   }
 

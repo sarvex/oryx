@@ -25,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.Reader;
 import java.util.Map;
 
 import com.cloudera.oryx.common.io.IOUtils;
@@ -61,7 +62,12 @@ public final class IrisIT extends AbstractComputationIT {
     new RDFLocalGenerationRunner().call();
     File pmmlFile = new File(TEST_TEMP_BASE_DIR, "00000/model.pmml.gz");
 
-    log.info("PMML:\n{}", CharStreams.toString(IOUtils.openReaderMaybeDecompressing(pmmlFile)));
+    Reader pmmlReader = IOUtils.openReaderMaybeDecompressing(pmmlFile);
+    try {
+      log.info("PMML:\n{}", CharStreams.toString(pmmlReader));
+    } finally {
+      pmmlReader.close();
+    }
 
     Pair<DecisionForest,Map<Integer,BiMap<String,Integer>>> forestAndMapping = DecisionForestPMML.read(pmmlFile);
     DecisionForest forest = forestAndMapping.getFirst();

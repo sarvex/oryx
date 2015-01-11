@@ -18,6 +18,7 @@ package com.cloudera.oryx.computation.common;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import org.apache.hadoop.mapreduce.Cluster;
+import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.JobStatus;
 import org.apache.hadoop.util.Tool;
 import org.slf4j.Logger;
@@ -66,12 +67,14 @@ public abstract class DistributedGenerationRunner extends GenerationRunner {
       if (statuses != null) {
         for (JobStatus jobStatus : statuses) {
           JobStatus.State state = jobStatus.getState();
-          if (state == JobStatus.State.RUNNING || state ==  JobStatus.State.PREP) {
-            cluster.getJob(jobStatus.getJobID());
-            String jobName = cluster.getJob(jobStatus.getJobID()).getJobName();
-            log.info("Found running job {}", jobName);
-            if (jobName.startsWith("Oryx-" + instanceDir + '-')) {
-              result.add(jobName);
+          if (state == JobStatus.State.RUNNING || state == JobStatus.State.PREP) {
+            Job job = cluster.getJob(jobStatus.getJobID());
+            if (job != null) {
+              String jobName = job.getJobName();
+              log.info("Found running job {}", jobName);
+              if (jobName.startsWith("Oryx-" + instanceDir + '-')) {
+                result.add(jobName);
+              }
             }
           }
         }

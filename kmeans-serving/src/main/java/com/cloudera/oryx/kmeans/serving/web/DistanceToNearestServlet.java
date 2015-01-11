@@ -52,6 +52,10 @@ public final class DistanceToNearestServlet extends AbstractKMeansServlet {
   protected void doPost(HttpServletRequest request,
                         HttpServletResponse response) throws IOException {
     String line = request.getReader().readLine();
+    if (line == null) {
+      response.sendError(HttpServletResponse.SC_BAD_REQUEST, "No body");
+      return;
+    }
     doDistanceToNearest(line, response);
   }
 

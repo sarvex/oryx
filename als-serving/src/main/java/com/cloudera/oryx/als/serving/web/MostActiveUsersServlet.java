@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <p>Responds to a GET request to {@code /user/mostActiveIDs(?howMany=n)(&offset=o)}
+ * <p>Responds to a GET request to {@code /mostActiveUsers(?howMany=n)(&offset=o)}
  * and in turn calls {@link OryxRecommender#getMostActiveUsers(int)}.
  * {@code offset} is an offset into the entire list of results; {@code howMany} is the desired
  * number of results to return from there. For example, {@code offset=30} and {@code howMany=5}

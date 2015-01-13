@@ -109,6 +109,14 @@
   <tr><td colspan="4"><hr/></td></tr>
 
 <form action="#" style="padding:10px">
+  <tr><td><code>/mostActiveUsers</code></td>
+    <td colspan="2"/>
+    <td><a href="#" class="arrow" onclick="return doQuery('mostActiveUsers',true)">&amp;#x27AC;</a></td></tr>
+</form>
+
+  <tr><td colspan="4"><hr/></td></tr>
+
+<form action="#" style="padding:10px">
   <tr><td><code>/popularRepresentativeItems</code></td>
     <td colspan="2"/>
     <td><a href="#" class="arrow" onclick="return doQuery('popularRepresentativeItems',true)">&amp;#x27AC;</a></td></tr>
@@ -120,6 +128,14 @@
   <tr><td><code>/item/allIDs</code></td>
     <td colspan="2"/>
     <td><a href="#" class="arrow" onclick="return doQuery('item/allIDs',true)">&amp;#x27AC;</a></td></tr>
+</form>
+
+    <tr><td colspan="4"><hr/></td></tr>
+
+<form action="#" style="padding:10px">
+  <tr><td><code>/user/allIDs</code></td>
+    <td colspan="2"/>
+    <td><a href="#" class="arrow" onclick="return doQuery('user/allIDs',true)">&amp;#x27AC;</a></td></tr>
 </form>
 
     <tr><td colspan="4"><hr/></td></tr>

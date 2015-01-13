@@ -72,7 +72,7 @@ import com.cloudera.oryx.common.parallel.ExecutorUtils;
  * @author Sean Owen
  */
 public final class ServerRecommender implements OryxRecommender, Closeable {
-  
+
   private static final Logger log = LoggerFactory.getLogger(ServerRecommender.class);
 
   private final ALSGenerationManager generationManager;
@@ -379,8 +379,8 @@ public final class ServerRecommender implements OryxRecommender, Closeable {
 
     float[][] anonymousFeaturesAsArray = { anonymousUserFeatures };
 
-    Generation generation = getCurrentGeneration();    
-    Lock yLock = generation.getYLock().readLock();    
+    Generation generation = getCurrentGeneration();
+    Lock yLock = generation.getYLock().readLock();
     yLock.lock();
     try {
       return multithreadedTopN(anonymousFeaturesAsArray,
@@ -392,13 +392,13 @@ public final class ServerRecommender implements OryxRecommender, Closeable {
       yLock.unlock();
     }
   }
-  
+
   private float[] buildAnonymousUserFeatures(String[] itemIDs, float[] values)
       throws NotReadyException, NoSuchItemException {
 
     Preconditions.checkArgument(values == null || values.length == itemIDs.length,
                                 "Number of values doesn't match number of items");
-    
+
     Generation generation = getCurrentGeneration();
 
     LongObjectMap<float[]> Y = generation.getY();
@@ -515,7 +515,7 @@ public final class ServerRecommender implements OryxRecommender, Closeable {
         Lock xReadLock = generation.getXLock().readLock();
         xReadLock.lock();
         try {
-          
+
           for (LongObjectMap.MapEntry<LongSet> entry : knownItemIDs.entrySet()) {
             LongSet itemIDs = entry.getValue();
             synchronized (itemIDs) {
@@ -526,7 +526,7 @@ public final class ServerRecommender implements OryxRecommender, Closeable {
               }
             }
           }
-          
+
         } finally {
           xReadLock.unlock();
         }
@@ -583,10 +583,10 @@ public final class ServerRecommender implements OryxRecommender, Closeable {
 
   @Override
   public float[] estimatePreferences(String userID, String... itemIDs) throws NotReadyException {
-    
+
     Generation generation = getCurrentGeneration();
     LongObjectMap<float[]> X = generation.getX();
-    
+
     float[] userFeatures;
     Lock xLock = generation.getXLock().readLock();
     xLock.lock();
@@ -598,7 +598,7 @@ public final class ServerRecommender implements OryxRecommender, Closeable {
     if (userFeatures == null) {
       return new float[itemIDs.length]; // All 0.0f
     }
-    
+
     LongObjectMap<float[]> Y = generation.getY();
 
     Lock yLock = generation.getYLock().readLock();
@@ -619,33 +619,33 @@ public final class ServerRecommender implements OryxRecommender, Closeable {
       yLock.unlock();
     }
   }
-  
+
   @Override
   public float estimateForAnonymous(String toItemID, String[] itemIDs) throws NotReadyException, NoSuchItemException {
     return estimateForAnonymous(toItemID, itemIDs, null);
   }
-  
+
   @Override
   public float estimateForAnonymous(String toItemID, String[] itemIDs, float[] values)
       throws NotReadyException, NoSuchItemException {
 
-    Generation generation = getCurrentGeneration();    
+    Generation generation = getCurrentGeneration();
     LongObjectMap<float[]> Y = generation.getY();
     Lock yLock = generation.getYLock().readLock();
-    float[] toItemFeatures;    
+    float[] toItemFeatures;
     yLock.lock();
     try {
       toItemFeatures = Y.get(StringLongMapping.toLong(toItemID));
     } finally {
       yLock.unlock();
     }
-    
+
     if (toItemFeatures == null) {
       throw new NoSuchItemException(toItemID);
     }
-    
-    float[] anonymousUserFeatures = buildAnonymousUserFeatures(itemIDs, values);    
-    
+
+    float[] anonymousUserFeatures = buildAnonymousUserFeatures(itemIDs, values);
+
     return (float) SimpleVectorMath.dot(anonymousUserFeatures, toItemFeatures);
   }
 
@@ -691,7 +691,7 @@ public final class ServerRecommender implements OryxRecommender, Closeable {
     if (newItem) {
       generation.getCandidateFilter().addItem(itemID);
     }
-    
+
     float[] itemFeatures = getFeatures(longItemID, generation.getY(), generation.getYLock());
 
     updateFeatures(userFeatures, itemFeatures, value, generation);
@@ -725,7 +725,7 @@ public final class ServerRecommender implements OryxRecommender, Closeable {
       }
     }
   }
-  
+
   private static float[] getFeatures(long longID, LongObjectMap<float[]> matrix, ReadWriteLock lock) {
     float[] features;
     Lock readLock = lock.readLock();
@@ -752,7 +752,7 @@ public final class ServerRecommender implements OryxRecommender, Closeable {
     }
     return features;
   }
-  
+
   private static void updateFeatures(float[] userFeatures, float[] itemFeatures, float value, Generation generation) {
     if (userFeatures == null || itemFeatures == null) {
       return;
@@ -1135,6 +1135,26 @@ public final class ServerRecommender implements OryxRecommender, Closeable {
     }
   }
 
+  @Override
+  public Collection<String> getAllUserIDs() throws NotReadyException {
+    Generation generation = getCurrentGeneration();
+    LongObjectMap<float[]> X = generation.getX();
+    StringLongMapping mapping = generation.getIDMapping();
+    Lock xLock = generation.getXLock().readLock();
+    xLock.lock();
+    try {
+      List<String> userIDs = Lists.newArrayListWithCapacity(X.size());
+      LongPrimitiveIterator it = X.keySetIterator();
+      while (it.hasNext()) {
+        userIDs.add(mapping.toString(it.nextLong()));
+      }
+      return userIDs;
+    } finally {
+      xLock.unlock();
+    }
+  }
+
+  @Override
   public Collection<String> getKnownItemsForUser(String userID) throws NotReadyException {
     Generation generation = getCurrentGeneration();
     LongObjectMap<LongSet> knownItemIDs = generation.getKnownItemIDs();
@@ -1164,6 +1184,37 @@ public final class ServerRecommender implements OryxRecommender, Closeable {
       }
     }
     return userIDStrings;
+  }
+
+  @Override
+  public List<IDValue> getMostActiveUsers(int howMany) throws NotReadyException {
+    Preconditions.checkArgument(howMany > 0, "howMany must be positive");
+
+    Generation generation = getCurrentGeneration();
+    LongObjectMap<LongSet> knownItemIDs = generation.getKnownItemIDs();
+    if (knownItemIDs == null) {
+      throw new UnsupportedOperationException();
+    }
+
+    List<NumericIDValue> userCounts = Lists.newArrayListWithCapacity(knownItemIDs.size());
+    Lock knownItemReadLock = generation.getKnownItemLock().readLock();
+    knownItemReadLock.lock();
+    try {
+      Lock xReadLock = generation.getXLock().readLock();
+      xReadLock.lock();
+      try {
+        for (LongObjectMap.MapEntry<LongSet> entry : knownItemIDs.entrySet()) {
+          LongSet itemIDs = entry.getValue();
+          userCounts.add(new NumericIDValue(entry.getKey(), (float) itemIDs.size()));
+        }
+      } finally {
+        xReadLock.unlock();
+      }
+    } finally {
+      knownItemReadLock.unlock();
+    }
+
+    return translateToStringIDs(TopN.selectTopN(userCounts.iterator(), howMany));
   }
 
   @Override

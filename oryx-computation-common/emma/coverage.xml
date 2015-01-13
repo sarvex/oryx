@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Sat Dec 13 23:33:41 GMT 2014 -->
+<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Tue Jan 13 10:48:32 GMT 2015 -->
 
 <report>
   <stats>
@@ -6,14 +6,14 @@
     <classes value="78"/>
     <methods value="479"/>
     <srcfiles value="46"/>
-    <srclines value="1547"/>
+    <srclines value="1549"/>
   </stats>
   <data>
     <all name="all classes">
       <coverage type="class, %" value="9%   (7/78)"/>
       <coverage type="method, %" value="5%   (24/479)"/>
-      <coverage type="block, %" value="8%   (544/7221)"/>
-      <coverage type="line, %" value="8%   (121.9/1547)"/>
+      <coverage type="block, %" value="8%   (544/7226)"/>
+      <coverage type="line, %" value="8%   (121.9/1549)"/>
 
       <package name="com.cloudera.oryx.computation.common.crossfold">
         <coverage type="class, %" value="0%   (0/2)"/>
@@ -2458,20 +2458,20 @@
       <package name="com.cloudera.oryx.computation.common">
         <coverage type="class, %" value="14%  (2/14)"/>
         <coverage type="method, %" value="8%   (9/108)"/>
-        <coverage type="block, %" value="7%   (204/2770)"/>
-        <coverage type="line, %" value="9%   (53.9/613)"/>
+        <coverage type="block, %" value="7%   (204/2775)"/>
+        <coverage type="line, %" value="9%   (53.9/615)"/>
 
         <srcfile name="DistributedGenerationRunner.java">
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/10)"/>
-          <coverage type="block, %" value="0%   (0/298)"/>
-          <coverage type="line, %" value="0%   (0/73)"/>
+          <coverage type="block, %" value="0%   (0/297)"/>
+          <coverage type="line, %" value="0%   (0/74)"/>
 
           <class name="DistributedGenerationRunner">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/10)"/>
-            <coverage type="block, %" value="0%   (0/298)"/>
-            <coverage type="line, %" value="0%   (0/73)"/>
+            <coverage type="block, %" value="0%   (0/297)"/>
+            <coverage type="line, %" value="0%   (0/74)"/>
 
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -2500,8 +2500,8 @@
             </method>
             <method name="find (String): Collection">
               <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/86)"/>
-              <coverage type="line, %" value="0%   (0/19)"/>
+              <coverage type="block, %" value="0%   (0/85)"/>
+              <coverage type="line, %" value="0%   (0/20)"/>
             </method>
             <method name="runOneIteration (int, List): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -2705,14 +2705,14 @@
         <srcfile name="JobStep.java">
           <coverage type="class, %" value="0%   (0/2)"/>
           <coverage type="method, %" value="0%   (0/29)"/>
-          <coverage type="block, %" value="0%   (0/866)"/>
-          <coverage type="line, %" value="0%   (0/179)"/>
+          <coverage type="block, %" value="0%   (0/872)"/>
+          <coverage type="line, %" value="0%   (0/180)"/>
 
           <class name="JobStep">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/28)"/>
-            <coverage type="block, %" value="0%   (0/826)"/>
-            <coverage type="line, %" value="0%   (0/179)"/>
+            <coverage type="block, %" value="0%   (0/832)"/>
+            <coverage type="line, %" value="0%   (0/180)"/>
 
             <method name="&lt;static initializer&gt;">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -2741,8 +2741,8 @@
             </method>
             <method name="createBasicPipeline (Class): MRPipeline">
               <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/231)"/>
-              <coverage type="line, %" value="0%   (0/48)"/>
+              <coverage type="block, %" value="0%   (0/237)"/>
+              <coverage type="line, %" value="0%   (0/49)"/>
             </method>
             <method name="createPipeline (): MRPipeline">
               <coverage type="method, %" value="0%   (0/1)"/>

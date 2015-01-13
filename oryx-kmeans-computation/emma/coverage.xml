@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Sat Dec 13 23:33:41 GMT 2014 -->
+<?xml version="1.0" encoding="UTF-8"?><!-- EMMA v2.1.5320 (stable) report, generated Tue Jan 13 10:48:32 GMT 2015 -->
 
 <report>
   <stats>
@@ -6,14 +6,14 @@
     <classes value="79"/>
     <methods value="376"/>
     <srcfiles value="59"/>
-    <srclines value="1766"/>
+    <srclines value="1763"/>
   </stats>
   <data>
     <all name="all classes">
       <coverage type="class, %" value="28%  (22/79)"/>
       <coverage type="method, %" value="15%  (55/376)"/>
-      <coverage type="block, %" value="13%  (1044/8328)"/>
-      <coverage type="line, %" value="12%  (210.1/1766)"/>
+      <coverage type="block, %" value="13%  (1044/8323)"/>
+      <coverage type="line, %" value="12%  (210.1/1763)"/>
 
       <package name="com.cloudera.oryx.kmeans.computation.evaluate">
         <coverage type="class, %" value="0%   (0/12)"/>
@@ -859,20 +859,20 @@
       <package name="com.cloudera.oryx.kmeans.computation.pmml">
         <coverage type="class, %" value="0%   (0/1)"/>
         <coverage type="method, %" value="0%   (0/6)"/>
-        <coverage type="block, %" value="0%   (0/407)"/>
-        <coverage type="line, %" value="0%   (0/78)"/>
+        <coverage type="block, %" value="0%   (0/402)"/>
+        <coverage type="line, %" value="0%   (0/75)"/>
 
         <srcfile name="ClusteringModelBuilder.java">
           <coverage type="class, %" value="0%   (0/1)"/>
           <coverage type="method, %" value="0%   (0/6)"/>
-          <coverage type="block, %" value="0%   (0/407)"/>
-          <coverage type="line, %" value="0%   (0/78)"/>
+          <coverage type="block, %" value="0%   (0/402)"/>
+          <coverage type="line, %" value="0%   (0/75)"/>
 
           <class name="ClusteringModelBuilder">
             <coverage type="class, %" value="0%   (0/1)"/>
             <coverage type="method, %" value="0%   (0/6)"/>
-            <coverage type="block, %" value="0%   (0/407)"/>
-            <coverage type="line, %" value="0%   (0/78)"/>
+            <coverage type="block, %" value="0%   (0/402)"/>
+            <coverage type="line, %" value="0%   (0/75)"/>
 
             <method name="ClusteringModelBuilder (Summary): void">
               <coverage type="method, %" value="0%   (0/1)"/>
@@ -886,8 +886,8 @@
             </method>
             <method name="buildSummaryInfo (Summary, InboundSettings): void">
               <coverage type="method, %" value="0%   (0/1)"/>
-              <coverage type="block, %" value="0%   (0/278)"/>
-              <coverage type="line, %" value="0%   (0/49)"/>
+              <coverage type="block, %" value="0%   (0/273)"/>
+              <coverage type="line, %" value="0%   (0/46)"/>
             </method>
             <method name="getDictionary (): DataDictionary">
               <coverage type="method, %" value="0%   (0/1)"/>

@@ -127,7 +127,7 @@
 <a class="jxr_linenumber" name="L119" href="#L119">119</a> <em class="jxr_javadoccomment">   * @param howMany desired number of most similar items to find</em>
 <a class="jxr_linenumber" name="L120" href="#L120">120</a> <em class="jxr_javadoccomment">   * @param rescorer {@link PairRescorer} which can adjust item-item similarity estimates used to determine</em>
 <a class="jxr_linenumber" name="L121" href="#L121">121</a> <em class="jxr_javadoccomment">   *  most similar items. The longs that will be passed to the {@link PairRescorer} are</em>
-<a class="jxr_linenumber" name="L122" href="#L122">122</a> <em class="jxr_javadoccomment">   *  the candidate item that might be returned in the result as its first element, and the </em>
+<a class="jxr_linenumber" name="L122" href="#L122">122</a> <em class="jxr_javadoccomment">   *  the candidate item that might be returned in the result as its first element, and the</em>
 <a class="jxr_linenumber" name="L123" href="#L123">123</a> <em class="jxr_javadoccomment">   *  {@code itemID} argument here as its second element.</em>
 <a class="jxr_linenumber" name="L124" href="#L124">124</a> <em class="jxr_javadoccomment">   * @return items most similar to the given item, ordered from most similar to least</em>
 <a class="jxr_linenumber" name="L125" href="#L125">125</a> <em class="jxr_javadoccomment">   * @throws NoSuchItemException if the item is not known</em>
@@ -150,7 +150,7 @@
 <a class="jxr_linenumber" name="L142" href="#L142">142</a> <em class="jxr_javadoccomment">   * @param howMany desired number of most similar items to find</em>
 <a class="jxr_linenumber" name="L143" href="#L143">143</a> <em class="jxr_javadoccomment">   * @param rescorer {@link PairRescorer} which can adjust item-item similarity estimates used to determine</em>
 <a class="jxr_linenumber" name="L144" href="#L144">144</a> <em class="jxr_javadoccomment">   *  most similar items. The longs that will be passed to the {@link PairRescorer} are</em>
-<a class="jxr_linenumber" name="L145" href="#L145">145</a> <em class="jxr_javadoccomment">   *  the candidate item that might be returned in the result as its first element, and one of the </em>
+<a class="jxr_linenumber" name="L145" href="#L145">145</a> <em class="jxr_javadoccomment">   *  the candidate item that might be returned in the result as its first element, and one of the</em>
 <a class="jxr_linenumber" name="L146" href="#L146">146</a> <em class="jxr_javadoccomment">   *  {@code itemID} arguments here as its second element.</em>
 <a class="jxr_linenumber" name="L147" href="#L147">147</a> <em class="jxr_javadoccomment">   * @return items most similar to the given items, ordered from most similar to least</em>
 <a class="jxr_linenumber" name="L148" href="#L148">148</a> <em class="jxr_javadoccomment">   * @throws NoSuchItemException if &lt;em&gt;none&lt;/em&gt; of {@code itemIDs}</em>
@@ -216,7 +216,7 @@
 <a class="jxr_linenumber" name="L208" href="#L208">208</a> <em class="jxr_javadoccomment">   * Computes recommendations for a user that is not known to the model yet; instead, the user's</em>
 <a class="jxr_linenumber" name="L209" href="#L209">209</a> <em class="jxr_javadoccomment">   * associated items are supplied to the method and it proceeds as if a user with these associated</em>
 <a class="jxr_linenumber" name="L210" href="#L210">210</a> <em class="jxr_javadoccomment">   * items were in the model.</em>
-<a class="jxr_linenumber" name="L211" href="#L211">211</a> <em class="jxr_javadoccomment">   * </em>
+<a class="jxr_linenumber" name="L211" href="#L211">211</a> <em class="jxr_javadoccomment">   *</em>
 <a class="jxr_linenumber" name="L212" href="#L212">212</a> <em class="jxr_javadoccomment">   * @param itemIDs item IDs that the anonymous user has interacted with</em>
 <a class="jxr_linenumber" name="L213" href="#L213">213</a> <em class="jxr_javadoccomment">   * @param howMany how many recommendations to return</em>
 <a class="jxr_linenumber" name="L214" href="#L214">214</a> <em class="jxr_javadoccomment">   * @see #recommend(String, int)</em>
@@ -333,19 +333,19 @@
 <a class="jxr_linenumber" name="L325" href="#L325">325</a> <em class="jxr_javadoccomment">   * vector formed by projecting the given items together into the latent feature space, and then</em>
 <a class="jxr_linenumber" name="L326" href="#L326">326</a> <em class="jxr_javadoccomment">   * recommending to that user vector (high dot product items), which is slightly different</em>
 <a class="jxr_linenumber" name="L327" href="#L327">327</a> <em class="jxr_javadoccomment">   * from the other method.&lt;/p&gt;</em>
-<a class="jxr_linenumber" name="L328" href="#L328">328</a> <em class="jxr_javadoccomment">   * </em>
+<a class="jxr_linenumber" name="L328" href="#L328">328</a> <em class="jxr_javadoccomment">   *</em>
 <a class="jxr_linenumber" name="L329" href="#L329">329</a> <em class="jxr_javadoccomment">   * @param toItemID item for which the anonymous user's strength of interaction is to be estimated</em>
 <a class="jxr_linenumber" name="L330" href="#L330">330</a> <em class="jxr_javadoccomment">   * @param itemIDs item IDs that the anonymous user has interacted with</em>
 <a class="jxr_linenumber" name="L331" href="#L331">331</a> <em class="jxr_javadoccomment">   * @see #recommendToAnonymous(String[], float[], int)</em>
 <a class="jxr_linenumber" name="L332" href="#L332">332</a> <em class="jxr_javadoccomment">   * @see #mostSimilarItems(String, int)</em>
 <a class="jxr_linenumber" name="L333" href="#L333">333</a> <em class="jxr_javadoccomment">   */</em>
 <a class="jxr_linenumber" name="L334" href="#L334">334</a>   <strong class="jxr_keyword">float</strong> estimateForAnonymous(String toItemID, String[] itemIDs) <strong class="jxr_keyword">throws</strong> NotReadyException, NoSuchItemException;
-<a class="jxr_linenumber" name="L335" href="#L335">335</a>   
+<a class="jxr_linenumber" name="L335" href="#L335">335</a> 
 <a class="jxr_linenumber" name="L336" href="#L336">336</a>   <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L337" href="#L337">337</a> <em class="jxr_javadoccomment">   * A version of {@link #estimatePreference(String, String)} that, like</em>
 <a class="jxr_linenumber" name="L338" href="#L338">338</a> <em class="jxr_javadoccomment">   * {@link #recommendToAnonymous(String[], float[], int)}, operates on "anonymous" users --</em>
 <a class="jxr_linenumber" name="L339" href="#L339">339</a> <em class="jxr_javadoccomment">   * defined not by a previously known set of data, but data given in the request.</em>
-<a class="jxr_linenumber" name="L340" href="#L340">340</a> <em class="jxr_javadoccomment">   * </em>
+<a class="jxr_linenumber" name="L340" href="#L340">340</a> <em class="jxr_javadoccomment">   *</em>
 <a class="jxr_linenumber" name="L341" href="#L341">341</a> <em class="jxr_javadoccomment">   * @param toItemID item for which the anonymous user's strength of interaction is to be estimated</em>
 <a class="jxr_linenumber" name="L342" href="#L342">342</a> <em class="jxr_javadoccomment">   * @param itemIDs item IDs that the anonymous user has interacted with</em>
 <a class="jxr_linenumber" name="L343" href="#L343">343</a> <em class="jxr_javadoccomment">   * @param values values corresponding to {@code itemIDs}</em>
@@ -353,7 +353,7 @@
 <a class="jxr_linenumber" name="L345" href="#L345">345</a> <em class="jxr_javadoccomment">   */</em>
 <a class="jxr_linenumber" name="L346" href="#L346">346</a>   <strong class="jxr_keyword">float</strong> estimateForAnonymous(String toItemID, String[] itemIDs, <strong class="jxr_keyword">float</strong>[] values)
 <a class="jxr_linenumber" name="L347" href="#L347">347</a>       <strong class="jxr_keyword">throws</strong> NotReadyException, NoSuchItemException;
-<a class="jxr_linenumber" name="L348" href="#L348">348</a>   
+<a class="jxr_linenumber" name="L348" href="#L348">348</a> 
 <a class="jxr_linenumber" name="L349" href="#L349">349</a>   <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L350" href="#L350">350</a> <em class="jxr_javadoccomment">   * Like {@link #ingest(File)}, but reads from a {@link Reader}.</em>
 <a class="jxr_linenumber" name="L351" href="#L351">351</a> <em class="jxr_javadoccomment">   *</em>
@@ -386,32 +386,46 @@
 <a class="jxr_linenumber" name="L378" href="#L378">378</a>   Collection&lt;String&gt; getAllItemIDs() <strong class="jxr_keyword">throws</strong> NotReadyException;
 <a class="jxr_linenumber" name="L379" href="#L379">379</a> 
 <a class="jxr_linenumber" name="L380" href="#L380">380</a>   <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L381" href="#L381">381</a> <em class="jxr_javadoccomment">   * @param userID user to get known items for</em>
-<a class="jxr_linenumber" name="L382" href="#L382">382</a> <em class="jxr_javadoccomment">   * @return a {@link Collection} of item IDs that the model records that the user has interacted</em>
-<a class="jxr_linenumber" name="L383" href="#L383">383</a> <em class="jxr_javadoccomment">   *  with. This is the same set of items that are excluded from</em>
-<a class="jxr_linenumber" name="L384" href="#L384">384</a> <em class="jxr_javadoccomment">   *  {@link #recommend(String, int, boolean, com.cloudera.oryx.als.common.rescorer.Rescorer)}</em>
-<a class="jxr_linenumber" name="L385" href="#L385">385</a> <em class="jxr_javadoccomment">   *  if {@code considerKnownItems} is {@code false}.</em>
-<a class="jxr_linenumber" name="L386" href="#L386">386</a> <em class="jxr_javadoccomment">   * @throws UnsupportedOperationException if known items for each user have been configured to not</em>
-<a class="jxr_linenumber" name="L387" href="#L387">387</a> <em class="jxr_javadoccomment">   *  be loaded or recorded</em>
-<a class="jxr_linenumber" name="L388" href="#L388">388</a> <em class="jxr_javadoccomment">   */</em>
-<a class="jxr_linenumber" name="L389" href="#L389">389</a>   Collection&lt;String&gt; getKnownItemsForUser(String userID) <strong class="jxr_keyword">throws</strong> NotReadyException;
-<a class="jxr_linenumber" name="L390" href="#L390">390</a> 
-<a class="jxr_linenumber" name="L391" href="#L391">391</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L392" href="#L392">392</a> <em class="jxr_javadoccomment">     * @return true if and only if the instance is ready to make recommendations; may be false for example</em>
-<a class="jxr_linenumber" name="L393" href="#L393">393</a> <em class="jxr_javadoccomment">     *  while the recommender is still building an initial model</em>
-<a class="jxr_linenumber" name="L394" href="#L394">394</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L395" href="#L395">395</a>   <strong class="jxr_keyword">boolean</strong> isReady();
+<a class="jxr_linenumber" name="L381" href="#L381">381</a> <em class="jxr_javadoccomment">   * @return all user IDs currently present in the model</em>
+<a class="jxr_linenumber" name="L382" href="#L382">382</a> <em class="jxr_javadoccomment">   * @throws NotReadyException</em>
+<a class="jxr_linenumber" name="L383" href="#L383">383</a> <em class="jxr_javadoccomment">   */</em>
+<a class="jxr_linenumber" name="L384" href="#L384">384</a>   Collection&lt;String&gt; getAllUserIDs() <strong class="jxr_keyword">throws</strong> NotReadyException;
+<a class="jxr_linenumber" name="L385" href="#L385">385</a> 
+<a class="jxr_linenumber" name="L386" href="#L386">386</a>   <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L387" href="#L387">387</a> <em class="jxr_javadoccomment">   * @param userID user to get known items for</em>
+<a class="jxr_linenumber" name="L388" href="#L388">388</a> <em class="jxr_javadoccomment">   * @return a {@link Collection} of item IDs that the model records that the user has interacted</em>
+<a class="jxr_linenumber" name="L389" href="#L389">389</a> <em class="jxr_javadoccomment">   *  with. This is the same set of items that are excluded from</em>
+<a class="jxr_linenumber" name="L390" href="#L390">390</a> <em class="jxr_javadoccomment">   *  {@link #recommend(String, int, boolean, com.cloudera.oryx.als.common.rescorer.Rescorer)}</em>
+<a class="jxr_linenumber" name="L391" href="#L391">391</a> <em class="jxr_javadoccomment">   *  if {@code considerKnownItems} is {@code false}.</em>
+<a class="jxr_linenumber" name="L392" href="#L392">392</a> <em class="jxr_javadoccomment">   * @throws UnsupportedOperationException if known items for each user have been configured to not</em>
+<a class="jxr_linenumber" name="L393" href="#L393">393</a> <em class="jxr_javadoccomment">   *  be loaded or recorded</em>
+<a class="jxr_linenumber" name="L394" href="#L394">394</a> <em class="jxr_javadoccomment">   */</em>
+<a class="jxr_linenumber" name="L395" href="#L395">395</a>   Collection&lt;String&gt; getKnownItemsForUser(String userID) <strong class="jxr_keyword">throws</strong> NotReadyException;
 <a class="jxr_linenumber" name="L396" href="#L396">396</a> 
 <a class="jxr_linenumber" name="L397" href="#L397">397</a>   <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L398" href="#L398">398</a> <em class="jxr_javadoccomment">   * Blocks indefinitely until {@link #isReady()} returns {@code true}.</em>
-<a class="jxr_linenumber" name="L399" href="#L399">399</a> <em class="jxr_javadoccomment">   * </em>
-<a class="jxr_linenumber" name="L400" href="#L400">400</a> <em class="jxr_javadoccomment">   * @throws InterruptedException if the thread is interrupted while waiting</em>
-<a class="jxr_linenumber" name="L401" href="#L401">401</a> <em class="jxr_javadoccomment">   */</em>
-<a class="jxr_linenumber" name="L402" href="#L402">402</a>   <strong class="jxr_keyword">void</strong> await() <strong class="jxr_keyword">throws</strong> InterruptedException;
-<a class="jxr_linenumber" name="L403" href="#L403">403</a> 
-<a class="jxr_linenumber" name="L404" href="#L404">404</a> }
+<a class="jxr_linenumber" name="L398" href="#L398">398</a> <em class="jxr_javadoccomment">   * @param howMany how many users to return</em>
+<a class="jxr_linenumber" name="L399" href="#L399">399</a> <em class="jxr_javadoccomment">   * @return {@link List} of user {@link IDValue}s, ordered from the most number of interaction with</em>
+<a class="jxr_linenumber" name="L400" href="#L400">400</a> <em class="jxr_javadoccomment">   * distinct items to least.</em>
+<a class="jxr_linenumber" name="L401" href="#L401">401</a> <em class="jxr_javadoccomment">   * @throws NotReadyException if the implementation has no usable model yet</em>
+<a class="jxr_linenumber" name="L402" href="#L402">402</a> <em class="jxr_javadoccomment">   */</em>
+<a class="jxr_linenumber" name="L403" href="#L403">403</a>   List&lt;IDValue&gt; getMostActiveUsers(<strong class="jxr_keyword">int</strong> howMany) <strong class="jxr_keyword">throws</strong> NotReadyException;
+<a class="jxr_linenumber" name="L404" href="#L404">404</a> 
+<a class="jxr_linenumber" name="L405" href="#L405">405</a>     <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L406" href="#L406">406</a> <em class="jxr_javadoccomment">     * @return true if and only if the instance is ready to make recommendations; may be false for example</em>
+<a class="jxr_linenumber" name="L407" href="#L407">407</a> <em class="jxr_javadoccomment">     *  while the recommender is still building an initial model</em>
+<a class="jxr_linenumber" name="L408" href="#L408">408</a> <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L409" href="#L409">409</a>   <strong class="jxr_keyword">boolean</strong> isReady();
+<a class="jxr_linenumber" name="L410" href="#L410">410</a> 
+<a class="jxr_linenumber" name="L411" href="#L411">411</a>   <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L412" href="#L412">412</a> <em class="jxr_javadoccomment">   * Blocks indefinitely until {@link #isReady()} returns {@code true}.</em>
+<a class="jxr_linenumber" name="L413" href="#L413">413</a> <em class="jxr_javadoccomment">   *</em>
+<a class="jxr_linenumber" name="L414" href="#L414">414</a> <em class="jxr_javadoccomment">   * @throws InterruptedException if the thread is interrupted while waiting</em>
+<a class="jxr_linenumber" name="L415" href="#L415">415</a> <em class="jxr_javadoccomment">   */</em>
+<a class="jxr_linenumber" name="L416" href="#L416">416</a>   <strong class="jxr_keyword">void</strong> await() <strong class="jxr_keyword">throws</strong> InterruptedException;
+<a class="jxr_linenumber" name="L417" href="#L417">417</a> 
+<a class="jxr_linenumber" name="L418" href="#L418">418</a> }
 </pre>
 <hr/>
-<div id="footer">Copyright &#169; 2013&#x2013;2014. All rights reserved.</div>
+<div id="footer">Copyright &#169; 2013&#x2013;2015. All rights reserved.</div>
 </body>
 </html>

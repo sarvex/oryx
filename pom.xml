@@ -763,13 +763,28 @@
           <version>0.7.2.201409121644</version>
           <executions>
             <execution>
+              <id>jacoco-prepare-agent</id>
               <goals>
                 <goal>prepare-agent</goal>
               </goals>
+              <configuration>
+                <append>false</append>
+              </configuration>
             </execution>
             <execution>
-              <id>report</id>
-              <phase>test</phase>
+              <id>jacoco-prepare-agent-integration</id>
+              <goals>
+                <goal>prepare-agent-integration</goal>
+              </goals>
+              <configuration>
+                <append>true</append>
+                <!-- matches default of prepare-agent goal; intended to append -->
+                <destFile>${project.build.directory}/jacoco.exec</destFile>
+              </configuration>
+            </execution>
+            <execution>
+              <id>jacoco-report</id>
+              <phase>verify</phase>
               <goals>
                 <goal>report</goal>
               </goals>

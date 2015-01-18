@@ -525,12 +525,15 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-assembly-plugin</artifactId>
-          <version>2.5.2</version>
+          <version>2.5.3</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-install-plugin</artifactId>
           <version>2.5.2</version>
+          <configuration>
+            <createChecksum>true</createChecksum>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -588,7 +591,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-antrun-plugin</artifactId>
-          <version>1.7</version>
+          <version>1.8</version>
           <dependencies>
             <dependency>
               <groupId>org.apache.tomcat</groupId>
@@ -674,7 +677,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
-          <version>2.18</version>
+          <version>2.18.1</version>
           <configuration>
             <reuseForks>false</reuseForks>
             <testSourceDirectory>${basedir}/src/it/java</testSourceDirectory>
@@ -783,7 +786,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
         <!-- duplicates version above to work around bogus Maven 3.0.x warning -->
-        <version>2.7</version>
+        <version>2.8</version>
         <reportSets>
           <reportSet>
             <reports>

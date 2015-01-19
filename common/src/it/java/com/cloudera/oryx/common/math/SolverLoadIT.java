@@ -22,6 +22,7 @@ import com.google.common.base.Stopwatch;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.random.RandomGenerator;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +37,8 @@ import com.cloudera.oryx.common.random.RandomManager;
 public final class SolverLoadIT extends OryxTest {
   
   private static final Logger log = LoggerFactory.getLogger(SolverLoadIT.class);
-  
+
+  @Ignore("Disable load testing by default")
   @Test
   public void testLoad() {
     RealMatrix symmetric = randomSymmetricMatrix(500);

@@ -46,10 +46,10 @@ public final class LocationSensitiveHashIT extends OryxTest {
 
   private static final Logger log = LoggerFactory.getLogger(LocationSensitiveHashIT.class);
 
-  private static final int NUM_FEATURES = 30;
-  private static final int NUM_ITEMS = 1000000;
+  private static final int NUM_FEATURES = 18;
+  private static final int NUM_ITEMS = 100000;
   private static final int NUM_RECS = 10;
-  private static final int ITERATIONS = 10;
+  private static final int ITERATIONS = 5;
   private static final double LN2 = Math.log(2.0);
 
   @Test
@@ -87,9 +87,9 @@ public final class LocationSensitiveHashIT extends OryxTest {
     log.info("{}", avgNDCG.getResult());
     log.info("{}", avgPercentAllItemsConsidered.getResult());
 
-    assertTrue(avgPercentTopRecsConsidered.getResult() > 0.8);
-    assertTrue(avgNDCG.getResult() > 0.8);
-    assertTrue(avgPercentAllItemsConsidered.getResult() < 0.09);
+    assertTrue(avgPercentTopRecsConsidered.getResult() > 0.85);
+    assertTrue(avgNDCG.getResult() > 0.85);
+    assertTrue(avgPercentAllItemsConsidered.getResult() < 0.1);
   }
 
   private static double[] doTestRandomVecs(LongObjectMap<float[]> Y, float[] userVec) {

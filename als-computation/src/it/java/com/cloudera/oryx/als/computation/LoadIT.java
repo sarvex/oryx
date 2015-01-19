@@ -19,6 +19,7 @@ import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import com.google.common.base.Stopwatch;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +41,7 @@ public final class LoadIT extends AbstractComputationIT {
     return getResourceAsFile("grouplens10M-ABC");
   }
 
+  @Ignore("Disable load testing by default")
   @Test
   public void testLoad() throws Exception {
     ServerRecommender client = getRecommender();

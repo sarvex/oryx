@@ -18,6 +18,7 @@ package com.cloudera.oryx.rdf.computation;
 import com.google.common.collect.Lists;
 import com.google.common.primitives.Doubles;
 import org.apache.commons.math3.stat.descriptive.moment.Mean;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,11 +71,12 @@ public final class CovtypeIT extends AbstractComputationIT {
     assertEquals(importances[0], Doubles.max(importances));
     // Assert something about important features
     assertTrue(importances[0] > 0.9);
-    assertTrue(importances[5] > 0.35);
+    assertTrue(importances[5] > 0.3);
     assertTrue(importances[9] > 0.3);
     assertTrue(importances[13] > 0.4);
   }
 
+  @Ignore("Sort of expensive, and redundant with similar test in WineQualityIT")
   @Test
   public void testPMMLOutput() throws Exception {
     new RDFLocalGenerationRunner().call();

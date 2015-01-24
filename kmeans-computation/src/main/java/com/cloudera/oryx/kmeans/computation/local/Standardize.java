@@ -88,25 +88,25 @@ public final class Standardize implements Callable<List<List<RealVector>>> {
         RealVector v = sparse ? Vectors.sparse(tokens.length + expansion) : Vectors.dense(tokens.length + expansion);
         int offset = 0;
         for (int i = 0; i < numFeatures; i++) {
-          if (inboundSettings.isIgnored(i)) {
-            // Do nothing
-          } else if (inboundSettings.isNumeric(i)) {
-            SummaryStats ss = summary.getStats(i);
-            Transform t = settings.getTransform(i);
-            double raw = asDouble(tokens[i]);
-            if (!Double.isNaN(raw)) {
-              double n = t.apply(raw, ss) * settings.getScale(i);
-              v.setEntry(offset, n);
-            }
-            offset++;
-          } else if (inboundSettings.isCategorical(i)) {
-            SummaryStats ss = summary.getStats(i);
-            int index = ss.index(tokens[i]);
-            if (index >= 0) {
-              v.setEntry(offset + index, settings.getScale(i));
-              offset += ss.numLevels();
-            } else {
-              log.warn("Unrecognized value for category {}: {}", i, tokens[i]);
+          if (!inboundSettings.isIgnored(i)) {
+            if (inboundSettings.isNumeric(i)) {
+              SummaryStats ss = summary.getStats(i);
+              Transform t = settings.getTransform(i);
+              double raw = asDouble(tokens[i]);
+              if (!Double.isNaN(raw)) {
+                double n = t.apply(raw, ss) * settings.getScale(i);
+                v.setEntry(offset, n);
+              }
+              offset++;
+            } else if (inboundSettings.isCategorical(i)) {
+              SummaryStats ss = summary.getStats(i);
+              int index = ss.index(tokens[i]);
+              if (index >= 0) {
+                v.setEntry(offset + index, settings.getScale(i));
+                offset += ss.numLevels();
+              } else {
+                log.warn("Unrecognized value for category {}: {}", i, tokens[i]);
+              }
             }
           }
         }
@@ -124,7 +124,7 @@ public final class Standardize implements Callable<List<List<RealVector>>> {
 
   private static double asDouble(String token) {
     try {
-      return Double.valueOf(token);
+      return Double.parseDouble(token);
     } catch (NumberFormatException e) {
       log.warn("Invalid numeric token: {}", token);
       return Double.NaN;

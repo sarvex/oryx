@@ -103,7 +103,7 @@ public abstract class AbstractALSServlet extends AbstractOryxServlet {
   }
 
   static boolean getConsiderKnownItems(ServletRequest request) {
-    return Boolean.valueOf(request.getParameter("considerKnownItems"));
+    return Boolean.parseBoolean(request.getParameter("considerKnownItems"));
   }
 
   /**

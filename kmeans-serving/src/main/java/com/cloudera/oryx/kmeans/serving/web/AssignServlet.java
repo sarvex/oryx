@@ -35,13 +35,12 @@ public final class AssignServlet extends AbstractKMeansServlet {
   @Override
   protected void doGet(HttpServletRequest request,
                        HttpServletResponse response) throws IOException {
-    CharSequence pathInfo = request.getPathInfo();
+    String pathInfo = request.getPathInfo();
     if (pathInfo == null) {
       response.sendError(HttpServletResponse.SC_BAD_REQUEST, "No path");
       return;
     }
-    String line = pathInfo.subSequence(1, pathInfo.length()).toString();
-    doAssign(line, response);
+    doAssign(pathInfo.substring(1), response);
   }
 
   @Override

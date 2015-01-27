@@ -22,6 +22,8 @@ import com.google.common.io.CharStreams;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import com.cloudera.oryx.common.io.DelimitedDataUtils;
@@ -36,7 +38,8 @@ import com.cloudera.oryx.rdf.serving.generation.RDFGenerationManager;
 /**
  * <p>Responds to POST request to {@code /train}. The input is one or more data points
  * to train, one for each line of the request body. Each data point is a delimited line of input like
- * "1,foo,3.0". The classifier updates to learn in some way from the new data. The response is empty.</p>
+ * "1,foo,3.0". Also, one data point can be supplied by POSTing to {@code /train/[datum]}.
+ * The classifier updates to learn in some way from the new data. The response is empty.</p>
  *
  * @author Sean Owen
  */
@@ -44,7 +47,15 @@ public final class TrainServlet extends AbstractRDFServlet {
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String pathInfo = request.getPathInfo();
+    if (pathInfo == null || pathInfo.isEmpty() || "/".equals(pathInfo)) {
+      doTrain(CharStreams.readLines(request.getReader()), response);
+    } else {
+      doTrain(Collections.singletonList(pathInfo.substring(1)), response);
+    }
+  }
 
+  private void doTrain(List<String> lines, HttpServletResponse response) throws IOException {
     RDFGenerationManager generationManager = getGenerationManager();
     Generation generation = generationManager.getCurrentGeneration();
     if (generation == null) {
@@ -61,7 +72,7 @@ public final class TrainServlet extends AbstractRDFServlet {
 
     int totalColumns = getTotalColumns();
 
-    for (CharSequence line : CharStreams.readLines(request.getReader())) {
+    for (CharSequence line : lines) {
 
       generationManager.append(line);
 

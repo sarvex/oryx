@@ -301,7 +301,7 @@
       <dependency>
         <groupId>org.jpmml</groupId>
         <artifactId>pmml-model</artifactId>
-        <version>1.1.11</version>
+        <version>1.1.13</version>
         <exclusions>
           <exclusion>
             <artifactId>com.sun.xml.bind</artifactId>
@@ -420,7 +420,7 @@
                 <rules>
                   <dependencyConvergence />
                   <requireMavenVersion>
-                    <version>3.1.1</version>
+                    <version>3.2.1</version>
                   </requireMavenVersion>
                   <requireJavaVersion>
                     <version>${java.version}</version>
@@ -499,7 +499,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-gpg-plugin</artifactId>
-          <version>1.5</version>
+          <version>1.6</version>
           <executions>
             <execution>
               <id>sign-artifacts</id>
@@ -924,17 +924,10 @@
   </scm>
   
   <prerequisites>
-    <maven>3.1.1</maven>
+    <maven>3.2.1</maven>
   </prerequisites>
 
   <repositories>
-    <repository>
-      <id>central</id>
-      <url>https://repo1.maven.org/maven2</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-    </repository>
     <repository>
       <id>oryx.repo</id>
       <url>https://repository.cloudera.com/artifactory/cloudera-repos</url>
@@ -943,31 +936,10 @@
         <enabled>true</enabled>
       </releases>
       <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>oryx.snapshots.repo</id>
-      <url>https://repository.cloudera.com/artifactory/cloudera-repos</url>
-      <name>Cloudera Snapshots Repository</name>
-      <snapshots>
         <enabled>true</enabled>
       </snapshots>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
     </repository>
   </repositories>
-  <pluginRepositories>
-    <pluginRepository>
-      <id>central</id>
-      <url>https://repo1.maven.org/maven2</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-    </pluginRepository>
-  </pluginRepositories>
-
 
   <distributionManagement>
     <repository>
@@ -999,18 +971,6 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <keyname>Sean Owen (Cloudera) &lt;sowen@cloudera.com&gt;</keyname>
-            </configuration>
           </plugin>
         </plugins>
       </build>

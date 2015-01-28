@@ -51,6 +51,8 @@ public final class MostPopularItemsServlet extends AbstractALSServlet {
       response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE, nre.toString());
     } catch (IllegalArgumentException iae) {
       response.sendError(HttpServletResponse.SC_BAD_REQUEST, iae.toString());
+    } catch (UnsupportedOperationException uoe) {
+      response.sendError(HttpServletResponse.SC_BAD_REQUEST, uoe.toString());
     }
   }
 

@@ -17,8 +17,6 @@ package com.cloudera.oryx.als.serving.web;
 
 import com.cloudera.oryx.als.common.NotReadyException;
 import com.cloudera.oryx.als.common.OryxRecommender;
-import com.cloudera.oryx.als.common.rescorer.Rescorer;
-import com.cloudera.oryx.als.common.rescorer.RescorerProvider;
 
 import java.io.IOException;
 
@@ -49,6 +47,8 @@ public final class MostActiveUsersServlet extends AbstractALSServlet {
       response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE, nre.toString());
     } catch (IllegalArgumentException iae) {
       response.sendError(HttpServletResponse.SC_BAD_REQUEST, iae.toString());
+    } catch (UnsupportedOperationException uoe) {
+      response.sendError(HttpServletResponse.SC_BAD_REQUEST, uoe.toString());
     }
   }
 

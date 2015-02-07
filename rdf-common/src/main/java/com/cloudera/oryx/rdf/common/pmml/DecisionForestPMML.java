@@ -51,6 +51,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -130,9 +131,8 @@ public final class DecisionForestPMML {
       MultipleModelMethodType multipleModelMethodType = classificationTask ?
           MultipleModelMethodType.WEIGHTED_MAJORITY_VOTE :
           MultipleModelMethodType.WEIGHTED_AVERAGE;
-      Segmentation segmentation = new Segmentation(multipleModelMethodType);
-      miningModel.setSegmentation(segmentation);
 
+      List<Segment> segments = new ArrayList<Segment>();
       int treeID = 0;
       for (DecisionTree tree : forest) {
         TreeModel treeModel = buildTreeModel(columnToCategoryNameToIDMapping,
@@ -143,16 +143,18 @@ public final class DecisionForestPMML {
         segment.setPredicate(new True());
         segment.setModel(treeModel);
         segment.setWeight(forest.getWeights()[treeID]);
-        segmentation.getSegments().add(segment);
+        segments.add(segment);
         treeID++;
       }
+
+      miningModel.setSegmentation(new Segmentation(multipleModelMethodType, segments));
     }
 
     model.setFunctionName(classificationTask ? MiningFunctionType.CLASSIFICATION : MiningFunctionType.REGRESSION);
     model.setMiningSchema(PMMLUtils.buildMiningSchema(inboundSettings, forest.getFeatureImportances()));
 
     DataDictionary dictionary = PMMLUtils.buildDataDictionary(inboundSettings, columnToCategoryNameToIDMapping);
-    PMML pmml = new PMML(null, dictionary, "4.2");
+    PMML pmml = new PMML("4.2.1", null, dictionary);
     pmml.getModels().add(model);
 
     try {
@@ -271,8 +273,8 @@ public final class DecisionForestPMML {
         while ((categoryID = includedCategoryIDs.nextSetBit(categoryID + 1)) >= 0) {
           categoryNames.add(categoryIDToName.get(categoryID));
         }
-        Array categories = new Array(DelimitedDataUtils.encode(' ', categoryNames), Array.Type.STRING);
-        predicate = new SimpleSetPredicate(categories, fieldName, SimpleSetPredicate.BooleanOperator.IS_IN);
+        Array categories = new Array(Array.Type.STRING, DelimitedDataUtils.encode(' ', categoryNames));
+        predicate = new SimpleSetPredicate(fieldName, SimpleSetPredicate.BooleanOperator.IS_IN, categories);
 
       } else {
         NumericDecision numericDecision = (NumericDecision) decision;

@@ -19,7 +19,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import org.apache.commons.math3.stat.descriptive.moment.Mean;
 import org.dmg.pmml.DataDictionary;
-import org.dmg.pmml.Field;
 import org.dmg.pmml.MiningField;
 import org.dmg.pmml.MiningFunctionType;
 import org.dmg.pmml.MiningModel;
@@ -46,6 +45,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -144,14 +144,14 @@ public final class RDFDistributedGenerationRunner extends DistributedGenerationR
             MultipleModelMethodType multipleModelMethodType = classificationTask ?
                 MultipleModelMethodType.WEIGHTED_MAJORITY_VOTE :
                 MultipleModelMethodType.WEIGHTED_AVERAGE;
-            segmentation = new Segmentation(multipleModelMethodType);
+            segmentation = new Segmentation(multipleModelMethodType, new ArrayList<Segment>());
             miningModel.setSegmentation(segmentation);
             miningModel.setFunctionName(currentModel.getFunctionName());
             MiningSchema cloneSchema = new MiningSchema();
             for (MiningField field : currentModel.getMiningSchema().getMiningFields()) {
               cloneSchema.getMiningFields().add(
                   new MiningField(field.getName())
-                      .withOptype(field.getOptype()
+                      .withOpType(field.getOpType()
                       ).withImportance(field.getImportance()));
             }
             miningModel.setMiningSchema(cloneSchema);

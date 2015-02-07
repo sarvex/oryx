@@ -151,7 +151,7 @@ public final class ALSModelDescription {
    * Quite manually write our fake model representation in PMML.
    */
   private static void write(OutputStream out, ALSModelDescription model) throws JAXBException {
-    PMML pmml = new PMML(null, null, "4.2");
+    PMML pmml = new PMML("4.2.1", null, null);
     for (Map.Entry<String,String> entry : model.getPathByKey().entrySet()) {
       Extension extension = new Extension();
       extension.setName(entry.getKey());

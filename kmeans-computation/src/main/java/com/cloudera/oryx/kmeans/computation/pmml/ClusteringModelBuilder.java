@@ -46,6 +46,8 @@ import org.dmg.pmml.NormDiscrete;
 import org.dmg.pmml.OpType;
 import org.dmg.pmml.SquaredEuclidean;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public final class ClusteringModelBuilder {
@@ -67,19 +69,22 @@ public final class ClusteringModelBuilder {
   }
 
   public ClusteringModel build(String modelName, Centers centers) {
+    List<ClusteringField> clusteringFields = new ArrayList<ClusteringField>(this.clusteringFields);
+    List<Cluster> clusters = new ArrayList<Cluster>();
+    for (int i = 0; i < centers.size(); i++) {
+      clusters.add(toCluster(centers.get(i), i));
+    }
     ClusteringModel model = new ClusteringModel(
-        miningSchema,
-        new ComparisonMeasure(ComparisonMeasure.Kind.DISTANCE).withMeasure(new SquaredEuclidean()),
         MiningFunctionType.CLUSTERING,
         ClusteringModel.ModelClass.CENTER_BASED,
-        centers.size());
+        centers.size(),
+        miningSchema,
+        new ComparisonMeasure(ComparisonMeasure.Kind.DISTANCE).withMeasure(new SquaredEuclidean()),
+        clusteringFields,
+        clusters);
     model.setModelName(modelName);
     model.setAlgorithmName("K-Means||");
     model.setLocalTransformations(transforms);
-    model.getClusteringFields().addAll(clusteringFields);
-    for (int i = 0; i < centers.size(); i++) {
-      model.getClusters().add(toCluster(centers.get(i), i));
-    }
     return model;
   }
 
@@ -98,15 +103,17 @@ public final class ClusteringModelBuilder {
           if (t != Transform.NONE) {
             Expression e = null;
             if (t == Transform.LINEAR) {
-              e = new NormContinuous(baseName).withLinearNorms(
+              List<LinearNorm> norms = Arrays.asList(
                   new LinearNorm(ss.min(), 0.0),
                   new LinearNorm(ss.max(), 1.0));
+              e = new NormContinuous(baseName, norms);
             } else if (t == Transform.LOG) {
               e = new Apply("ln").withExpressions(new FieldRef(baseName));
             } else if (t == Transform.Z) {
-              e = new NormContinuous(baseName).withLinearNorms(
+              List<LinearNorm> norms = Arrays.asList(
                   new LinearNorm(0.0, -ss.mean()/ss.stdDev()),
                   new LinearNorm(ss.mean(), 0.0));
+              e = new NormContinuous(baseName, norms);
             }
             fn = new FieldName(columnNames.get(i) + "_normed");
             DerivedField df = new DerivedField(OpType.CONTINUOUS, DataType.DOUBLE);
@@ -142,7 +149,7 @@ public final class ClusteringModelBuilder {
   private static Cluster toCluster(RealVector point, int pointId) {
     Cluster cluster = new Cluster();
     cluster.setId(String.valueOf(pointId));
-    Array array = new Array(toString(point), Array.Type.REAL);
+    Array array = new Array(Array.Type.REAL, toString(point));
     array.setN(point.getDimension());
     cluster.setArray(array);
     return cluster;

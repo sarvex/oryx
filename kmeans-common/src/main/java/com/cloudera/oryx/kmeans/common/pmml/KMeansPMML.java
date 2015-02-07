@@ -112,7 +112,7 @@ public final class KMeansPMML {
       OutputStream out,
       DataDictionary dictionary,
       List<? extends Model> models) throws JAXBException {
-    PMML pmml = new PMML(null, dictionary, "4.2");
+    PMML pmml = new PMML("4.2.1", null, dictionary);
     pmml.getModels().addAll(models);
     JAXBUtil.marshalPMML(pmml, new StreamResult(out));
   }

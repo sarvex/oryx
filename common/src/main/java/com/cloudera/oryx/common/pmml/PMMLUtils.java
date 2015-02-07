@@ -127,9 +127,9 @@ public final class PMMLUtils {
       }
       MiningField field = new MiningField(new FieldName(columnNames.get(col)));
       if (numeric.contains(col)) {
-        field.setOptype(OpType.CONTINUOUS);
+        field.setOpType(OpType.CONTINUOUS);
       } else if (categorical.contains(col)) {
-        field.setOptype(OpType.CATEGORICAL);
+        field.setOpType(OpType.CATEGORICAL);
       } else {
         throw new IllegalStateException("No type for col " + col);
       }

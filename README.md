@@ -1,6 +1,14 @@
+------
+
 # Development has moved to [Oryx 2](https://github.com/OryxProject/oryx)!
 
-This site contains the current stable 1.x version of Oryx.
+Now that a [first release](https://github.com/OryxProject/oryx/releases) of [Oryx 2](https://github.com/OryxProject/oryx) is available, developers are encouraged to instead test and migrate to the new version.  
+
+This site contains the previous  1.x version of Oryx, which is stable and will remain available. Only maintenance releases will be made for 1.x from here on.
+
+# Really! Try [Oryx 2](https://github.com/OryxProject/oryx)
+
+------
 
 # Summary
 
